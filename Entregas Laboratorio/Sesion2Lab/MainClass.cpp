@@ -67,10 +67,10 @@ bool leerAlquiler(Rent* rent, Car* coches, const int & tam_coches, int tam_rent)
 		rent = new Rent[2*tam_rent];
 		
 		for (int i = 0; i < tam_rent; i++) {
-			int code = 0;
+			int code = -1;
 			file >> code;
-
 			rent[i].car_ = buscaCoche(coches, tam_coches, code);
+
 			if (rent[i].car_ != nullptr) {
 				file >> rent[i].date_;
 				file >> rent[i].days;
@@ -80,10 +80,7 @@ bool leerAlquiler(Rent* rent, Car* coches, const int & tam_coches, int tam_rent)
 			else {
 				return false;
 			}
-
-
 		}
-
 
 		return true;
 	}
@@ -94,14 +91,21 @@ bool leerAlquiler(Rent* rent, Car* coches, const int & tam_coches, int tam_rent)
 
 
 int main() {
+	//tam
 	int tam_coches=10;
 	int tam_rent=10;
-	Car* lista= new Car();
+	
+	//listas
+	Car* coches= new Car();
 	Rent* alquileres = new Rent();
-	CargaCoches(lista, tam_coches);
-	leerAlquiler(alquileres, lista, tam_coches, tam_rent);
+	
+	//lectura
+	CargaCoches(coches, tam_coches);
+	leerAlquiler(alquileres, coches, tam_coches, tam_rent);
+	
+	//borrado
 	delete alquileres;
-	delete lista;
+	delete coches;
 	return 0;
 }
 
