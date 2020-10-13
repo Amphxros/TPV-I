@@ -6,14 +6,15 @@ struct Car
 {
 	int mat_;
 	int precio_;
-	//CAMBIAR ESTO A UN VALOR CON GET LINE !!
 	std::string model_;
-	std::string name_;
 };
-
+struct Date {
+	int d, m,a; //dia/mes/año
+};
 struct Rent {
 	Car* car_;
 	std::string date_;//<- CAMBIAR ESTO A TIPO FECHA
+	Date date;//<- CAMBIAR ESTO A TIPO FECHA
 	int days;
 
 };
@@ -34,10 +35,11 @@ bool CargaCoches(Car* lista,int & tam) {
 		for (int i = 0; i < tam; i++) {
 			file >> lista[i].mat_;
 			file >> lista[i].precio_;
-			file >> lista[i].model_;
-			file >> lista[i].name_;
+			std::getline(file, lista[i].model_);
+			
+			
 
-		//std::cout << lista[i].mat_ << " " << lista[i].precio_ << " " << lista[i].model_<< " "<< lista[i].name_ << std::endl;
+		std::cout << lista[i].mat_ << " " << lista[i].precio_ << " " << lista[i].model_ << std::endl;
 		}
 	
 		return true;
@@ -72,7 +74,7 @@ bool leerAlquiler(Rent* rent, Car* coches, const int & tam_coches, int tam_rent)
 			rent[i].car_ = buscaCoche(coches, tam_coches, code);
 
 			if (rent[i].car_ != nullptr) {
-				file >> rent[i].date_;
+				std::getline(file, rent[i].date_);
 				file >> rent[i].days;
 				std::cout << rent[i].car_->mat_ << " " << rent[i].date_ << " " << rent[i].days << std::endl;
 
