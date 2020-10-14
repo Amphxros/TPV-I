@@ -19,27 +19,35 @@ struct Rent {
 
 };
 
+struct ListaCoches {
+	int tam, limite;
+	Car* lista;
+};
+
+struct ListaAlquileres {
+	int tam, limite;
+	Rent* lista;
+};
+
 /// <summary>
 /// :carga la información del archivo coches.txt en la lista de coches
 /// </summary>
 /// <param name="lista"></param>
 /// <returns> true si el archivo se ha podido leer </returns>
-bool CargaCoches(Car* lista,int & tam) {
+bool CargaCoches(ListaCoches l) {
 	std::ifstream file;
 	file.open("coches.txt");
 	if (file.is_open()) {
 		int dim = 0;
-		file >> tam;
-		lista = new Car[2*tam];
+		file >> l.tam;
+		l.lista = new Car[2*l.tam];
 
-		for (int i = 0; i < tam; i++) {
-			file >> lista[i].mat_;
-			file >> lista[i].precio_;
-			std::getline(file, lista[i].model_);
-			
-			
+		for (int i = 0; i < l.tam; i++) {
+			file >> l.lista[i].mat_;
+			file >> l.lista[i].precio_;
+			std::getline(file, l.lista[i].model_);
 
-		std::cout << lista[i].mat_ << " " << lista[i].precio_ << " " << lista[i].model_ << std::endl;
+		std::cout << l.lista[i].mat_ << " " << l.lista[i].precio_ << " " << l.lista[i].model_ << std::endl;
 		}
 	
 		return true;
@@ -92,22 +100,18 @@ bool leerAlquiler(Rent* rent, Car* coches, const int & tam_coches, int tam_rent)
 }
 
 
-int main() {
-	//tam
-	int tam_coches=10;
-	int tam_rent=10;
-	
+int main() {	
 	//listas
-	Car* coches= new Car();
-	Rent* alquileres = new Rent();
-	
+	ListaCoches coches_ = ListaCoches();
+	ListaAlquileres alquileres_ = ListaAlquileres();
 	//lectura
-	CargaCoches(coches, tam_coches);
-	leerAlquiler(alquileres, coches, tam_coches, tam_rent);
+	CargaCoches(coches_);
+
+	//leerAlquiler(alquileres, coches, tam_coches, tam_rent);
 	
 	//borrado
-	delete alquileres;
-	delete coches;
+	//delete alquileres;
+	//delete l;
 	return 0;
 }
 
