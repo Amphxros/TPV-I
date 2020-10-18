@@ -1,3 +1,7 @@
+// G13
+// Amparo Rubio Bellón
+// Jorge Zurdo Izquierdo
+
 #include <iostream>
 #include <algorithm>
 #include <string>
@@ -16,8 +20,7 @@ struct Date	{
 
 struct Rent {
 	Car* car_;
-	//std::string date_;//<- CAMBIAR ESTO A TIPO FECHA
-	Date date_;//<- CAMBIAR ESTO A TIPO FECHA
+	Date date_;
 	int days_;
 
 };
@@ -51,7 +54,7 @@ bool CargaCoches(ListaCoches &l) {
 			file >> l.lista[i].precio_;
 			std::getline(file, l.lista[i].model_);
 
-		std::cout << l.lista[i].mat_ << " " << l.lista[i].precio_ << " " << l.lista[i].model_ << std::endl;
+		//std::cout << l.lista[i].mat_ << " " << l.lista[i].precio_ << " " << l.lista[i].model_ << std::endl;
 		}
 	
 		return true;
@@ -62,8 +65,9 @@ bool CargaCoches(ListaCoches &l) {
 }
 
 bool ComparaFechas(Rent primera, Rent segunda) {
-	if (primera.date_.a < segunda.date_.a) {
-		if (primera.date_.m < segunda.date_.m) {
+
+	if (primera.date_.a <= segunda.date_.a) {
+		if (primera.date_.m <= segunda.date_.m) {
 			if (primera.date_.d < segunda.date_.d)
 			{
 				return true;
@@ -81,16 +85,6 @@ void OrdenaAlquileres(ListaAlquileres &l) {
 }
 
 Car* buscaCoche(Car* lista, int tam, int code) {
-	/*
-	int i = 0;
-	while (i < tam && code != lista[i].mat_)
-		i++;
-
-	if (i > tam)
-		return nullptr;
-	else
-		return &(lista[i]);
-	*/
 	for (int i = 0; i < tam; i++)
 	{
 		if (code == lista[i].mat_)		return &(lista[i]);
@@ -98,39 +92,32 @@ Car* buscaCoche(Car* lista, int tam, int code) {
 	return nullptr;
 }
 
-//bool leerAlquiler(Rent* rent, Car* coches, const int & tam_coches, int tam_rent) {
-bool leerAlquiler(ListaAlquileres &l, ListaCoches &coches) {
+bool leerAlquiler(ListaAlquileres& l, ListaCoches& coches) {
 
 	std::ifstream file;
 	file.open("rent.txt");
-	
+
 	if (file.is_open()) {
 		int tam_rent = 0;
 		file >> l.tam;
 		l.lista = new Rent[2 * l.tam];
-		
+
 		for (int i = 0; i < l.tam; i++) {
 			int coche = 0;
 			file >> coche;
 			l.lista[i].car_ = buscaCoche(coches.lista, coches.tam, coche);
-			
+
 			char aux = '/';
-			// Tenemos que leer las fechas aunque el coche no exista
-			//if (rent[i].car_ != nullptr) {
-				//std::getline(file, rent[i].date_);
-				//std::getline(file, date);
-				file >> l.lista[i].date_.d >> aux >> l.lista[i].date_.m >> aux >> l.lista[i].date_.a;
-				file >> l.lista[i].days_;
 
-				//l.lista[i].car_->mat_ <<
-				if (l.lista[i].car_ != nullptr)
-					std::cout << l.lista[i].car_->mat_ << " " << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << " " << l.lista[i].days_ << std::endl;
-				else std::cout << "Modelo inexistente " << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << l.lista[i].days_ << std::endl;
+			file >> l.lista[i].date_.d >> aux >> l.lista[i].date_.m >> aux >> l.lista[i].date_.a;
+			file >> l.lista[i].days_;
 
-			/*}
-			else {
-				return false;
-			}*/
+			/*
+			if (l.lista[i].car_ != nullptr)
+				std::cout << l.lista[i].car_->mat_ << " " << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << " " << l.lista[i].days_ << std::endl;
+			else std::cout << "Modelo inexistente " << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << l.lista[i].days_ << std::endl;
+			*/
+
 		}
 		return true;
 	}
@@ -144,8 +131,9 @@ void MostrarAlquileres(ListaAlquileres l) {
 
 		char aux = '/';
 		if (l.lista[i].car_ != nullptr)
-			std::cout << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << l.lista[i].car_->model_ << l.lista[i].days_ << " dia(s) por " << l.lista[i].days_ * l.lista[i].car_->precio_ << " euros." << std::endl;
-		else std::cout << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << "ERROR: Modelo inexistente " << std::endl;
+			std::cout << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << l.lista[i].car_->model_ << " " <<
+			l.lista[i].days_ << " dia(s) por " << l.lista[i].days_ * l.lista[i].car_->precio_ << " euros." << std::endl;
+		else std::cout << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << " ERROR: Modelo inexistente " << std::endl;
 
 	}
 }
