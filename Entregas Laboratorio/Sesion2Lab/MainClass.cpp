@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <string>
 #include <fstream>
 using namespace std;
@@ -60,7 +61,25 @@ bool CargaCoches(ListaCoches &l) {
 	}
 }
 
-// De momento siempre devuelve nullptr
+bool ComparaFechas(Rent primera, Rent segunda) {
+	if (primera.date_.a < segunda.date_.a) {
+		if (primera.date_.m < segunda.date_.m) {
+			if (primera.date_.d < segunda.date_.d)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+void OrdenaAlquileres(ListaAlquileres &l) {
+
+	// Requiere del inicio y el final del array, asi de c
+	std::sort(l.lista, l.lista+l.tam, ComparaFechas);
+
+}
+
 Car* buscaCoche(Car* lista, int tam, int code) {
 	/*
 	int i = 0;
@@ -94,9 +113,8 @@ bool leerAlquiler(ListaAlquileres &l, ListaCoches &coches) {
 			int coche = 0;
 			file >> coche;
 			l.lista[i].car_ = buscaCoche(coches.lista, coches.tam, coche);
-			std::string date;
+			
 			char aux = '/';
-
 			// Tenemos que leer las fechas aunque el coche no exista
 			//if (rent[i].car_ != nullptr) {
 				//std::getline(file, rent[i].date_);
@@ -106,8 +124,8 @@ bool leerAlquiler(ListaAlquileres &l, ListaCoches &coches) {
 
 				//l.lista[i].car_->mat_ <<
 				if (l.lista[i].car_ != nullptr)
-					std::cout << l.lista[i].car_->mat_ << " " << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << date << " " << l.lista[i].days_ << std::endl;
-				else std::cout << "Modelo inexistente " << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << date << " " << l.lista[i].days_ << std::endl;
+					std::cout << l.lista[i].car_->mat_ << " " << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << " " << l.lista[i].days_ << std::endl;
+				else std::cout << "Modelo inexistente " << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << l.lista[i].days_ << std::endl;
 
 			/*}
 			else {
@@ -121,6 +139,17 @@ bool leerAlquiler(ListaAlquileres &l, ListaCoches &coches) {
 	}
 }
 
+void MostrarAlquileres(ListaAlquileres l) {
+	for (int i = 0; i < l.tam; i++) {
+
+		char aux = '/';
+		if (l.lista[i].car_ != nullptr)
+			std::cout << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << l.lista[i].car_->model_ << l.lista[i].days_ << " dia(s) por " << l.lista[i].days_ * l.lista[i].car_->precio_ << " euros." << std::endl;
+		else std::cout << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << "ERROR: Modelo inexistente " << std::endl;
+
+	}
+}
+
 
 int main() {	
 	//listas
@@ -129,12 +158,18 @@ int main() {
 	//lectura
 	CargaCoches(coches_);
 	leerAlquiler(alquileres_, coches_);		// Necesita coches para añadir nullptr si uno no existe
+	OrdenaAlquileres(alquileres_);
+	MostrarAlquileres(alquileres_);
 
 	//leerAlquiler(alquileres, coches, tam_coches, tam_rent);
 	int axe = 0;
 	//borrado
-	//delete alquileres;
-	//delete l;
+	
+	delete[] alquileres_.lista;
+	alquileres_.lista = nullptr;
+	delete[] coches_.lista;
+	coches_.lista = nullptr;
+
 	return 0;
 }
 
