@@ -66,14 +66,17 @@ bool CargaCoches(ListaCoches &l) {
 
 bool ComparaFechas(Rent primera, Rent segunda) {
 
-	if (primera.date_.a <= segunda.date_.a) {
-		if (primera.date_.m <= segunda.date_.m) {
-			if (primera.date_.d < segunda.date_.d)
-			{
-				return true;
-			}
+	if (primera.date_.a < segunda.date_.a)	return true;
+	else if (primera.date_.a == segunda.date_.a) {
+
+		if (primera.date_.m < segunda.date_.m) return true;
+		else if (primera.date_.m == segunda.date_.m) {
+
+			if (primera.date_.d < primera.date_.d)	return true;
+			else if (primera.date_.d > primera.date_.d) return false;
 		}
 	}
+
 	return false;
 }
 
