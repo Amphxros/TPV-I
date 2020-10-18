@@ -36,7 +36,7 @@ struct ListaAlquileres {
 /// </summary>
 /// <param name="lista"></param>
 /// <returns> true si el archivo se ha podido leer </returns>
-bool CargaCoches(ListaCoches l) {
+bool CargaCoches(ListaCoches &l) {
 	std::ifstream file;
 	file.open("coches.txt");
 	
@@ -80,7 +80,7 @@ Car* buscaCoche(Car* lista, int tam, int code) {
 }
 
 //bool leerAlquiler(Rent* rent, Car* coches, const int & tam_coches, int tam_rent) {
-bool leerAlquiler(ListaAlquileres l, ListaCoches coches) {
+bool leerAlquiler(ListaAlquileres &l, ListaCoches &coches) {
 
 	std::ifstream file;
 	file.open("rent.txt");
@@ -106,8 +106,8 @@ bool leerAlquiler(ListaAlquileres l, ListaCoches coches) {
 
 				//l.lista[i].car_->mat_ <<
 				if (l.lista[i].car_ != nullptr)
-					std::cout << l.lista[i].car_->mat_ << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << date << " " << l.lista[i].days_ << std::endl;
-				else std::cout << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << date << " " << l.lista[i].days_ << std::endl;
+					std::cout << l.lista[i].car_->mat_ << " " << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << date << " " << l.lista[i].days_ << std::endl;
+				else std::cout << "Modelo inexistente " << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << date << " " << l.lista[i].days_ << std::endl;
 
 			/*}
 			else {
