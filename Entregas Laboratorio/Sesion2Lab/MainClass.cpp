@@ -1,21 +1,23 @@
-
 #include <iostream>
 #include <string>
 #include <fstream>
-struct Car
-{
+using namespace std;
+
+struct Car	{
 	int mat_;
 	int precio_;
 	std::string model_;
 };
-struct Date {
-	int d, m,a; //dia/mes/año
+
+struct Date	{
+	int d, m, a; //dia/mes/año
 };
+
 struct Rent {
 	Car* car_;
-	std::string date_;//<- CAMBIAR ESTO A TIPO FECHA
-	Date date;//<- CAMBIAR ESTO A TIPO FECHA
-	int days;
+	//std::string date_;//<- CAMBIAR ESTO A TIPO FECHA
+	Date date_;//<- CAMBIAR ESTO A TIPO FECHA
+	int days_;
 
 };
 
@@ -37,10 +39,11 @@ struct ListaAlquileres {
 bool CargaCoches(ListaCoches l) {
 	std::ifstream file;
 	file.open("coches.txt");
+	
 	if (file.is_open()) {
 		int dim = 0;
-		file >> l.tam;
-		l.lista = new Car[2*l.tam];
+		file >> l.tam;		// Primer elemento del txt es el numero con el tamaño de la lista
+		l.lista = new Car[2 * l.tam];
 
 		for (int i = 0; i < l.tam; i++) {
 			file >> l.lista[i].mat_;
@@ -56,8 +59,10 @@ bool CargaCoches(ListaCoches l) {
 		return false;
 	}
 }
-Car* buscaCoche(Car* lista,int tam, int code) {
 
+// De momento siempre devuelve nullptr
+Car* buscaCoche(Car* lista, int tam, int code) {
+	/*
 	int i = 0;
 	while (i < tam && code != lista[i].mat_)
 		i++;
@@ -66,32 +71,49 @@ Car* buscaCoche(Car* lista,int tam, int code) {
 		return nullptr;
 	else
 		return &(lista[i]);
+	*/
+	for (int i = 0; i < tam; i++)
+	{
+		if (code == lista[i].mat_)		return &(lista[i]);
+	}
+	return nullptr;
 }
 
-bool leerAlquiler(Rent* rent, Car* coches, const int & tam_coches, int tam_rent) {
+//bool leerAlquiler(Rent* rent, Car* coches, const int & tam_coches, int tam_rent) {
+bool leerAlquiler(ListaAlquileres l, ListaCoches coches) {
+
 	std::ifstream file;
 	file.open("rent.txt");
+	
 	if (file.is_open()) {
-		tam_rent = 0;
-		file >> tam_rent;
-		rent = new Rent[2*tam_rent];
+		int tam_rent = 0;
+		file >> l.tam;
+		l.lista = new Rent[2 * l.tam];
 		
-		for (int i = 0; i < tam_rent; i++) {
-			int code = -1;
-			file >> code;
-			rent[i].car_ = buscaCoche(coches, tam_coches, code);
+		for (int i = 0; i < l.tam; i++) {
+			int coche = 0;
+			file >> coche;
+			l.lista[i].car_ = buscaCoche(coches.lista, coches.tam, coche);
+			std::string date;
+			char aux = '/';
 
-			if (rent[i].car_ != nullptr) {
-				std::getline(file, rent[i].date_);
-				file >> rent[i].days;
-				std::cout << rent[i].car_->mat_ << " " << rent[i].date_ << " " << rent[i].days << std::endl;
+			// Tenemos que leer las fechas aunque el coche no exista
+			//if (rent[i].car_ != nullptr) {
+				//std::getline(file, rent[i].date_);
+				//std::getline(file, date);
+				file >> l.lista[i].date_.d >> aux >> l.lista[i].date_.m >> aux >> l.lista[i].date_.a;
+				file >> l.lista[i].days_;
 
-			}
+				//l.lista[i].car_->mat_ <<
+				if (l.lista[i].car_ != nullptr)
+					std::cout << l.lista[i].car_->mat_ << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << date << " " << l.lista[i].days_ << std::endl;
+				else std::cout << l.lista[i].date_.d << aux << l.lista[i].date_.m << aux << l.lista[i].date_.a << " " << date << " " << l.lista[i].days_ << std::endl;
+
+			/*}
 			else {
 				return false;
-			}
+			}*/
 		}
-
 		return true;
 	}
 	else {
@@ -106,9 +128,10 @@ int main() {
 	ListaAlquileres alquileres_ = ListaAlquileres();
 	//lectura
 	CargaCoches(coches_);
+	leerAlquiler(alquileres_, coches_);		// Necesita coches para añadir nullptr si uno no existe
 
 	//leerAlquiler(alquileres, coches, tam_coches, tam_rent);
-	
+	int axe = 0;
 	//borrado
 	//delete alquileres;
 	//delete l;
