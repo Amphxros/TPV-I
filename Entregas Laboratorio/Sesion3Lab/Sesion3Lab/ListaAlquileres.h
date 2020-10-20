@@ -9,8 +9,10 @@ using namespace std;
 
 class ListaAlquileres
 {
+
 public:
 	ListaAlquileres(int t, int lim, Alquiler* list, ListaCoches listcoches);
+	~ListaAlquileres() {};
 	
 	bool LeerAlquiler(std::string filename);
 	void MostrarAlquiler();
@@ -25,5 +27,4 @@ private:
 	int tam, limite;
 	Alquiler* lista;
 	ListaCoches lista_;
-};
-
+}

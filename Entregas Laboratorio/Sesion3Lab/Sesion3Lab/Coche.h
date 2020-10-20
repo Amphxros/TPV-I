@@ -10,6 +10,8 @@ public:
 	inline int getPrecio() { return precio_; }
 	inline std::string getModel() { return model_; }
 
+	void CargaCoches();
+
 private:
 	int mat_, precio_;
 	std::string model_;

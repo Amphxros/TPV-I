@@ -12,7 +12,6 @@ public:
 	inline Date getDate() { return date_; }
 	inline int getDias() { return days_; }
 
-
 private:	
 	Coche* car_;
 	Date date_;

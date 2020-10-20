@@ -1,5 +1,5 @@
 // G13
-// Amparo Rubio Bellón
+// Amparo Rubio Bellï¿½n
 // Jorge Zurdo Izquierdo
 
 #include <iostream>
@@ -16,7 +16,7 @@ int main() {
 	//ListaAlquileres alquileres_ = ListaAlquileres();
 	//lectura
 	//coches_->CargaCoches(coches_);
-	//alquileres_->leerAlquiler(alquileres_, coches_);		// Necesita coches para añadir nullptr si uno no existe
+	//alquileres_->leerAlquiler(alquileres_, coches_);		// Necesita coches para aï¿½adir nullptr si uno no existe
 	//alquileres_->OrdenaAlquileres(alquileres_);
 	//alquileres_->MostrarAlquileres(alquileres_);
 
