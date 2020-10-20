@@ -11,9 +11,10 @@ public:
 	inline Coche* getCoche() { return car_; }
 	inline Date getDate() { return date_; }
 	inline int getDias() { return days_; }
+
+
 private:	
 	Coche* car_;
 	Date date_;
 	int days_;
 };
-

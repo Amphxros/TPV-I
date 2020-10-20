@@ -16,6 +16,10 @@ public:
 	void print() const;
 	friend istream& operator>>(istream& in, Date& d);
 	friend ostream& operator<<(ostream& in, const Date& d);
+
+	inline int getYear() { return year; }
+	inline int getMonth() { return month; }
+	inline int getDay() { return day; }
 private:
 	int day;
 	int month;
