@@ -3,8 +3,11 @@
 
 class ListaAlquileres
 {
-	private:
-		int tam, limite;
-		Rent* lista;
+public:
+	ListaAlquileres(int tam, int lim, Alquiler* list);
+	bool LeerAlquiler(std::string filename);
+private:
+	int tam, limite;
+	Alquiler* lista;
 };
 
