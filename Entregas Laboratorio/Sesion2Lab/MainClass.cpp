@@ -152,7 +152,6 @@ int main() {
 	OrdenaAlquileres(alquileres_);
 	MostrarAlquileres(alquileres_);
 
-	//leerAlquiler(alquileres, coches, tam_coches, tam_rent);
 	int axe = 0;
 	//borrado
 	
