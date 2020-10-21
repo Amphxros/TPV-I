@@ -10,7 +10,10 @@ public:
 	inline int getPrecio() { return precio_; }
 	inline std::string getModel() { return model_; }
 
-	void CargaCoches();
+	inline void setMat(int mat) { mat_ = mat; }
+	inline void setPrecio(int pre) { precio_ = pre; }
+	inline void setModel(std::string s) { model_ = s; }
+
 
 private:
 	int mat_, precio_;
