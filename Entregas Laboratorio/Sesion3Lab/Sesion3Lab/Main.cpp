@@ -6,14 +6,15 @@
 #include <string>
 #include <fstream>
 
-using namespace std;
-
 #include "ListaAlquileres.h"	// Incluye Alquileres y ListaCoches
+#include "ListaCoches.h"
+
+using namespace std;
 
 int main() {
 	//listas
-	//ListaCoches coches_ = ListaCoches();
-	//ListaAlquileres alquileres_ = ListaAlquileres();
+	ListaCoches coches_ = ListaCoches();
+	ListaAlquileres alquileres_ = ListaAlquileres();
 	//lectura
 	//coches_->CargaCoches(coches_);
 	//alquileres_->leerAlquiler(alquileres_, coches_);		// Necesita coches para a�adir nullptr si uno no existe
