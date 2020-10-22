@@ -17,7 +17,7 @@ public:
 
 	bool LeerAlquiler(std::string filename);
 	void MostrarAlquiler();
-	void OrdenaAlquiler();
+	void OrdenaAlquiler() const;
 
 	bool ComparaFechas(Alquiler primera, Alquiler segunda);
 	inline Alquiler* getLista() { return lista; }

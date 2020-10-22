@@ -83,8 +83,8 @@ void ListaAlquileres::MostrarAlquiler()
 	}
 }
 
-void ListaAlquileres::OrdenaAlquiler()
+void ListaAlquileres::OrdenaAlquiler() const
 {
-	sort(lista, (lista + tam),ComparaFechas);
+	std::sort(lista, (lista + tam),ComparaFechas);
 }
 
