@@ -2,18 +2,22 @@
 
 #include <fstream>
 #include <iostream>
+
+/// constructora
 ListaCoches::ListaCoches() :
 	tam(0),limite(0)
 {
 	cargaCoches("coches.txt");
 }
 
+/// constructora
 ListaCoches::ListaCoches(int tam, int limite) :
 	tam(tam), limite(limite)
 {
 	cargaCoches("coches.txt");
 }
 
+/// carga los coches de un archivo filename
 bool ListaCoches::cargaCoches(std::string filename)
 {
 	std::ifstream file;
@@ -48,6 +52,7 @@ bool ListaCoches::cargaCoches(std::string filename)
 	}
 }
 
+///devuelve el coche con la matricula code
 Coche* ListaCoches::buscaCoche(int code)
 {
 	int i = 0;

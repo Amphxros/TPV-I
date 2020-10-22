@@ -10,6 +10,8 @@ public:
 
 	bool cargaCoches(std::string filename);
 	Coche* buscaCoche(int code);
+
+	inline int getTam() { return tam; }
 private:
 	int tam, limite;
 	Coche* lista;

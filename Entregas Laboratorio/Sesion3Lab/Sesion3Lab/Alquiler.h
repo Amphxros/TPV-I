@@ -12,6 +12,11 @@ public:
 	inline Date getDate() { return date_; }
 	inline int getDias() { return days_; }
 
+	inline void setCoche(Coche* c) { car_ = c; }
+	inline void setDate(Date d) { date_ = d; }
+	inline void setDays(int d) { days_ = d; }
+
+
 private:	
 	Coche* car_;
 	Date date_;
