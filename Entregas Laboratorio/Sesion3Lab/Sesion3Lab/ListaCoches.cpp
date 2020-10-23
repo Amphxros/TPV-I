@@ -1,5 +1,8 @@
-#include "ListaCoches.h"
+// G13
+// Amparo Rubio Bellon
+// Jorge Zurdo Izquierdo
 
+#include "ListaCoches.h"
 #include <fstream>
 #include <iostream>
 

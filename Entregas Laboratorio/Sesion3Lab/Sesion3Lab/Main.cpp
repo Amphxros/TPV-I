@@ -1,5 +1,5 @@
 // G13
-// Amparo Rubio Bell�n
+// Amparo Rubio Bellon
 // Jorge Zurdo Izquierdo
 
 #include <iostream>
@@ -15,17 +15,9 @@ int main() {
 	//listas
 	ListaCoches coches_ = ListaCoches();
 	ListaAlquileres alquileres_ = ListaAlquileres();
-	//lectura
-	//coches_->CargaCoches(coches_);
-	//alquileres_->leerAlquiler(alquileres_, coches_);		// Necesita coches para a�adir nullptr si uno no existe
-	//alquileres_->OrdenaAlquileres(alquileres_);
-	//alquileres_->MostrarAlquileres(alquileres_);
 
-	////borrado
-	//delete[] alquileres_.lista;
-	//alquileres_.lista = nullptr;
-	//delete[] coches_.lista;
-	//coches_.lista = nullptr;
+	alquileres_.OrdenaAlquiler();
+	alquileres_.MostrarAlquiler();
 
 	return 0;
 }

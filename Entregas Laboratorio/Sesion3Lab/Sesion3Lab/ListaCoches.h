@@ -1,3 +1,6 @@
+// G13
+// Amparo Rubio Bellon
+// Jorge Zurdo Izquierdo
 #pragma once
 #include "Coche.h"
 
@@ -10,7 +13,6 @@ public:
 
 	bool cargaCoches(std::string filename);
 	Coche* buscaCoche(int code);
-
 	inline int getTam() const { return tam; }
 private:
 	int tam, limite;

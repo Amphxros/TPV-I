@@ -1,3 +1,6 @@
+// G13
+// Amparo Rubio Bellon
+// Jorge Zurdo Izquierdo
 #include "Date.h"
 Date::Date(int d, int m, int y) :
 	day(d), month(m), year(y){

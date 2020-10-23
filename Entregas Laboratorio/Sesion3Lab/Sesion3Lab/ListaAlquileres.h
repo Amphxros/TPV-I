@@ -1,3 +1,6 @@
+// G13
+// Amparo Rubio Bellon
+// Jorge Zurdo Izquierdo
 #pragma once
 #include <iostream>
 
@@ -13,19 +16,19 @@ class ListaAlquileres
 public:
 	ListaAlquileres();
 	ListaAlquileres(int t, int lim, ListaCoches listcoches);
-	~ListaAlquileres() {};
+	~ListaAlquileres() { delete alquileres; };
 
 	bool LeerAlquiler(std::string filename);
 	void MostrarAlquiler();
 	void OrdenaAlquiler() const;
 
 	bool ComparaFechas(Alquiler primera, Alquiler segunda);
-	inline Alquiler* getLista() { return lista; }
+	inline Alquiler* getLista() { return alquileres; }
 	inline int getTam() { return tam; }
 
 
 private:
 	int tam, limite;
-	Alquiler* lista;
-	ListaCoches lista_;
+	Alquiler* alquileres;
+	ListaCoches lista_coches;
 };

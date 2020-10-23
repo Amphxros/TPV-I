@@ -1,3 +1,6 @@
+// G13
+// Amparo Rubio Bellon
+// Jorge Zurdo Izquierdo
 #pragma once
 #include <iostream>
 #include "Date.h"
