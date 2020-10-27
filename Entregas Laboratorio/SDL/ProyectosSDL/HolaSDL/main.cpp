@@ -8,6 +8,7 @@ using namespace std;
 
 using uint = unsigned int;
 
+const uint TIME_PER_FRAME = 60;
 void firstTest() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Check Memory Leaks
 	SDL_Window* window = nullptr;
@@ -21,11 +22,48 @@ void firstTest() {
 	if (window == nullptr || renderer == nullptr)
 		cout << "Error cargando SDL" << endl;
 	else {
+		
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderClear(renderer);
-		SDL_RenderPresent(renderer);
-		SDL_Delay(5000);
-	}
+			
+
+			//aqui se renderizan cosas
+			SDL_Texture* texture; // Variable para la textura
+			string filename = "../images/dog.png"; // Nombre del fichero con la imagen .bmp
+			SDL_Surface* surface = IMG_Load(filename.c_str()); // Solo para bmps
+			texture = SDL_CreateTextureFromSurface(renderer, surface);
+			SDL_FreeSurface(surface); // Se borra la estructura auxiliar
+			// Textura lista para ser usada
+
+			//Tamano de frame
+		
+			
+			bool exit = false;
+			//Tamano spritesheet
+			int width, height;
+			SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
+
+			SDL_Rect dest;
+			dest.x = 0;
+			dest.y = 0;
+			dest.w = 50;
+			dest.h = 50;
+
+			while (!exit) {
+				SDL_RenderClear(renderer);
+			SDL_Rect rect;
+			rect.w = width / 6;
+			rect.h = height;
+			rect.x = width / 6 * (SDL_GetTicks() / TIME_PER_FRAME % 6);
+			rect.y = 0;
+			dest.x += 1;
+
+			SDL_RenderCopy(renderer, texture, &rect, &dest);
+			SDL_Delay(25);
+			SDL_RenderPresent(renderer);
+			if (dest.x == 600)
+				exit = true;
+			}
+		}
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
