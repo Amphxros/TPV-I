@@ -60,8 +60,8 @@ void firstTest() {
 			SDL_RenderCopy(renderer, texture, &rect, &dest);
 			SDL_Delay(25);
 			SDL_RenderPresent(renderer);
-			if (dest.x == 600)
-				exit = true;
+			if (dest.x == winHeight)
+				dest.x = 0;
 			}
 		}
 	SDL_DestroyRenderer(renderer);

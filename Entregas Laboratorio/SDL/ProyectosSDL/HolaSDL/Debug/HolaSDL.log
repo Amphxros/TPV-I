@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Windows Kits\10\Include\10.0.18362.0\ucrt\crtdbg.h(303,1): warning C4005: '_malloca': macro redefinition
+C:\Windows Kits\10\Include\10.0.18362.0\ucrt\malloc.h(122): message : see previous definition of '_malloca'
+  HolaSDL.vcxproj -> C:\hlocal\TPV-I\Entregas Laboratorio\SDL\ProyectosSDL\bin\HolaSDLDebug.exe
