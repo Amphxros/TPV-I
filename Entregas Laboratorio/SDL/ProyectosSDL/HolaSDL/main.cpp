@@ -11,26 +11,6 @@ using namespace std;
 using uint = unsigned int;
 
 const uint TIME_PER_FRAME = 60;
-void renderFrame(SDL_Texture* texture, SDL_Rect & dest, SDL_Renderer* renderer) {
-	int width, height;
-	SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
-	SDL_Rect rect;
-	rect.w = width / 6;
-	rect.h = height;
-	rect.x = width / 6 * (SDL_GetTicks() / TIME_PER_FRAME % 6);
-	rect.y = 0;
-	dest.x += 5;
-
-	SDL_RenderCopy(renderer, texture, &rect, &dest);
-	SDL_RenderPresent(renderer);
-	if (dest.x == 600)
-		dest.x = 0;
-}
-
-void render(SDL_Texture* texture, SDL_Rect & dest, SDL_Renderer* renderer) {
-	SDL_RenderCopy(renderer, texture, nullptr, &dest);
-	SDL_RenderPresent(renderer);
-}
 
 void handleEvents( bool& exit) {
 	SDL_Event event;
@@ -56,12 +36,19 @@ void firstTest() {
 	if (window == nullptr || renderer == nullptr)
 		cout << "Error cargando SDL" << endl;
 	else {
-		Texture* dog_texture = new Texture(renderer, "./images/dog.png", 1, 6);
-		Dog* dog = new Dog(0, 500, 5, 100, 100, dog_texture);
+		Texture* bg = new Texture(renderer, "../images/background1.png");
+		Texture* dog_texture = new Texture(renderer, "../images/dog.png", 1, 6);
+		Dog* dog = new Dog(0, 300, 5, 350, 350, dog_texture);
+		bool exit = false;
 		while (!exit)
 		{
+			SDL_RenderClear(renderer);
+			bg->render({ 0,0,800,600 }, SDL_FLIP_NONE);
 			dog->render();
 			dog->update();
+			SDL_RenderPresent(renderer);
+			handleEvents(exit);
+			SDL_Delay(30);
 		}
 		
 	}

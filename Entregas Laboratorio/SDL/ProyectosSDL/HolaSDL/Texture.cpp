@@ -27,18 +27,21 @@ void Texture::load(std::string filename, uint nRows, uint nCols)
 	SDL_Surface* tmp = IMG_Load(filename.c_str());
 	if (tmp == nullptr)
 		throw "Error loading " + filename;
-	clear();
+	
 	texture_ = SDL_CreateTextureFromSurface(renderer_, tmp);
-	if (texture_ == nullptr)
+	
+	if (texture_ == nullptr) {
 		throw "can't load texture " + filename;
-	fils = nRows;
-	cols = nCols;
-	width_ = tmp->w;
-	height_ = tmp->h;
-	fwidth_ = width_ / fils;
-	fheight_ = height_ / cols;
-	SDL_FreeSurface(tmp);
-
+	}
+	else {
+		fils = nRows;
+		cols = nCols;
+		width_ = tmp->w;
+		height_ = tmp->h;
+		fwidth_ = width_ / fils;
+		fheight_ = height_ / cols;
+		SDL_FreeSurface(tmp);
+	}
 }
 
 void Texture::render(const SDL_Rect& destRect, SDL_RendererFlip flip) const
@@ -56,5 +59,5 @@ void Texture::renderFrame(const SDL_Rect& destRect, int row, int col, int angle,
 	srcRect.y = fheight_ * row;
 	srcRect.w = fwidth_;
 	srcRect.h = fheight_;
-	SDL_RenderCopyEx(renderer_, texture_, &srcRect, &destRect, angle, 0, flip);
+	SDL_RenderCopy(renderer_, texture_, &srcRect, &destRect);
 }

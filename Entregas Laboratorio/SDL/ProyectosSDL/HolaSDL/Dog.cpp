@@ -17,13 +17,16 @@ void Dog::render()
 	dest.w = width;
 	dest.h = height;
 
-	frame_ = (int)(SDL_GetTicks() * 60 % texture_->getNumFils());
+	frame_ = width / 6 * (SDL_GetTicks() / 60 % 6);
+
+	texture_->render(dest, SDL_FLIP_NONE);
 	texture_->renderFrame(dest, 1, frame_,0, SDL_FLIP_NONE);
 }
 
 void Dog::update()
 {
 	pos_x+=speed;
+
 	if (pos_x - width>= 600) {
 		pos_x = 0;
 	}

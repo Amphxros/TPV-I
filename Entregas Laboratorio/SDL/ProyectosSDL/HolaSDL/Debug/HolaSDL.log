@@ -1,8 +1,4 @@
 ﻿  Dog.cpp
-  main.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\crtdbg.h(303,1): warning C4005: '_malloca': redefinición de macro
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\malloc.h(122): message : vea la definición anterior de '_malloca'
+  Texture.cpp
   Generando código...
-C:\Users\ampac\Documents\git_Repositorios\UCM_Repos\TPV-I\Entregas Laboratorio\SDL\ProyectosSDL\HolaSDL\main.cpp(61,15): warning C4551: la llamada a la función no tiene lista de argumentos
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(810,5): error MSB6006: "link.exe" salió con el código 1168.
-LINK : fatal error LNK1168: no se puede abrir C:\Users\ampac\Documents\git_Repositorios\UCM_Repos\TPV-I\Entregas Laboratorio\SDL\ProyectosSDL\bin\HolaSDLDebug.exe para escritura
+  HolaSDL.vcxproj -> C:\Users\ampac\Documents\git_Repositorios\UCM_Repos\TPV-I\Entregas Laboratorio\SDL\ProyectosSDL\bin\HolaSDLDebug.exe
