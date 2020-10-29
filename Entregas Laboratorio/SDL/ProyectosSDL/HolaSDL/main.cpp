@@ -3,6 +3,8 @@
 #include "SDL_image.h"
 #include "checkML.h"
 #include <iostream>
+#include "Texture.h"
+#include "Dog.h"
 
 using namespace std;
 
@@ -54,42 +56,15 @@ void firstTest() {
 	if (window == nullptr || renderer == nullptr)
 		cout << "Error cargando SDL" << endl;
 	else {
-			SDL_Texture* texture; // Variable para la textura
-			string filename = "../images/dog.png"; // Nombre del fichero con la imagen .bmp
-			SDL_Surface* surface = IMG_Load(filename.c_str()); // Solo para bmps
-			texture = SDL_CreateTextureFromSurface(renderer, surface);
-			SDL_FreeSurface(surface); // Se borra la estructura auxiliar
-		
-			SDL_Texture* bg; // Variable para la textura
-			filename = "../images/background1.png"; // Nombre del fichero con la imagen .bmp
-			surface = IMG_Load(filename.c_str()); // Solo para bmps
-			bg = SDL_CreateTextureFromSurface(renderer, surface);
-			SDL_FreeSurface(surface); // Se borra la estructura auxiliar
-		
-			SDL_Rect dest;
-			dest.x = 0;
-			dest.y = 500;
-			dest.w = 100;
-			dest.h = 100;
-			
-			SDL_Rect b;
-			b.x = 0;
-			b.y = 0;
-			b.w = 800;
-			b.h = 600;
-			bool exit = false;
-			//Tamano spritesheet
-			while (!exit)
-			{
-				SDL_RenderClear(renderer);
-
-				render(bg, b, renderer);
-				renderFrame(texture,dest,renderer);
-				handleEvents(exit);
-				SDL_Delay(30);
-			}
-		
+		Texture* dog_texture = new Texture(renderer, "./images/dog.png", 1, 6);
+		Dog* dog = new Dog(0, 500, 5, 100, 100, dog_texture);
+		while (!exit)
+		{
+			dog->render();
+			dog->update();
 		}
+		
+	}
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
