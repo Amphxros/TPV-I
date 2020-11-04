@@ -3,10 +3,11 @@
 #include <SDL.h>
 #include "Pacman.h"
 
-const int WIN_WIDTH;
-const int WIN_HEIGHT;
+const int WIN_WIDTH=800;
+const int WIN_HEIGHT=600;
 
 const int NUM_TEXTURES=5;
+const int TAM_MAT;
 struct TextureData
 {
 	std::string filename;
@@ -26,6 +27,8 @@ public:
 	~Game();
 
 	void init();
+	void createPacman(Vector2D pos);
+	void createGhost(Vector2D pos);
 	void run();
 	
 
