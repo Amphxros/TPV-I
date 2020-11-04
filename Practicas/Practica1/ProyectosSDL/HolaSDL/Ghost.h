@@ -8,16 +8,15 @@ class Game;
 class Ghost
 {
 public:
-	Ghost(Point2D pos, Vector2D speed,double width,double height, Texture* Texture, Game* game_,int color);
+	Ghost(Point2D pos, Texture* Texture, Game* game_,int color);
 	~Ghost();
 
-	void render() const;
+	void render();
 	void update();
 
 private:
 	Point2D pos_;
-	Vector2D speed_;
-	double width_, height_;
+	Vector2D dir_;
 	Texture* texture_;
 	Game* game_;
 	int color_;

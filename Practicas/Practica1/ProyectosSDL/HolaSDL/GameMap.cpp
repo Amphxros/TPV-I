@@ -1,7 +1,10 @@
 #include "GameMap.h"
 #include <iostream>
 #include <fstream>
+#include "Game.h"
+GameMap::GameMap(int rows, int cols, Texture* texture, Game* game) {
 
+}
 void GameMap::load(string filename) {
 	std::ifstream file;
 	file.open(filename);
@@ -26,8 +29,7 @@ void GameMap::load(string filename) {
 			for (int j = 0; j < dimx; j++) {
 				int d;
 				file >> d;
-				//para acceder a cada dato
-				//switch aqui
+				std::cout << d;
 				switch (d) {
 				case 0:
 					map[i][j] = MapCell::Empty; //por ejemplo
@@ -41,11 +43,33 @@ void GameMap::load(string filename) {
 				case 3:
 					map[i][j] = MapCell::Vitamins; //por ejemplo
 					break;
-				//mas casos . . .
+				//mas casos para crear fantasmas, pacman etc
+				case 5:
+					map[i][j] = MapCell::Empty;
+					game_->createGhost(Vector2D(TAM_MAT * i, TAM_MAT * j), 1);
+					break;
+				case 6:
+					map[i][j] = MapCell::Empty;
+					game_->createGhost(Vector2D(TAM_MAT * i, TAM_MAT * j), 2);
+					break;
+				case 7:
+					map[i][j] = MapCell::Empty;
+					game_->createGhost(Vector2D(TAM_MAT * i, TAM_MAT * j), 3);
+					break;
+				case 8:
+					map[i][j] = MapCell::Empty;
+					game_->createGhost(Vector2D(TAM_MAT * i, TAM_MAT * j), 4);
+					break;
+				case 9:
+					map[i][j] = MapCell::Empty; //por ejemplo
+					game_->createPacman(Vector2D(TAM_MAT * i, TAM_MAT * j));
+					break;
 
 				default:
+					map[i][j] = MapCell::Empty;
 					break;
 				}
+				std::cout << " " << std::endl;
 			}
 		}
 	}

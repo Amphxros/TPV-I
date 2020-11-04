@@ -1,6 +1,5 @@
 #pragma once
 
-using Point2D = Vector2D;
 class Vector2D
 {
 public:
@@ -8,8 +7,8 @@ public:
 	Vector2D(int x, int y) :x_(x), y_(y) {};
 	~Vector2D() {};
 
-	inline double getX() { return x_; };	//devuelve x
-	inline double getY() { return y_; };	//devuelve y (para sorpresa de muchos)
+	double getX() { return x_; };	//devuelve x
+	double getY() { return y_; };	//devuelve y (para sorpresa de muchos)
 	//suma de vectores
 	Vector2D operator+(Vector2D& v) { return Vector2D(x_ + v.getX(), y_ + v.getY()); };
 	//resta de vectores
@@ -23,3 +22,4 @@ public:
 private:
 	double x_,y_;
 };
+using Point2D = Vector2D;

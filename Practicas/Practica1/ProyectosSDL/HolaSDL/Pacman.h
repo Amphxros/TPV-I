@@ -9,7 +9,7 @@ public:
 	Pacman(Point2D pos, Texture* texture, Game* game_);
 	~Pacman();
 
-	void render() const;
+	void render();
 	void update();
 	void handleEvents(SDL_Event& event);
 

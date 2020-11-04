@@ -4,7 +4,7 @@
 Pacman::Pacman(Point2D pos, Texture* texture, Game* game):
 pos_(pos),texture_(texture),game_(game) {}
 
-void Pacman::render() const
+void Pacman::render()
 {
 	SDL_Rect dest;
 	dest.x = pos_.getX();
@@ -18,7 +18,7 @@ void Pacman::render() const
 void Pacman::update()
 {
 	//if(!colision con la matriz)
-	pos_ = { pos_.getX() + dir_.getX()*TAM_MAT, pos_.getY()+ dir_.getY()*TAM_MAT };
+	pos_ = { (int)(pos_.getX() + dir_.getX()*TAM_MAT), (int)(pos_.getY() + dir_.getY()*TAM_MAT) };
 	//if colisionconHamburguesa -> bool nyom true
 	//if nyom && ha pasao tiempo de cooldown bool nyom false
 

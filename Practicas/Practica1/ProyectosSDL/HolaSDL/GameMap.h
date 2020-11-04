@@ -9,9 +9,9 @@ class GameMap
 {
 enum MapCell {Empty, Wall, Food, Vitamins};	//Solo contiene info de elementos estáticos
 public:
-	GameMap(int rows, int cols, std::string filename, Texture* tex0, Texture* tex1, Texture* tex2, Texture* tex3, Game* game);
+	GameMap(int rows, int cols, Texture* texture,Game* game);
 	
-	~GameMap() { delete map; map = nullptr; };
+	~GameMap();
 
 	void load(std::string filename);
 	void write(std::string filename);
@@ -22,5 +22,7 @@ private:
 	Vector2D mapSize;
 	MapCell** map; //Array de celdas de tipo MapCell; Contienen info de lo que hay en las casillas
 	Game* game_;
+
+	int rows_, cols_;
 };
 
