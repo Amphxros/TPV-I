@@ -17,12 +17,39 @@ void Pacman::render() const
 
 void Pacman::update()
 {
-//if(colision con la matriz)
-	pos_ = { pos_.getX() + speed_.getX(), pos_.getY()+ speed_.getY() };
-
+	//if(!colision con la matriz)
+	pos_ = { pos_.getX() + dir_.getX(), pos_.getY()+ dir_.getY() };
+	//if colisionconHamburguesa -> bool nyom true
+	//if nyom && ha pasao tiempo de cooldown bool nyom false
 
 }
 
 void Pacman::handleEvents(SDL_Event& event)
 {
+	switch (event.type)
+	{
+	case SDL_KEYDOWN:
+		if (event.key.keysym.sym == SDLK_UP)
+		{
+			dir_ = { 0,-speed_.getY() };
+		}
+
+		else if (event.key.keysym.sym == SDLK_DOWN)
+		{
+			dir_ = { 0,speed_.getY() };
+		}
+
+		else if (event.key.keysym.sym == SDLK_LEFT) 
+		{
+			dir_ = {-speed_.getY(),0 };
+		}
+
+		else if (event.key.keysym.sym == SDLK_RIGHT)
+		{
+			dir_ = { 0,speed_.getY() };
+		}
+		break;
+	default:
+		break;
+	}
 }
