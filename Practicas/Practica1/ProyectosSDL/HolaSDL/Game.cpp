@@ -15,8 +15,8 @@ Game::Game()
 		init();
 		
 		SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);
-		SDL_RenderClear(renderer_);
-		SDL_RenderPresent(renderer_);
+		
+		
 		SDL_Delay(5000);
 	}
 }
@@ -33,7 +33,7 @@ void Game::init()
 		textures[i] = new Texture(renderer_,textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
 	}
 	map_ = new GameMap(30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
-	map_->load("...");
+	map_->load("../Mapas/level01.dat");
 }
 
 void Game::createPacman(Vector2D pos)
@@ -58,12 +58,26 @@ void Game::run()
 
 void Game::render()
 {
+	SDL_RenderClear(renderer_);
+	pacman_->render();
+	SDL_RenderPresent(renderer_);
 }
 
 void Game::update()
 {
+	pacman_->update();
 }
 
 void Game::handleEvents()
 {
+	SDL_Event event;
+	while (SDL_PollEvent(&event)) {
+		if (event.type == SDL_QUIT) {
+			exit_ = true;
+		}
+		else
+		{
+		pacman_->handleEvents(event);
+		}
+	}
 }
