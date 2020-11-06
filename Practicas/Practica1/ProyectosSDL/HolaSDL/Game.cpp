@@ -3,8 +3,6 @@
 
 Game::Game()
 {
-	window_ = nullptr;
-	renderer_ = nullptr;
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window_ = SDL_CreateWindow("First test with SDL", SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, WIN_WIDTH, WIN_HEIGHT, SDL_WINDOW_SHOWN);
@@ -29,9 +27,9 @@ Game::~Game()
 
 void Game::init()
 {
-	for (int i = 0; i < NUM_TEXTURES; i++) { 
+	/*for (int i = 0; i < NUM_TEXTURES; i++) { 
 		textures[i] = new Texture(renderer_,textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
-	}
+	}*/
 	map_ = new GameMap(30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
 	map_->load("../Mapas/level01.dat");
 }

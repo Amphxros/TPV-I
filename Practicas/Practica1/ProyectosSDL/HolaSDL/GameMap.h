@@ -22,7 +22,7 @@ private:
 	Vector2D mapSize;
 	MapCell** map; //Array de celdas de tipo MapCell; Contienen info de lo que hay en las casillas
 	Game* game_;
-
+	Texture* texture_;
 	int rows_, cols_;
 };
 

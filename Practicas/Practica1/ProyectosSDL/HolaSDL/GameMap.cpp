@@ -2,7 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include "Game.h"
-GameMap::GameMap(int rows, int cols, Texture* texture, Game* game) {
+GameMap::GameMap(int rows, int cols, Texture* texture, Game* game):
+rows_(rows),cols_(cols),texture_(texture),game_(game){
 
 }
 void GameMap::load(string filename) {
@@ -29,7 +30,7 @@ void GameMap::load(string filename) {
 			for (int j = 0; j < dimx; j++) {
 				int d;
 				file >> d;
-				std::cout << d;
+				std::cout << d<< " ";
 				switch (d) {
 				case 0:
 					map[i][j] = MapCell::Empty; //por ejemplo
@@ -69,8 +70,8 @@ void GameMap::load(string filename) {
 					map[i][j] = MapCell::Empty;
 					break;
 				}
-				std::cout << " " << std::endl;
 			}
+				std::cout << " " << std::endl;
 		}
 	}
 

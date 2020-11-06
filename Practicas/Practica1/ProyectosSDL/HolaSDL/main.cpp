@@ -13,7 +13,7 @@ void firstTest() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Check Memory Leaks
 
 	Game g = Game();
-
+	g.run();
 
 	SDL_Quit();
 }
