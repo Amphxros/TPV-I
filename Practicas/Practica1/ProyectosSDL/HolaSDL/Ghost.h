@@ -8,7 +8,7 @@ class Game;
 class Ghost
 {
 public:
-	Ghost(Point2D pos, Texture* Texture, Game* game_,int color);
+	Ghost(Point2D pos, Texture* Texture, Game* game,int color);
 	~Ghost();
 
 	void render();

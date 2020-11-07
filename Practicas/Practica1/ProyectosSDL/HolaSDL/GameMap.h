@@ -16,6 +16,7 @@ public:
 	void load(std::string filename);
 	void write(std::string filename);
 
+	void render();
 
 private:
 

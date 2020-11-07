@@ -1,6 +1,7 @@
 #include "Ghost.h"
 #include "Game.h"
-Ghost::Ghost(Point2D pos, Texture* Texture, Game* game_, int color)
+Ghost::Ghost(Point2D pos, Texture* Texture, Game* game, int color):
+	pos_(pos),texture_(Texture), game_(game),color_(color)
 {
 	dir_ = { 0,-1 };
 }

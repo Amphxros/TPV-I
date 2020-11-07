@@ -15,7 +15,7 @@ Game::Game()
 		SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);
 		
 		
-		SDL_Delay(5000);
+		
 	}
 }
 
@@ -27,9 +27,9 @@ Game::~Game()
 
 void Game::init()
 {
-	/*for (int i = 0; i < NUM_TEXTURES; i++) { 
+	for (int i = 0; i < NUM_TEXTURES; i++) { 
 		textures[i] = new Texture(renderer_,textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
-	}*/
+	}
 	map_ = new GameMap(30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
 	map_->load("../Mapas/level01.dat");
 }
@@ -51,13 +51,15 @@ void Game::run()
 		render();
 		update();
 		handleEvents();
+		SDL_Delay(500);
 	}
 }
 
 void Game::render()
 {
 	SDL_RenderClear(renderer_);
-	pacman_->render();
+	//pacman_->render();
+	map_->render();
 	SDL_RenderPresent(renderer_);
 }
 

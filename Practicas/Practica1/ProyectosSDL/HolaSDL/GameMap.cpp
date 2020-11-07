@@ -26,57 +26,74 @@ void GameMap::load(string filename) {
 		delete map
 		*/
 
-		for (int i = 0; i < dimy; i++) {
-			for (int j = 0; j < dimx; j++) {
+		for (int i = 0; i < dimx; i++) {
+			for (int j = 0; j < dimy; j++) {
 				int d;
 				file >> d;
 				std::cout << d<< " ";
 				switch (d) {
 				case 0:
-					map[i][j] = MapCell::Empty; //por ejemplo
+					map[j][i] = MapCell::Empty; //por ejemplo
 					break;
 				case 1:
-					map[i][j] = MapCell::Wall; //por ejemplo
+					map[j][i] = MapCell::Wall; //por ejemplo
 					break;
 				case 2:
-					map[i][j] = MapCell::Food; //por ejemplo
+					map[j][i] = MapCell::Food; //por ejemplo
 					break;
 				case 3:
-					map[i][j] = MapCell::Vitamins; //por ejemplo
+					map[j][i] = MapCell::Vitamins; //por ejemplo
 					break;
 				//mas casos para crear fantasmas, pacman etc
 				case 5:
-					map[i][j] = MapCell::Empty;
+					map[j][i] = MapCell::Empty;
 					game_->createGhost(Vector2D(TAM_MAT * i, TAM_MAT * j), 1);
 					break;
 				case 6:
-					map[i][j] = MapCell::Empty;
+					map[j][i] = MapCell::Empty;
 					game_->createGhost(Vector2D(TAM_MAT * i, TAM_MAT * j), 2);
 					break;
 				case 7:
-					map[i][j] = MapCell::Empty;
+					map[j][i] = MapCell::Empty;
 					game_->createGhost(Vector2D(TAM_MAT * i, TAM_MAT * j), 3);
 					break;
 				case 8:
-					map[i][j] = MapCell::Empty;
+					map[j][i] = MapCell::Empty;
 					game_->createGhost(Vector2D(TAM_MAT * i, TAM_MAT * j), 4);
 					break;
 				case 9:
-					map[i][j] = MapCell::Empty; //por ejemplo
+					map[j][i] = MapCell::Empty; //por ejemplo
 					game_->createPacman(Vector2D(TAM_MAT * i, TAM_MAT * j));
 					break;
 
 				default:
-					map[i][j] = MapCell::Empty;
+					map[j][i] = MapCell::Empty;
 					break;
 				}
 			}
 				std::cout << " " << std::endl;
 		}
+		rows_ = dimx;
+		cols_ = dimy;
 	}
-
-
 }
 void GameMap::write(std::string filename)
 {
+}
+
+void GameMap::render()
+{
+	for (int i = 0; i < rows_; i++) {
+		for (int j = 0; j < cols_; j++) {
+			SDL_Rect dest;
+			dest.x = i * TAM_MAT;
+			dest.y = j * TAM_MAT;
+			dest.w = TAM_MAT;
+			dest.h = TAM_MAT;
+
+			if (map[i][j] == MapCell::Wall) {
+				texture_->renderFrame(dest, 2, 8);
+			}
+		}
+	}
 }
