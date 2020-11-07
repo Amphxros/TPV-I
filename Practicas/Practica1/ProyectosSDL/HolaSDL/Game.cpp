@@ -55,6 +55,9 @@ void Game::render()
 	SDL_RenderClear(renderer_);
 	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);
 	map_->render();
+	for (Ghost* g : ghost_) {
+		g->render();
+	}
 	pacman_->render();
 	SDL_RenderPresent(renderer_);
 }

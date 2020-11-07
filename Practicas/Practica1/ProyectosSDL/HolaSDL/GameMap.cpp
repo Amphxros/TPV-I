@@ -47,19 +47,19 @@ void GameMap::load(string filename) {
 				//mas casos para crear fantasmas, pacman etc
 				case 5:
 					map[j][i] = MapCell::Empty;
-					game_->createGhost(Vector2D(TAM_MAT * i, TAM_MAT * j), 1);
+					game_->createGhost(Vector2D(j, i), 0);
 					break;
 				case 6:
 					map[j][i] = MapCell::Empty;
-					game_->createGhost(Vector2D(TAM_MAT * i, TAM_MAT * j), 2);
+					game_->createGhost(Vector2D(j, i), 1);
 					break;
 				case 7:
 					map[j][i] = MapCell::Empty;
-					game_->createGhost(Vector2D(TAM_MAT * i, TAM_MAT * j), 3);
+					game_->createGhost(Vector2D( j,i), 2);
 					break;
 				case 8:
 					map[j][i] = MapCell::Empty;
-					game_->createGhost(Vector2D( i, j), 4);
+					game_->createGhost(Vector2D( j, i), 3);
 					break;
 				case 9:
 					map[j][i] = MapCell::Empty; //por ejemplo
