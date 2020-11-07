@@ -7,19 +7,20 @@
 const int WIN_WIDTH=800;
 const int WIN_HEIGHT=600;
 
-const int NUM_TEXTURES=3;
+const int NUM_TEXTURES=4;
 const int NUM_GHOSTS=4;
-const int TAM_MAT=50;
+const int TAM_MAT=20;
 struct TextureData
 {
 	std::string filename;
 	int rows, cols;
 };
-enum TextureOrder {CHAR_SPRITESHEET,MAP_SPRITESHEET,DIGITS };
+enum TextureOrder {INIT,MAP_SPRITESHEET, CHAR_SPRITESHEET,DIGITS };
 const TextureData textures_data_[NUM_TEXTURES] = {
 	//{"filename",n,m}
+	{"../images/digits2.jpeg",3,4},
+	{"../images/BlueWallsEtc.png",3,10},
 	{"../images/characters1.png",4,14},
-	{"../images/BlueWallsEtc.png",3,8},
 	{"../images/digits2.jpeg",3,4}
 };
 

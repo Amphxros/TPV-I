@@ -2,23 +2,25 @@
 #include "Game.h"
 
 Pacman::Pacman(Point2D pos, Texture* texture, Game* game):
-pos_(pos),texture_(texture),game_(game) {}
+pos_(pos),texture_(texture),game_(game) {
+	dir_ = { -1,0 };
+}
 
 void Pacman::render()
 {
 	SDL_Rect dest;
-	dest.x = pos_.getX();
-	dest.y = pos_.getY();
+	dest.x = pos_.getX()*TAM_MAT;
+	dest.y = pos_.getY()*TAM_MAT;
 	dest.w = TAM_MAT;
 	dest.h = TAM_MAT;
 
-	texture_->renderFrame(dest,1,10);
+	texture_->renderFrame(dest,0,11);
 }
 
 void Pacman::update()
 {
 	//if(!colision con la matriz)
-	pos_ = { (int)(pos_.getX() + dir_.getX()*TAM_MAT), (int)(pos_.getY() + dir_.getY()*TAM_MAT) };
+	pos_ = { (int)(pos_.getX() + dir_.getX()), (int)(pos_.getY() + dir_.getY()) };
 	//if colisionconHamburguesa -> bool nyom true
 	//if nyom && ha pasao tiempo de cooldown bool nyom false
 

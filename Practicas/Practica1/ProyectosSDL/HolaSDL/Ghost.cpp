@@ -20,7 +20,7 @@ void Ghost::render()
 	dest.h = TAM_MAT;
 	//if (pacman hamburgueseado) -> renderiza frames azules
 	//else los del color correspondiente
-	texture_->renderFrame(dest,GHOST_ROW,GHOST_COL);
+	texture_->renderFrame(dest,GHOST_ROW,GHOST_COL+ color_);
 }
 
 void Ghost::update()

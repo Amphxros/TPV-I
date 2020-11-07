@@ -11,11 +11,6 @@ Game::Game()
 		std::cout << "Error cargando SDL" << std::endl;
 	else {
 		init();
-		
-		SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);
-		
-		
-		
 	}
 }
 
@@ -51,15 +46,16 @@ void Game::run()
 		render();
 		update();
 		handleEvents();
-		SDL_Delay(500);
+		SDL_Delay(200);
 	}
 }
 
 void Game::render()
 {
 	SDL_RenderClear(renderer_);
-	//pacman_->render();
+	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);
 	map_->render();
+	pacman_->render();
 	SDL_RenderPresent(renderer_);
 }
 

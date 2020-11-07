@@ -1,1 +1,10 @@
-﻿LINK : fatal error LNK1168: no se puede abrir C:\Users\ampac\Documents\git_Repositorios\UCM_Repos\TPV-I\Practicas\Practica1\ProyectosSDL\bin\HolaSDLDebug.exe para escritura
+﻿  Game.cpp
+C:\Users\ampac\Documents\git_Repositorios\UCM_Repos\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(13,70): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\UCM_Repos\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(13,55): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\UCM_Repos\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(15,71): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\UCM_Repos\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(15,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\UCM_Repos\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(17,74): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\UCM_Repos\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(17,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\UCM_Repos\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(18,76): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\UCM_Repos\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(18,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+  HolaSDL.vcxproj -> C:\Users\ampac\Documents\git_Repositorios\UCM_Repos\TPV-I\Practicas\Practica1\ProyectosSDL\bin\HolaSDLDebug.exe

@@ -59,11 +59,11 @@ void GameMap::load(string filename) {
 					break;
 				case 8:
 					map[j][i] = MapCell::Empty;
-					game_->createGhost(Vector2D(TAM_MAT * i, TAM_MAT * j), 4);
+					game_->createGhost(Vector2D( i, j), 4);
 					break;
 				case 9:
 					map[j][i] = MapCell::Empty; //por ejemplo
-					game_->createPacman(Vector2D(TAM_MAT * i, TAM_MAT * j));
+					game_->createPacman(Vector2D( j,i));
 					break;
 
 				default:
@@ -83,8 +83,8 @@ void GameMap::write(std::string filename)
 
 void GameMap::render()
 {
-	for (int i = 0; i < rows_; i++) {
-		for (int j = 0; j < cols_; j++) {
+	for (int i = 0; i < cols_; i++) {
+		for (int j = 0; j < rows_; j++) {
 			SDL_Rect dest;
 			dest.x = i * TAM_MAT;
 			dest.y = j * TAM_MAT;
@@ -92,8 +92,17 @@ void GameMap::render()
 			dest.h = TAM_MAT;
 
 			if (map[i][j] == MapCell::Wall) {
+				texture_->renderFrame(dest, 1, 7);
+			}
+			else if (map[i][j] == MapCell::Food) {
+
+				texture_->renderFrame(dest, 2, 9);
+			}
+			else if (map[i][j] == MapCell::Vitamins) {
+
 				texture_->renderFrame(dest, 2, 8);
 			}
+
 		}
 	}
 }
