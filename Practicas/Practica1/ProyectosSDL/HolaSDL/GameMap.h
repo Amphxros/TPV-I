@@ -18,6 +18,8 @@ public:
 
 	void render();
 
+	MapCell getCell(int i, int j) { return map[i][j]; }
+	void setMapCellEmpty(MapCell m) { m = MapCell::Empty; }
 private:
 
 	Vector2D mapSize;

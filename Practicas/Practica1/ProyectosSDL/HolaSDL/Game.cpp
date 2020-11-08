@@ -43,9 +43,9 @@ void Game::run()
 {
 	while (!exit_)
 	{
-		render();
-		update();
 		handleEvents();
+		update();
+		render();
 		SDL_Delay(200);
 	}
 }
