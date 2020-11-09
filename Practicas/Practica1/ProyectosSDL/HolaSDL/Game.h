@@ -35,6 +35,8 @@ public:
 	void createGhost(Vector2D pos,int color);
 	void run();
 	
+	bool collision(Vector2D pos);
+
 
 private:
 	SDL_Window* window_;

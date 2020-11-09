@@ -51,4 +51,3 @@ C:\Users\ampac\Documents\git_Repositorios\UCM_Repos\TPV-I\Practicas\Practica1\Pr
   Generando código...
 C:\Users\ampac\Documents\git_Repositorios\UCM_Repos\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(18,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
 LINK : fatal error LNK1168: no se puede abrir C:\Users\ampac\Documents\git_Repositorios\UCM_Repos\TPV-I\Practicas\Practica1\ProyectosSDL\bin\HolaSDLDebug.exe para escritura
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(810,5): error MSB6006: "link.exe" salió con el código 1168.

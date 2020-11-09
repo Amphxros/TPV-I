@@ -18,7 +18,15 @@ public:
 
 	void render();
 
+	//devuelve una pos i,j
 	MapCell getCell(int i, int j) { return map[i][j]; }
+	//devuelve si la pos i,j es un muro
+	bool isCellWall(int i, int j) { return map[i][j]==MapCell::Wall; }
+	//devuelve si la pos i,j es comida
+	bool isCellFood(int i, int j) { return map[i][j]==MapCell::Food; }
+	//devuelve si la pos i,j es vitamina
+	bool isCellVitamin(int i, int j) { return map[i][j]==MapCell::Vitamins; }
+
 	void setMapCellEmpty(MapCell m) { m = MapCell::Empty; }
 private:
 

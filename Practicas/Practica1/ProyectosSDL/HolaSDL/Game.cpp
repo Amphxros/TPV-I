@@ -50,6 +50,11 @@ void Game::run()
 	}
 }
 
+bool Game::collision(Vector2D pos)
+{
+	return false;
+}
+
 void Game::render()
 {
 	SDL_RenderClear(renderer_);
