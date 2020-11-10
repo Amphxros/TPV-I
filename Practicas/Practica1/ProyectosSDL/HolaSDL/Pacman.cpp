@@ -19,8 +19,10 @@ void Pacman::render()
 
 void Pacman::update()
 {
-	//if(!colision con la matriz)
-	pos_ = { (int)(pos_.getX() + dir_.getX()), (int)(pos_.getY() + dir_.getY()) };
+	Vector2D aux = { (int)(pos_.getX() + dir_.getX()), (int)(pos_.getY() + dir_.getY()) };
+	if(!game_->check_collision(aux))
+		pos_ = aux;
+	
 	//if colisionconHamburguesa -> bool nyom true
 	//if nyom && ha pasao tiempo de cooldown bool nyom false
 

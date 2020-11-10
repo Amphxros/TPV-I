@@ -50,9 +50,22 @@ void Game::run()
 	}
 }
 
-bool Game::collision(Vector2D pos)
+bool Game::check_collision(Vector2D pos)
 {
-	return false;
+	if (map_->isCellWall(pos.getX(), pos.getY())) {
+		return true;
+	}
+	else {
+		if (map_->isCellFood(pos.getX(), pos.getY())) {
+			map_->setMapCellEmpty(map_->getCell(pos.getX(), pos.getY()));
+		}
+		else if (map_->isCellVitamin(pos.getX(), pos.getY())) {
+			map_->setMapCellEmpty(map_->getCell(pos.getX(), pos.getY()));
+			//set nyom true
+		}
+
+		return false;
+	}
 }
 
 void Game::render()

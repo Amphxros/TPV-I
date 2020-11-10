@@ -35,7 +35,7 @@ public:
 	void createGhost(Vector2D pos,int color);
 	void run();
 	
-	bool collision(Vector2D pos);
+	bool check_collision(Vector2D pos);
 
 
 private:
