@@ -20,12 +20,12 @@ void Pacman::render()
 void Pacman::update()
 {
 	Vector2D aux = { (int)(pos_.getX() + dir_.getX()), (int)(pos_.getY() + dir_.getY()) };
-	if(!game_->check_collision(aux))
+	if(!game_->check_collisionofPacman(aux))
 		pos_ = aux;
 	if (aux.getX() < 0) {
 		//swappear a una pos dada
 	}
-	//if colisionconHamburguesa -> bool nyom true
+	
 	//if nyom && ha pasao tiempo de cooldown bool nyom false
 
 }

@@ -14,6 +14,8 @@ public:
 	void render();
 	void update();
 
+	Vector2D getPos(){return pos_ + dir_;}
+
 private:
 	Point2D pos_;
 	Vector2D dir_;

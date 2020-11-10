@@ -35,7 +35,10 @@ public:
 	void createGhost(Vector2D pos,int color);
 	void run();
 	
-	bool check_collision(Vector2D pos);
+	bool check_collisionofPacman(Vector2D pos);
+	bool check_collisionofGhost(Vector2D pos);
+	bool check_collisionGhostPacman();
+	bool isPacmanNyom() { return pacman_->getNyom(); };
 
 
 private:

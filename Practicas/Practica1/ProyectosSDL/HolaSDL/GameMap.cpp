@@ -35,35 +35,16 @@ void GameMap::load(string filename) {
 				file >> d;
 				std::cout << d<< " ";
 				switch (d) {
-				case 0:
-					map[j][i] = MapCell::Empty; //por ejemplo
+				case 0:case 1:case 2:case 3:
+					map[j][i] =(MapCell)d; //por ejemplo
 					break;
-				case 1:
-					map[j][i] = MapCell::Wall; //por ejemplo
-					break;
-				case 2:
-					map[j][i] = MapCell::Food; //por ejemplo
-					break;
-				case 3:
-					map[j][i] = MapCell::Vitamins; //por ejemplo
-					break;
+
 				//mas casos para crear fantasmas, pacman etc
-				case 5:
+				case 5:case 6:case 7:case 8:
 					map[j][i] = MapCell::Empty;
-					game_->createGhost(Vector2D(j, i), 0);
+					game_->createGhost(Vector2D(j, i), d-5);
 					break;
-				case 6:
-					map[j][i] = MapCell::Empty;
-					game_->createGhost(Vector2D(j, i), 1);
-					break;
-				case 7:
-					map[j][i] = MapCell::Empty;
-					game_->createGhost(Vector2D( j,i), 2);
-					break;
-				case 8:
-					map[j][i] = MapCell::Empty;
-					game_->createGhost(Vector2D( j, i), 3);
-					break;
+				
 				case 9:
 					map[j][i] = MapCell::Empty; //por ejemplo
 					game_->createPacman(Vector2D( j,i));

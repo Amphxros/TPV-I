@@ -11,10 +11,13 @@ using uint = unsigned int;
 
 void firstTest() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Check Memory Leaks
-
-	Game g = Game();
-	g.run();
-
+	try {
+		Game g = Game();
+		g.run();
+	}
+	catch(std::string s){
+		std::cout << s;
+	}
 	SDL_Quit();
 }
 

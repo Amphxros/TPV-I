@@ -12,11 +12,15 @@ public:
 	void render();
 	void update();
 	void handleEvents(SDL_Event& event);
+	void setNyom(bool comer) { nyom = comer; };
+	bool getNyom() { return nyom; };
+	Vector2D getPos() { return pos_ + dir_; };
 
 private:
 	Point2D pos_;
 	Vector2D dir_;	//vector auxiliar que tomará el valor de las velocidades en funcion de si va a la izq,der,arr o abajo
 	Texture* texture_;
 	Game* game_;
+	bool nyom = false;
 };
 

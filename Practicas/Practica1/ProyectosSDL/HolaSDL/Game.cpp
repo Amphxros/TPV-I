@@ -1,14 +1,14 @@
 #include "Game.h"
 #include <iostream>
-
+#include <cstdlib>
 Game::Game()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	window_ = SDL_CreateWindow("First test with SDL", SDL_WINDOWPOS_CENTERED,
+	window_ = SDL_CreateWindow("ManPac", SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, WIN_WIDTH, WIN_HEIGHT, SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 	if (window_ == nullptr || renderer_ == nullptr)
-		std::cout << "Error cargando SDL" << std::endl;
+		throw "Error cargando SDL";
 	else {
 		init();
 	}
@@ -22,13 +22,9 @@ Game::~Game()
 
 void Game::init()
 {
+	srand(NULL);
 	for (int i = 0; i < NUM_TEXTURES; i++) {
-		try {
-			textures[i] = new Texture(renderer_, textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
-		}
-		catch(std::string s){
-			std::cout << "texture error " << s << std::endl;
-		}
+		textures[i] = new Texture(renderer_, textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
 	}
 	map_ = new GameMap(30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
 	map_->load("../Mapas/level01.dat");
@@ -55,7 +51,7 @@ void Game::run()
 	}
 }
 
-bool Game::check_collision(Vector2D pos)
+bool Game::check_collisionofPacman(Vector2D pos)
 {
 	if (map_->isCellWall(pos.getX(), pos.getY())) {
 		return true;
@@ -67,10 +63,27 @@ bool Game::check_collision(Vector2D pos)
 		else if (map_->isCellVitamin(pos.getX(), pos.getY())) {
 			map_->setMapCellEmpty(pos.getX(), pos.getY());
 			//set nyom true
+			pacman_->setNyom(true);
 		}
 
 		return false;
 	}
+}
+bool Game::check_collisionofGhost(Vector2D pos){
+	if (map_->isCellWall(pos.getX(), pos.getY())) {
+		return true;
+	}
+	return false;
+}
+
+bool Game::check_collisionGhostPacman() {
+	for(Ghost* g:ghost_){
+	if(g->getPos()==pacman_->getPos()){
+	//....
+		return true;
+		}
+	}
+	return false;
 }
 
 void Game::render()
@@ -88,6 +101,10 @@ void Game::render()
 void Game::update()
 {
 	pacman_->update();
+	for(Ghost* g:ghost_){
+		g->update();
+	}
+
 }
 
 void Game::handleEvents()
