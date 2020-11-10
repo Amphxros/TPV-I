@@ -6,6 +6,9 @@ GameMap::GameMap(int rows, int cols, Texture* texture, Game* game):
 rows_(rows),cols_(cols),texture_(texture),game_(game){
 
 }
+GameMap::~GameMap()
+{
+}
 void GameMap::load(string filename) {
 	std::ifstream file;
 	file.open(filename);

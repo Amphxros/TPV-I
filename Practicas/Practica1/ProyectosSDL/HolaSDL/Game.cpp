@@ -22,8 +22,13 @@ Game::~Game()
 
 void Game::init()
 {
-	for (int i = 0; i < NUM_TEXTURES; i++) { 
-		textures[i] = new Texture(renderer_,textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
+	for (int i = 0; i < NUM_TEXTURES; i++) {
+		try {
+			textures[i] = new Texture(renderer_, textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
+		}
+		catch(std::string s){
+			std::cout << "texture error " << s << std::endl;
+		}
 	}
 	map_ = new GameMap(30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
 	map_->load("../Mapas/level01.dat");
@@ -57,10 +62,10 @@ bool Game::check_collision(Vector2D pos)
 	}
 	else {
 		if (map_->isCellFood(pos.getX(), pos.getY())) {
-			map_->setMapCellEmpty(map_->getCell(pos.getX(), pos.getY()));
+			map_->setMapCellEmpty(pos.getX(), pos.getY());
 		}
 		else if (map_->isCellVitamin(pos.getX(), pos.getY())) {
-			map_->setMapCellEmpty(map_->getCell(pos.getX(), pos.getY()));
+			map_->setMapCellEmpty(pos.getX(), pos.getY());
 			//set nyom true
 		}
 

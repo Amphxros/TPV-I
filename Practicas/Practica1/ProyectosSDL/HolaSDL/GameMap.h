@@ -28,6 +28,7 @@ public:
 	bool isCellVitamin(int i, int j) { return map[i][j]==MapCell::Vitamins; }
 
 	void setMapCellEmpty(MapCell m) { m = MapCell::Empty; }
+	void setMapCellEmpty(int i, int j) { map[i][j] = MapCell::Empty; }
 private:
 
 	Vector2D mapSize;
