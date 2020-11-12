@@ -3,6 +3,8 @@
 
 #include "Vector2D.h"
 #include "Texture.h"
+
+#include "checkML.h"
 using namespace std;
 
 enum MapCell {Empty, Wall, Food, Vitamins};	//Solo contiene info de elementos estáticos

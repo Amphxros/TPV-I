@@ -2,6 +2,8 @@
 #include "Vector2D.h"
 #include "Texture.h"
 
+
+#include "checkML.h"
 const int GHOST_ROW = 6;
 const int GHOST_COL = 6;
 class Game;
