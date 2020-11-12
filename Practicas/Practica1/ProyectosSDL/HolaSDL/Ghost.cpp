@@ -10,6 +10,7 @@ Ghost::Ghost(Point2D pos, Texture* Texture, Game* game, int color):
 Ghost::~Ghost()
 {
 	delete texture_;
+	delete game_;
 }
 
 void Ghost::render()

@@ -18,6 +18,12 @@ Game::Game()
 
 Game::~Game()
 {
+	delete map_;
+	for (Ghost* g : ghost_)
+		delete g;
+	for (int i = 0; i < NUM_TEXTURES; i++)
+		delete textures[i];
+
 	SDL_DestroyRenderer(renderer_);
 	SDL_DestroyWindow(window_);
 }
@@ -44,20 +50,20 @@ void Game::load(std::string filename)
 			for (int j = 0; j < dimy; j++) {
 				int d;
 				file >> d;
-				std::cout << d << " ";
+
 				switch (d) {
 				case 0:case 1:case 2:case 3:
-					map_->write(j, i, (MapCell)d); //por ejemplo
+					map_->write(j, i, (MapCell)d); 
+					if (d == 2) food_left++;
 					break;
 
-					//mas casos para crear fantasmas, pacman etc
 				case 5:case 6:case 7:case 8:
 					map_->write(j, i, (MapCell)0);
 					createGhost(Vector2D(j, i), d - 5);
 					break;
 
 				case 9:
-					map_->write(j, i, (MapCell)0); //por ejemplo
+					map_->write(j, i, (MapCell)0);
 					createPacman(Vector2D(j, i));
 					break;
 
@@ -66,7 +72,6 @@ void Game::load(std::string filename)
 					break;
 				}
 			}
-			std::cout << " " << std::endl;
 		}
 	}
 	else
@@ -85,7 +90,7 @@ void Game::createGhost(Vector2D pos, int color)
 
 void Game::run()
 {
-	while (!exit_)
+	while (!exit_||food_left==0)
 	{
 		handleEvents();
 		update();
@@ -102,10 +107,10 @@ bool Game::check_collisionofPacman(Vector2D pos)
 	else {
 		if (map_->isCellFood(pos.getX(), pos.getY())) {
 			map_->setMapCellEmpty(pos.getX(), pos.getY());
+			food_left--;
 		}
 		else if (map_->isCellVitamin(pos.getX(), pos.getY())) {
 			map_->setMapCellEmpty(pos.getX(), pos.getY());
-			//set nyom true
 			pacman_->setNyom(true);
 		}
 
@@ -148,7 +153,6 @@ void Game::update()
 	for(Ghost* g:ghost_){
 		g->update();
 	}
-	
 }
 
 void Game::handleEvents()

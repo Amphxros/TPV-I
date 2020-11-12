@@ -56,5 +56,6 @@ private:
 	void handleEvents();
 
 	bool exit_ = false;
+	int food_left = 0;
 };
 
