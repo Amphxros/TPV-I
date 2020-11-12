@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 Game::Game()
 {
@@ -27,7 +28,46 @@ void Game::init()
 		textures[i] = new Texture(renderer_, textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
 	}
 	map_ = new GameMap(30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
-	map_->load("../Mapas/level01.dat");
+	load("../Mapas/level01.dat");
+}
+
+void Game::load(std::string filename)
+{
+	std::ifstream file;
+	file.open(filename);
+
+	if (file.is_open()) {
+		int dimx = 0, dimy = 0;
+		file >> dimx >> dimy;	//Tamaño del mapa
+		for (int i = 0; i < dimx; i++) {
+			for (int j = 0; j < dimy; j++) {
+				int d;
+				file >> d;
+				std::cout << d << " ";
+				switch (d) {
+				case 0:case 1:case 2:case 3:
+					map_->write(j,i,(MapCell)d); //por ejemplo
+					break;
+
+					//mas casos para crear fantasmas, pacman etc
+				case 5:case 6:case 7:case 8:
+					map_->write(j, i, (MapCell)0);
+					createGhost(Vector2D(j, i), d - 5);
+					break;
+
+				case 9:
+					map_->write(j, i, (MapCell)0); //por ejemplo
+					createPacman(Vector2D(j, i));
+					break;
+
+				default:
+					map_->write(j, i, (MapCell)0);
+					break;
+				}
+			}
+			std::cout << " " << std::endl;
+		}
+	}
 }
 
 void Game::createPacman(Vector2D pos)
@@ -79,7 +119,7 @@ bool Game::check_collisionofGhost(Vector2D pos){
 bool Game::check_collisionGhostPacman() {
 	for(Ghost* g:ghost_){
 	if(g->getPos()==pacman_->getPos()){
-	//....
+	//...
 		return true;
 		}
 	}
@@ -101,10 +141,11 @@ void Game::render()
 void Game::update()
 {
 	pacman_->update();
+	
 	for(Ghost* g:ghost_){
 		g->update();
 	}
-
+	
 }
 
 void Game::handleEvents()

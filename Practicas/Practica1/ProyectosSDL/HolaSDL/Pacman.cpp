@@ -6,6 +6,12 @@ pos_(pos),texture_(texture),game_(game) {
 	dir_ = { -1,0 };
 }
 
+Pacman::~Pacman()
+{
+	delete texture_;
+	delete game_;
+}
+
 void Pacman::render()
 {
 	SDL_Rect dest;
@@ -25,7 +31,11 @@ void Pacman::update()
 	if (aux.getX() < 0) {
 		//swappear a una pos dada
 	}
-	
+	if (game_->check_collisionGhostPacman()) {
+		//quit game
+
+	}
+
 	//if nyom && ha pasao tiempo de cooldown bool nyom false
 
 }

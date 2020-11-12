@@ -31,6 +31,7 @@ public:
 	~Game();
 
 	void init();
+	void load(std::string filename);
 	void createPacman(Vector2D pos);
 	void createGhost(Vector2D pos,int color);
 	void run();

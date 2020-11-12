@@ -4,18 +4,18 @@
 #include "Vector2D.h"
 #include "Texture.h"
 using namespace std;
+
+enum MapCell {Empty, Wall, Food, Vitamins};	//Solo contiene info de elementos estáticos
+
 class Game;
 class GameMap
 {
-enum MapCell {Empty, Wall, Food, Vitamins};	//Solo contiene info de elementos estáticos
 public:
 	GameMap(int rows, int cols, Texture* texture,Game* game);
 	
 	~GameMap();
 
-	void load(std::string filename);
-	void write(std::string filename);
-
+	void write(int x, int y, MapCell m);
 	void render();
 
 	//devuelve una pos i,j
