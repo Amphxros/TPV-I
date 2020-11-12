@@ -1,12 +1,16 @@
 #include "GameMap.h"
 
 #include "Game.h"
+#include <iostream>
 GameMap::GameMap(int rows, int cols, Texture* texture, Game* game):
 rows_(rows),cols_(cols),texture_(texture),game_(game){
 	map = new MapCell * [cols_];
 
-	for (int i = 0; i < cols_; i++)
+	for (int i = 0; i < cols_; i++) {
 		map[i] = new MapCell[rows_];
+		for(int j=0;j<rows_;j++)
+			map[i][j] = MapCell::Empty;
+	}
 
 }
 GameMap::~GameMap()
@@ -18,11 +22,11 @@ GameMap::~GameMap()
 }
 void GameMap::write(int x,int y, MapCell m)
 {
-	map[x][y] == m;
+	map[x][y] = m;
 }
 
 void GameMap::render()
-{
+{ 
 	for (int i = 0; i < cols_; i++) {
 		for (int j = 0; j < rows_; j++) {
 			SDL_Rect dest;
@@ -44,5 +48,6 @@ void GameMap::render()
 			}
 
 		}
+	
 	}
 }

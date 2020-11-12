@@ -4,6 +4,7 @@
 #include <cstdlib>
 Game::Game()
 {
+	srand(NULL);
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window_ = SDL_CreateWindow("ManPac", SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, WIN_WIDTH, WIN_HEIGHT, SDL_WINDOW_SHOWN);
@@ -23,7 +24,6 @@ Game::~Game()
 
 void Game::init()
 {
-	srand(NULL);
 	for (int i = 0; i < NUM_TEXTURES; i++) {
 		textures[i] = new Texture(renderer_, textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
 	}
@@ -39,6 +39,7 @@ void Game::load(std::string filename)
 	if (file.is_open()) {
 		int dimx = 0, dimy = 0;
 		file >> dimx >> dimy;	//Tamaño del mapa
+		
 		for (int i = 0; i < dimx; i++) {
 			for (int j = 0; j < dimy; j++) {
 				int d;
@@ -46,7 +47,7 @@ void Game::load(std::string filename)
 				std::cout << d << " ";
 				switch (d) {
 				case 0:case 1:case 2:case 3:
-					map_->write(j,i,(MapCell)d); //por ejemplo
+					map_->write(j, i, (MapCell)d); //por ejemplo
 					break;
 
 					//mas casos para crear fantasmas, pacman etc
@@ -68,6 +69,8 @@ void Game::load(std::string filename)
 			std::cout << " " << std::endl;
 		}
 	}
+	else
+		throw "Archivo no encontrado";
 }
 
 void Game::createPacman(Vector2D pos)
