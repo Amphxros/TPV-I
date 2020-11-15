@@ -26,17 +26,32 @@ void Pacman::render()
 void Pacman::update()
 {
 	Vector2D aux = { (int)(pos_.getX() + dir_.getX()), (int)(pos_.getY() + dir_.getY()) };
-	if(!game_->check_collisionofPacman(aux))
-		pos_ = aux;
-	if (aux.getX() < 0) {
-		//swappear a una pos dada
-	}
+
 	if (game_->check_collisionGhostPacman()) {
 		//quit game
 
-	}
+	}	
+	if (!game_->check_collisionofPacman(aux)) {
+		//aqui se mueve
+		pos_ = aux;	
+		if (pos_.getX() < 0) {
+			//swappear a una pos dada
+		}
 
+		//aqui come
+		game_->eatFood(pos_);
+		
+		//aqui volvemos a comprobar si nos chocamos
+		if (game_->check_collisionGhostPacman()) {
+		
+		}	
+	}
+	
 	//if nyom && ha pasao tiempo de cooldown bool nyom false
+	if(nyom){
+	//... restar tiempo
+		//if(time_>0) nyom=false
+	}
 
 }
 
@@ -47,22 +62,22 @@ void Pacman::handleEvents(SDL_Event& event)
 	case SDL_KEYDOWN:
 		if (event.key.keysym.sym == SDLK_UP)
 		{
-			dir_ = { 0,-1 };
+			dir_ = dirs_[directions::UP];
 		}
 
 		else if (event.key.keysym.sym == SDLK_DOWN)
 		{
-			dir_ = { 0,1 };
+			dir_ = dirs_[directions::DOWN];
 		}
 
 		else if (event.key.keysym.sym == SDLK_LEFT) 
 		{
-			dir_ = {-1,0 };
+			dir_ = dirs_[directions::LEFT];
 		}
 
 		else if (event.key.keysym.sym == SDLK_RIGHT)
 		{
-			dir_ = { 1,0 };
+			dir_ = dirs_[directions::RIGHT];
 		}
 		break;
 	default:

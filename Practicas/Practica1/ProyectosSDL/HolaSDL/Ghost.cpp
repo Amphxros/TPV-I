@@ -1,10 +1,11 @@
 #include "Ghost.h"
 #include "Game.h"
+#include <vector>
 #include <cstdlib>
 Ghost::Ghost(Point2D pos, Texture* Texture, Game* game, int color):
 	pos_(pos),texture_(Texture), game_(game),color_(color)
 {
-	dir_ = { 0,-1 };
+	dir_ = dirs_[directions::LEFT];
 }
 
 Ghost::~Ghost()
@@ -20,6 +21,7 @@ void Ghost::render()
 	dest.y = pos_.getY()*TAM_MAT;
 	dest.w = TAM_MAT;
 	dest.h = TAM_MAT;
+
 	if (game_->isPacmanNyom()) 
 		texture_->renderFrame(dest, 0, 13);
 	else
@@ -28,35 +30,22 @@ void Ghost::render()
 
 void Ghost::update()
 {
-	Vector2D aux = pos_ + dir_;
-
+	Vector2D aux; 
 	int direccion=0;
 	
-	do {
-		direccion = rand() % 4;	//Genera entre 0 y 3
-		switch (direccion)
-		{
-		case 0:
-			dir_ = { 0, -1 };
-			break;
-		case 1:
-			dir_ = { 0, 1 };
-			break;
-		case 2:
-			dir_ = { 1, 0 };
-			break;
-		case 3:
-			dir_ = { -1, 0 };
-			break;
-		default:
-			break;
-		}
-
-		aux = { (int)(pos_.getX() + dir_.getX()), (int)(pos_.getY() + dir_.getY()) };
-	} while (game_->check_collisionofGhost(aux));
-	pos_ = aux;
-
-
-	//if(colisionPacmanFantasma && pacman ha comiu hamburguesas)
-	//pos_ = { (int)(pos_.getX() + (dir_.getX()*TAM_MAT)), (int)(pos_.getY() + (dir_.getY()*TAM_MAT)) };
+	std::vector<Vector2D> choises;
+	choises.reserve(NUM_DIRS);
+	for (int i = 0 ; i < NUM_DIRS; i++) {
+		aux = pos_ + (Vector2D)dirs_[i];
+		if(!game_->check_collisionofGhost(aux)){
+			choises.push_back(dirs_[i]);
+		}	
+	}
+	if(choises.size()==0){
+		throw "no puede moverse";
+	}
+	else{
+		aux = pos_ + choises[rand() % choises.size()];
+		pos_ = aux;
+	}
 }

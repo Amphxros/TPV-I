@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <SDL.h>
+#include "Vector2D.h"
 #include "Pacman.h"
 #include "Ghost.h"
 #include "GameMap.h"
@@ -11,6 +12,11 @@ const int WIN_HEIGHT=600;
 const int NUM_TEXTURES=4;
 const int NUM_GHOSTS=4;
 const int TAM_MAT=20;
+const int NUM_DIRS = 4;
+
+enum directions { LEFT, RIGHT, UP, DOWN };
+const Vector2D dirs_[NUM_DIRS] = {Vector2D(-1,0),Vector2D(1,0),Vector2D(0,-1),Vector2D(0,1)};
+	
 struct TextureData
 {
 	std::string filename;
@@ -37,9 +43,12 @@ public:
 	void createGhost(Vector2D pos,int color);
 	void run();
 	
+
 	bool check_collisionofPacman(Vector2D pos);
 	bool check_collisionofGhost(Vector2D pos);
 	bool check_collisionGhostPacman();
+	
+	void eatFood(Vector2D pos);
 	bool isPacmanNyom() { return pacman_->getNyom(); };
 
 

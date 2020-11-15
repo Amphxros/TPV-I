@@ -18,7 +18,7 @@ GameMap::~GameMap()
 	for (int i = 0; i < rows_; i++) {
 		delete map[i];
 	}
-	delete[] map;
+	delete[] map; map = nullptr;
 }
 void GameMap::write(int x,int y, MapCell m)
 {

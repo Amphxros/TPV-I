@@ -50,7 +50,6 @@ void Game::load(std::string filename)
 			for (int j = 0; j < dimy; j++) {
 				int d;
 				file >> d;
-
 				switch (d) {
 				case 0:case 1:case 2:case 3:
 					map_->write(j, i, (MapCell)d); 
@@ -104,18 +103,7 @@ bool Game::check_collisionofPacman(Vector2D pos)
 	if (map_->isCellWall(pos.getX(), pos.getY())) {
 		return true;
 	}
-	else {
-		if (map_->isCellFood(pos.getX(), pos.getY())) {
-			map_->setMapCellEmpty(pos.getX(), pos.getY());
-			food_left--;
-		}
-		else if (map_->isCellVitamin(pos.getX(), pos.getY())) {
-			map_->setMapCellEmpty(pos.getX(), pos.getY());
-			pacman_->setNyom(true);
-		}
-
-		return false;
-	}
+	return false;
 }
 bool Game::check_collisionofGhost(Vector2D pos){
 	if (map_->isCellWall(pos.getX(), pos.getY())) {
@@ -132,6 +120,18 @@ bool Game::check_collisionGhostPacman() {
 		}
 	}
 	return false;
+}
+
+void Game::eatFood(Vector2D pos)
+{
+	if (map_->isCellFood(pos.getX(), pos.getY())) {
+		map_->setMapCellEmpty(pos.getX(), pos.getY());
+		food_left--;
+	}
+	else if (map_->isCellVitamin(pos.getX(), pos.getY())) {
+		map_->setMapCellEmpty(pos.getX(), pos.getY());
+		pacman_->setNyom(true);
+	}
 }
 
 void Game::render()
