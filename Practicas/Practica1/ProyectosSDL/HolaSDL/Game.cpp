@@ -1,7 +1,9 @@
 #include "Game.h"
+
 #include <iostream>
 #include <fstream>
-#include <cstdlib>
+#include <cstdlib>	// Para el random
+
 Game::Game()
 {
 	srand(NULL);
@@ -48,14 +50,17 @@ void Game::load(std::string filename)
 		
 		for (int i = 0; i < dimx; i++) {
 			for (int j = 0; j < dimy; j++) {
+
 				int d;
 				file >> d;
+
 				switch (d) {
 				case 0:case 1:case 2:case 3:
 					map_->write(j, i, (MapCell)d); 
-					if (d == 2) food_left++;
+					if (d == 2) food_left++;	// Caso 2 es la comida, el resto son el mapa
 					break;
 
+					// Los fantasmas se codifican del 0 (5) al 3 (8) 
 				case 5:case 6:case 7:case 8:
 					map_->write(j, i, (MapCell)0);
 					createGhost(Vector2D(j, i), d - 5);
@@ -114,6 +119,7 @@ bool Game::check_collisionofGhost(Vector2D pos){
 
 bool Game::check_collisionGhostPacman() {
 	for(Ghost* g:ghost_){
+		// GetPos devuelve pos_ + dir_
 	if(g->getPos()==pacman_->getPos()){
 	//...
 		return true;
