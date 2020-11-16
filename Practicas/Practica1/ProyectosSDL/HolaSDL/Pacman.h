@@ -19,7 +19,7 @@ public:
 	void setNyom(bool comer) { nyom = comer; };
 	bool getNyom() { return nyom; };
 	Vector2D getPos() { return pos_ + dir_; };
-
+	void setPos(Vector2D pos) { pos_ = pos; };
 private:
 	Point2D pos_;
 	Vector2D dir_;	// A efectos practico es la velocida de pacman (Up, Down, Left y Right)

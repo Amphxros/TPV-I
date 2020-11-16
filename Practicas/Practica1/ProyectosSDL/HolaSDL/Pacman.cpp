@@ -25,41 +25,36 @@ void Pacman::render()
 
 void Pacman::update()
 {
-	//Vector2D aux = { (int)(pos_.getX() + dir_.getX()), (int)(pos_.getY() + dir_.getY()) };
 	Vector2D aux = getPos();
 
-	if (game_->check_collisionGhostPacman()) {
-		
+	if (!game_->check_collisionGhostPacman()) {
 
-	}	
-	if (!game_->check_collisionofPacman(aux)) {
-		//aqui se mueve
-		pos_ = aux;	
-		if (pos_.getX() <= 0) {
-			pos_ = {(int) game_->getSwapX(), (int)pos_.getY() };
-		}
-		else if (pos_.getX() >= game_->getSwapX()) {
-			pos_ = { 0, (int)pos_.getY() };
-		}
+		if (!game_->check_collisionofPacman(aux)) {
+			//aqui se mueve
+			pos_ = aux;
+			if (pos_.getX() <= 0) {
+				pos_ = { (int)game_->getSwapX(), (int)pos_.getY() };
+			}
+			else if (pos_.getX() >= game_->getSwapX()) {
+				pos_ = { 0, (int)pos_.getY() };
+			}
 
-		if (pos_.getY() <= 0) {
-			pos_ = { (int)pos_.getX(),(int)game_->getSwapY() };
-		}
-		else if (pos_.getY() >= game_->getSwapY()) {
-			pos_ = { (int)pos_.getX(), 0 };
-		}
+			if (pos_.getY() <= 0) {
+				pos_ = { (int)pos_.getX(),(int)game_->getSwapY() };
+			}
+			else if (pos_.getY() > game_->getSwapY()) {
+				pos_ = { (int)pos_.getX(), 0 };
+			}
 
-		
+			//aqui come
+			game_->eatFood(pos_);
 
-		//aqui come
-		game_->eatFood(pos_);
-		
-		//aqui volvemos a comprobar si nos chocamos
-		if (game_->check_collisionGhostPacman()) {
-		
-		}	
+			//aqui volvemos a comprobar si nos chocamos
+			if (game_->check_collisionGhostPacman()) {
+
+			}
+		}
 	}
-	
 	//if nyom && ha pasao tiempo de cooldown bool nyom false
 	if(nyom){
 	//... restar tiempo

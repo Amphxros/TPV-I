@@ -36,7 +36,7 @@ void Game::init()
 		textures[i] = new Texture(renderer_, textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
 	}
 	map_ = new GameMap(30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
-	load("../Mapas/level04.dat");
+	load("../Mapas/level05.dat");
 }
 
 void Game::load(std::string filename)
@@ -93,12 +93,12 @@ void Game::createGhost(Vector2D pos, int color)
 
 void Game::run()
 {
-	while (!exit_||food_left==0)
+	while (!exit_&&food_left>0)
 	{
 		handleEvents();
 		update();
 		render();
-		SDL_Delay(200);
+		SDL_Delay(300);
 	}
 }
 
@@ -130,11 +130,11 @@ bool Game::check_collisionGhostPacman() {
 void Game::eatFood(Vector2D pos)
 {
 	if (map_->isCellFood(pos.getX(), pos.getY())) {
-		map_->setMapCellEmpty(pos.getX(), pos.getY());
+		map_->write(pos.getX(), pos.getY(),(MapCell)0);
 		food_left--;
 	}
 	else if (map_->isCellVitamin(pos.getX(), pos.getY())) {
-		map_->setMapCellEmpty(pos.getX(), pos.getY());
+		map_->write(pos.getX(), pos.getY(), (MapCell)0);
 		pacman_->setNyom(true);
 	}
 }

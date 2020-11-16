@@ -17,8 +17,8 @@ public:
 	void render();
 	void update();
 
-	Vector2D getPos() { return pos_ + dir_; };	// Posición a la que quiere avanzar
-
+	Vector2D getPos() { return pos_; };	// Posición a la que quiere avanzar
+	void setPos(Vector2D pos) { pos_ = pos; };
 private:
 	Point2D pos_;
 	Vector2D dir_;

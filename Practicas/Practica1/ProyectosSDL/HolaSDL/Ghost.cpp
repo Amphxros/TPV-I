@@ -46,7 +46,7 @@ void Ghost::update()
 		}	
 	}
 	if(choises.size()==0){	// Esto es malo
-		// Para la ejecución del juego si un fantasma esta sandwichado entre otros dos
+		// Para la ejecución del juego si un fantasma esta sandwichado entre muros
 		// Lo cual sería extremadamente raro but still
 		throw "no puede moverse";
 	}
