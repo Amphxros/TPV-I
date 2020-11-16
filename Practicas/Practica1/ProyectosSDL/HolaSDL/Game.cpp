@@ -34,7 +34,7 @@ void Game::init()
 		textures[i] = new Texture(renderer_, textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
 	}
 	map_ = new GameMap(30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
-	load("../Mapas/level01.dat");
+	load("../Mapas/level04.dat");
 }
 
 void Game::load(std::string filename)
@@ -43,11 +43,11 @@ void Game::load(std::string filename)
 	file.open(filename);
 
 	if (file.is_open()) {
-		int dimx = 0, dimy = 0;
-		file >> dimx >> dimy;	//Tamaño del mapa
 		
-		for (int i = 0; i < dimx; i++) {
-			for (int j = 0; j < dimy; j++) {
+		file >> dim_map_x >> dim_map_y;	//Tamaño del mapa
+		
+		for (int i = 0; i < dim_map_x; i++) {
+			for (int j = 0; j < dim_map_y; j++) {
 				int d;
 				file >> d;
 				switch (d) {

@@ -28,15 +28,27 @@ void Pacman::update()
 	Vector2D aux = { (int)(pos_.getX() + dir_.getX()), (int)(pos_.getY() + dir_.getY()) };
 
 	if (game_->check_collisionGhostPacman()) {
-		//quit game
+		
 
 	}	
 	if (!game_->check_collisionofPacman(aux)) {
 		//aqui se mueve
 		pos_ = aux;	
-		if (pos_.getX() < 0) {
-			//swappear a una pos dada
+		if (pos_.getX() <= 0) {
+			pos_ = {(int) game_->getSwapX(), (int)pos_.getY() };
 		}
+		else if (pos_.getX() > game_->getSwapX()) {
+			pos_ = { 0, (int)pos_.getY() };
+		}
+
+		if (pos_.getY() <= 0) {
+			pos_ = { (int)pos_.getX(),(int)game_->getSwapY() };
+		}
+		else if (pos_.getY() > game_->getSwapY()) {
+			pos_ = { (int)pos_.getX(), 0 };
+		}
+
+		
 
 		//aqui come
 		game_->eatFood(pos_);
@@ -51,6 +63,7 @@ void Pacman::update()
 	if(nyom){
 	//... restar tiempo
 		//if(time_>0) nyom=false
+	
 	}
 
 }

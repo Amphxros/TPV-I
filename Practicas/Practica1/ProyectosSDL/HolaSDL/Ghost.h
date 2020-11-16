@@ -21,7 +21,6 @@ public:
 private:
 	Point2D pos_;
 	Vector2D dir_;
-	//aqui creamos un array estatico con las posibles direcciones (0,1),(0,-1),(1,0),(-1,0)
 	Texture* texture_;
 	Game* game_;
 	int color_;
