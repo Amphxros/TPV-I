@@ -20,7 +20,7 @@ GameMap::~GameMap()
 	for (int i = 0; i < rows_; i++) {
 		delete map[i];
 	}
-	delete[] map; map = nullptr;
+	delete map; map = nullptr;
 }
 
 void GameMap::render()

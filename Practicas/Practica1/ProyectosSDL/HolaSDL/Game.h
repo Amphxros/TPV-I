@@ -16,7 +16,11 @@ const int NUM_GHOSTS=4;		//numero de fantasmas
 const int TAM_MAT=WIN_HEIGHT/30;	//tama�o de tile
 const int NUM_DIRS = 4;		//numero de direcciones
 
-const int OFFSET = WIN_HEIGHT / 15;
+const int COOLNYOM = 3000;
+const int TIME_PER_FRAME = 50;
+const int OFFSET = WIN_HEIGHT / 15;	// Para el hueco de las vidas y puntuacion
+
+
 enum directions { LEFT, RIGHT, UP, DOWN };		//enum para las posibles direcciones
 	const Vector2D dirs_[NUM_DIRS] = {			//posibles direcciones
 		Vector2D(-1,0),		//izquierda
@@ -81,6 +85,7 @@ private:
 	Pacman* pacman_=nullptr;
 	Ghost* ghost_[NUM_GHOSTS];
 	Texture* textures[NUM_TEXTURES];
+	Vector2D posicionesInit[NUM_GHOSTS + 1];	// Posiciones iniciales de fantasma(s) y pacman para que vuelvan
 
 	void render();
 	void update();

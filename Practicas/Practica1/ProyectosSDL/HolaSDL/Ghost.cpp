@@ -11,8 +11,7 @@ Ghost::Ghost(Point2D pos, Texture* Texture, Game* game, int color):
 
 Ghost::~Ghost()
 {
-	delete texture_; texture_ = nullptr;
-	delete game_; game_ = nullptr;
+	//delete texture_; //texture_ = nullptr;
 }
 
 void Ghost::render()

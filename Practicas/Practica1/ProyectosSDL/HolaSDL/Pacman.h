@@ -16,7 +16,7 @@ public:
 	void update();
 	void handleEvents(SDL_Event& event);
 
-	void setNyom(bool comer) { nyom = comer; };
+	void setNyom(bool comer);
 	bool getNyom() { return nyom; };
 	Vector2D getPos() { return pos_ + dir_; };
 	void setPos(Vector2D pos) { pos_ = pos; };
@@ -26,5 +26,6 @@ private:
 	Texture* texture_;
 	Game* game_;
 	bool nyom = false;
+	int cool_nyom = 0;
 };
 

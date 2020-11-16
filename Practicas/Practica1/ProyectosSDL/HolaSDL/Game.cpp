@@ -20,14 +20,16 @@ Game::Game()
 
 Game::~Game()
 {
-	delete map_;
 	for (Ghost* g : ghost_)
 		delete g;
 	for (int i = 0; i < NUM_TEXTURES; i++)
 		delete textures[i];
 
+	delete map_; map_ = nullptr;
+	delete pacman_; pacman_ = nullptr;
 	SDL_DestroyRenderer(renderer_);
 	SDL_DestroyWindow(window_);
+	SDL_Quit();
 }
 
 void Game::init()
@@ -63,11 +65,14 @@ void Game::load(std::string filename)
 				case 5:case 6:case 7:case 8:
 					map_->write(j, i, (MapCell)0);
 					createGhost(Vector2D(j, i), d - 5);
+					// Posiciones iniciales para volver tras morir
+					posicionesInit[d - 5] = Vector2D(j, i);
 					break;
 
 				case 9:
 					map_->write(j, i, (MapCell)0);
 					createPacman(Vector2D(j, i));
+					posicionesInit[NUM_GHOSTS] = Vector2D(j, i);
 					break;
 
 				default:
@@ -117,11 +122,15 @@ bool Game::check_collisionofGhost(Vector2D pos){
 }
 
 bool Game::check_collisionGhostPacman() {
-	for(Ghost* g:ghost_){
+
+	for (int i = 0; i < NUM_GHOSTS; i++)
+	{
 		// GetPos devuelve pos_ + dir_
-	if(g->getPos()==pacman_->getPos()){
-	//...
-		return true;
+		if(ghost_[i]->getPos()==pacman_->getPos()) {	
+			if (isPacmanNyom()) { ghost_[i]->setPos(posicionesInit[i]); }
+			else { pacman_->setPos(posicionesInit[NUM_GHOSTS]); }
+		
+			return true;
 		}
 	}
 	return false;

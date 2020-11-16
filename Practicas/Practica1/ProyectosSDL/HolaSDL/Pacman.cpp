@@ -3,13 +3,12 @@
 
 Pacman::Pacman(Point2D pos, Texture* texture, Game* game):
 pos_(pos),texture_(texture),game_(game) {
-	dir_ = dirs_[directions::LEFT];;
+	dir_ = dirs_[directions::LEFT];
 }
 
 Pacman::~Pacman()
 {
-	delete texture_; texture_ = nullptr;
-	delete game_; game_ = nullptr;
+	//delete texture_; //texture_ = nullptr;
 }
 
 void Pacman::render()
@@ -57,9 +56,11 @@ void Pacman::update()
 	}
 	//if nyom && ha pasao tiempo de cooldown bool nyom false
 	if(nyom){
-	//... restar tiempo
-		//if(time_>0) nyom=false
-	
+
+		cool_nyom -= SDL_GetTicks() / TIME_PER_FRAME;
+		if (cool_nyom < 0) {
+			nyom = false;
+		}
 	}
 
 }
@@ -92,4 +93,10 @@ void Pacman::handleEvents(SDL_Event& event)
 	default:
 		break;
 	}
+}
+
+void Pacman::setNyom(bool comer)
+{
+	nyom = comer; 
+	cool_nyom = COOLNYOM; 
 }
