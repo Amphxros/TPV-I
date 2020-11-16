@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <SDL.h>
+
 #include "Vector2D.h"
 #include "Pacman.h"
 #include "Ghost.h"
@@ -8,11 +9,11 @@
 #include "checkML.h"
 
 const int WIN_WIDTH=800;	//ancho de ventana
-const int WIN_HEIGHT=800;	//alto de ventana
+const int WIN_HEIGHT=600;	//alto de ventana
 
 const int NUM_TEXTURES=4;	//numero de texturas
 const int NUM_GHOSTS=4;		//numero de fantasmas
-const int TAM_MAT=WIN_HEIGHT/30;	//tamaño de tile
+const int TAM_MAT=WIN_HEIGHT/30;	//tamaï¿½o de tile
 const int NUM_DIRS = 4;		//numero de direcciones
 
 const int OFFSET = WIN_HEIGHT / 15;
@@ -57,20 +58,17 @@ public:
 	void createGhost(Vector2D pos,int color);
 	//bucle principal
 	void run();
-	
-	//metodos que comprueban colisiones
 
-	//colisiones del pacman con el entorno
+	// Las colisiones con la pared
 	bool check_collisionofPacman(Vector2D pos);
 	//colisiones de un fantasma con el entorno
 	bool check_collisionofGhost(Vector2D pos);
-	//colisiones entre el fantasma y el pacman
+	// Las colisiones entre Pacman y Ghost
 	bool check_collisionGhostPacman();
 	
-	//metodo donde el pacman come
+	// Diferencia entre comida normal y la Hamburguesa
 	void eatFood(Vector2D pos);
-	//devuelve si el pacman ha comido comida
-	bool isPacmanNyom() { return pacman_->getNyom(); };
+	bool isPacmanNyom() { return pacman_->getNyom(); };	//Nyom es la comida
 
 	int getSwapX() { return dim_map_x-1; }
 	int getSwapY() { return dim_map_y-1; }

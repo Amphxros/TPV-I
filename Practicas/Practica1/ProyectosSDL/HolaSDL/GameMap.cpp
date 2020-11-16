@@ -2,6 +2,7 @@
 
 #include "Game.h"
 #include <iostream>
+
 GameMap::GameMap(int rows, int cols, Texture* texture, Game* game):
 rows_(rows),cols_(cols),texture_(texture),game_(game){
 	map = new MapCell * [cols_];
@@ -13,16 +14,13 @@ rows_(rows),cols_(cols),texture_(texture),game_(game){
 	}
 
 }
+// Esto peta de momento
 GameMap::~GameMap()
 {
 	for (int i = 0; i < rows_; i++) {
 		delete map[i];
 	}
 	delete[] map; map = nullptr;
-}
-void GameMap::write(int x,int y, MapCell m)
-{
-	map[x][y] = m;
 }
 
 void GameMap::render()
@@ -38,16 +36,14 @@ void GameMap::render()
 			if (map[i][j] == MapCell::Wall) {
 				texture_->renderFrame(dest, 1, 7);
 			}
-			else if (map[i][j] == MapCell::Food) {
 
+			else if (map[i][j] == MapCell::Food) {
 				texture_->renderFrame(dest, 2, 9);
 			}
-			else if (map[i][j] == MapCell::Vitamins) {
 
+			else if (map[i][j] == MapCell::Vitamins) {
 				texture_->renderFrame(dest, 2, 8);
 			}
-
 		}
-	
 	}
 }

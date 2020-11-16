@@ -13,20 +13,20 @@ class Game;
 class GameMap
 {
 public:
-	GameMap(int rows, int cols, Texture* texture,Game* game);
 	
+	GameMap(int rows, int cols, Texture* texture,Game* game);
 	~GameMap();
 
-	void write(int x, int y, MapCell m);
+	// Rellena la casilla x, y con el tipo m, se usa en la creadora
+	void write(int x, int y, MapCell m) { map[x][y] = m; };
 	void render();
 
-	//devuelve una pos i,j
+	// Devuelve lo que hay en una pos i,j
 	MapCell getCell(int i, int j) { return map[i][j]; }
-	//devuelve si la pos i,j es un muro
+
+	// Devuelve si la pos i,j es un muro, comida o vitamina
 	bool isCellWall(int i, int j) { return map[i][j]==MapCell::Wall; }
-	//devuelve si la pos i,j es comida
 	bool isCellFood(int i, int j) { return map[i][j]==MapCell::Food; }
-	//devuelve si la pos i,j es vitamina
 	bool isCellVitamin(int i, int j) { return map[i][j]==MapCell::Vitamins; }
 
 	void setMapCellEmpty(MapCell m) { m = MapCell::Empty; }

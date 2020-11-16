@@ -7,6 +7,7 @@
 const int GHOST_ROW = 6;
 const int GHOST_COL = 6;
 class Game;
+
 class Ghost
 {
 public:
@@ -16,7 +17,7 @@ public:
 	void render();
 	void update();
 
-	Vector2D getPos(){return pos_ + dir_;}
+	Vector2D getPos() { return pos_ + dir_; };	// Posición a la que quiere avanzar
 
 private:
 	Point2D pos_;

@@ -3,13 +3,13 @@
 
 Pacman::Pacman(Point2D pos, Texture* texture, Game* game):
 pos_(pos),texture_(texture),game_(game) {
-	dir_ = { -1,0 };
+	dir_ = dirs_[directions::LEFT];;
 }
 
 Pacman::~Pacman()
 {
-	delete texture_;
-	delete game_;
+	delete texture_; texture_ = nullptr;
+	delete game_; game_ = nullptr;
 }
 
 void Pacman::render()
@@ -25,7 +25,8 @@ void Pacman::render()
 
 void Pacman::update()
 {
-	Vector2D aux = { (int)(pos_.getX() + dir_.getX()), (int)(pos_.getY() + dir_.getY()) };
+	//Vector2D aux = { (int)(pos_.getX() + dir_.getX()), (int)(pos_.getY() + dir_.getY()) };
+	Vector2D aux = getPos();
 
 	if (game_->check_collisionGhostPacman()) {
 		
