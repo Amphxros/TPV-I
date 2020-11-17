@@ -1,7 +1,6 @@
 #include "Ghost.h"
 #include "Game.h"
 #include <vector>
-//#include <cstdlib>
 
 Ghost::Ghost(Point2D pos, Texture* Texture, Game* game, int color):
 	pos_(pos),texture_(Texture), game_(game),color_(color)
@@ -17,8 +16,8 @@ Ghost::~Ghost()
 void Ghost::render()
 {
 	SDL_Rect dest;
-	dest.x = pos_.getX()* TAM_MAT;
-	dest.y = pos_.getY()*TAM_MAT;
+	dest.x = (pos_.getX() * TAM_MAT) + OFFSET;
+	dest.y = (pos_.getY() * TAM_MAT) + OFFSET;
 	dest.w = TAM_MAT;
 	dest.h = TAM_MAT;
 
@@ -56,15 +55,15 @@ void Ghost::update()
 		if (pos_.getX() <= 0) {
 			pos_ = { (int)game_->getSwapX(), (int)pos_.getY() };
 		}
-		else if (pos_.getX() > game_->getSwapX()) {
-			pos_ = { 0, (int)pos_.getY() };
+		else if (pos_.getX() >= game_->getSwapX()) {
+			pos_ = { 1, (int)pos_.getY() };
 		}
 
 		if (pos_.getY() <= 0) {
 			pos_ = { (int)pos_.getX(),(int)game_->getSwapY() };
 		}
 		else if (pos_.getY() > game_->getSwapY()) {
-			pos_ = { (int)pos_.getX(), 0 };
+			pos_ = { (int)pos_.getX(), 1 };
 		}
 	}
 }

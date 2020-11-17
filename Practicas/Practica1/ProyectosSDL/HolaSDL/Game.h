@@ -5,6 +5,7 @@
 #include "Vector2D.h"
 #include "Pacman.h"
 #include "Ghost.h"
+#include "InfoBar.h"
 #include "GameMap.h"
 #include "checkML.h"
 
@@ -13,7 +14,7 @@ const int WIN_HEIGHT=600;	//alto de ventana
 
 const int NUM_TEXTURES=4;	//numero de texturas
 const int NUM_GHOSTS=4;		//numero de fantasmas
-const int TAM_MAT=WIN_HEIGHT/30;	//tama�o de tile
+const int TAM_MAT = WIN_HEIGHT/35;	//tama�o de tile
 const int NUM_DIRS = 4;		//numero de direcciones
 
 const int COOLNYOM = 3000;
@@ -36,7 +37,6 @@ struct TextureData		//struct que contiene datos importantes de las texturas: nom
 	int rows, cols;
 };
 	const TextureData textures_data_[NUM_TEXTURES] = {		//array de datos de textura
-		//{"filename",n,m}
 		{"../images/digits2.jpeg",3,4},
 		{"../images/BlueWallsEtc.png",3,10},
 		{"../images/characters1.png",4,14},
@@ -52,10 +52,6 @@ public:
 	//destructora
 	~Game();
 
-	//creacion de texturas y objetos
-	void init();
-	//carga del mapa
-	void load(std::string filename);
 	//crea un pacman en una pos dada
 	void createPacman(Vector2D pos);
 	//crea un fantasma en una pos dada
@@ -72,24 +68,31 @@ public:
 	
 	// Diferencia entre comida normal y la Hamburguesa
 	void eatFood(Vector2D pos);
-	bool isPacmanNyom() { return pacman_->getNyom(); };	//Nyom es la comida
+	bool isPacmanNyom() { return pacman_->getNyom(); };	//Nyom es si nos hemos tomado las vitaminas
+	int getVidas() { return pacman_->getVidas(); }
 
-	int getSwapX() { return dim_map_x-1; }
-	int getSwapY() { return dim_map_y-1; }
+	int getSwapX() { return dim_map_x-1; } //devuelve la posicion limite del mapa en x
+	int getSwapY() { return dim_map_y-1; } //devuelve la posicion limite en y
 
 private:
-	SDL_Window* window_=nullptr;
-	SDL_Renderer* renderer_=nullptr;
+	SDL_Window* window_=nullptr; //puntero a ventana
+	SDL_Renderer* renderer_=nullptr; // puntero al renderer
 
-	GameMap* map_=nullptr;
-	Pacman* pacman_=nullptr;
-	Ghost* ghost_[NUM_GHOSTS];
-	Texture* textures[NUM_TEXTURES];
+	GameMap* map_=nullptr; //mapa
+	Pacman* pacman_=nullptr;// pacman
+	Ghost* ghost_[NUM_GHOSTS];//array de fantasmas
+	Texture* textures[NUM_TEXTURES]; //array de texturas
 	Vector2D posicionesInit[NUM_GHOSTS + 1];	// Posiciones iniciales de fantasma(s) y pacman para que vuelvan
+	InfoBar* infoBar_=nullptr;
 
-	void render();
-	void update();
-	void handleEvents();
+	void render();  //renderiza los elementos del juego
+	void update();  //actualiza los elementos de juego(posiciones, control de colisiones ...)
+	void handleEvents();	// Controla la salida del juego y los eventos de Pacman
+	
+	//creacion de texturas y objetos
+	void init();
+	//carga del mapa
+	void load(std::string filename);
 
 	bool exit_ = false;
 	int food_left = 0;

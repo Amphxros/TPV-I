@@ -4,26 +4,30 @@
 
 #include "checkML.h"
 
-const int GHOST_ROW = 6;
-const int GHOST_COL = 6;
 class Game;
 
 class Ghost
 {
 public:
+	//constructor
 	Ghost(Point2D pos, Texture* Texture, Game* game,int color);
+	//destructor
 	~Ghost();
 
+	//render
 	void render();
+	//update
 	void update();
 
+	//devuelve la posicion
 	Vector2D getPos() { return pos_; };	// Posición a la que quiere avanzar
+	//cambia la posicion
 	void setPos(Vector2D pos) { pos_ = pos; };
 private:
-	Point2D pos_;
-	Vector2D dir_;
-	Texture* texture_;
-	Game* game_;
-	int color_;
+	Point2D pos_; //posicion
+	Vector2D dir_;	//Direccion a la que quiere avanzar
+	Texture* texture_; //textura
+	Game* game_; //puntero a juego
+	int color_; //color del fantasma
 };
 

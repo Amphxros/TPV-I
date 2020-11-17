@@ -13,13 +13,15 @@ class Game;
 class GameMap
 {
 public:
-	
+	//constructora
 	GameMap(int rows, int cols, Texture* texture,Game* game);
+	//destructora
 	~GameMap();
 
 	// Rellena la casilla x, y con el tipo m, se usa en la creadora
 	void write(int x, int y, MapCell m) { map[x][y] = m; };
-	void render();
+	//renderiza la matriz map
+	void render();	
 
 	// Devuelve lo que hay en una pos i,j
 	MapCell getCell(int i, int j) { return map[i][j]; };
@@ -31,10 +33,9 @@ public:
 
 private:
 
-	Vector2D mapSize;
 	MapCell** map; //Array de celdas de tipo MapCell; Contienen info de lo que hay en las casillas
-	Game* game_;
-	Texture* texture_;
-	int rows_, cols_;
+	Game* game_; //puntero a game
+	Texture* texture_; //textura del mapa (spritesheet de tiles)
+	int rows_, cols_; //numero de filas y columnas
 };
 

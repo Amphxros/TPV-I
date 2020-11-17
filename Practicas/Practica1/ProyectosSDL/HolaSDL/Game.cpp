@@ -38,7 +38,9 @@ void Game::init()
 		textures[i] = new Texture(renderer_, textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
 	}
 	map_ = new GameMap(30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
-	load("../Mapas/level05.dat");
+
+	load("../Mapas/level01.dat");
+	infoBar_= new InfoBar(Vector2D(dim_map_x,0),textures[TextureOrder::CHAR_SPRITESHEET],textures[TextureOrder::DIGITS],this);
 }
 
 void Game::load(std::string filename)
@@ -61,7 +63,7 @@ void Game::load(std::string filename)
 					if (d == 2) food_left++;	// Caso 2 es la comida, el resto son el mapa
 					break;
 
-					// Los fantasmas se codifican del 0 (5) al 3 (8) 
+				// Los fantasmas se codifican del 0 (5) al 3 (8) 
 				case 5:case 6:case 7:case 8:
 					map_->write(j, i, (MapCell)0);
 					createGhost(Vector2D(j, i), d - 5);
@@ -88,7 +90,7 @@ void Game::load(std::string filename)
 
 void Game::createPacman(Vector2D pos)
 {
-	pacman_ = new Pacman(pos, textures[TextureOrder::CHAR_SPRITESHEET], this);
+	pacman_ = new Pacman(pos, textures[TextureOrder::CHAR_SPRITESHEET], this,3);
 }
 
 void Game::createGhost(Vector2D pos, int color)
@@ -127,8 +129,14 @@ bool Game::check_collisionGhostPacman() {
 	{
 		// GetPos devuelve pos_ + dir_
 		if(ghost_[i]->getPos()==pacman_->getPos()) {	
-			if (isPacmanNyom()) { ghost_[i]->setPos(posicionesInit[i]); }
-			else { pacman_->setPos(posicionesInit[NUM_GHOSTS]); }
+			if (isPacmanNyom()) { 
+			ghost_[i]->setPos(posicionesInit[i]); 
+			}
+			else {
+			 pacman_->setPos(posicionesInit[NUM_GHOSTS]);
+			 pacman_->setVidas(pacman_->getVidas()-1);
+			 if(pacman_->getVidas()==0) exit_=true;
+			 }
 		
 			return true;
 		}
@@ -150,13 +158,12 @@ void Game::eatFood(Vector2D pos)
 
 void Game::render()
 {
-	SDL_RenderClear(renderer_);
-	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);
+	SDL_RenderClear(renderer_);	// Limpieza del frame
+	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);	// Color del fondo
 	map_->render();
-	for (Ghost* g : ghost_) {
-		g->render();
-	}
+	for (Ghost* g : ghost_)		g->render();
 	pacman_->render();
+	infoBar_->render();
 	SDL_RenderPresent(renderer_);
 }
 

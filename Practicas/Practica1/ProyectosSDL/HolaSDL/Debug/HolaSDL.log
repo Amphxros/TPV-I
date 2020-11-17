@@ -1,65 +1,22 @@
 ﻿  Game.cpp
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(14,70): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(14,55): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(16,71): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(16,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(18,74): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(18,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,76): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(112,43): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(112,31): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(118,43): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(118,31): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(141,43): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(141,31): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(142,35): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(142,23): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(145,51): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(145,39): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(146,35): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(146,23): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-  GameMap.cpp
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(14,70): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(14,55): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(16,71): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(16,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(18,74): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(18,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,76): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-  Ghost.cpp
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(14,70): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(14,55): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(16,71): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(16,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(18,74): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(18,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,76): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Ghost.cpp(20,22): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Ghost.cpp(21,22): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
-  Pacman.cpp
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(14,70): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(14,55): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(16,71): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(16,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(18,74): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(18,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,76): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Pacman.cpp(17,22): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Pacman.cpp(18,22): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
-  main.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\crtdbg.h(307,1): warning C4005: '_malloca': redefinición de macro
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\malloc.h(124): message : vea la definición anterior de '_malloca'
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(14,70): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(14,55): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(16,71): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(16,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(18,74): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(18,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,76): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-  Generando código...
-  HolaSDL.vcxproj -> C:\Users\Dragomante\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\bin\HolaSDLDebug.exe
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(17,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(17,55): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,71): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,56): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(21,74): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(21,61): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(22,76): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(22,61): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(114,43): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(114,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(120,43): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(120,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(149,43): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(149,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(150,35): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(150,23): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(153,51): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(153,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(154,35): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(154,23): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  HolaSDL.vcxproj -> C:\Users\usuario_local\Documents\GitHub\TPV-I\Practicas\Practica1\ProyectosSDL\bin\HolaSDLDebug.exe
