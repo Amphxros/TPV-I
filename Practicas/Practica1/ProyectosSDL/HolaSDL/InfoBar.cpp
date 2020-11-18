@@ -17,10 +17,10 @@ void InfoBar::render()
 		num_texture->renderFrame(dest, punt_[i]/4, punt_[i]%4);
 	}
 
-	for(int i=0;i<3;i++){
+	for(int i=0;i<game_->getVidas();i++){
 		SDL_Rect dest;
-		dest.x=pos_.getX() - TAM_MAT * i;
-		dest.y=pos_.getY();
+		dest.x=(pos_.getX()*TAM_MAT)+ OFFSET + TAM_MAT * (i+1);
+		dest.y=pos_.getY()*TAM_MAT + OFFSET;
 		dest.w=TAM_MAT;
 		dest.h=TAM_MAT;
 
