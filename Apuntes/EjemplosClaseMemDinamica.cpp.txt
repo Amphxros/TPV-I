@@ -1,0 +1,113 @@
+#include <fstream>
+
+using Date = int;
+const int MAX_SCORES = 10;
+
+struct ScoreReg{
+    string user;
+    Date date;
+    int score;
+};
+
+/*
+Version 0: Con array estático de ScoreRegs
+Version 1: Con array estático de punteros a ScoreReg
+Version 2: Con array dinámico de ScoreRegs
+Versión 3: Con array dinámico de punteros a ScoreReg
+*/
+
+using ScoreRegPointer = ScoreReg*; // Se podría usar esto para no tener que escribir ** en versión 3
+
+struct Scores0{
+    ScoreReg elems[MAX_SCORES]; // Array estático de ScoreReg
+    int counter;
+};
+
+struct Scores1{
+    ScoreReg* elems[MAX_SCORES]; // Array estático de ScoreReg*
+    int counter;
+};
+
+struct Scores2{
+    ScoreReg* elems; // Array dinámico de ScoreReg
+    int counter;
+    int capacity;
+};
+
+struct Scores3{
+    ScoreReg** elems; // Array dinámico de ScoreReg*
+    int counter;
+    int capacity;
+};
+
+void loadScores0(Scores0& scores, string filename){
+    ifstream in;
+    in.open(filename);
+    int n, i;
+    in >> n;
+    for (i = 0; i < n && i < MAX_SCORES; i++){
+        in >> scores.elems[i].user >> scores.elems[i].date >> scores.elems[i].score;
+    }
+    scores.counter = i;
+    in.close();
+}
+
+
+void loadScores1(Scores1& scores, string filename){
+    ifstream in;
+    in.open(filename);
+    int n, i;
+    in >> n;
+    for (i = 0; i < n && i < MAX_SCORES; i++){
+        scores.elems[i] = new ScoreReg;
+        in >> scores.elems[i]->user >> scores.elems[i]->date >> scores.elems[i]->score;
+    }
+    scores.counter = n;
+    in.close();
+}
+
+void loadScores2(Scores2& scores, string filename){
+    ifstream in;
+    in.open(filename);
+    int n;
+    in >> n;
+    scores.capacity = n+10; // Ponemos un poco más de lo necesario
+    scores.elems = new ScoreReg[scores.capacity];
+    for (int i = 0; i < n; i++){
+        in >> scores.elems[i].user >> scores.elems[i].date >> scores.elems[i].score;
+    }
+    scores.counter = n;
+    in.close();
+}
+
+void loadScores3(Scores3& scores, string filename){
+    ifstream in;
+    in.open(filename);
+    int n;
+    in >> n;
+    scores.capacity = n+10; // Ponemos un poco más de lo necesario
+    scores.elems = new ScoreReg*[scores.capacity];
+    for (int i = 0; i < n; i++){
+        scores.elems[i] = new ScoreReg;
+        in >> scores.elems[i]->user >> scores.elems[i]->date >> scores.elems[i]->score;
+    }
+    scores.counter = n;
+    in.close();
+}
+
+int main() {
+    Scores3 scores;
+    ...
+    // Destrucción de versión 3
+    for (int i = 0; i < scores->counter; i++)
+        delete scores.elems[i];
+    delete[] scores.elems;
+}
+
+	
+	
+	
+	
+	
+	
+}

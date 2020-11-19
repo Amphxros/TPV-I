@@ -1,0 +1,116 @@
+
+#include <iostream>
+#include <string>
+#include <cctype>
+
+using namespace std;
+
+/* Busca el caracter c en la cadena cad. Si lo encuentra, devuelve la posici�n que ocupaba en la cadena.
+ Si no, devuelve -1.
+ Entrada: La cadena en la que buscar (cad) y el caracter buscado (c)
+ Salida: La posici�n del caracter, si se encuentra, o -1 en otro caso */
+int buscaCaracter(string cad, char c); // Al poner el prototipo aquí el compilador ya conoce la función
+
+const int NUMLETRAS = 'z' - 'a' + 1;
+using TablaFrecuencias = int[NUMLETRAS];
+
+void calcularFrecuencias(const string& cad, TablaFrecuencias frecs);
+bool arraysIguales(const int array1[], const int array2[], int n);
+
+void printArray(int arr[], int n) {
+	for (int i = 0; i < n; i++)
+		cout << arr[i] << ",";
+	cout << endl;
+}
+
+// Algoritmo cuadrático en la longitud de las cadenas
+bool anagramas2(const string& cad1, string& cad2) {
+	// cad2 queda inservible. Se no se quiere eso habría que copiarla (sin &)
+	// Si las cadenas tienen distinta longitud no son anagramas
+	if (cad1.length() != cad2.length())
+		return false;
+	int posEnCad2;
+	bool sonAnagramas = true;
+	int numCar = 0; //Contador que recorre los caracteres de la primera cadena
+	while (sonAnagramas && (numCar < cad1.length())) {
+		posEnCad2 = buscaCaracter(cad2, cad1.at(numCar));
+		//posEnCad2 = cad2.find(cad1[numCar]);
+		if (posEnCad2 == -1)  //No se ha encontrado el caracter
+			sonAnagramas = false;
+		else
+			cad2[posEnCad2] = '\0'; // Marca que esa letra ya se ha encontrado para no volver a encontrarla
+			//cad2.erase(posEnCad2, 1); // Otra forma de hacerlo
+		numCar++;
+	}
+	return sonAnagramas;
+}
+
+// Algoritmo lineal en la longitud de las cadenas
+bool anagramas(const string& cad1, const string& cad2) {
+	//Si las cadenas tienen distinta longitud no son anagramas
+	if (cad1.length() != cad2.length())
+		return false;
+	else {
+		TablaFrecuencias frecsCad1 = { 0 }, frecsCad2 = { 0 };
+		calcularFrecuencias(cad1, frecsCad1);
+		calcularFrecuencias(cad2, frecsCad2);
+		return arraysIguales(frecsCad1, frecsCad2, NUMLETRAS);
+	}
+}
+
+void calcularFrecuencias(const string& cad, TablaFrecuencias frecs) {
+	char c;
+	for (int i = 0; i < cad.length(); i++) {
+		c = tolower(cad.at(i));
+		if (c >= 'a' && c <= 'z')
+			frecs[c - 'a']++;
+	}
+}
+
+bool arraysIguales(const int array1[], const int array2[], int n) {
+	bool iguales = true;
+	int i = 0;
+	while (iguales && i < n) {
+		iguales = array1[i] == array2[i];
+		i++;
+	}
+	return iguales;
+}
+
+int buscaCaracter(string cad, char c) {
+	int pos = 0; //Contador para recorrer los caracteres de la cadena
+	bool encontrado = false;
+	while (pos < cad.length() && !encontrado) {
+		if (cad.at(pos) == c)
+			encontrado = true;
+		else
+			pos++;
+	}
+	if (!encontrado)
+		pos = -1;
+	return pos;
+}
+
+int main() {
+	string cad1, cad2;
+	bool sonAnagramas = true;
+
+	//Leemos las cadenas de teclado mientras no se introduzca la cadena vacía
+	cout << "Introduce la primera cadena: ";
+	getline(cin, cad1);
+	while (cad1 != "") {
+		cout << "Introduce la segunda cadena: ";
+		getline(cin, cad2);
+		sonAnagramas = anagramas(cad1, cad2);
+
+		//Mostramos el resultado
+		if (sonAnagramas)
+			cout << "Las palabras introducidas son anagramas" << endl;
+		else
+			cout << "Las palabras introducidas NO son anagramas" << endl;
+
+		cout << "Introduce la primera cadena: ";
+		getline(cin, cad1);
+	}
+	return 0;
+}
