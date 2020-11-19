@@ -9,6 +9,7 @@ class InfoBar
 {
 public:
 	InfoBar(Vector2D pos, Texture* texture, Texture* nums, Game* game);
+	~InfoBar() { punt_.clear(); }
 	void setPuntos(int p);
 	int getPuntos() { return points_; }
 	void render();

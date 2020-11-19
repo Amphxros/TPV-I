@@ -165,7 +165,8 @@ void Game::render()
 	SDL_RenderClear(renderer_);	// Limpieza del frame
 	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);	// Color del fondo
 	map_->render();
-	for (Ghost* g : ghost_)		g->render();
+	for (Ghost* g : ghost_)		
+		g->render();
 	pacman_->render();
 	infoBar_->render();
 	SDL_RenderPresent(renderer_);

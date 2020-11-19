@@ -53,7 +53,7 @@ void Ghost::update()
 		pos_ = aux;
 		
 		if (pos_.getX() <= 0) {
-			pos_ = { (int)game_->getSwapX(), (int)pos_.getY() };
+			pos_ = { (int)game_->getSwapX()-1, (int)pos_.getY() };
 		}
 		else if (pos_.getX() >= game_->getSwapX()) {
 			pos_ = { 1, (int)pos_.getY() };

@@ -18,5 +18,62 @@ C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL
 C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(156,51): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
 C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(156,39): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
 C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(157,35): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+  GameMap.cpp
 C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Game.cpp(157,23): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(17,70): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(17,55): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,71): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(21,74): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(21,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(22,76): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+  Ghost.cpp
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(22,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(17,70): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(17,55): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,71): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(21,74): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(21,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(22,76): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(22,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Ghost.cpp(19,35): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+  InfoBar.cpp
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Ghost.cpp(20,35): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(17,70): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(17,55): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,71): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(21,74): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(21,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(22,76): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(22,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\InfoBar.cpp(22,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\InfoBar.cpp(24,46): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\InfoBar.cpp(25,21): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\InfoBar.cpp(34,37): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+  Pacman.cpp
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\InfoBar.cpp(35,19): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(17,70): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(17,55): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,71): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(21,74): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(21,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(22,76): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(22,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Pacman.cpp(17,35): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+  main.cpp
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Pacman.cpp(18,35): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\crtdbg.h(303,1): warning C4005: '_malloca': redefinición de macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\malloc.h(122): message : vea la definición anterior de '_malloca'
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(17,70): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(17,55): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,71): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(19,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(21,74): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(21,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(22,76): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+  Generando código...
+C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\HolaSDL\Vector2D.h(22,61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
   HolaSDL.vcxproj -> C:\Users\ampac\Documents\git_Repositorios\TPV-I\Practicas\Practica1\ProyectosSDL\bin\HolaSDLDebug.exe

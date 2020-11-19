@@ -10,7 +10,7 @@
 #include "checkML.h"
 
 const int WIN_WIDTH=800;	//ancho de ventana
-const int WIN_HEIGHT=600;	//alto de ventana
+const int WIN_HEIGHT=800;	//alto de ventana
 
 const int NUM_TEXTURES=4;	//numero de texturas
 const int NUM_GHOSTS=4;		//numero de fantasmas

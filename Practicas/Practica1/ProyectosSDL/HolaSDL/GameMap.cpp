@@ -18,7 +18,7 @@ rows_(rows),cols_(cols),texture_(texture),game_(game){
 GameMap::~GameMap()
 {
 	for (int i = 0; i < rows_; i++) {
-		delete map[i];
+		delete []map[i];
 	}
 	delete map; map = nullptr;
 }
