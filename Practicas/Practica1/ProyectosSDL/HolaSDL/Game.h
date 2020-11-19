@@ -21,6 +21,9 @@ const int COOLNYOM = 10000;
 const int TIME_PER_FRAME = 50;
 const int OFFSET = WIN_HEIGHT / 15;	// Para el hueco de las vidas y puntuacion
 
+const int POINTS_PER_FOOD=50;
+const int POINTS_PER_VITAMIN=500;
+const int POINTS_PER_GHOST=500;
 
 enum directions { LEFT, RIGHT, UP, DOWN };		//enum para las posibles direcciones
 	const Vector2D dirs_[NUM_DIRS] = {			//posibles direcciones

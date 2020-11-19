@@ -24,6 +24,8 @@ public:
 	int getVidas() { return vidas; };
 
 	Vector2D getPos() { return pos_ + dir_; };	// Devuelve la posicion a la que intenta moverse
+	Vector2D getCurrPos() { return pos_; };	// Devuelve la posicion a la que intenta moverse
+	
 	void setPos(Vector2D pos) { pos_ = pos; };
 private:
 	Point2D pos_;

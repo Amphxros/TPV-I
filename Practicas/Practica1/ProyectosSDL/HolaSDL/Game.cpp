@@ -129,10 +129,10 @@ bool Game::check_collisionGhostPacman() {
 	for (int i = 0; i < NUM_GHOSTS; i++)
 	{
 		// GetPos devuelve pos_ + dir_
-		if(ghost_[i]->getPos()==pacman_->getPos()) {	
+		if(ghost_[i]->getPos()==pacman_->getPos()|| ghost_[i]->getPos()==pacman_->getCurrPos()) {	
 			if (isPacmanNyom()) { 
 			ghost_[i]->setPos(posicionesInit[i]); 
-			infoBar_->setPuntos(infoBar_->getPuntos() + 1000);
+			infoBar_->setPuntos(infoBar_->getPuntos() + POINTS_PER_GHOST);
 			}
 			else {
 			 pacman_->setPos(posicionesInit[NUM_GHOSTS]);
@@ -151,12 +151,12 @@ void Game::eatFood(Vector2D pos)
 	if (map_->isCellFood(pos.getX(), pos.getY())) {
 		map_->write(pos.getX(), pos.getY(),(MapCell)0);
 		food_left--;
-		infoBar_->setPuntos(infoBar_->getPuntos() + 50);
+		infoBar_->setPuntos(infoBar_->getPuntos() + POINTS_PER_FOOD);
 	}
 	else if (map_->isCellVitamin(pos.getX(), pos.getY())) {
 		map_->write(pos.getX(), pos.getY(), (MapCell)0);
 		pacman_->setNyom(true);
-		infoBar_->setPuntos(infoBar_->getPuntos() + 100);
+		infoBar_->setPuntos(infoBar_->getPuntos() + POINTS_PER_VITAMIN);
 	}
 }
 
