@@ -10,6 +10,7 @@ class InfoBar
 public:
 	InfoBar(Vector2D pos, Texture* texture, Texture* nums, Game* game);
 	void setPuntos(int p);
+	int getPuntos() { return points_; }
 	void render();
 
 private:
@@ -17,7 +18,7 @@ private:
 	Game* game_;
 	Texture* texture_; 
 	Texture* num_texture;
-
+	int points_=0;
 	std::vector<int> punt_;
 };
 

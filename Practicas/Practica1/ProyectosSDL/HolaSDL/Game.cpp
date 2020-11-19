@@ -25,6 +25,7 @@ Game::~Game()
 	for (int i = 0; i < NUM_TEXTURES; i++)
 		delete textures[i];
 
+	delete infoBar_; infoBar_=nullptr;
 	delete map_; map_ = nullptr;
 	delete pacman_; pacman_ = nullptr;
 	SDL_DestroyRenderer(renderer_);
@@ -131,6 +132,7 @@ bool Game::check_collisionGhostPacman() {
 		if(ghost_[i]->getPos()==pacman_->getPos()) {	
 			if (isPacmanNyom()) { 
 			ghost_[i]->setPos(posicionesInit[i]); 
+			infoBar_->setPuntos(infoBar_->getPuntos() + 1000);
 			}
 			else {
 			 pacman_->setPos(posicionesInit[NUM_GHOSTS]);
@@ -149,10 +151,12 @@ void Game::eatFood(Vector2D pos)
 	if (map_->isCellFood(pos.getX(), pos.getY())) {
 		map_->write(pos.getX(), pos.getY(),(MapCell)0);
 		food_left--;
+		infoBar_->setPuntos(infoBar_->getPuntos() + 50);
 	}
 	else if (map_->isCellVitamin(pos.getX(), pos.getY())) {
 		map_->write(pos.getX(), pos.getY(), (MapCell)0);
 		pacman_->setNyom(true);
+		infoBar_->setPuntos(infoBar_->getPuntos() + 100);
 	}
 }
 

@@ -17,7 +17,7 @@ const int NUM_GHOSTS=4;		//numero de fantasmas
 const int TAM_MAT = WIN_HEIGHT/35;	//tama�o de tile
 const int NUM_DIRS = 4;		//numero de direcciones
 
-const int COOLNYOM = 3000;
+const int COOLNYOM = 10000;
 const int TIME_PER_FRAME = 50;
 const int OFFSET = WIN_HEIGHT / 15;	// Para el hueco de las vidas y puntuacion
 
