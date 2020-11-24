@@ -1,8 +1,9 @@
 #include "Pacman.h"
 #include "Game.h"
 
-Pacman::Pacman(Point2D pos, Texture* texture, Game* game, int numVidas):
-	GameCharacter(pos,TAM_MAT,TAM_MAT,texture,game){
+Pacman::Pacman(Point2D pos, double width, double height, Texture* texture, Game* game, int numVidas):
+	GameCharacter(pos,width,height,texture,game)
+{
 	dir_ = dirs_[directions::LEFT];
 	vidas=vidasmax;
 }
@@ -24,31 +25,27 @@ void Pacman::render()
 
 void Pacman::update()
 {
-	if (!game_->check_collisionGhostPacman()) {		// si no hay colision, nos movemos
+	
+	pos_ = getPos();
 
-		if (!game_->check_collisionofPacman(getPos())) {
-			//aqui se mueve
-			pos_ = getPos();
+	//comprobamos los puntos en los que se puede salir por otro lado del mapa
+	if (pos_.getX() <= 0)
+		pos_ = { (int)game_->getSwapX()-1, (int)pos_.getY() };
 
-			//comprobamos los puntos en los que se puede salir por otro lado del mapa
-			if (pos_.getX() <= 0)
-				pos_ = { (int)game_->getSwapX()-1, (int)pos_.getY() };
+	else if (pos_.getX() >= game_->getSwapX()) 
+		pos_ = { 1, (int)pos_.getY() };
 
-			else if (pos_.getX() >= game_->getSwapX()) 
-				pos_ = { 1, (int)pos_.getY() };
+	if (pos_.getY() <= 0) 
+		pos_ = { (int)pos_.getX(),(int)game_->getSwapY() };
+	
+	else if (pos_.getY() > game_->getSwapY()) 
+		pos_ = { (int)pos_.getX(), 0 };
 
-			if (pos_.getY() <= 0) 
-				pos_ = { (int)pos_.getX(),(int)game_->getSwapY() };
-			
-			else if (pos_.getY() > game_->getSwapY()) 
-				pos_ = { (int)pos_.getX(), 0 };
+	game_->eatFood(pos_);	//aqui come
 
-			game_->eatFood(pos_);	//aqui come
+	//aqui volvemos a comprobar si nos chocamos
 
-			//aqui volvemos a comprobar si nos chocamos
-			game_->check_collisionGhostPacman();
-		}
-	}
+	
 	//if nyom && ha pasao tiempo de cooldown bool nyom false
 	if(nyom){
 

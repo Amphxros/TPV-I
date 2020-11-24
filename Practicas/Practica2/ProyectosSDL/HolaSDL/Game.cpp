@@ -67,15 +67,12 @@ void Game::load(std::string filename)
 				// Los fantasmas se codifican del 0 (5) al 3 (8) 
 				case 5:case 6:case 7:case 8:
 					map_->write(j, i, (MapCell)0);
-					createGhost(Vector2D(j, i), d - 5);
-					// Posiciones iniciales para volver tras morir
-					posicionesInit[d - 5] = Vector2D(j, i);
+					createGhost(Vector2D(j, i), d - 5);	
 					break;
 
 				case 9:
 					map_->write(j, i, (MapCell)0);
 					createPacman(Vector2D(j, i));
-					posicionesInit[NUM_GHOSTS] = Vector2D(j, i);
 					break;
 
 				default:
@@ -91,12 +88,12 @@ void Game::load(std::string filename)
 
 void Game::createPacman(Vector2D pos)
 {
-	pacman_ = new Pacman(pos, textures[TextureOrder::CHAR_SPRITESHEET], this,3);
+	pacman_ = new Pacman(pos,TAM_MAT,TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this,3);
 }
 
 void Game::createGhost(Vector2D pos, int color)
 {
-	ghost_[color] = new Ghost(pos, textures[TextureOrder::CHAR_SPRITESHEET], this, color);
+	ghost_[color] = new Ghost(pos,TAM_MAT,TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, color);
 }
 
 void Game::run()
@@ -110,41 +107,41 @@ void Game::run()
 	}
 }
 
-bool Game::check_collisionofPacman(Vector2D pos)
-{
-	if (map_->isCellWall(pos.getX(), pos.getY())) {
-		return true;
-	}
-	return false;
-}
-bool Game::check_collisionofGhost(Vector2D pos){
-	if (map_->isCellWall(pos.getX(), pos.getY())) {
-		return true;
-	}
-	return false;
-}
+//bool Game::check_collisionofPacman(const Vector2D& pos)
+//{
+//	if (map_->isCellWall(pos.getX(), pos.getY())) {
+//		return true;
+//	}
+//	return false;
+//}
+//bool Game::check_collisionofGhost(const Vector2D& pos){
+//	if (map_->isCellWall(pos.getX(), pos.getY())) {
+//		return true;
+//	}
+//	return false;
+//}
 
-bool Game::check_collisionGhostPacman() {
-
-	for (int i = 0; i < NUM_GHOSTS; i++)
-	{
-		// GetPos devuelve pos_ + dir_
-		if(ghost_[i]->getPos()==pacman_->getPos()|| ghost_[i]->getPos()==pacman_->getCurrPos()) {	
-			if (isPacmanNyom()) { 
-			ghost_[i]->setPos(posicionesInit[i]); 
-			infoBar_->setPuntos(infoBar_->getPuntos() + POINTS_PER_GHOST);
-			}
-			else {
-				pacman_->resetPos();
-			 pacman_->setVidas(pacman_->getVidas()-1);
-			 if(pacman_->getVidas()==0) exit_=true;
-			 }
-		
-			return true;
-		}
-	}
-	return false;
-}
+//bool Game::check_collisionGhostPacman() {
+//
+//	for (int i = 0; i < NUM_GHOSTS; i++)
+//	{
+//		// GetPos devuelve pos_ + dir_
+//		if(ghost_[i]->getPos()==pacman_->getPos()|| ghost_[i]->getPos()==pacman_->getCurrPos()) {	
+//			if (isPacmanNyom()) { 
+//			ghost_[i]->resetPos(); 
+//			infoBar_->setPuntos(infoBar_->getPuntos() + POINTS_PER_GHOST);
+//			}
+//			else {
+//				pacman_->resetPos();
+//			 pacman_->setVidas(pacman_->getVidas()-1);
+//			 if(pacman_->getVidas()==0) exit_=true;
+//			 }
+//		
+//			return true;
+//		}
+//	}
+//	return false;
+//}
 
 void Game::eatFood(Vector2D pos)
 {
@@ -165,9 +162,8 @@ void Game::render()
 	SDL_RenderClear(renderer_);	// Limpieza del frame
 	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);	// Color del fondo
 	map_->render();
-	for (Ghost* g : ghost_)		
-		g->render();
 	pacman_->render();
+	for (Ghost* g : ghost_) g->render();
 	infoBar_->render();
 	SDL_RenderPresent(renderer_);
 }
@@ -175,10 +171,7 @@ void Game::render()
 void Game::update()
 {
 	pacman_->update();
-	
-	for(Ghost* g:ghost_){
-		g->update();
-	}
+	for (Ghost* g : ghost_) g->update();
 }
 
 void Game::handleEvents()

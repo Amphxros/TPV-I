@@ -63,9 +63,9 @@ public:
 	void run();
 
 	// Las colisiones con la pared
-	bool check_collisionofPacman(Vector2D pos);
+	bool check_collisionofPacman(const Vector2D & pos);
 	//colisiones de un fantasma con el entorno
-	bool check_collisionofGhost(Vector2D pos);
+	bool check_collisionofGhost(const Vector2D& pos);
 	// Las colisiones entre Pacman y Ghost
 	bool check_collisionGhostPacman();
 	
@@ -85,8 +85,9 @@ private:
 	Pacman* pacman_=nullptr;// pacman
 	Ghost* ghost_[NUM_GHOSTS];//array de fantasmas
 	Texture* textures[NUM_TEXTURES]; //array de texturas
-	Vector2D posicionesInit[NUM_GHOSTS + 1];	// Posiciones iniciales de fantasma(s) y pacman para que vuelvan
 	InfoBar* infoBar_=nullptr;
+
+	std::list<GameObject*> gObjects_; //lista de GO (mapa, barra de vida, fantasmas, pacman ...)
 
 	void render();  //renderiza los elementos del juego
 	void update();  //actualiza los elementos de juego(posiciones, control de colisiones ...)

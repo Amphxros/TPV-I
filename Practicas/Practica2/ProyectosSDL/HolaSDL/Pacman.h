@@ -1,15 +1,13 @@
 #pragma once
 #include "GameCharacter.h"
 #include "checkML.h"
-
 class Game;
-
 class Pacman: 
 	public GameCharacter
 {
 public:
 	
-	Pacman(Point2D pos, Texture* texture, Game* game_, int numVidas);
+	Pacman(Point2D pos,double width, double height, Texture* texture, Game* game_, int numVidas);
 	~Pacman();
 
 	void render();

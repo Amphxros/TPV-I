@@ -2,8 +2,8 @@
 #include "Game.h"
 #include <vector>
 
-Ghost::Ghost(Point2D pos, Texture* Texture, Game* game, int color):
-	pos_(pos),texture_(Texture), game_(game),color_(color)
+Ghost::Ghost(Point2D pos, double width, double height, Texture* texture, Game* game, int color):
+	GameCharacter(pos,width,height,texture,game),color_(color)
 {
 	dir_ = dirs_[directions::LEFT];
 }
@@ -18,8 +18,8 @@ void Ghost::render()
 	SDL_Rect dest;
 	dest.x = (pos_.getX() * TAM_MAT) + OFFSET;
 	dest.y = (pos_.getY() * TAM_MAT) + OFFSET;
-	dest.w = TAM_MAT;
-	dest.h = TAM_MAT;
+	dest.w = width_;
+	dest.h = height_;
 
 	if (game_->isPacmanNyom()) 
 		texture_->renderFrame(dest, 0, 13);
@@ -37,11 +37,11 @@ void Ghost::update()
 	choises.reserve(NUM_DIRS);
 	for (int i = 0 ; i < NUM_DIRS; i++) {
 		aux = pos_ + (Vector2D)dirs_[i];	// Direcciones del enum de la clase Game
-		if(!game_->check_collisionofGhost(aux)){
+		//if(!game_->check_collisionofGhost(aux)){
 			// Cargamos solo las disponibles en todo momento
 			// Esto permite que el fantasma de la vuelta por un pasillo
 			choises.push_back(dirs_[i]);	
-		}	
+		//}	
 	}
 	if(choises.size()==0){	// Esto es malo
 		// Para la ejecución del juego si un fantasma esta sandwichado entre muros
