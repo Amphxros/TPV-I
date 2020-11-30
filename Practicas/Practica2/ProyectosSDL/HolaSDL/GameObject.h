@@ -7,7 +7,7 @@ class Game;
 class GameObject
 {
 public:
-	~GameObject() { texture_ = nullptr; game_ = nullptr; }
+	virtual ~GameObject() { texture_ = nullptr; game_ = nullptr; }
 	virtual void render()=0;
 	virtual void update()=0;
 

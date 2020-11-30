@@ -14,7 +14,7 @@ rows_(rows),cols_(cols),texture_(texture),game_(game){
 	}
 
 }
-// Esto peta de momento
+
 GameMap::~GameMap()
 {
 	for (int i = 0; i < rows_; i++) {

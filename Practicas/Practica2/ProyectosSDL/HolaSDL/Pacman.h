@@ -8,7 +8,7 @@ class Pacman:
 public:
 	
 	Pacman(Point2D pos,double width, double height, Texture* texture, Game* game_, int numVidas);
-	~Pacman();
+	virtual ~Pacman();
 
 	void render();
 	void update();

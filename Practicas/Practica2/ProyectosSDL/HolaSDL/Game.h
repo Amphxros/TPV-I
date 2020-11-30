@@ -51,10 +51,13 @@ public:
 	void createPacman(Vector2D pos);
 	//crea un fantasma en una pos dada
 	void createGhost(Vector2D pos,int color);
+	//crea un smart ghost
+	void createSmartGhost(Vector2D pos);
 	//bucle principal
 	void run();
 
-	
+	bool CollisionWithWalls(GameObject* g);
+	bool CollisionWithCharacters(GameObject* g);
 	
 	// Diferencia entre comida normal y la Hamburguesa
 	void eatFood(Vector2D pos);
@@ -74,6 +77,7 @@ private:
 	Texture* textures[NUM_TEXTURES]; //array de texturas
 	InfoBar* infoBar_=nullptr;
 
+	std::list<Ghost*>ghosts_;
 	std::list<GameObject*> gObjects_; //lista de GO (mapa, barra de vida, fantasmas, pacman ...)
 
 	void render();  //renderiza los elementos del juego

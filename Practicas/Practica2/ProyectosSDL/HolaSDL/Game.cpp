@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>	// Para el random
+#include "SmartGhost.h"
 
 Game::Game()
 {
@@ -70,6 +71,11 @@ void Game::load(std::string filename)
 					createGhost(Vector2D(j, i), d - 5);	
 					break;
 
+				case 4:
+					map_->write(j, i, (MapCell)0);
+					createSmartGhost(Vector2D(j, i));
+					break;
+
 				case 9:
 					map_->write(j, i, (MapCell)0);
 					createPacman(Vector2D(j, i));
@@ -94,6 +100,11 @@ void Game::createPacman(Vector2D pos)
 void Game::createGhost(Vector2D pos, int color)
 {
 	ghost_[color] = new Ghost(pos,TAM_MAT,TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, color);
+}
+
+void Game::createSmartGhost(Vector2D pos)
+{
+	SmartGhost* ghost_ = new SmartGhost(pos, TAM_MAT, TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, 4);
 }
 
 void Game::run()

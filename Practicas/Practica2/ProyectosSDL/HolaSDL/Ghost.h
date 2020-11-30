@@ -10,7 +10,7 @@ public:
 	//constructor
 	Ghost(Point2D pos,double width, double height, Texture* texture, Game* game,int color);
 	//destructor
-	~Ghost();
+	virtual ~Ghost();
 	//render
 	void render();
 	//update
