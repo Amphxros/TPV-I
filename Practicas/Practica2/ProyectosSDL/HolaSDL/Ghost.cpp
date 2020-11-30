@@ -16,8 +16,8 @@ Ghost::~Ghost()
 void Ghost::render()
 {
 	SDL_Rect dest;
-	dest.x = (pos_.getX() * TAM_MAT) + OFFSET;
-	dest.y = (pos_.getY() * TAM_MAT) + OFFSET;
+	dest.x = (pos_.getX() * width_) + OFFSET;
+	dest.y = (pos_.getY() * height_) + OFFSET;
 	dest.w = width_;
 	dest.h = height_;
 
@@ -35,6 +35,7 @@ void Ghost::update()
 	// Usamos el vector de choises para comprobar las direcciones antes de movernos
 	std::vector<Vector2D> choises;
 	choises.reserve(NUM_DIRS);
+	
 	for (int i = 0 ; i < NUM_DIRS; i++) {
 		aux = pos_ + (Vector2D)dirs_[i];	// Direcciones del enum de la clase Game
 		//if(!game_->check_collisionofGhost(aux)){
@@ -49,21 +50,7 @@ void Ghost::update()
 		throw "no puede moverse";
 	}
 	else{	// Elige un random de las posibles
-		aux = pos_ + choises[rand() % choises.size()];
-		pos_ = aux;
-		
-		if (pos_.getX() <= 0) {
-			pos_ = { (int)game_->getSwapX()-1, (int)pos_.getY() };
-		}
-		else if (pos_.getX() >= game_->getSwapX()) {
-			pos_ = { 1, (int)pos_.getY() };
-		}
-
-		if (pos_.getY() <= 0) {
-			pos_ = { (int)pos_.getX(),(int)game_->getSwapY() };
-		}
-		else if (pos_.getY() > game_->getSwapY()) {
-			pos_ = { (int)pos_.getX(), 1 };
-		}
+		dir_ =  choises[rand() % choises.size()];
+		GameCharacter::update();
 	}
 }

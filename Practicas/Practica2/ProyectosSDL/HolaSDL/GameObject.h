@@ -17,7 +17,7 @@ public:
 	SDL_Rect getdest() { return SDL_Rect{ (int)pos_.getX(), (int)pos_.getY(),(int)width_, (int)height_ }; }
 
 protected:
-	GameObject() {};
+	GameObject():pos_(Point2D(-1,-1)), width_(0), height_(0){};
 	GameObject(Point2D pos, double width, double height, Texture* texture, Game* game):
 		pos_(pos), width_(width),height_(height), texture_(texture),game_(game) {}
 
