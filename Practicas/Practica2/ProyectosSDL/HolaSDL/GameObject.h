@@ -21,9 +21,9 @@ protected:
 	GameObject(Point2D pos, double width, double height, Texture* texture, Game* game):
 		pos_(pos), width_(width),height_(height), texture_(texture),game_(game) {}
 
-	Point2D pos_;
+	Point2D pos_;				//posicion
 	double width_, height_;		//width y height seran igual a la constante de tile generalmente
-	Game* game_ = nullptr;
-	Texture* texture_=nullptr; 
+	Game* game_ = nullptr;		//puntero a game
+	Texture* texture_= nullptr;	//textura
 };
 

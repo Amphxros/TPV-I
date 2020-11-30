@@ -25,14 +25,6 @@ const int POINTS_PER_FOOD=50;
 const int POINTS_PER_VITAMIN=500;
 const int POINTS_PER_GHOST=500;
 
-//enum directions { LEFT, RIGHT, UP, DOWN };		//enum para las posibles direcciones
-//	const Vector2D dirs_[NUM_DIRS] = {			//posibles direcciones
-//		Vector2D(-1,0),		//izquierda
-//		Vector2D(1,0),		//derecha
-//		Vector2D(0,-1),		//arriba
-//		Vector2D(0,1)		//abajo
-//	};
-//	
 enum TextureOrder {INIT,MAP_SPRITESHEET, CHAR_SPRITESHEET,DIGITS };		//orden de las texturas
 struct TextureData		//struct que contiene datos importantes de las texturas: nombre, filas y columnas
 {
@@ -62,12 +54,7 @@ public:
 	//bucle principal
 	void run();
 
-	// Las colisiones con la pared
-	bool check_collisionofPacman(const Vector2D & pos);
-	//colisiones de un fantasma con el entorno
-	bool check_collisionofGhost(const Vector2D& pos);
-	// Las colisiones entre Pacman y Ghost
-	bool check_collisionGhostPacman();
+	
 	
 	// Diferencia entre comida normal y la Hamburguesa
 	void eatFood(Vector2D pos);
