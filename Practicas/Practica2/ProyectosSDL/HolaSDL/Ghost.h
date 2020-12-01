@@ -8,7 +8,7 @@ class Ghost:
 {
 public:
 	//constructor
-	Ghost(Point2D pos,double width, double height, Texture* texture, Game* game,int color);
+	Ghost(Point2D pos, double speed,double width, double height, Texture* texture, Game* game,int color);
 	//destructor
 	virtual ~Ghost();
 	//render

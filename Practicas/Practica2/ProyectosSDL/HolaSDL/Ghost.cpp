@@ -2,8 +2,8 @@
 #include "Game.h"
 #include <vector>
 
-Ghost::Ghost(Point2D pos, double width, double height, Texture* texture, Game* game, int color):
-	GameCharacter(pos,width,height,texture,game),color_(color)
+Ghost::Ghost(Point2D pos, double speed,double width, double height, Texture* texture, Game* game, int color):
+	GameCharacter(pos,speed,width,height,texture,game),color_(color)
 {
 	dir_ = dirs_[directions::LEFT];
 }
@@ -16,8 +16,8 @@ Ghost::~Ghost()
 void Ghost::render()
 {
 	SDL_Rect dest;
-	dest.x = (pos_.getX() * width_) + OFFSET;
-	dest.y = (pos_.getY() * height_) + OFFSET;
+	dest.x = (pos_.getX()) + OFFSET;
+	dest.y = (pos_.getY()) + OFFSET;
 	dest.w = width_;
 	dest.h = height_;
 

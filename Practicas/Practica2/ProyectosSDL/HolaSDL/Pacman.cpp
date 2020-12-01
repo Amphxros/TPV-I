@@ -1,8 +1,8 @@
 #include "Pacman.h"
 #include "Game.h"
 
-Pacman::Pacman(Point2D pos, double width, double height, Texture* texture, Game* game, int numVidas):
-	GameCharacter(pos,width,height,texture,game)
+Pacman::Pacman(Point2D pos, double speed, double width, double height, Texture* texture, Game* game, int numVidas):
+	GameCharacter(pos,speed,width,height,texture,game), vidas(numVidas)
 {
 	dir_ = dirs_[directions::LEFT];
 	vidas=vidasmax;
@@ -15,8 +15,8 @@ Pacman::~Pacman()
 void Pacman::render()
 {
 	SDL_Rect dest;
-	dest.x = (pos_.getX() * width_) + OFFSET;
-	dest.y = (pos_.getY() * height_) + OFFSET;
+	dest.x = pos_.getX();
+	dest.y = pos_.getY();
 	dest.w = width_;
 	dest.h = height_;
 
@@ -28,7 +28,7 @@ void Pacman::update()
 	GameCharacter::update(); //mueve y teletransporta si llegamos a los limites del mapa
 
 
-	game_->eatFood(pos_);	//aqui come
+	//game_->eatFood(pos_);	//aqui come
 
 	//aqui volvemos a comprobar si nos chocamos
 

@@ -7,7 +7,7 @@ class SmartGhost :
 	public Ghost
 {
 public:
-	SmartGhost(Point2D pos, double width, double height, Texture* texture, Game* game, int color);
+	SmartGhost(Point2D pos, double speed, double width, double height, Texture* texture, Game* game, int color);
 	virtual ~SmartGhost() {};
 	
 	void render();

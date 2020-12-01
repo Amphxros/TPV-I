@@ -28,8 +28,8 @@ void GameMap::render()
 	for (int i = 0; i < cols_; i++) {
 		for (int j = 0; j < rows_; j++) {
 			SDL_Rect dest;
-			dest.x = (i * TAM_MAT) + OFFSET;	// OFFSET es el tamaño de la barra
-			dest.y = (j * TAM_MAT) + OFFSET;
+			dest.x = (i * TAM_MAT);	// OFFSET es el tamaño de la barra
+			dest.y = (j * TAM_MAT);
 			dest.w = TAM_MAT;
 			dest.h = TAM_MAT;
 

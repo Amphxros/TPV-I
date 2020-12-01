@@ -57,7 +57,7 @@ public:
 	void run();
 
 	bool CollisionWithWalls(GameObject* g);
-	bool CollisionWithCharacters(GameObject* g);
+	bool CollisionWithGhosts(GameObject* g);
 	
 	// Diferencia entre comida normal y la Hamburguesa
 	void eatFood(Vector2D pos);

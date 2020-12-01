@@ -7,7 +7,7 @@ class Pacman:
 {
 public:
 	
-	Pacman(Point2D pos,double width, double height, Texture* texture, Game* game_, int numVidas);
+	Pacman(Point2D pos, double speed,double width, double height, Texture* texture, Game* game_, int numVidas);
 	virtual ~Pacman();
 
 	void render();

@@ -24,10 +24,11 @@ public:
     inline void setItList(const std::list<GameObject*>::iterator& it) { it_ = it; }
 protected:
     GameCharacter(): GameObject() {};
-    GameCharacter(Point2D pos, double width, double height, Texture* texture, Game* game);
+    GameCharacter(Point2D pos, double speed, double width, double height, Texture* texture, Game* game);
    
     Point2D pos_init;	//posicion inicial
     Vector2D dir_;		//direccion actual
+	float speed_=5;
     std::list<GameObject*>::iterator it_;	//iterador
 };
 
