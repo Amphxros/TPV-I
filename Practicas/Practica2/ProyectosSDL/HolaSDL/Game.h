@@ -73,11 +73,11 @@ private:
 
 	GameMap* map_=nullptr; //mapa
 	Pacman* pacman_=nullptr;// pacman
-	Ghost* ghost_[NUM_GHOSTS];//array de fantasmas
 	Texture* textures[NUM_TEXTURES]; //array de texturas
 	InfoBar* infoBar_=nullptr;
-
 	std::list<Ghost*>ghosts_;
+
+
 	std::list<GameObject*> gObjects_; //lista de GO (mapa, barra de vida, fantasmas, pacman ...)
 
 	void render();  //renderiza los elementos del juego

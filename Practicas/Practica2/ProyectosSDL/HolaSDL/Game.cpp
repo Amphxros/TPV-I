@@ -21,8 +21,8 @@ Game::Game()
 
 Game::~Game()
 {
-	for (Ghost* g : ghost_)
-		delete g;
+	/*for (Ghost* g : ghost_)
+		delete g;*/
 	for (int i = 0; i < NUM_TEXTURES; i++)
 		delete textures[i];
 
@@ -40,6 +40,8 @@ void Game::init()
 		textures[i] = new Texture(renderer_, textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
 	}
 	map_ = new GameMap(30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
+	//std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end, map_);
+	//map_->setItList(it);
 
 	load("../Mapas/level01.dat");
 	infoBar_= new InfoBar(Vector2D(dim_map_x,0),textures[TextureOrder::CHAR_SPRITESHEET],textures[TextureOrder::DIGITS],this);
@@ -95,16 +97,28 @@ void Game::load(std::string filename)
 void Game::createPacman(Vector2D pos)
 {
 	pacman_ = new Pacman(pos,TAM_MAT,TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this,3);
+	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), pacman_);
+	pacman_->setItList(it);
+
 }
 
 void Game::createGhost(Vector2D pos, int color)
 {
-	ghost_[color] = new Ghost(pos,TAM_MAT,TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, color);
+	Ghost* g = new Ghost(pos,TAM_MAT,TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, color);
+
+	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
+	g->setItList(it);
+
+	ghosts_.insert(ghosts_.end(), g);
 }
 
 void Game::createSmartGhost(Vector2D pos)
 {
-	SmartGhost* ghost_ = new SmartGhost(pos, TAM_MAT, TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, 4);
+	SmartGhost* g = new SmartGhost(pos, TAM_MAT, TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, 4);
+	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
+	g->setItList(it);
+
+	ghosts_.insert(ghosts_.end(), g);
 }
 
 void Game::run()
@@ -173,16 +187,20 @@ void Game::render()
 	SDL_RenderClear(renderer_);	// Limpieza del frame
 	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);	// Color del fondo
 	map_->render();
-	pacman_->render();
-	for (Ghost* g : ghost_) g->render();
+
+	for (GameObject* g : gObjects_)
+		g->render();
+
+
 	infoBar_->render();
 	SDL_RenderPresent(renderer_);
 }
 
 void Game::update()
 {
-	pacman_->update();
-	for (Ghost* g : ghost_) g->update();
+	//pacman_->update();
+	for (GameObject* g : gObjects_)
+		g->update();
 }
 
 void Game::handleEvents()
