@@ -43,7 +43,7 @@ void Game::init()
 	//std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end, map_);
 	//map_->setItList(it);
 
-	load("../Mapas/level01.dat");
+	load(map_name[0]);
 	infoBar_= new InfoBar(Vector2D(dim_map_x,0),textures[TextureOrder::CHAR_SPRITESHEET],textures[TextureOrder::DIGITS],this);
 }
 
@@ -96,7 +96,7 @@ void Game::load(std::string filename)
 
 void Game::createPacman(Vector2D pos)
 {
-	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_MAT), (pos.getY()*TAM_MAT)),20,TAM_MAT,TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this,3);
+	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_MAT), (pos.getY()*TAM_MAT)),TAM_MAT/2,TAM_MAT,TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this,3);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), pacman_);
 	pacman_->setItList(it);
 }

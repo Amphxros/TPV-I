@@ -23,6 +23,19 @@ public:
 	//renderiza la matriz map
 	void render();	
 
+	bool tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos);
+
+	/* if(dir.getX>0 && (newPos. getX + width)>= maprect.x+maprect.w){
+	newpos.setX(mapRect.x);
+	}
+	
+	*/
+
+	bool IntersectWall(SDL_Rect dest);
+	//point a (punto arriba izquierda) SDL_POINTTOMAPCOORDS(...)
+	//point b(punto abajo derecha)
+
+
 	// Devuelve lo que hay en una pos i,j
 	MapCell getCell(int i, int j) { return map[i][j]; };
 

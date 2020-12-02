@@ -12,6 +12,7 @@
 const int WIN_WIDTH=800;	//ancho de ventana
 const int WIN_HEIGHT=800;	//alto de ventana
 
+const int NUM_LEVELS=4;
 const int NUM_TEXTURES=4;	//numero de texturas
 const int NUM_GHOSTS=4;		//numero de fantasmas
 const int TAM_MAT = WIN_HEIGHT/35;	//tama�o de tile
@@ -25,12 +26,12 @@ const int POINTS_PER_FOOD=50;
 const int POINTS_PER_VITAMIN=500;
 const int POINTS_PER_GHOST=500;
 
-enum TextureOrder {INIT,MAP_SPRITESHEET, CHAR_SPRITESHEET,DIGITS };		//orden de las texturas
-struct TextureData		//struct que contiene datos importantes de las texturas: nombre, filas y columnas
-{
+	enum TextureOrder {INIT,MAP_SPRITESHEET, CHAR_SPRITESHEET,DIGITS };		//orden de las texturas
+	struct TextureData		//struct que contiene datos importantes de las texturas: nombre, filas y columnas
+	{
 	std::string filename;
 	int rows, cols;
-};
+	};
 	const TextureData textures_data_[NUM_TEXTURES] = {		//array de datos de textura
 		{"../images/digits2.jpeg",3,4},
 		{"../images/BlueWallsEtc.png",3,10},
@@ -38,6 +39,15 @@ struct TextureData		//struct que contiene datos importantes de las texturas: nom
 		{"../images/digits2.jpeg",3,4}
 	};
 
+	const std::string map_name[NUM_LEVELS] = {		//array de datos de los ficheros del mapa
+		{"../Mapas/level01.dat"},
+		{"../Mapas/level02.dat"},
+		{"../Mapas/level03.dat"},
+		{"../Mapas/level04.dat"}
+		//{"../Mapas/level05.dat"},
+	};
+
+	enum State { START,PLAYING,GAMEOVER,WIN };
 ///clase Game
 class Game
 {
@@ -47,15 +57,17 @@ public:
 	//destructora
 	~Game();
 
+	//bucle principal
+	void run();
+
 	//crea un pacman en una pos dada
 	void createPacman(Vector2D pos);
 	//crea un fantasma en una pos dada
 	void createGhost(Vector2D pos,int color);
 	//crea un smart ghost
 	void createSmartGhost(Vector2D pos);
-	//bucle principal
-	void run();
-
+	
+	
 	bool CollisionWithWalls(GameObject* g);
 	bool CollisionWithGhosts(GameObject* g);
 	
@@ -75,9 +87,8 @@ private:
 	Pacman* pacman_=nullptr;// pacman
 	Texture* textures[NUM_TEXTURES]; //array de texturas
 	InfoBar* infoBar_=nullptr;
-	std::list<Ghost*>ghosts_;
 
-
+	std::list<Ghost*>ghosts_;	//lista de fantasmas
 	std::list<GameObject*> gObjects_; //lista de GO (mapa, barra de vida, fantasmas, pacman ...)
 
 	void render();  //renderiza los elementos del juego
