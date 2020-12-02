@@ -40,8 +40,8 @@ void Game::init()
 		textures[i] = new Texture(renderer_, textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
 	}
 	map_ = new GameMap(Vector2D(0,0),TAM_MAT,TAM_MAT,30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
-	//std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end, map_);
-	//map_->setItList(it);
+	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), map_);
+	map_->setItList(it);
 
 	load(map_name[0]);
 	infoBar_= new InfoBar(Vector2D(dim_map_x,0),textures[TextureOrder::CHAR_SPRITESHEET],textures[TextureOrder::DIGITS],this);
@@ -198,9 +198,7 @@ void Game::render()
 {
 	SDL_RenderClear(renderer_);	// Limpieza del frame
 	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);	// Color del fondo
-	map_->render();
 
-	//pacman_->render();
 	for (GameObject* g : gObjects_)
 		g->render();
 
@@ -211,7 +209,6 @@ void Game::render()
 
 void Game::update()
 {
-	//pacman_->update();
 	for (GameObject* g : gObjects_)
 		g->update();
 }
