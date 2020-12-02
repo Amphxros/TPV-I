@@ -17,11 +17,11 @@ public:
 	//destructora
 	virtual ~GameMap();
 
-	// Rellena la casilla x, y con el tipo m, se usa en la lectura
-	void write(int x, int y, MapCell m) { map[x][y] = m; };
-	//renderiza la matriz map
 	void render();	
 	void update(){}
+
+	// Rellena la casilla x, y con el tipo m, se usa en la lectura
+	void write(int x, int y, MapCell m) { map[x][y] = m; };
 	bool tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos);
 
 	

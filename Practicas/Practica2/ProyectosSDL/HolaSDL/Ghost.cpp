@@ -15,12 +15,8 @@ Ghost::~Ghost()
 
 void Ghost::render()
 {
-	SDL_Rect dest;
-	dest.x = pos_.getX();
-	dest.y = pos_.getY();
-	dest.w = width_;
-	dest.h = height_;
-
+	SDL_Rect dest=getdest();
+	
 	if (game_->isPacmanNyom()) 
 		texture_->renderFrame(dest, 0, 13);
 	else

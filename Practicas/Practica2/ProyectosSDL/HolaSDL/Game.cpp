@@ -43,7 +43,7 @@ void Game::init()
 	//std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end, map_);
 	//map_->setItList(it);
 
-	load(map_name[1]);
+	load(map_name[0]);
 	infoBar_= new InfoBar(Vector2D(dim_map_x,0),textures[TextureOrder::CHAR_SPRITESHEET],textures[TextureOrder::DIGITS],this);
 }
 
