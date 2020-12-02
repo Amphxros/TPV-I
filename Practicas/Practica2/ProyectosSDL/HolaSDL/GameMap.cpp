@@ -3,16 +3,16 @@
 #include "Game.h"
 #include <iostream>
 
-GameMap::GameMap(int rows, int cols, Texture* texture, Game* game):
-rows_(rows),cols_(cols),texture_(texture),game_(game){
+GameMap::GameMap(Point2D pos, double width, double height, int rows, int cols, Texture* texture, Game* game):
+	GameObject(pos,width,height,texture,game), rows_(rows), cols_(cols)
+{
 	map = new MapCell * [cols_];
 
 	for (int i = 0; i < cols_; i++) {
 		map[i] = new MapCell[rows_];
-		for(int j=0;j<rows_;j++)
+		for (int j = 0; j < rows_; j++)
 			map[i][j] = MapCell::Empty;
 	}
-
 }
 
 GameMap::~GameMap()
@@ -28,10 +28,10 @@ void GameMap::render()
 	for (int i = 0; i < cols_; i++) {
 		for (int j = 0; j < rows_; j++) {
 			SDL_Rect dest;
-			dest.x = (i * TAM_MAT);	// OFFSET es el tamaño de la barra
-			dest.y = (j * TAM_MAT);
-			dest.w = TAM_MAT;
-			dest.h = TAM_MAT;
+			dest.x = pos_.getX()+(i * width_);	// OFFSET es el tamaño de la barra
+			dest.y = pos_.getY()+ (j * height_);
+			dest.w = width_;
+			dest.h = height_;
 
 			if (map[i][j] == MapCell::Wall) {
 				texture_->renderFrame(dest, 1, 7);

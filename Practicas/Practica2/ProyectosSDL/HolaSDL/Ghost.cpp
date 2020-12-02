@@ -16,8 +16,8 @@ Ghost::~Ghost()
 void Ghost::render()
 {
 	SDL_Rect dest;
-	dest.x = (pos_.getX()) + OFFSET;
-	dest.y = (pos_.getY()) + OFFSET;
+	dest.x = pos_.getX();
+	dest.y = pos_.getY();
 	dest.w = width_;
 	dest.h = height_;
 

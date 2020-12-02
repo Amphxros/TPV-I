@@ -1,8 +1,6 @@
 #pragma once
 #include <string>
-
-#include "Vector2D.h"
-#include "Texture.h"
+#include "GameObject.h"
 
 #include "checkML.h"
 using namespace std;
@@ -10,26 +8,23 @@ using namespace std;
 enum MapCell {Empty, Wall, Food, Vitamins};	//Solo contiene info de elementos estáticos
 
 class Game;
-class GameMap
+class GameMap:
+	public GameObject
 {
 public:
 	//constructora
-	GameMap(int rows, int cols, Texture* texture,Game* game);
+	GameMap(Point2D pos, double width, double height, int rows, int cols, Texture* texture,Game* game);
 	//destructora
-	~GameMap();
+	virtual ~GameMap();
 
-	// Rellena la casilla x, y con el tipo m, se usa en la creadora
+	// Rellena la casilla x, y con el tipo m, se usa en la lectura
 	void write(int x, int y, MapCell m) { map[x][y] = m; };
 	//renderiza la matriz map
 	void render();	
-
+	void update(){}
 	bool tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos);
 
-	/* if(dir.getX>0 && (newPos. getX + width)>= maprect.x+maprect.w){
-	newpos.setX(mapRect.x);
-	}
 	
-	*/
 
 	bool IntersectWall(SDL_Rect dest);
 	//point a (punto arriba izquierda) SDL_POINTTOMAPCOORDS(...)
@@ -47,10 +42,7 @@ public:
 
 
 private:
-
 	MapCell** map; //Array de celdas de tipo MapCell; Contienen info de lo que hay en las casillas
-	Game* game_; //puntero a game
-	Texture* texture_; //textura del mapa (spritesheet de tiles)
 	int rows_, cols_; //numero de filas y columnas
 };
 

@@ -39,11 +39,11 @@ void Game::init()
 	for (int i = 0; i < NUM_TEXTURES; i++) {
 		textures[i] = new Texture(renderer_, textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
 	}
-	map_ = new GameMap(30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
+	map_ = new GameMap(Vector2D(0,0),TAM_MAT,TAM_MAT,30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
 	//std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end, map_);
 	//map_->setItList(it);
 
-	load(map_name[0]);
+	load(map_name[1]);
 	infoBar_= new InfoBar(Vector2D(dim_map_x,0),textures[TextureOrder::CHAR_SPRITESHEET],textures[TextureOrder::DIGITS],this);
 }
 
@@ -103,7 +103,7 @@ void Game::createPacman(Vector2D pos)
 
 void Game::createGhost(Vector2D pos, int color)
 {
-	Ghost* g = new Ghost(pos,10,TAM_MAT,TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, color);
+	Ghost* g = new Ghost(Vector2D((pos.getX() * TAM_MAT), (pos.getY() * TAM_MAT)),TAM_MAT/2,TAM_MAT,TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, color);
 
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
 	g->setItList(it);
@@ -113,11 +113,24 @@ void Game::createGhost(Vector2D pos, int color)
 
 void Game::createSmartGhost(Vector2D pos)
 {
-	SmartGhost* g = new SmartGhost(pos,10, TAM_MAT, TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, 4);
+	SmartGhost* g = new SmartGhost(Vector2D((pos.getX() * TAM_MAT), (pos.getY() * TAM_MAT)),TAM_MAT/2, TAM_MAT, TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, 4);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
 	g->setItList(it);
 
 	ghosts_.insert(ghosts_.end(), g);
+}
+
+bool Game::tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos)
+{
+	/* if(dir.getX>0 && (newPos. getX + width)>= maprect.x+maprect.w){
+	newpos.setX(mapRect.x);
+	}
+
+	*/
+
+	
+
+	return false;
 }
 
 void Game::run()
@@ -187,9 +200,9 @@ void Game::render()
 	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);	// Color del fondo
 	map_->render();
 
-	pacman_->render();
-	//for (GameObject* g : gObjects_)
-	//	g->render();
+	//pacman_->render();
+	for (GameObject* g : gObjects_)
+		g->render();
 
 
 	infoBar_->render();
@@ -198,9 +211,9 @@ void Game::render()
 
 void Game::update()
 {
-	pacman_->update();
-	/*for (GameObject* g : gObjects_)
-		g->update();*/
+	//pacman_->update();
+	for (GameObject* g : gObjects_)
+		g->update();
 }
 
 void Game::handleEvents()

@@ -67,7 +67,8 @@ public:
 	//crea un smart ghost
 	void createSmartGhost(Vector2D pos);
 	
-	
+	bool tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos);
+
 	bool CollisionWithWalls(GameObject* g);
 	bool CollisionWithGhosts(GameObject* g);
 	
