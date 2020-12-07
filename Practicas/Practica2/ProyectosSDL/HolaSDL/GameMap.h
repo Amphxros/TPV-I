@@ -5,7 +5,7 @@
 #include "checkML.h"
 using namespace std;
 
-enum MapCell {Empty, Wall, Food, Vitamins};	//Solo contiene info de elementos estáticos
+enum class MapCell {Empty, Wall, Food, Vitamins};	//Solo contiene info de elementos estáticos
 
 class Game;
 class GameMap:

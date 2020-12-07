@@ -133,6 +133,11 @@ bool Game::tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos)
 	return false;
 }
 
+bool Game::CollisionWithWalls(GameObject* g)
+{
+	return false;
+}
+
 void Game::run()
 {
 	while (!exit_&& food_left>0)

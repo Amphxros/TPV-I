@@ -18,6 +18,12 @@ public:
 	SDL_Rect getdest() { return SDL_Rect{ (int)pos_.getX(), (int)pos_.getY(),(int)width_, (int)height_ }; }
 
 	inline void setItList(const std::list<GameObject*>::iterator& it) { it_ = it; }
+
+
+	inline double getWidth() { return width_; }
+	inline double getHeight() { return height_; }
+	inline Point2D getPos() { return pos_; }
+
 protected:
 	GameObject():pos_(Point2D(-1,-1)), width_(0), height_(0){};
 	GameObject(Point2D pos, double width, double height, Texture* texture, Game* game):

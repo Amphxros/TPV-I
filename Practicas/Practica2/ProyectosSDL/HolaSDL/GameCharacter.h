@@ -21,6 +21,7 @@ public:
     virtual void update() override;
 
     inline void resetPos() { pos_ = pos_init; }
+	inline Vector2D getPos() { return pos_; }
   
 protected:
     GameCharacter(): GameObject() {};

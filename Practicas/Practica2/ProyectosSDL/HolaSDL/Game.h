@@ -67,6 +67,8 @@ public:
 	//crea un smart ghost
 	void createSmartGhost(Vector2D pos);
 	
+	Point2D SDLPointToMapCoords(Point2D mapCoor) const { return Point2D(mapCoor.getY() / map_->getHeight(), mapCoor.getX() / map_->getWidth()); }
+
 	bool tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos);
 
 	bool CollisionWithWalls(GameObject* g);

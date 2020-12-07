@@ -48,3 +48,18 @@ void GameMap::render()
 		}
 	}
 }
+
+bool GameMap::IntersectWall(SDL_Rect dest)
+{
+	Point2D topLeft = game_->SDLPointToMapCoords(Point2D(dest.y, dest.x));
+	Point2D botRight = game_->SDLPointToMapCoords(Point2D(dest.y + height_ - 1, dest.x + width_- 1));
+
+	for (int y = topLeft.getY(); y <= botRight.getY(); y++) {
+		for (int x = topLeft.getX(); x <= botRight.getX(); x++) {
+			if (map[y][x] == MapCell::Wall) {
+				return true; 
+			}
+		}
+	}
+	return false;
+}

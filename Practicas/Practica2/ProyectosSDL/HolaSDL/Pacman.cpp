@@ -20,8 +20,8 @@ void Pacman::render()
 
 void Pacman::update()
 {
-	GameCharacter::update(); //mueve y teletransporta si llegamos a los limites del mapa
-
+	GameCharacter::update(); //mueve y teletransporta si llegamos a los limites del mapa (tambien tiene que comprobar las colisiones con el mapa)
+	
 
 	//game_->eatFood(pos_);	//aqui come
 
