@@ -11,8 +11,12 @@ public:
 	//destructora
 	~Vector2D() {};
 
-	double getX() { return x_; };	// Devuelve x
-	double getY() { return y_; };	// Devuelve y (para sorpresa de muchos)
+	inline double getX() { return x_; };	// Devuelve x
+	inline double getY() { return y_; };	// Devuelve y (para sorpresa de muchos)
+
+	inline void setX(int x) { x_ = x; }
+	inline void setY(int y) { y_ = y; }
+	
 	//suma de vectores
 	Vector2D operator+(Vector2D& v) { return Vector2D(x_ + v.getX(), y_ + v.getY()); };
 	//resta de vectores

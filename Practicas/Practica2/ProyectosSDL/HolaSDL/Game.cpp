@@ -122,15 +122,13 @@ void Game::createSmartGhost(Vector2D pos)
 
 bool Game::tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos)
 {
-	/* if(dir.getX>0 && (newPos. getX + width)>= maprect.x+maprect.w){
-	newpos.setX(mapRect.x);
-	}
+	SDL_Rect dest; //rectangulo correspondiente a la posicion siguiente
+	dest.x = newPos.getX();
+	dest.y = newPos.getX();
+	dest.w = rect.w;
+	dest.h = rect.h;
 
-	*/
-
-	
-
-	return false;
+	return !(map_->IntersectWall(rect));
 }
 
 bool Game::CollisionWithWalls(GameObject* g)
