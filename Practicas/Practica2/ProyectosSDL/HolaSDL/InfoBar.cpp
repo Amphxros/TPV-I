@@ -1,8 +1,8 @@
 #include "InfoBar.h"
 #include "Game.h"
 
-InfoBar::InfoBar(Vector2D pos, Texture* texture, Texture* nums, Game* game):
-pos_(pos), texture_(texture), num_texture(nums),game_(game){
+InfoBar::InfoBar(Vector2D pos, double width, double height, Texture* texture, Texture* nums, Game* game):
+ GameObject(pos, width,height,texture, game),num_texture(nums){
 	
 	setPuntos(0);
 }

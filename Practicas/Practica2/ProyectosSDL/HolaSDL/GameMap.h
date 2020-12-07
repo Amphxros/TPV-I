@@ -22,9 +22,7 @@ public:
 
 	// Rellena la casilla x, y con el tipo m, se usa en la lectura
 	void write(int x, int y, MapCell m) { map[x][y] = m; };
-	bool tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos);
 
-	
 
 	bool IntersectWall(SDL_Rect dest);
 	//point a (punto arriba izquierda) SDL_POINTTOMAPCOORDS(...)

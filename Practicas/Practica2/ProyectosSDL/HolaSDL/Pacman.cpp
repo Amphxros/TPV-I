@@ -20,9 +20,10 @@ void Pacman::render()
 
 void Pacman::update()
 {
-	GameCharacter::update(); //mueve y teletransporta si llegamos a los limites del mapa (tambien tiene que comprobar las colisiones con el mapa)
-	
-
+	//GameCharacter::update(); //mueve y teletransporta si llegamos a los limites del mapa (tambien tiene que comprobar las colisiones con el mapa)
+	if (game_->tryMove(getdest(), dir_, pos_ + (dir_ * speed_))) {
+		pos_= pos_ + (dir_*speed_);
+	}
 	//game_->eatFood(pos_);	//aqui come
 
 	//aqui volvemos a comprobar si nos chocamos

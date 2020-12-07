@@ -15,7 +15,7 @@ public:
 	//virtual void saveToFile(std::ofstream & file );
 	//virtual void loadFromFile(const std::ifstream & file );
 
-	SDL_Rect getdest() { return SDL_Rect{ (int)pos_.getX(), (int)pos_.getY(),(int)width_, (int)height_ }; }
+	SDL_Rect getdest() { return SDL_Rect{ (int)pos_.getX(), (int)pos_.getY(), (int)width_, (int)height_ }; }
 
 	inline void setItList(const std::list<GameObject*>::iterator& it) { it_ = it; }
 

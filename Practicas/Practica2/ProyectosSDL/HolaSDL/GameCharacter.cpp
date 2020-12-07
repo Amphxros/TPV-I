@@ -10,9 +10,8 @@ void GameCharacter::render()
 
 void GameCharacter::update()
 {
-	if (game_->tryMove(getdest(), dir_, pos_ + (dir_ * speed_))) {
+	
 		pos_ = pos_ + (dir_ * speed_);
-	}
 	//comprobamos los puntos en los que se puede salir por otro lado del mapa
 	if (pos_.getX() <= 0)
 		pos_ = { TAM_MAT * ((int)game_->getSwapX() - 1), (int)pos_.getY() };

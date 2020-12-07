@@ -44,7 +44,7 @@ void Game::init()
 	map_->setItList(it);
 
 	load(map_name[0]);
-	infoBar_= new InfoBar(Vector2D(dim_map_x,0),textures[TextureOrder::CHAR_SPRITESHEET],textures[TextureOrder::DIGITS],this);
+	infoBar_= new InfoBar(Vector2D(dim_map_x,0), 0, 0, textures[TextureOrder::CHAR_SPRITESHEET],textures[TextureOrder::DIGITS],this);
 }
 
 void Game::load(std::string filename)
@@ -124,11 +124,11 @@ bool Game::tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos)
 {
 	SDL_Rect dest; //rectangulo correspondiente a la posicion siguiente
 	dest.x = newPos.getX();
-	dest.y = newPos.getX();
+	dest.y = newPos.getY();
 	dest.w = rect.w;
 	dest.h = rect.h;
 
-	return !(map_->IntersectWall(rect));
+	return !(map_->IntersectWall(dest));
 }
 
 bool Game::CollisionWithWalls(GameObject* g)

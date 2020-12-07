@@ -1,23 +1,18 @@
 #pragma once
 
-#include "Texture.h"
-#include "Vector2D.h"
 #include <Vector>
 
-class Game;
-class InfoBar
+#include "GameObject.h"
+class InfoBar: public GameObject
 {
 public:
-	InfoBar(Vector2D pos, Texture* texture, Texture* nums, Game* game);
-	~InfoBar() { punt_.clear(); }
+	InfoBar(Vector2D pos, double width, double height, Texture* texture, Texture* nums, Game* game);
+	virtual ~InfoBar() { punt_.clear(); }
 	void setPuntos(int p);
 	int getPuntos() { return points_; }
 	void render();
-
+	void update(){}
 private:
-	Vector2D pos_;
-	Game* game_;
-	Texture* texture_; 
 	Texture* num_texture;
 	int points_=0;
 	std::vector<int> punt_;
