@@ -40,7 +40,6 @@ public:
 	bool isCellVitamin(int i, int j) { return map[i][j] == MapCell::Vitamins; };
 
 
-
 private:
 	MapCell** map; //Array de celdas de tipo MapCell; Contienen info de lo que hay en las casillas
 	int rows_, cols_; //numero de filas y columnas

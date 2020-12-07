@@ -24,6 +24,8 @@ void GameCharacter::update()
 
 	else if (pos_.getY() > TAM_MAT* game_->getSwapY())
 		pos_ = { (int)pos_.getX(), 0 };
+
+	
 }
 
 GameCharacter::GameCharacter(Point2D pos, double speed, double width, double height, Texture* texture, Game* game):
