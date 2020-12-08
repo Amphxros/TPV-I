@@ -25,6 +25,7 @@ public:
 
 
 	bool IntersectWall(SDL_Rect dest);
+	bool IntersectFood(SDL_Rect dest);
 	//point a (punto arriba izquierda) SDL_POINTTOMAPCOORDS(...)
 	//point b(punto abajo derecha)
 

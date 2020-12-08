@@ -26,6 +26,8 @@ const int POINTS_PER_FOOD=50;
 const int POINTS_PER_VITAMIN=500;
 const int POINTS_PER_GHOST=500;
 
+const int POINTS_PER_LEVEL = 10000;
+
 	enum TextureOrder {INIT,MAP_SPRITESHEET, CHAR_SPRITESHEET,DIGITS };		//orden de las texturas
 	struct TextureData		//struct que contiene datos importantes de las texturas: nombre, filas y columnas
 	{
@@ -60,6 +62,8 @@ public:
 	//bucle principal
 	void run();
 
+	void clear();
+
 	//crea un pacman en una pos dada
 	void createPacman(Vector2D pos);
 	//crea un fantasma en una pos dada
@@ -70,12 +74,12 @@ public:
 	Point2D SDLPointToMapCoords(Point2D mapCoor) const { return Point2D((int)(mapCoor.getX() / map_->getWidth()), (int)(mapCoor.getY() / map_->getHeight())); }
 
 	bool tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos);
+	bool eatFood(SDL_Rect rect,Point2D& newPos );
 
 	bool CollisionWithWalls(GameObject* g);
 	bool CollisionWithGhosts(GameObject* g);
 	
 	// Diferencia entre comida normal y la Hamburguesa
-	void eatFood(Vector2D pos);
 	bool isPacmanNyom() { return pacman_->getNyom(); };	//Nyom es si nos hemos tomado las vitaminas
 	int getVidas() { return pacman_->getVidas(); }
 
@@ -108,5 +112,6 @@ private:
 
 	int dim_map_x = 0;
 	int dim_map_y = 0;
+	int level_ = 0;
 };
 

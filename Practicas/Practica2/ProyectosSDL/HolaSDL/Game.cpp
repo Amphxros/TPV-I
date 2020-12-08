@@ -21,14 +21,16 @@ Game::Game()
 
 Game::~Game()
 {
-	/*for (Ghost* g : ghost_)
-		delete g;*/
 	for (int i = 0; i < NUM_TEXTURES; i++)
 		delete textures[i];
 
 	delete infoBar_; infoBar_=nullptr;
 	delete map_; map_ = nullptr;
 	delete pacman_; pacman_ = nullptr;
+	for (auto g : gObjects_)
+
+		delete g;
+	
 	SDL_DestroyRenderer(renderer_);
 	SDL_DestroyWindow(window_);
 	SDL_Quit();
@@ -43,7 +45,7 @@ void Game::init()
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), map_);
 	map_->setItList(it);
 
-	load(map_name[0]);
+	load(map_name[level_]);
 	infoBar_= new InfoBar(Vector2D(dim_map_x,0), 0, 0, textures[TextureOrder::CHAR_SPRITESHEET],textures[TextureOrder::DIGITS],this);
 }
 
@@ -131,6 +133,17 @@ bool Game::tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos)
 	return !(map_->IntersectWall(dest));
 }
 
+bool Game::eatFood(SDL_Rect rect, Point2D& newPos)
+{
+	SDL_Rect dest; //rectangulo correspondiente a la posicion siguiente
+	dest.x = newPos.getX();
+	dest.y = newPos.getY();
+	dest.w = rect.w;
+	dest.h = rect.h;
+
+	return !(map_->IntersectFood(dest));
+}
+
 bool Game::CollisionWithWalls(GameObject* g)
 {
 	return false;
@@ -138,28 +151,33 @@ bool Game::CollisionWithWalls(GameObject* g)
 
 void Game::run()
 {
-	while (!exit_&& food_left>0)
+	while (!exit_)
 	{
 		handleEvents();
 		update();
 		render();
+
+		if((food_left<=0 || infoBar_->getPuntos()>=POINTS_PER_LEVEL)){
+			if(level_<NUM_LEVELS){
+				exit_ = true;
+			}	
+			else 
+			{
+				clear();
+			}
+		}
 		SDL_Delay(300);
 	}
 }
 
-//bool Game::check_collisionofPacman(const Vector2D& pos)
-//{
-//	if (map_->isCellWall(pos.getX(), pos.getY())) {
-//		return true;
-//	}
-//	return false;
-//}
-//bool Game::check_collisionofGhost(const Vector2D& pos){
-//	if (map_->isCellWall(pos.getX(), pos.getY())) {
-//		return true;
-//	}
-//	return false;
-//}
+void Game::clear()
+{
+	level_++;
+	for(auto g:gObjects_){
+		delete g;
+	}
+	init();
+}
 
 //bool Game::check_collisionGhostPacman() {
 //
@@ -182,20 +200,6 @@ void Game::run()
 //	}
 //	return false;
 //}
-
-void Game::eatFood(Vector2D pos)
-{
-	if (map_->isCellFood(pos.getX()/TAM_MAT, pos.getY()/TAM_MAT)) {
-		map_->write(pos.getX()/TAM_MAT, pos.getY()/TAM_MAT,(MapCell)0);
-		food_left--;
-		infoBar_->setPuntos(infoBar_->getPuntos() + POINTS_PER_FOOD);
-	}
-	else if (map_->isCellVitamin(pos.getX(), pos.getY())) {
-		map_->write(pos.getX(), pos.getY(), (MapCell)0);
-		pacman_->setNyom(true);
-		infoBar_->setPuntos(infoBar_->getPuntos() + POINTS_PER_VITAMIN);
-	}
-}
 
 void Game::render()
 {
