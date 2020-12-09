@@ -25,11 +25,7 @@ Game::~Game()
 		delete textures[i];
 
 	delete infoBar_; infoBar_=nullptr;
-	delete map_; map_ = nullptr;
-	delete pacman_; pacman_ = nullptr;
-	for (auto g : gObjects_)
-
-		delete g;
+	clear();
 	
 	SDL_DestroyRenderer(renderer_);
 	SDL_DestroyWindow(window_);
@@ -41,7 +37,7 @@ void Game::init()
 	for (int i = 0; i < NUM_TEXTURES; i++) {
 		textures[i] = new Texture(renderer_, textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
 	}
-	map_ = new GameMap(Vector2D(0,0),TAM_MAT,TAM_MAT,30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
+	map_ = new GameMap(Vector2D(OFFSET,OFFSET),TAM_MAT,TAM_MAT,30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), map_);
 	map_->setItList(it);
 
@@ -98,14 +94,14 @@ void Game::load(std::string filename)
 
 void Game::createPacman(Vector2D pos)
 {
-	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_MAT), (pos.getY()*TAM_MAT)),TAM_MAT/2,TAM_MAT + TAM_MAT/2,TAM_MAT +TAM_MAT/2, textures[TextureOrder::CHAR_SPRITESHEET], this,3);
+	pacman_ = new Pacman(Vector2D((OFFSET + pos.getX()*TAM_MAT), (OFFSET + pos.getY()*TAM_MAT)),TAM_MAT/2,TAM_MAT + TAM_MAT/2,TAM_MAT +TAM_MAT/2, textures[TextureOrder::CHAR_SPRITESHEET], this,3);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), pacman_);
 	pacman_->setItList(it);
 }
 
 void Game::createGhost(Vector2D pos, int color)
 {
-	Ghost* g = new Ghost(Vector2D((pos.getX() * TAM_MAT), (pos.getY() * TAM_MAT)),TAM_MAT/2,TAM_MAT,TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, color);
+	Ghost* g = new Ghost(Vector2D((OFFSET + pos.getX() * TAM_MAT), (OFFSET + pos.getY() * TAM_MAT)),TAM_MAT/2,TAM_MAT,TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, color);
 
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
 	g->setItList(it);
@@ -115,11 +111,28 @@ void Game::createGhost(Vector2D pos, int color)
 
 void Game::createSmartGhost(Vector2D pos)
 {
-	SmartGhost* g = new SmartGhost(Vector2D((pos.getX() * TAM_MAT), (pos.getY() * TAM_MAT)),TAM_MAT/2, TAM_MAT, TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, 4);
+	SmartGhost* g = new SmartGhost(Vector2D((OFFSET + pos.getX() * TAM_MAT), (OFFSET + pos.getY() * TAM_MAT)),TAM_MAT/2, TAM_MAT, TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, 4);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
 	g->setItList(it);
 
 	ghosts_.insert(ghosts_.end(), g);
+}
+
+void Game::deleteGameObject(GameObject* g)
+{
+	gObjects_.remove(g);
+	delete g;
+}
+
+void Game::deleteGhost(Ghost* g)
+{
+	ghosts_.remove(g);
+	deleteGameObject(g);
+}
+
+void Game::deletePacman()
+{
+	deleteGameObject(pacman_);
 }
 
 bool Game::tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos)
@@ -147,7 +160,7 @@ bool Game::eatFood(SDL_Rect rect, Point2D& newPos)
 bool Game::CollisionWithGhosts(GameObject* g)
 {
 	for (auto g_ : ghosts_) {
-		if (SDL_HasIntersection(&(g->getdest()), &(g_->getdest()))&& (dynamic_cast<Pacman*>(g)!=nullptr)) {
+		if (SDL_HasIntersection(&(g->getdest()), &(g_->getdest()))) {
 			if (pacman_->getNyom()) {
 				g_->resetPos();
 			}
@@ -186,11 +199,11 @@ void Game::run()
 
 void Game::clear()
 {
-	level_++;
-	for(auto g:gObjects_){
-		delete g;
+	for (auto g = gObjects_.begin(); g != gObjects_.end(); g++) {
+		deleteGameObject(*g);
 	}
-	init();
+	gObjects_.clear();
+	ghosts_.clear();
 }
 
 //bool Game::check_collisionGhostPacman() {

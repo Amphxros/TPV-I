@@ -71,6 +71,11 @@ public:
 	//crea un smart ghost
 	void createSmartGhost(Vector2D pos);
 	
+	void deleteGameObject(GameObject* g);
+	void deleteGhost(Ghost* g);
+	void deletePacman();
+	void deleteMap();
+
 	Point2D SDLPointToMapCoords(Point2D mapCoor) const { return Point2D((int)(mapCoor.getX() / map_->getWidth()), (int)(mapCoor.getY() / map_->getHeight())); }
 
 	bool tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos);

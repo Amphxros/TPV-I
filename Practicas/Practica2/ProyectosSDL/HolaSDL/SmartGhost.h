@@ -2,7 +2,7 @@
 #include "Ghost.h"
 class Game;
 
-enum Age{CHILD, ADULT, OLD}; //edad?????
+enum Age{CHILD, ADULT, QUARANTINE, OLD}; //edad?????
 class SmartGhost :
 	public Ghost
 {
