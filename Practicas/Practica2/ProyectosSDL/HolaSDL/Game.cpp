@@ -98,7 +98,7 @@ void Game::load(std::string filename)
 
 void Game::createPacman(Vector2D pos)
 {
-	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_MAT), (pos.getY()*TAM_MAT)),TAM_MAT/2,TAM_MAT +1,TAM_MAT +1, textures[TextureOrder::CHAR_SPRITESHEET], this,3);
+	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_MAT), (pos.getY()*TAM_MAT)),TAM_MAT/2,TAM_MAT + TAM_MAT/2,TAM_MAT +TAM_MAT/2, textures[TextureOrder::CHAR_SPRITESHEET], this,3);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), pacman_);
 	pacman_->setItList(it);
 }
@@ -141,7 +141,7 @@ bool Game::eatFood(SDL_Rect rect, Point2D& newPos)
 	dest.w = rect.w;
 	dest.h = rect.h;
 
-	return !(map_->IntersectFood(dest));
+	return (map_->IntersectFood(dest));
 }
 
 bool Game::CollisionWithGhosts(GameObject* g)

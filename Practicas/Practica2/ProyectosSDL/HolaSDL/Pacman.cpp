@@ -1,8 +1,9 @@
 #include "Pacman.h"
 #include "Game.h"
+#include <iostream>
 
 Pacman::Pacman(Point2D pos, double speed, double width, double height, Texture* texture, Game* game, int numVidas):
-	GameCharacter(pos,speed,width,height,texture,game), vidas(numVidas)
+	GameCharacter(pos,speed,width,height,texture,game), vidas(numVidas), nyom(false)
 {
 	dir_ = dirs_[directions::LEFT];
 	vidas=vidasmax;
