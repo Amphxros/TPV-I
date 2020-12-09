@@ -76,7 +76,6 @@ public:
 	bool tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos);
 	bool eatFood(SDL_Rect rect,Point2D& newPos );
 
-	bool CollisionWithWalls(GameObject* g);
 	bool CollisionWithGhosts(GameObject* g);
 	
 	// Diferencia entre comida normal y la Hamburguesa

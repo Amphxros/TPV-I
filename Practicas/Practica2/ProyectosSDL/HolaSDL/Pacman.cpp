@@ -20,11 +20,12 @@ void Pacman::render()
 
 void Pacman::update()
 {
-	GameCharacter::update(); //mueve y teletransporta si llegamos a los limites del mapa (tambien tiene que comprobar las colisiones con el mapa)
-	
-	nyom=game_->eatFood(getdest(),pos_);	//aqui come
-
-	//aqui volvemos a comprobar si nos chocamos
+	if (!game_->CollisionWithGhosts(this)) {
+		GameCharacter::update(); //mueve y teletransporta si llegamos a los limites del mapa (tambien tiene que comprobar las colisiones con el mapa)
+	}
+	if (game_->eatFood(getdest(), pos_)){
+		nyom = true;
+	}
 
 	
 	//if nyom && ha pasao tiempo de cooldown bool nyom false
