@@ -25,26 +25,25 @@ void Ghost::render()
 
 void Ghost::update()
 {
-	//Vector2D aux; 
-	//int direccion=0;
-	//
+	Vector2D aux; 
+	
 	//// Usamos el vector de choises para comprobar las direcciones antes de movernos
-	//std::vector<Vector2D> choises;
-	//choises.reserve(NUM_DIRS);
+	std::vector<Vector2D> choises;
+	choises.reserve(NUM_DIRS);
 	//
-	//for (int i = 0 ; i < NUM_DIRS; i++) {
-	//	aux = pos_ + (Vector2D)dirs_[i];	// Direcciones del enum de la clase Game
-	//	if(game_->tryMove(getdest(),(Vector2D)(dirs_[i]),Point2D(aux))){
-	//		
-	//		choises.push_back(dirs_[i]);	
-	//	}	
-	//}
-	//if(choises.size()==0){	// Esto es malo
+	for (int i = 0 ; i < NUM_DIRS; i++) {
+		aux = pos_ + (Vector2D)dirs_[i];	// Direcciones del enum de la clase Game
+		if(game_->tryMove(getdest(),(Vector2D)(dirs_[i]),Point2D(aux))){
+			
+			choises.push_back(dirs_[i]);	
+		}	
+	}
+	if(choises.size()==0){	// Esto es malo
 	//	throw "no puede moverse";
-	//}
-	//else {	// Elige un random de las posibles
-	//	dir_ = choises[rand() % choises.size()];
-	//	GameCharacter::update();
-	//}
+	}
+	else {	// Elige un random de las posibles
+		dir_ = choises[rand() % choises.size()];
+		pos_ = pos_ + (dir_ * speed_);
+	}
 }
 

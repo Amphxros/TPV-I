@@ -2,9 +2,7 @@
 #include "Game.h"
 
 InfoBar::InfoBar(Vector2D pos, double width, double height, Texture* texture, Texture* nums, Game* game):
- GameObject(pos, width,height,texture, game),num_texture(nums), points_(0){
-	
-	
+ GameObject(pos, width,height,texture, game),num_texture(nums), points_(0){		
 }
 void InfoBar::setPuntos(int p)
 {

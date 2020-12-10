@@ -14,7 +14,6 @@ class GameCharacter :
     public GameObject
 {
 public:
-   
     virtual ~GameCharacter();
    
     virtual void render() override;
@@ -22,9 +21,12 @@ public:
 
     inline void resetPos() { pos_ = pos_init; }
 	inline Vector2D getPos() { return pos_; }
+	inline void setPos(Vector2D pos) { pos_ = pos; }
+	inline void setPos(int x, int y) { pos_ = Vector2D(x, y); }
+
   
 protected:
-    GameCharacter(): GameObject() {};
+	GameCharacter();
     GameCharacter(Point2D pos, double speed, double width, double height, Texture* texture, Game* game);
    
     Point2D pos_init;	//posicion inicial

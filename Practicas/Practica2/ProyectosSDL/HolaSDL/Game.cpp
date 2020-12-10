@@ -43,7 +43,10 @@ void Game::init()
 	map_->setItList(it);
 
 	load(map_name[level_]);
-	infoBar_= new InfoBar(Vector2D(dim_map_x,0), 0, 0, textures[TextureOrder::CHAR_SPRITESHEET],textures[TextureOrder::DIGITS],this);
+	infoBar_= new InfoBar(Vector2D(0,0), 0, 0, textures[TextureOrder::CHAR_SPRITESHEET],textures[TextureOrder::DIGITS],this);
+	it = gObjects_.insert(gObjects_.end(), infoBar_);
+	map_->setItList(it);
+
 }
 
 void Game::load(std::string filename)
@@ -66,16 +69,16 @@ void Game::load(std::string filename)
 					if (d == 2) food_left++;	// Caso 2 es la comida, el resto son el mapa
 					break;
 
+				case 4:
+					map_->write(j, i, (MapCell)0);
+					createSmartGhost(Vector2D(j, i));
+					break;
 				// Los fantasmas se codifican del 0 (5) al 3 (8) 
 				case 5:case 6:case 7:case 8:
 					map_->write(j, i, (MapCell)0);
 					createGhost(Vector2D(j, i), d - 5);	
 					break;
 
-				case 4:
-					map_->write(j, i, (MapCell)0);
-					createSmartGhost(Vector2D(j, i));
-					break;
 
 				case 9:
 					map_->write(j, i, (MapCell)0);
@@ -187,7 +190,7 @@ void Game::run()
 		render();
 		
 		if((food_left<=0 || infoBar_->getPuntos()>=POINTS_PER_LEVEL)){
-			if(level_<NUM_LEVELS){
+			if(level_>NUM_LEVELS){
 				exit_ = true;
 			}	
 			else 
@@ -238,8 +241,6 @@ void Game::render()
 	for (GameObject* g : gObjects_)
 		g->render();
 
-
-	infoBar_->render();
 	SDL_RenderPresent(renderer_);
 }
 

@@ -29,6 +29,9 @@ void GameCharacter::update()
 	
 }
 
+GameCharacter::GameCharacter() :
+	GameObject(), speed_(0),pos_init(Vector2D()){}
+
 GameCharacter::GameCharacter(Point2D pos, double speed, double width, double height, Texture* texture, Game* game):
 	GameObject(pos, width, height, texture, game),speed_(speed), pos_init(pos_)
 {

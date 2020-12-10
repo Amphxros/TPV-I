@@ -75,10 +75,14 @@ bool GameMap::IntersectFood(SDL_Rect dest){
 	bool b = false;
 	for (int y = topLeft.getY(); y < botRight.getY(); y++) {
 		for (int x = topLeft.getX(); x < botRight.getX(); x++) {
-			if (map[x][y] != MapCell::Wall) {
+			if (map[x][y] != MapCell::Wall && map[x][y] != MapCell::Empty) {
 			
 				if (map[x][y] == MapCell::Vitamins) {
+					game_->addPoints(POINTS_PER_VITAMIN);
 					b = true;
+				}
+				else {
+					game_->addPoints(POINTS_PER_FOOD);
 				}
 				write(x, y, MapCell::Empty);
 			}

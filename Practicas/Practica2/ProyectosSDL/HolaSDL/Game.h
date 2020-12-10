@@ -89,6 +89,7 @@ public:
 
 	int getSwapX() { return dim_map_x-1; } //devuelve la posicion limite del mapa en x
 	int getSwapY() { return dim_map_y-1; } //devuelve la posicion limite en y
+	void addPoints(int points) { infoBar_->setPuntos(infoBar_->getPuntos() + points); }
 
 private:
 	SDL_Window* window_=nullptr; //puntero a ventana
