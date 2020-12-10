@@ -24,8 +24,9 @@ Game::~Game()
 	for (int i = 0; i < NUM_TEXTURES; i++)
 		delete textures[i];
 
-	delete infoBar_; infoBar_=nullptr;
 	clear();
+
+	delete infoBar_; infoBar_=nullptr;
 	
 	SDL_DestroyRenderer(renderer_);
 	SDL_DestroyWindow(window_);
@@ -37,7 +38,7 @@ void Game::init()
 	for (int i = 0; i < NUM_TEXTURES; i++) {
 		textures[i] = new Texture(renderer_, textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
 	}
-	map_ = new GameMap(Vector2D(OFFSET,OFFSET),TAM_MAT,TAM_MAT,30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
+	map_ = new GameMap(Vector2D(0,0),TAM_MAT,TAM_MAT,30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), map_);
 	map_->setItList(it);
 
@@ -94,7 +95,7 @@ void Game::load(std::string filename)
 
 void Game::createPacman(Vector2D pos)
 {
-	pacman_ = new Pacman(Vector2D((OFFSET + pos.getX()*TAM_MAT), (OFFSET + pos.getY()*TAM_MAT)),TAM_MAT/2,TAM_MAT + TAM_MAT/2,TAM_MAT +TAM_MAT/2, textures[TextureOrder::CHAR_SPRITESHEET], this,3);
+	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_MAT), (pos.getY()*TAM_MAT)),TAM_MAT/2,TAM_MAT +1,TAM_MAT +1, textures[TextureOrder::CHAR_SPRITESHEET], this,3);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), pacman_);
 	pacman_->setItList(it);
 }
@@ -111,7 +112,7 @@ void Game::createGhost(Vector2D pos, int color)
 
 void Game::createSmartGhost(Vector2D pos)
 {
-	SmartGhost* g = new SmartGhost(Vector2D((OFFSET + pos.getX() * TAM_MAT), (OFFSET + pos.getY() * TAM_MAT)),TAM_MAT/2, TAM_MAT, TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, 4);
+	SmartGhost* g = new SmartGhost(Vector2D(( pos.getX() * TAM_MAT), ( pos.getY() * TAM_MAT)),TAM_MAT/2, TAM_MAT, TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, 4);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
 	g->setItList(it);
 
@@ -163,13 +164,12 @@ bool Game::CollisionWithGhosts(GameObject* g)
 		if (SDL_HasIntersection(&(g->getdest()), &(g_->getdest()))) {
 			if (pacman_->getNyom()) {
 				g_->resetPos();
+				deleteGhost(g_);
 			}
 			else {
-				//quitar vida
 				pacman_->resetPos();
+				//quitar vida
 			}
-
-			
 			return true;
 		}
 	}

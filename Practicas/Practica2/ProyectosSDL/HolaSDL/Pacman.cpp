@@ -1,9 +1,8 @@
 #include "Pacman.h"
 #include "Game.h"
-#include <iostream>
 
 Pacman::Pacman(Point2D pos, double speed, double width, double height, Texture* texture, Game* game, int numVidas):
-	GameCharacter(pos,speed,width,height,texture,game), vidas(numVidas), nyom(false)
+	GameCharacter(pos,speed,width,height,texture,game), vidas(numVidas)
 {
 	dir_ = dirs_[directions::LEFT];
 	vidas=vidasmax;
@@ -32,10 +31,10 @@ void Pacman::update()
 	//if nyom && ha pasao tiempo de cooldown bool nyom false
 	if(nyom){
 
-		cool_nyom -= SDL_GetTicks() % TIME_PER_FRAME;
-		if (cool_nyom < 0) {
-			nyom = false;
-		}
+		//cool_nyom -= SDL_GetTicks() % TIME_PER_FRAME;
+		//if (cool_nyom < 0) {
+		//	nyom = false;
+		//}
 	}
 
 }

@@ -43,6 +43,8 @@ void GameMap::render()
 			}
 
 			else if (map[i][j] == MapCell::Vitamins) {
+				dest.w += 5;
+				dest.h += 5;
 				texture_->renderFrame(dest, 2, 8);
 			}
 		}
@@ -67,18 +69,20 @@ bool GameMap::IntersectWall(SDL_Rect dest)
 }
 
 bool GameMap::IntersectFood(SDL_Rect dest){
-	Point2D topLeft = game_->SDLPointToMapCoords(Point2D(dest.x, dest.y)); 
+	Point2D topLeft = game_->SDLPointToMapCoords(Point2D(dest.x, dest.y)); //pos x + i * width, pos y + j * height
 	Point2D botRight = game_->SDLPointToMapCoords(Point2D(dest.x + dest.w, dest.y + dest.h));
 
+	bool b = false;
 	for (int y = topLeft.getY(); y < botRight.getY(); y++) {
 		for (int x = topLeft.getX(); x < botRight.getX(); x++) {
 			if (map[x][y] != MapCell::Wall) {
-				map[x][y] = MapCell::Empty;
+			
 				if (map[x][y] == MapCell::Vitamins) {
-					return true;
+					b = true;
 				}
+				map[x][y] = MapCell::Empty;
 			}
 		}
 	}
-	return false;
+	return b;
 }
