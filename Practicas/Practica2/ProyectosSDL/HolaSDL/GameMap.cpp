@@ -56,16 +56,16 @@ bool GameMap::IntersectWall(SDL_Rect dest)
 {
 	Point2D topLeft = game_->SDLPointToMapCoords(Point2D(dest.x, dest.y)); //pos x + i * width, pos y + j * height
 	Point2D botRight = game_->SDLPointToMapCoords(Point2D(dest.x + dest.w, dest.y + dest.h));
-
+	bool b = false;
 	for (int y = topLeft.getY(); y < botRight.getY(); y++) {
 		for (int x = topLeft.getX(); x < botRight.getX(); x++) {
 			
 			if (map[x][y] == MapCell::Wall) {
-				return true; 
+				b=true; 
 			}
 		}
 	}
-	return false;
+	return b;
 }
 
 bool GameMap::IntersectFood(SDL_Rect dest){
@@ -80,7 +80,7 @@ bool GameMap::IntersectFood(SDL_Rect dest){
 				if (map[x][y] == MapCell::Vitamins) {
 					b = true;
 				}
-				map[x][y] = MapCell::Empty;
+				write(x, y, MapCell::Empty);
 			}
 		}
 	}
