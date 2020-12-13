@@ -18,8 +18,8 @@ public:
    
     virtual void render() override;
     virtual void update() override;
-	virtual void saveToFile(std::ofstream& file) override;
-	virtual void loadFromFile(std::ifstream& file) override;
+	virtual void saveToFile(std::ofstream& file);
+	virtual void loadFromFile(std::ifstream& file);
 
     inline void resetPos() { pos_ = pos_init; }
 	inline Vector2D getPos() { return pos_; }

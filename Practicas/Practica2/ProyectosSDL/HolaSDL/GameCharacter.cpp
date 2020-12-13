@@ -40,10 +40,10 @@ void GameCharacter::saveToFile(std::ofstream& file)
 
 void GameCharacter::loadFromFile(std::ifstream& file)
 {
-	float x, y, x0,y0, w, h;
+	float x, y, x0,y0, w, h; 
 	file >> x >> y >> x0>>y0 >> w>>h;
-	pos_ = { x,y };
-	pos_init = { x0,y0 };
+	pos_ = { (int)x,(int)y };
+	pos_init = { (int)x0,(int)y0 };
 	width_ = w;
 	height_ = h;
 

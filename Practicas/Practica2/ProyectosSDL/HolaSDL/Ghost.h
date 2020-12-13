@@ -15,6 +15,8 @@ public:
 	void render();
 	//update
 	void update();
+
+	
 private:
 	
 	int color_; //color del fantasma

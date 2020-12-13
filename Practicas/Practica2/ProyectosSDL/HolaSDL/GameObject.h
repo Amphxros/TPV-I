@@ -12,13 +12,9 @@ public:
 	virtual void render()=0;
 	virtual void update()=0;
 
-	virtual void saveToFile(std::ofstream& file)=0;
-	virtual void loadFromFile(std::ifstream& file)=0;
-
 	SDL_Rect getdest() { return SDL_Rect{ (int)pos_.getX(), (int)pos_.getY(), (int)width_, (int)height_ }; }
 
 	inline void setItList(const std::list<GameObject*>::iterator& it) { it_ = it; }
-
 
 	inline double getWidth() { return width_; }
 	inline double getHeight() { return height_; }
