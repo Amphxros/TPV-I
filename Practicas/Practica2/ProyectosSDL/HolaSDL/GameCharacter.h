@@ -2,11 +2,11 @@
 #include "GameObject.h"
 
 
-enum directions { LEFT, RIGHT, UP, DOWN };		//enum para las posibles direcciones
+enum directions { LEFT, UP, RIGHT, DOWN };		//enum para las posibles direcciones
 const Vector2D dirs_[4] = {			//posibles direcciones
 	Vector2D(-1,0),		//izquierda
-	Vector2D(1,0),		//derecha
 	Vector2D(0,-1),		//arriba
+	Vector2D(1,0),		//derecha
 	Vector2D(0,1)		//abajo
 };
 class Game;
@@ -18,6 +18,8 @@ public:
    
     virtual void render() override;
     virtual void update() override;
+	virtual void saveToFile(std::ofstream& file) override;
+	virtual void loadFromFile(std::ifstream& file) override;
 
     inline void resetPos() { pos_ = pos_init; }
 	inline Vector2D getPos() { return pos_; }

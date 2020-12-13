@@ -119,4 +119,3 @@ private:
 	int dim_map_y = 0;
 	int level_ = 0;
 };
-

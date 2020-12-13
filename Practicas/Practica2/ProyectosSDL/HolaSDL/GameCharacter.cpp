@@ -29,6 +29,26 @@ void GameCharacter::update()
 	
 }
 
+void GameCharacter::saveToFile(std::ofstream& file)
+{
+	std::string data = to_string((int)pos_.getX()) + " " + to_string((int)pos_.getY()) + " " +
+		to_string((int)pos_init.getX()) + " " + to_string((int)pos_init.getY()) + " " + 
+		to_string((int)width_)+" " + to_string(height_);
+	file << data;
+	file << endl;
+}
+
+void GameCharacter::loadFromFile(std::ifstream& file)
+{
+	float x, y, x0,y0, w, h;
+	file >> x >> y >> x0>>y0 >> w>>h;
+	pos_ = { x,y };
+	pos_init = { x0,y0 };
+	width_ = w;
+	height_ = h;
+
+}
+
 GameCharacter::GameCharacter() :
 	GameObject(), speed_(0),pos_init(Vector2D()){}
 
