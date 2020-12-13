@@ -15,6 +15,7 @@ public:
 	SDL_Rect getdest() { return SDL_Rect{ (int)pos_.getX(), (int)pos_.getY(), (int)width_, (int)height_ }; }
 
 	inline void setItList(const std::list<GameObject*>::iterator& it) { it_ = it; }
+	inline std::list<GameObject*>::iterator getIt() { return it_;}
 
 	inline double getWidth() { return width_; }
 	inline double getHeight() { return height_; }

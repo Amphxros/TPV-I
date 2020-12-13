@@ -26,7 +26,7 @@ const int POINTS_PER_FOOD=50;
 const int POINTS_PER_VITAMIN=500;
 const int POINTS_PER_GHOST=500;
 
-const int POINTS_PER_LEVEL = 10000;
+const int POINTS_PER_LEVEL = 1000;
 
 	enum TextureOrder {INIT,MAP_SPRITESHEET, CHAR_SPRITESHEET,DIGITS };		//orden de las texturas
 	struct TextureData		//struct que contiene datos importantes de las texturas: nombre, filas y columnas
@@ -76,6 +76,7 @@ public:
 	void deletePacman();
 	void deleteMap();
 
+	//GetWidth/height son los pixeles del tile
 	Point2D SDLPointToMapCoords(Point2D mapCoor) const { return Point2D((int)(mapCoor.getX() / map_->getWidth()), (int)(mapCoor.getY() / map_->getHeight())); }
 
 	bool tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos);
@@ -111,6 +112,8 @@ private:
 	void init();
 	//carga del mapa
 	void load(std::string filename);
+	//pasa de nivel
+	void nextLevel();
 
 	bool exit_ = false;
 	int food_left = 0;
