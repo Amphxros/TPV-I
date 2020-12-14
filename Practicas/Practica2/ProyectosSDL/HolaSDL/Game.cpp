@@ -117,7 +117,7 @@ void Game::createPacman(Vector2D pos)
 
 void Game::createGhost(Vector2D pos, int color)
 {
-	Ghost* g = new Ghost(Vector2D((OFFSET + pos.getX() * TAM_MAT), (OFFSET + pos.getY() * TAM_MAT)),TAM_MAT/2,TAM_MAT,TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, color);
+	Ghost* g = new Ghost(Vector2D((pos.getX() * TAM_MAT), (pos.getY() * TAM_MAT)),TAM_MAT/2,TAM_MAT,TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, color);
 
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
 	g->setItList(it);
