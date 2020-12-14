@@ -204,7 +204,7 @@ void Game::run()
 		update();
 		render();
 		
-		if((food_left<=0 || infoBar_->getPuntos()>= level_*POINTS_PER_LEVEL)){
+		if((food_left<=0 || infoBar_->getPuntos()>= (level_ +1)*POINTS_PER_LEVEL)){
 			if(level_>NUM_LEVELS){
 				exit_ = true;
 			}	
