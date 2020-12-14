@@ -16,9 +16,11 @@ public:
 	//update
 	void update();
 
+	bool chooseDirection();
+
 	
 private:
-	
 	int color_; //color del fantasma
+	int time_per_election = 5;
 };
 

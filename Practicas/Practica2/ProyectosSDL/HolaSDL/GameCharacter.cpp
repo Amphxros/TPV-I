@@ -55,5 +55,5 @@ GameCharacter::GameCharacter() :
 GameCharacter::GameCharacter(Point2D pos, double speed, double width, double height, Texture* texture, Game* game):
 	GameObject(pos, width, height, texture, game),speed_(speed), pos_init(pos_)
 {
-	dir_ = dirs_[directions::LEFT];
+	dir_ = dirs_[directions::UP];
 }

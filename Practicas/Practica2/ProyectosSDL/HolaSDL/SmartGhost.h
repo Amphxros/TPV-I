@@ -15,6 +15,6 @@ public:
 
 private:
 	Age age_;
-
+	int time_ = 16;
 };
 

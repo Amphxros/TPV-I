@@ -31,10 +31,10 @@ void Pacman::update()
 	//if nyom && ha pasao tiempo de cooldown bool nyom false
 	if(nyom){
 
-		//cool_nyom -= SDL_GetTicks() % TIME_PER_FRAME;
-		//if (cool_nyom < 0) {
-		//	nyom = false;
-		//}
+		cool_nyom -= SDL_GetTicks() % TIME_PER_FRAME;
+		if (cool_nyom < 0) {
+			nyom = false;
+		}
 	}
 
 }
