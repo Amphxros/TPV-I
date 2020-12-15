@@ -64,4 +64,17 @@ bool Ghost::chooseDirection()
 		return true;
 	}
 }
+void Ghost::saveToFile(std::ofstream& file) {
+	GameCharacter::saveToFile(file);
+	file << color_;
+}
+void Ghost::LoadFromFile(std::ifstream& file) {
 
+	float x, y, x0, y0, w, h,c;
+	file >> x >> y >> x0 >> y0 >> w >> h>>c;
+	pos_ = { (int)x,(int)y };
+	pos_init = { (int)x0,(int)y0 };
+	width_ = w;
+	height_ = h;
+	color_ = c;
+}

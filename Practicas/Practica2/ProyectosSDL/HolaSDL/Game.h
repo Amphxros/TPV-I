@@ -12,13 +12,13 @@
 const int WIN_WIDTH=800;	//ancho de ventana
 const int WIN_HEIGHT=800;	//alto de ventana
 
-const int NUM_LEVELS=4;
+const int NUM_LEVELS=5;
 const int NUM_TEXTURES=4;	//numero de texturas
 const int NUM_GHOSTS=4;		//numero de fantasmas
 const int TAM_MAT = WIN_HEIGHT/35;	//tama�o de tile
 const int NUM_DIRS = 4;		//numero de direcciones
 
-const int COOLNYOM = 10000;
+const int COOLNYOM = 100;
 const int TIME_PER_FRAME = 50;
 const int OFFSET = WIN_HEIGHT / 15;	// Para el hueco de las vidas y puntuacion
 
@@ -26,7 +26,7 @@ const int POINTS_PER_FOOD=50;
 const int POINTS_PER_VITAMIN=500;
 const int POINTS_PER_GHOST=500;
 
-const int POINTS_PER_LEVEL = 1000;
+const int POINTS_PER_LEVEL = 3000;
 
 	enum TextureOrder {INIT,MAP_SPRITESHEET, CHAR_SPRITESHEET,DIGITS };		//orden de las texturas
 	struct TextureData		//struct que contiene datos importantes de las texturas: nombre, filas y columnas
@@ -45,8 +45,8 @@ const int POINTS_PER_LEVEL = 1000;
 		{"../Mapas/level01.dat"},
 		{"../Mapas/level02.dat"},
 		{"../Mapas/level03.dat"},
-		{"../Mapas/level04.dat"}
-		//{"../Mapas/level05.dat"},
+		{"../Mapas/level04.dat"},
+		{"../Mapas/level05.dat"}
 	};
 
 	enum State { START,PLAYING,GAMEOVER,WIN };
@@ -61,6 +61,7 @@ public:
 
 	//bucle principal
 	void run();
+	void loadFromFile();
 
 	void clear();
 
@@ -108,6 +109,8 @@ private:
 	void update();  //actualiza los elementos de juego(posiciones, control de colisiones ...)
 	void handleEvents();	// Controla la salida del juego y los eventos de Pacman
 	
+	void saveToFile();
+
 	//creacion de texturas y objetos
 	void init();
 	//carga del mapa
@@ -121,4 +124,6 @@ private:
 	int dim_map_x = 0;
 	int dim_map_y = 0;
 	int level_ = 0;
+
+	int num_ghosts=0;
 };

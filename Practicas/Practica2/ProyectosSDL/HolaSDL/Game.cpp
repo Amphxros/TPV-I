@@ -43,7 +43,7 @@ void Game::init()
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), map_);
 	map_->setItList(it);
 
-	infoBar_= new InfoBar(Vector2D(0,0), 0, 0, textures[TextureOrder::CHAR_SPRITESHEET],textures[TextureOrder::DIGITS],this);
+	infoBar_= new InfoBar(Vector2D(WIN_WIDTH - OFFSET,0), 0, 0, textures[TextureOrder::CHAR_SPRITESHEET],textures[TextureOrder::DIGITS],this);
 	it = gObjects_.insert(gObjects_.end(), infoBar_);
 	infoBar_->setItList(it);
 
@@ -101,8 +101,8 @@ void Game::nextLevel()
 	int v = pacman_->getVidas();
 	int p = infoBar_->getPuntos();
 	level_++;
-	
 	clear();
+	num_ghosts = 0;
 	init();
 	infoBar_->setPuntos(p);
 	pacman_->setVidas(v);
@@ -110,7 +110,7 @@ void Game::nextLevel()
 
 void Game::createPacman(Vector2D pos)
 {
-	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_MAT), (pos.getY()*TAM_MAT)),TAM_MAT/2,TAM_MAT +5,TAM_MAT +5, textures[TextureOrder::CHAR_SPRITESHEET], this,3);
+	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_MAT), (pos.getY()*TAM_MAT)),TAM_MAT/2,TAM_MAT +5,TAM_MAT +5, textures[TextureOrder::CHAR_SPRITESHEET], this,5);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), pacman_);
 	pacman_->setItList(it);
 }
@@ -123,6 +123,7 @@ void Game::createGhost(Vector2D pos, int color)
 	g->setItList(it);
 
 	ghosts_.insert(ghosts_.end(), g);
+	num_ghosts++;
 }
 
 void Game::createSmartGhost(Vector2D pos)
@@ -132,6 +133,7 @@ void Game::createSmartGhost(Vector2D pos)
 	g->setItList(it);
 
 	ghosts_.insert(ghosts_.end(), g);
+	num_ghosts++;
 }
 
 void Game::deleteGameObject(GameObject* g)
@@ -146,6 +148,7 @@ void Game::deleteGhost(Ghost* g)
 	std::cout << "boooo" << std::endl;
 	ghosts_.remove(g);
 	deleteGameObject(g);
+	num_ghosts--;
 }
 
 void Game::deletePacman()
@@ -182,12 +185,17 @@ bool Game::CollisionWithGhosts(GameObject* g)
 		if (SDL_HasIntersection(&(g->getdest()), &(g_->getdest()))) {
 			if (pacman_->getNyom()) {
 				g_->resetPos();
-				deleteGhost(g_);
+				if (dynamic_cast<SmartGhost*>(g_) != nullptr) {
+					deleteGhost(g_);
+				}
+				else {
+					g_->resetPos();
+				}
 			}
 			else {
 				pacman_->resetPos();
-				pacman_->setVidas(pacman_->getVidas() - 1);
-				if (pacman_->getVidas() == 0) 
+				pacman_->setVidas(pacman_->getVidas()-1);
+				if (pacman_->getVidas()< 0) 
 					exit_ = true;
 			}
 			return true;
@@ -205,7 +213,7 @@ void Game::run()
 		render();
 		
 		if((food_left<=0 || infoBar_->getPuntos()>= (level_ +1)*POINTS_PER_LEVEL)){
-			if(level_>NUM_LEVELS){
+			if(level_>=NUM_LEVELS){
 				exit_ = true;
 			}	
 			else 
@@ -227,28 +235,6 @@ void Game::clear()
 	gObjects_.clear();
 	ghosts_.clear();
 }
-
-//bool Game::check_collisionGhostPacman() {
-//
-//	for (int i = 0; i < NUM_GHOSTS; i++)
-//	{
-//		// GetPos devuelve pos_ + dir_
-//		if(ghost_[i]->getPos()==pacman_->getPos()|| ghost_[i]->getPos()==pacman_->getCurrPos()) {	
-//			if (isPacmanNyom()) { 
-//			ghost_[i]->resetPos(); 
-//			infoBar_->setPuntos(infoBar_->getPuntos() + POINTS_PER_GHOST);
-//			}
-//			else {
-//				pacman_->resetPos();
-//			 pacman_->setVidas(pacman_->getVidas()-1);
-//			 if(pacman_->getVidas()==0) exit_=true;
-//			 }
-//		
-//			return true;
-//		}
-//	}
-//	return false;
-//}
 
 void Game::render()
 {
@@ -274,9 +260,57 @@ void Game::handleEvents()
 		if (event.type == SDL_QUIT) {
 			exit_ = true;
 		}
+		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_g) {
+			saveToFile();
+		}
 		else
 		{
-		pacman_->handleEvents(event);
+			pacman_->handleEvents(event);	
 		}
 	}
+}
+
+void Game::saveToFile() {
+	
+	int seed = -1;
+	std::cout << "Introduce codigo: ";
+	std::cin >> seed;
+	std::ofstream file;
+	file.open(seed + ".pac");
+
+	if (file.is_open()) {
+		int p = infoBar_->getPuntos();
+		int v = pacman_->getVidas();
+
+		file << p << " " << v << " "<<level_<<std::endl; //puntos, vidas y nivel
+		
+		file << std::endl;
+		for (int i = 0; i < dim_map_x; i++) {
+			for (int j = 0; j < dim_map_y; j++) {
+				int d = (int)(map_->getCell(i, j));
+				file <<d<< " ";
+			}
+			file << std::endl;
+		}
+
+		pacman_->saveToFile(file);
+		file << std::endl;
+		file << num_ghosts;
+		file << std::endl;
+		for (auto it = ghosts_.begin(); it != ghosts_.end(); ++it) {
+			auto g = *it;
+			g->saveToFile(file);
+			file << std::endl;
+		}
+		std::cout << "Guardado " << seed<<".pac";
+
+	}
+	else {
+		//throw a rock or whatever
+	}
+	
+
+}
+void Game::loadFromFile() {
+	
 }

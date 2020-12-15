@@ -16,6 +16,9 @@ public:
 	//update
 	void update();
 
+	void saveToFile(std::ofstream& file);
+	void LoadFromFile(std::ifstream& file);
+
 	bool chooseDirection();
 
 	

@@ -35,7 +35,6 @@ void GameCharacter::saveToFile(std::ofstream& file)
 		to_string((int)pos_init.getX()) + " " + to_string((int)pos_init.getY()) + " " + 
 		to_string((int)width_)+" " + to_string(height_);
 	file << data;
-	file << endl;
 }
 
 void GameCharacter::loadFromFile(std::ifstream& file)
