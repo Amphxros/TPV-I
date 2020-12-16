@@ -179,7 +179,7 @@ bool Game::eatFood(SDL_Rect rect, Point2D& newPos)
 	return (map_->IntersectFood(dest));
 }
 
-bool Game::CollisionWithGhosts(GameObject* g)
+bool Game::CollisionWithGhosts(Pacman* g)
 {
 	for (auto g_ : ghosts_) {
 		if (SDL_HasIntersection(&(g->getdest()), &(g_->getdest()))) {
@@ -199,6 +199,27 @@ bool Game::CollisionWithGhosts(GameObject* g)
 					exit_ = true;
 			}
 			return true;
+		}
+	}
+	return false;
+}
+
+bool Game::CollisionBetweenGhosts(Ghost* g)
+{
+
+	for (auto g_ : ghosts_) {
+	
+		SDL_Rect dest;
+		dest.x = (g_->getPos().getX() + g->getPos().getX()) / 2;
+		dest.y = (g_->getPos().getY() + g->getPos().getY()) / 2;
+		dest.w = g->getWidth();
+		dest.h = g->getHeight();
+		if (SDL_HasIntersection(&(g->getdest()), &(g_->getdest()))) {
+			if (!map_->IntersectWall(dest)) {
+				Vector2D ps = SDLPointToMapCoords(Point2D(dest.x, dest.y));
+				createSmartGhost(ps);
+				return true;
+			}
 		}
 	}
 	return false;
@@ -285,7 +306,7 @@ void Game::saveToFile() {
 		file << p << " " << v << " "<<level_<<std::endl; //puntos, vidas y nivel
 		
 		file << std::endl;
-		file << dim_map_x << " " << dim_map_y << std::endl; //puntos, vidas y nivel
+		file << dim_map_x << " " << dim_map_y << std::endl; //dimensiones del mapa en num de tiles
 
 		for (int i = 0; i < dim_map_x; i++) {
 			for (int j = 0; j < dim_map_y; j++) {

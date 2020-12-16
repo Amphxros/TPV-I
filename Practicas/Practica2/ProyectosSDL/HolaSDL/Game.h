@@ -83,7 +83,8 @@ public:
 	bool tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos);
 	bool eatFood(SDL_Rect rect,Point2D& newPos );
 
-	bool CollisionWithGhosts(GameObject* g);
+	bool CollisionWithGhosts(Pacman* g);
+	bool CollisionBetweenGhosts(Ghost* g);
 	
 	// Diferencia entre comida normal y la Hamburguesa
 	bool isPacmanNyom() { return pacman_->getNyom(); };	//Nyom es si nos hemos tomado las vitaminas
