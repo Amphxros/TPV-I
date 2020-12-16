@@ -276,7 +276,7 @@ void Game::saveToFile() {
 	std::cout << "Introduce codigo: ";
 	std::cin >> seed;
 	std::ofstream file;
-	file.open(seed + ".pac");
+	file.open(std::to_string(seed) + ".pac");
 
 	if (file.is_open()) {
 		int p = infoBar_->getPuntos();
@@ -285,6 +285,8 @@ void Game::saveToFile() {
 		file << p << " " << v << " "<<level_<<std::endl; //puntos, vidas y nivel
 		
 		file << std::endl;
+		file << dim_map_x << " " << dim_map_y << std::endl; //puntos, vidas y nivel
+
 		for (int i = 0; i < dim_map_x; i++) {
 			for (int j = 0; j < dim_map_y; j++) {
 				int d = (int)(map_->getCell(i, j));
