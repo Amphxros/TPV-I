@@ -2,7 +2,7 @@
 #include "Ghost.h"
 class Game;
 
-enum Age{CHILD, ADULT, QUARANTINE, OLD}; //edad?????
+enum Age{CHILD, ADULT, QUARANTINE, OLD}; //edad
 class SmartGhost :
 	public Ghost
 {
@@ -12,9 +12,13 @@ public:
 	
 	void render();
 	void update();
+	void handleState();
+	inline Age getAge() { return age_; }
 
 private:
 	Age age_;
-	int time_ = 16;
+	int time_ = 10;
+	int reproduction_time = 10;
+
 };
 

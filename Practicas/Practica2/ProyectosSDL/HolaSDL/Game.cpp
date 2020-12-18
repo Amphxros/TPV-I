@@ -145,9 +145,10 @@ void Game::deleteGameObject(GameObject* g)
 
 void Game::deleteGhost(Ghost* g)
 {
-	std::cout << "boooo" << std::endl;
-	ghosts_.remove(g);
-	deleteGameObject(g);
+	Ghost* aux = g;
+	ghosts_.remove(aux);
+	gObjects_.remove(aux);
+	delete g;
 	num_ghosts--;
 }
 
@@ -206,7 +207,6 @@ bool Game::CollisionWithGhosts(Pacman* g)
 
 bool Game::CollisionBetweenGhosts(Ghost* g)
 {
-
 	for (auto g_ : ghosts_) {
 	
 		SDL_Rect dest;
@@ -215,10 +215,22 @@ bool Game::CollisionBetweenGhosts(Ghost* g)
 		dest.w = g->getWidth();
 		dest.h = g->getHeight();
 		if (SDL_HasIntersection(&(g->getdest()), &(g_->getdest()))) {
+			
 			if (!map_->IntersectWall(dest)) {
-				Vector2D ps = SDLPointToMapCoords(Point2D(dest.x, dest.y));
-				createSmartGhost(ps);
-				return true;
+				
+				SmartGhost* gs=dynamic_cast<SmartGhost*>(g_);
+				if (gs != nullptr) {
+					if (gs->getAge() == Age::ADULT) {
+						Vector2D ps = SDLPointToMapCoords(Point2D(dest.x, dest.y));
+						createSmartGhost(ps);
+						return true;
+					}
+				}
+				else {
+					Vector2D ps = SDLPointToMapCoords(Point2D(dest.x, dest.y));
+					createSmartGhost(ps);
+					return true;
+				}
 			}
 		}
 	}
@@ -244,6 +256,35 @@ void Game::run()
 		}
 		SDL_Delay(300);
 	}
+}
+
+void Game::loadFromFile(int seed)
+{
+	std::ifstream file;
+	file.open(std::to_string(seed) + ".pac");
+
+	if (file.is_open()) {
+	//cargar partida
+		int p, v;
+		file >> p >> v >> level_;
+		//if(...) lanzar cosas
+		//else 
+		file >> dim_map_x >> dim_map_y;
+		map_ = new GameMap(Vector2D(0, 0), TAM_MAT, TAM_MAT, 30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
+		for (int i = 0; i < dim_map_x; i++) {
+			for (int j = 0; j < dim_map_y; j++) {
+				int d;
+				file >> d;
+				map_->write(j, i, (MapCell)d);
+			}
+		}
+	
+	}
+	else {
+		//throw a rock or a sandwich...I'm hungry help
+		init();
+	}
+
 }
 
 void Game::clear()
@@ -333,7 +374,4 @@ void Game::saveToFile() {
 	}
 	
 
-}
-void Game::loadFromFile() {
-	
 }

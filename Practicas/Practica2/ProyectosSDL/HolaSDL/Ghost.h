@@ -22,7 +22,7 @@ public:
 	bool chooseDirection();
 
 	
-private:
+protected:
 	int color_; //color del fantasma
 	int time_per_election = 5;
 };

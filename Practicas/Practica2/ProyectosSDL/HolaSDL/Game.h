@@ -61,7 +61,7 @@ public:
 
 	//bucle principal
 	void run();
-	void loadFromFile();
+	void loadFromFile(int seed);
 
 	void clear();
 
@@ -75,7 +75,6 @@ public:
 	void deleteGameObject(GameObject* g);
 	void deleteGhost(Ghost* g);
 	void deletePacman();
-	void deleteMap();
 
 	//GetWidth/height son los pixeles del tile
 	Point2D SDLPointToMapCoords(Point2D mapCoor) const { return Point2D((int)(mapCoor.getX() / map_->getWidth()), (int)(mapCoor.getY() / map_->getHeight())); }
