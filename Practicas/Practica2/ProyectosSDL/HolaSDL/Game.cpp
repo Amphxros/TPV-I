@@ -272,8 +272,8 @@ void Game::loadFromFile(int seed)
 		//mapa
 		file >> dim_map_x >> dim_map_y;
 		map_ = new GameMap(Vector2D(0, 0), TAM_MAT, TAM_MAT, 40, 40, textures[TextureOrder::MAP_SPRITESHEET], this);
-		for (int i = 0; i < dim_map_x; i++) {
-			for (int j = 0; j < dim_map_y; j++) {
+		for (int i = 0; i <= dim_map_x; i++) {
+			for (int j = 0; j <= dim_map_y; j++) {
 				int d;
 				file >> d;
 				map_->write(i, j, (MapCell)d);
@@ -346,8 +346,8 @@ void Game::saveToFile() {
 		file << std::endl;
 		file << dim_map_x << " " << dim_map_y << std::endl; //dimensiones del mapa en num de tiles
 
-		for (int i = 0; i < dim_map_x; i++) {
-			for (int j = 0; j < dim_map_y; j++) {
+		for (int i = 0; i <= dim_map_x; i++) {
+			for (int j = 0; j <= dim_map_y; j++) {
 				int d = (int)(map_->getCell(i, j));
 				file << d << " ";
 			}
