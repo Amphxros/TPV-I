@@ -24,7 +24,7 @@ public:
 	Vector2D getCurrPos() { return pos_; };	// Devuelve la posicion a la que intenta moverse
 	
 private:
-	int vidasmax,vidas=0;
+	int vidasmax,vidas;
 
 	bool nyom = false;
 	int cool_nyom = 0;

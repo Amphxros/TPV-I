@@ -16,7 +16,7 @@ void SmartGhost::render()
 		if (game_->isPacmanNyom())
 			texture_->renderFrame(dest, 0, 13);
 		else
-			texture_->renderFrame(dest, 0, color_);
+			texture_->renderFrame(dest, 0, color_+1);
 	}
 	else {
 		Ghost::render();
@@ -25,7 +25,6 @@ void SmartGhost::render()
 
 void SmartGhost::update()
 {
-	handleState();
 	time_--;
 	if (age_ == Age::ADULT) {
 		//si hay colision con fantasmas adultos o normales se crea un fantasma
@@ -40,6 +39,10 @@ void SmartGhost::update()
 		}
 	}
 	Ghost::update();
+	handleState();
+	if (age_ == Age::QUARANTINE) {
+		game_->deleteGhost(this);
+	}
 }
 
 void SmartGhost::handleState()
@@ -55,7 +58,6 @@ void SmartGhost::handleState()
 			age_ = Age::QUARANTINE;
 			break;
 		default:
-			game_->deleteGhost(this);
 			break;
 		}
 	}

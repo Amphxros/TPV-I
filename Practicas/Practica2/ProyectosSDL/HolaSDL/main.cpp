@@ -12,7 +12,13 @@ using uint = unsigned int;
 void firstTest() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Check Memory Leaks
 	try {
+
+		int seed;
+		cin >> seed;
 		Game g = Game();
+		if (seed > 0) {
+			g.loadFromFile(seed);
+		}
 		g.run();
 	}
 	catch(std::string s){

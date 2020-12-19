@@ -260,6 +260,7 @@ void Game::run()
 
 void Game::loadFromFile(int seed)
 {
+	clear();
 	std::ifstream file;
 	file.open(std::to_string(seed) + ".pac");
 
@@ -267,24 +268,107 @@ void Game::loadFromFile(int seed)
 	//cargar partida
 		int p, v;
 		file >> p >> v >> level_;
-		//if(...) lanzar cosas
-		//else 
+		
+		//mapa
 		file >> dim_map_x >> dim_map_y;
-		map_ = new GameMap(Vector2D(0, 0), TAM_MAT, TAM_MAT, 30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
+		map_ = new GameMap(Vector2D(0, 0), TAM_MAT, TAM_MAT, 40, 40, textures[TextureOrder::MAP_SPRITESHEET], this);
 		for (int i = 0; i < dim_map_x; i++) {
 			for (int j = 0; j < dim_map_y; j++) {
 				int d;
 				file >> d;
-				map_->write(j, i, (MapCell)d);
+				map_->write(i, j, (MapCell)d);
 			}
 		}
+		std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), map_);
+		map_->setItList(it);
+
+		infoBar_ = new InfoBar(Vector2D(WIN_WIDTH - OFFSET, 0), 0, 0, textures[TextureOrder::CHAR_SPRITESHEET], textures[TextureOrder::DIGITS], this);
+		it = gObjects_.insert(gObjects_.end(), infoBar_);
+		infoBar_->setItList(it);
+		infoBar_->setPuntos(p);
+
+		//pacman
+		int x, y, x0, y0, w, h;
+		file >> x >> y >> x0 >> y0 >> w >> h;
+		pacman_ = new Pacman(Vector2D(x0,y0), TAM_MAT / 2, w, h, textures[TextureOrder::CHAR_SPRITESHEET], this, v);
+		pacman_->setPos(x, y);
+		it = gObjects_.insert(gObjects_.end(), pacman_);
+		pacman_->setItList(it);
 	
+		//fantasmas
+		file >> num_ghosts;
+		for (int i = 0; i < num_ghosts; i++) {
+			//habría usado el loadfromfile de Ghost pero no habia una forma clara de distinguir los fantasmas normales 
+			//sin cargar la linea entera(ya que tiene el color que es la unica diferencia a nivel de archivo de guardado)
+			int x, y, x0, y0, w, h, c;
+			file >> x >> y >> x0 >> y0 >> w >> h >> c;
+			if (c== 5) {
+				SmartGhost* g = new SmartGhost(Vector2D(x0, y0), TAM_MAT / 2, w, h, textures[TextureOrder::CHAR_SPRITESHEET], this, c);
+				g->setPos(x, y);
+				it = gObjects_.insert(gObjects_.end(), g);
+				g->setItList(it);
+				ghosts_.push_back(g);
+				
+			}
+			else {
+				Ghost* g= new Ghost(Vector2D(x0, y0), TAM_MAT / 2, w, h, textures[TextureOrder::CHAR_SPRITESHEET], this, c);
+				g->setPos(x, y);
+				it = gObjects_.insert(gObjects_.end(), g);
+				g->setItList(it);
+				ghosts_.push_back(g);
+
+			}
+
+
+		}
 	}
 	else {
 		//throw a rock or a sandwich...I'm hungry help
 		init();
 	}
 
+}
+
+void Game::saveToFile() {
+
+	int seed = -1;
+	std::cout << "Introduce codigo: ";
+	std::cin >> seed;
+	std::ofstream file;
+	file.open(std::to_string(seed) + ".pac");
+
+	if (file.is_open()) {
+		int p = infoBar_->getPuntos();
+		int v = pacman_->getVidas();
+
+		file << p << " " << v << " " << level_ << std::endl; //puntos, vidas y nivel
+
+		file << std::endl;
+		file << dim_map_x << " " << dim_map_y << std::endl; //dimensiones del mapa en num de tiles
+
+		for (int i = 0; i < dim_map_x; i++) {
+			for (int j = 0; j < dim_map_y; j++) {
+				int d = (int)(map_->getCell(i, j));
+				file << d << " ";
+			}
+			file << std::endl;
+		}
+
+		pacman_->saveToFile(file);
+		file << std::endl;
+		file << num_ghosts;
+		file << std::endl;
+		for (auto it = ghosts_.begin(); it != ghosts_.end(); ++it) {
+			auto g = *it;
+			g->saveToFile(file);
+			file << std::endl;
+		}
+		std::cout << "Guardado " << seed << ".pac";
+
+	}
+	else {
+		//throw a rock or whatever
+	}
 }
 
 void Game::clear()
@@ -332,46 +416,7 @@ void Game::handleEvents()
 	}
 }
 
-void Game::saveToFile() {
-	
-	int seed = -1;
-	std::cout << "Introduce codigo: ";
-	std::cin >> seed;
-	std::ofstream file;
-	file.open(std::to_string(seed) + ".pac");
 
-	if (file.is_open()) {
-		int p = infoBar_->getPuntos();
-		int v = pacman_->getVidas();
 
-		file << p << " " << v << " "<<level_<<std::endl; //puntos, vidas y nivel
-		
-		file << std::endl;
-		file << dim_map_x << " " << dim_map_y << std::endl; //dimensiones del mapa en num de tiles
 
-		for (int i = 0; i < dim_map_x; i++) {
-			for (int j = 0; j < dim_map_y; j++) {
-				int d = (int)(map_->getCell(i, j));
-				file <<d<< " ";
-			}
-			file << std::endl;
-		}
 
-		pacman_->saveToFile(file);
-		file << std::endl;
-		file << num_ghosts;
-		file << std::endl;
-		for (auto it = ghosts_.begin(); it != ghosts_.end(); ++it) {
-			auto g = *it;
-			g->saveToFile(file);
-			file << std::endl;
-		}
-		std::cout << "Guardado " << seed<<".pac";
-
-	}
-	else {
-		//throw a rock or whatever
-	}
-	
-
-}
