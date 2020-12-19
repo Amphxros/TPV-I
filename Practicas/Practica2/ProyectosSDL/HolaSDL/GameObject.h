@@ -4,6 +4,8 @@
 #include <SDL.h>
 #include <list>
 #include "Texture.h"
+
+#include "checkML.h"
 class Game;
 class GameObject
 {

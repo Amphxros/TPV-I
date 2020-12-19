@@ -296,8 +296,10 @@ void Game::loadFromFile(int seed)
 		pacman_->setItList(it);
 	
 		//fantasmas
-		file >> num_ghosts;
-		for (int i = 0; i < num_ghosts; i++) {
+		int n;
+		file >> n;
+		std::cout << n;
+		for (int i = 0; i < n; i++) {
 			//habría usado el loadfromfile de Ghost pero no habia una forma clara de distinguir los fantasmas normales 
 			//sin cargar la linea entera(ya que tiene el color que es la unica diferencia a nivel de archivo de guardado)
 			int x, y, x0, y0, w, h, c;
