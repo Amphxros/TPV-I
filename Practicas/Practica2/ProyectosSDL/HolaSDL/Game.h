@@ -24,7 +24,7 @@ const uint COOLNYOM = 100;
 const uint NUM_VIDAS=3;
 
 const uint TIME_PER_PHASE = 50;
-const uint TIME_PER_REPRODUCTION = 150;
+const uint TIME_PER_REPRODUCTION = 15;
 
 const uint OFFSET = WIN_HEIGHT / 15;	// Para el hueco de las vidas y puntuacion
 

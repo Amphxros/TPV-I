@@ -54,16 +54,23 @@ bool Ghost::chooseDirection()
 			choises.push_back(dirs_[i]);	
 		}	
 	}
+
 	if(choises.size()==0){	// Esto es malo
 	//	throw "no puede moverse";
 		return false;
 	}
-	else {	// Elige un random de las posibles
+
+	else if (choises.size() > 2){	// Elige un random de las posibles
 		Vector2D aux = dir_;
 		do {
 			dir_ = choises[rand() % choises.size()];
 		} while (aux == dir_);
 		
+		return true;
+	}
+	else {
+
+		dir_ = choises[rand() % choises.size()];
 		return true;
 	}
 }
