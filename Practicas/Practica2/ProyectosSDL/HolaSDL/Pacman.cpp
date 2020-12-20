@@ -5,7 +5,6 @@ Pacman::Pacman(Point2D pos, double speed, double width, double height, Texture* 
 	GameCharacter(pos,speed,width,height,texture,game), vidas(numVidas)
 {
 	dir_ = dirs_[directions::LEFT];
-	vidas=vidasmax;
 }
 
 Pacman::~Pacman()

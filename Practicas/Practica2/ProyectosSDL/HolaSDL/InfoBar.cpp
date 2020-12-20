@@ -29,8 +29,8 @@ void InfoBar::render()
 
 	for(int i=0;i<game_->getVidas();i++){
 		SDL_Rect dest;
-		dest.x=(pos_.getX()) + TAM_MAT* i + 5;
-		dest.y=pos_.getY() + OFFSET;
+		dest.x=(pos_.getX()) - TAM_MAT* i + 5;
+		dest.y=pos_.getY() + OFFSET/2;
 		dest.w=TAM_MAT;
 		dest.h=TAM_MAT;
 
