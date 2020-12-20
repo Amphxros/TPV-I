@@ -14,7 +14,6 @@ public:
 	void update();
 	void handleEvents(SDL_Event& event);
 
-	void setNyom(bool comer);	// Come la vitamina y activa la debilidad en los fantasmas
 	bool getNyom() { return nyom; };
 	
 	void setVidas(int v) { vidas = v; }
@@ -24,9 +23,9 @@ public:
 	Vector2D getCurrPos() { return pos_; };	// Devuelve la posicion a la que intenta moverse
 	
 private:
-	int vidasmax,vidas;
+	int vidas; //num de vidas actuales
 
-	bool nyom = false;
-	int cool_nyom = 0;
+	bool nyom = false; //es true si se puede comer a los fantasmas
+	int cool_nyom = 0; //tiempo restante para comer los fantasmas
 };
 

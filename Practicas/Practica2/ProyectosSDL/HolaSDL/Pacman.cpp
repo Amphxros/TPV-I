@@ -28,7 +28,7 @@ void Pacman::update()
 	}
 
 	
-	//if nyom && ha pasao tiempo de cooldown bool nyom false
+	//if nyom && ha pasao tiempo de cooldown bool nyom= false
 	if(nyom){
 
 		cool_nyom --;
@@ -64,8 +64,3 @@ void Pacman::handleEvents(SDL_Event& event)
 	}
 }
 
-void Pacman::setNyom(bool comer)
-{
-	nyom = comer; 
-	cool_nyom = COOLNYOM; // Variable global de tiempo de duracion del powerup
-}

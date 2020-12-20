@@ -10,7 +10,7 @@ public:
 	InfoBar(Vector2D pos, double width, double height, Texture* texture, Texture* nums, Game* game);
 	virtual ~InfoBar() { punt_.clear(); }
 	
-	void setPuntos(int p);
+	void setPuntos(int p); //cambia los puntos
 	int getPuntos() { return points_; }
 	
 	void render();

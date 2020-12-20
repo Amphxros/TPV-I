@@ -23,12 +23,8 @@ public:
 	// Rellena la casilla x, y con el tipo m, se usa en la lectura
 	void write(int x, int y, MapCell m) { map[x][y] = m; };
 
-
-	bool IntersectWall(SDL_Rect dest);
-	bool IntersectFood(SDL_Rect dest);
-	//point a (punto arriba izquierda) SDL_POINTTOMAPCOORDS(...)
-	//point b(punto abajo derecha)
-
+	bool IntersectWall(SDL_Rect dest); //comprueba si dest coincide con un muro
+	bool IntersectFood(SDL_Rect dest); //comprueba si dest coincide con comida y la sobreescribe
 
 	// Devuelve lo que hay en una pos i,j
 	MapCell getCell(int i, int j) { return map[i][j]; };

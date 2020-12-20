@@ -21,9 +21,8 @@ public:
 	virtual void saveToFile(std::ofstream& file);
 	virtual void loadFromFile(std::ifstream& file);
 
-    inline void resetPos() { pos_ = pos_init; }
-	inline Vector2D getPos() { return pos_; }
-	inline void setPos(Vector2D pos) { pos_ = pos; }
+    inline void resetPos() { pos_ = pos_init; }		//resetea la posicion
+	inline void setPos(Vector2D pos) { pos_ = pos; }//cambia la posicion
 	inline void setPos(int x, int y) { pos_ = Vector2D(x, y); }
 
   
