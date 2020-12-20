@@ -13,10 +13,18 @@ void firstTest() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Check Memory Leaks
 	try {
 
-		int seed;
-		cin >> seed;
+		string carga_;
+		std::cout << "jugar(p) o cargar partida(c)?"<<std::endl;
+		std::cin >> carga_;
+		while (carga_ != "p" && carga_ != "c") {
+			std::cout << "Introducir (p) o (c)"<<std::endl;
+			std::cin >> carga_;
+		}
 		Game g = Game();
-		if (seed > 0) {
+		if (carga_ == "c") {
+			int seed;
+			std::cout << "Introduce codigo: ";
+			std::cin >> seed;
 			g.loadFromFile(seed);
 		}
 		g.run();

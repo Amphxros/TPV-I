@@ -33,7 +33,7 @@ void GameCharacter::saveToFile(std::ofstream& file)
 {
 	std::string data = to_string((int)pos_.getX()) + " " + to_string((int)pos_.getY()) + " " +
 		to_string((int)pos_init.getX()) + " " + to_string((int)pos_init.getY()) + " " + 
-		to_string((int)width_)+" " + to_string(height_);
+		to_string((int)width_)+" " + to_string((int)height_);
 	file << data;
 }
 
