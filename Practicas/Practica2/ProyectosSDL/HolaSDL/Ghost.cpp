@@ -10,7 +10,6 @@ Ghost::Ghost(Point2D pos, double speed,double width, double height, Texture* tex
 
 Ghost::~Ghost()
 {
-	//delete texture_; //texture_ = nullptr;
 }
 
 void Ghost::render()
@@ -60,7 +59,11 @@ bool Ghost::chooseDirection()
 		return false;
 	}
 	else {	// Elige un random de las posibles
-		dir_ = choises[rand() % choises.size()];
+		Vector2D aux = dir_;
+		do {
+			dir_ = choises[rand() % choises.size()];
+		} while (aux == dir_);
+		
 		return true;
 	}
 }

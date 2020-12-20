@@ -21,9 +21,13 @@ public:
 
 	bool chooseDirection();
 
+	inline std::list<Ghost*>::iterator getGhostIt() { return ghost_it; }
+	void setGhostIt(std::list<Ghost*>::iterator it) { ghost_it = it; }
 	
 protected:
 	int color_; //color del fantasma
 	int time_per_election = 5;
+
+	std::list<Ghost*>::iterator ghost_it;
 };
 

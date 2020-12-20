@@ -15,17 +15,16 @@ void GameCharacter::update()
 	}
 	//comprobamos los puntos en los que se puede salir por otro lado del mapa
 	if (pos_.getX() <= 0)
-		pos_ = { TAM_MAT * ((int)game_->getSwapX() - 1), (int)pos_.getY() };
+		pos_ = { (int)TAM_TILE * ((int)game_->getSwapX() - 1), (int)pos_.getY() };
 
-	else if (pos_.getX() >= (TAM_MAT *game_->getSwapX()-1))
+	else if (pos_.getX() >= (TAM_TILE *game_->getSwapX()-1))
 		pos_ = { 1, (int)pos_.getY() };
 
 	if (pos_.getY() <= 0)
-		pos_ = { (int)pos_.getX(), TAM_MAT *(int)game_->getSwapY() };
+		pos_ = { (int)pos_.getX(), (int)TAM_TILE *(int)game_->getSwapY() };
 
-	else if (pos_.getY() > TAM_MAT* game_->getSwapY())
+	else if (pos_.getY() > TAM_TILE* game_->getSwapY())
 		pos_ = { (int)pos_.getX(), 0 };
-
 	
 }
 

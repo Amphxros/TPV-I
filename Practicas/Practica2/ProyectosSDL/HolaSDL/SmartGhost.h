@@ -17,8 +17,8 @@ public:
 
 private:
 	Age age_;
-	int time_ = 10;
-	int reproduction_time = 10;
+	int time_;
+	int reproduction_time;
 
 };
 

@@ -19,20 +19,20 @@ void InfoBar::render()
 {
 	for (int i = 0; i < punt_.size(); i++) {
 		SDL_Rect dest;
-		dest.x = pos_.getX() - TAM_MAT * i + 5;
+		dest.x = pos_.getX() - TAM_TILE * i + 5;
 		dest.y = pos_.getY();
-		dest.w = TAM_MAT;
-		dest.h = TAM_MAT;
+		dest.w = TAM_TILE;
+		dest.h = TAM_TILE;
 
 		num_texture->renderFrame(dest, punt_[i]/4, punt_[i]%4);
 	}
 
 	for(int i=0;i<game_->getVidas();i++){
 		SDL_Rect dest;
-		dest.x=(pos_.getX()) - TAM_MAT* i + 5;
+		dest.x=(pos_.getX()) - TAM_TILE* i + 5;
 		dest.y=pos_.getY() + OFFSET/2;
-		dest.w=TAM_MAT;
-		dest.h=TAM_MAT;
+		dest.w=TAM_TILE;
+		dest.h=TAM_TILE;
 
 		texture_->renderFrame(dest,0,11);
 	}

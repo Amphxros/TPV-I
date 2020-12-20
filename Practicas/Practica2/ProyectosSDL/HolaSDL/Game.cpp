@@ -39,7 +39,7 @@ Game::~Game()
 
 void Game::init()
 {	
-	map_ = new GameMap(Vector2D(0,0),TAM_MAT,TAM_MAT,30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
+	map_ = new GameMap(Vector2D(0,0),TAM_TILE,TAM_TILE,30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), map_);
 	map_->setItList(it);
 
@@ -110,14 +110,14 @@ void Game::nextLevel()
 
 void Game::createPacman(Vector2D pos)
 {
-	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_MAT), (pos.getY()*TAM_MAT)),TAM_MAT/2,TAM_MAT +5,TAM_MAT +5, textures[TextureOrder::CHAR_SPRITESHEET], this,5);
+	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_TILE), (pos.getY()*TAM_TILE)),TAM_TILE/2,TAM_TILE +5,TAM_TILE +5, textures[TextureOrder::CHAR_SPRITESHEET], this,5);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), pacman_);
 	pacman_->setItList(it);
 }
 
 void Game::createGhost(Vector2D pos, int color)
 {
-	Ghost* g = new Ghost(Vector2D((pos.getX() * TAM_MAT), (pos.getY() * TAM_MAT)),TAM_MAT/2,TAM_MAT,TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, color);
+	Ghost* g = new Ghost(Vector2D((pos.getX() * TAM_TILE), (pos.getY() * TAM_TILE)),TAM_TILE/2,TAM_TILE,TAM_TILE, textures[TextureOrder::CHAR_SPRITESHEET], this, color);
 
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
 	g->setItList(it);
@@ -128,11 +128,12 @@ void Game::createGhost(Vector2D pos, int color)
 
 void Game::createSmartGhost(Vector2D pos)
 {
-	SmartGhost* g = new SmartGhost(Vector2D(( pos.getX() * TAM_MAT), ( pos.getY() * TAM_MAT)),TAM_MAT/2, TAM_MAT, TAM_MAT, textures[TextureOrder::CHAR_SPRITESHEET], this, 4);
+	SmartGhost* g = new SmartGhost(Vector2D(( pos.getX() * TAM_TILE), ( pos.getY() * TAM_TILE)),TAM_TILE/2, TAM_TILE, TAM_TILE, textures[TextureOrder::CHAR_SPRITESHEET], this, 4);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
 	g->setItList(it);
 
-	ghosts_.insert(ghosts_.end(), g);
+	std::list <Ghost*>::iterator git=ghosts_.insert(ghosts_.end(), g);
+	g->setGhostIt(git);
 	num_ghosts++;
 }
 
@@ -143,12 +144,11 @@ void Game::deleteGameObject(GameObject* g)
 	delete g;
 }
 
-void Game::deleteGhost(Ghost* g)
+void Game::deleteGhost(std::list<GameObject*>::iterator it, std::list<Ghost*>::iterator git)
 {
-	Ghost* aux = g;
-	ghosts_.remove(aux);
-	gObjects_.remove(aux);
-	delete g;
+
+	gObjects_.erase(it);
+	ghosts_.erase(git);
 	num_ghosts--;
 }
 
@@ -185,9 +185,9 @@ bool Game::CollisionWithGhosts(Pacman* g)
 	for (auto g_ : ghosts_) {
 		if (SDL_HasIntersection(&(g->getdest()), &(g_->getdest()))) {
 			if (pacman_->getNyom()) {
-				g_->resetPos();
+				
 				if (dynamic_cast<SmartGhost*>(g_) != nullptr) {
-					deleteGhost(g_);
+					deleteGhost(g_->getIt(), g_->getGhostIt());
 				}
 				else {
 					g_->resetPos();
@@ -214,7 +214,7 @@ bool Game::CollisionBetweenGhosts(Ghost* g)
 		dest.y = (g_->getPos().getY() + g->getPos().getY()) / 2;
 		dest.w = g->getWidth();
 		dest.h = g->getHeight();
-		if (SDL_HasIntersection(&(g->getdest()), &(g_->getdest()))) {
+		if (SDL_HasIntersection(&(g->getdest()), &(g_->getdest()))&& g->getIt()!=g_->getIt()) {
 			
 			if (!map_->IntersectWall(dest)) {
 				
@@ -271,7 +271,7 @@ void Game::loadFromFile(int seed)
 		
 		//mapa
 		file >> dim_map_x >> dim_map_y;
-		map_ = new GameMap(Vector2D(0, 0), TAM_MAT, TAM_MAT, 40, 40, textures[TextureOrder::MAP_SPRITESHEET], this);
+		map_ = new GameMap(Vector2D(0, 0), TAM_TILE, TAM_TILE, 40, 40, textures[TextureOrder::MAP_SPRITESHEET], this);
 		for (int i = 0; i <= dim_map_x; i++) {
 			for (int j = 0; j <= dim_map_y; j++) {
 				int d;
@@ -290,7 +290,7 @@ void Game::loadFromFile(int seed)
 		//pacman
 		int x, y, x0, y0, w, h;
 		file >> x >> y >> x0 >> y0 >> w >> h;
-		pacman_ = new Pacman(Vector2D(x0,y0), TAM_MAT / 2, w, h, textures[TextureOrder::CHAR_SPRITESHEET], this, v);
+		pacman_ = new Pacman(Vector2D(x0,y0), TAM_TILE / 2, w, h, textures[TextureOrder::CHAR_SPRITESHEET], this, v);
 		pacman_->setPos(x, y);
 		it = gObjects_.insert(gObjects_.end(), pacman_);
 		pacman_->setItList(it);
@@ -305,20 +305,21 @@ void Game::loadFromFile(int seed)
 			int x, y, x0, y0, w, h, c;
 			file >> x >> y >> x0 >> y0 >> w >> h >> c;
 			if (c== 5) {
-				SmartGhost* g = new SmartGhost(Vector2D(x0, y0), TAM_MAT / 2, w, h, textures[TextureOrder::CHAR_SPRITESHEET], this, c);
+				SmartGhost* g = new SmartGhost(Vector2D(x0, y0), TAM_TILE / 2, w, h, textures[TextureOrder::CHAR_SPRITESHEET], this, c);
 				g->setPos(x, y);
 				it = gObjects_.insert(gObjects_.end(), g);
 				g->setItList(it);
-				ghosts_.push_back(g);
-				
+
+				std::list <Ghost*>::iterator git = ghosts_.insert(ghosts_.end(), g);
+				g->setGhostIt(git);
 			}
 			else {
-				Ghost* g= new Ghost(Vector2D(x0, y0), TAM_MAT / 2, w, h, textures[TextureOrder::CHAR_SPRITESHEET], this, c);
+				Ghost* g= new Ghost(Vector2D(x0, y0), TAM_TILE / 2, w, h, textures[TextureOrder::CHAR_SPRITESHEET], this, c);
 				g->setPos(x, y);
 				it = gObjects_.insert(gObjects_.end(), g);
 				g->setItList(it);
-				ghosts_.push_back(g);
-
+				std::list <Ghost*>::iterator git = ghosts_.insert(ghosts_.end(), g);
+				g->setGhostIt(git);
 			}
 
 
