@@ -3,9 +3,7 @@
 
 #include "SDL.h" // Windows
 #include "SDL_image.h" // Windows
-
 #include <string>
-
 
 #include "checkML.h"
 using namespace std;
@@ -24,7 +22,7 @@ private:
     uint numRows = 1;
 
 public:
-    Texture(SDL_Renderer* r) : renderer(r) {};
+	Texture(SDL_Renderer* r) : renderer(r) { throw "Textura nula"; };
     Texture(SDL_Renderer* r, string filename, uint numRows = 1, uint numCols = 1) : renderer(r) { load(filename, numRows, numCols); };
     ~Texture() { clear(); };
     void clear();

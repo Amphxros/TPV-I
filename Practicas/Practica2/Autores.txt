@@ -1,4 +1,8 @@
-Ampario Rubio Bellón
+Amparo Rubio Bellón
 Jorge Zurdo Izquierdo
 
 -Implementada la clase infobar con informacion de vidas y puntuacion actual
+
+-Todo funciona correctamente
+
+-Los SmartGhost tienen un cooldown antes de poder reproducirse porque de lo contrario generaban demasiados fantasmas

@@ -23,15 +23,14 @@ Game::Game()
 }
 
 Game::~Game()
-{
-	std::cout << "txt" << std::endl;
+{	
+	// Borrado de texturas
 	for (int i = 0; i < NUM_TEXTURES; i++) {
 		delete textures[i];	textures[i] = nullptr;
 	}
-	
-	std::cout << "lista" << std::endl;
+	//borrado de objetos
 	clear();
-
+	//destruccion de cosas de sdl
 	SDL_DestroyRenderer(renderer_);
 	SDL_DestroyWindow(window_);
 	SDL_Quit();
@@ -39,17 +38,19 @@ Game::~Game()
 
 void Game::init()
 {	
+	// Cargado del Mapa
 	map_ = new GameMap(Vector2D(0,0),TAM_TILE,TAM_TILE,30, 30, textures[TextureOrder::MAP_SPRITESHEET], this);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), map_);
 	map_->setItList(it);
 
+	// Cargado de la barra de puntuaciones
 	infoBar_= new InfoBar(Vector2D(WIN_WIDTH - OFFSET,0), 0, 0, textures[TextureOrder::CHAR_SPRITESHEET],textures[TextureOrder::DIGITS],this);
 	it = gObjects_.insert(gObjects_.end(), infoBar_);
 	infoBar_->setItList(it);
 
 	load(map_name[level_]);
-
 }
+
 
 void Game::load(std::string filename)
 {
@@ -58,7 +59,7 @@ void Game::load(std::string filename)
 
 	if (file.is_open()) {
 		
-		file >> dim_map_x >> dim_map_y;	//Tama�o del mapa
+		file >> dim_map_x >> dim_map_y;	// Dimensiones del mapa
 		
 		for (int i = 0; i < dim_map_x; i++) {
 			for (int j = 0; j < dim_map_y; j++) {
@@ -66,21 +67,20 @@ void Game::load(std::string filename)
 				file >> d;
 
 				switch (d) {
-				case 0:case 1:case 2:case 3:
+				case 0:case 1:case 2:case 3: //0 vacio, 1 muro, 2 comida, 3 vitaminas
 					map_->write(j, i, (MapCell)d); 
-					if (d == 2) food_left++;	// Caso 2 es la comida, el resto son el mapa
 					break;
 
-				case 4:
+				case 4: //fantasmas inteligentes
 					map_->write(j, i, (MapCell)0);
 					createSmartGhost(Vector2D(j, i));
 					break;
-				// Los fantasmas se codifican del 0 (5) al 3 (8) 
-				case 5:case 6:case 7:case 8:
+			
+				case 5:case 6:case 7:case 8:		// Los fantasmas normales van del 5 al 8  
 					map_->write(j, i, (MapCell)0);
 					createGhost(Vector2D(j, i), d - 5);	
 					break;
-				case 9:
+				case 9:		//pacman
 					map_->write(j, i, (MapCell)0);
 					createPacman(Vector2D(j, i));
 					break;
@@ -98,11 +98,14 @@ void Game::load(std::string filename)
 
 void Game::nextLevel()
 {
+	// Datos para el siguiente nivel (Mismos puntos y vidas)
 	int v = pacman_->getVidas();
 	int p = infoBar_->getPuntos();
 	level_++;
 	clear();
 	num_ghosts = 0;
+
+	// Nuevos datos del nivel
 	init();
 	infoBar_->setPuntos(p);
 	pacman_->setVidas(v);
@@ -110,22 +113,27 @@ void Game::nextLevel()
 
 void Game::createPacman(Vector2D pos)
 {
-	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_TILE), (pos.getY()*TAM_TILE)),TAM_TILE/2,TAM_TILE +5,TAM_TILE +5, textures[TextureOrder::CHAR_SPRITESHEET], this,5);
+	// Creamos Pacman, lo añadimos a la lista y movemos el iterador
+	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_TILE), (pos.getY()*TAM_TILE)),TAM_TILE/2,TAM_TILE +5,TAM_TILE +5, textures[TextureOrder::CHAR_SPRITESHEET], this,NUM_VIDAS);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), pacman_);
 	pacman_->setItList(it);
 }
 
 void Game::createGhost(Vector2D pos, int color)
 {
+	// Creamos el Fantasma, lo añadimos a la lista y movemos el iterador
 	Ghost* g = new Ghost(Vector2D((pos.getX() * TAM_TILE), (pos.getY() * TAM_TILE)),TAM_TILE/2,TAM_TILE,TAM_TILE, textures[TextureOrder::CHAR_SPRITESHEET], this, color);
 
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
 	g->setItList(it);
 
-	ghosts_.insert(ghosts_.end(), g);
+	// Lo añadimos a la lista de fantasmas y aumentamos su tamaño
+	std::list <Ghost*>::iterator git=ghosts_.insert(ghosts_.end(), g);
+	g->setGhostIt(git);
 	num_ghosts++;
 }
 
+// Funciona igual que la creacion de fantasma normal
 void Game::createSmartGhost(Vector2D pos)
 {
 	SmartGhost* g = new SmartGhost(Vector2D(( pos.getX() * TAM_TILE), ( pos.getY() * TAM_TILE)),TAM_TILE/2, TAM_TILE, TAM_TILE, textures[TextureOrder::CHAR_SPRITESHEET], this, 4);
@@ -137,27 +145,15 @@ void Game::createSmartGhost(Vector2D pos)
 	num_ghosts++;
 }
 
-void Game::deleteGameObject(GameObject* g)
-{
-	std::cout << "borra" << std::endl;
-	gObjects_.remove(g);
-	delete g;
-}
-
 void Game::deleteGhost(std::list<GameObject*>::iterator it, std::list<Ghost*>::iterator git)
 {
-
+	// Lo borramos de la lista de objetos y de la de fantasmas
 	gObjects_.erase(it);
 	ghosts_.erase(git);
 	num_ghosts--;
 }
 
-void Game::deletePacman()
-{
-	std::cout << "nyom nyom" << std::endl;
-	deleteGameObject(pacman_);
-}
-
+// Detecta la colision con las paredes
 bool Game::tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos)
 {
 	SDL_Rect dest; //rectangulo correspondiente a la posicion siguiente
@@ -169,6 +165,7 @@ bool Game::tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos)
 	return !(map_->IntersectWall(dest));
 }
 
+// Detecta la interseccion con la comida
 bool Game::eatFood(SDL_Rect rect, Point2D& newPos)
 {
 	SDL_Rect dest; //rectangulo correspondiente a la posicion siguiente
@@ -180,12 +177,14 @@ bool Game::eatFood(SDL_Rect rect, Point2D& newPos)
 	return (map_->IntersectFood(dest));
 }
 
+// Comprueba la colision del pacman con los fantasmas, resetea la posicion suya o de ellos y los elimina si es un fantasma inteligente
 bool Game::CollisionWithGhosts(Pacman* g)
 {
 	for (auto g_ : ghosts_) {
 		if (SDL_HasIntersection(&(g->getdest()), &(g_->getdest()))) {
 			if (pacman_->getNyom()) {
 				
+				infoBar_->setPuntos(infoBar_->getPuntos() + POINTS_PER_GHOST);
 				if (dynamic_cast<SmartGhost*>(g_) != nullptr) {
 					deleteGhost(g_->getIt(), g_->getGhostIt());
 				}
@@ -205,22 +204,24 @@ bool Game::CollisionWithGhosts(Pacman* g)
 	return false;
 }
 
+//compueba la colision de un fantasma inteligente entre los fantasmas y si es un fantasma normal o uno inteligente y adulto crea un fantasma inteligente
 bool Game::CollisionBetweenGhosts(Ghost* g)
 {
 	for (auto g_ : ghosts_) {
 	
-		SDL_Rect dest;
+		SDL_Rect dest; //rectangulo correspondiente con la posicion media
 		dest.x = (g_->getPos().getX() + g->getPos().getX()) / 2;
 		dest.y = (g_->getPos().getY() + g->getPos().getY()) / 2;
 		dest.w = g->getWidth();
 		dest.h = g->getHeight();
+
 		if (SDL_HasIntersection(&(g->getdest()), &(g_->getdest()))&& g->getIt()!=g_->getIt()) {
 			
-			if (!map_->IntersectWall(dest)) {
+			if (!map_->IntersectWall(dest)) { //comprueba que la posicion no es muro
 				
-				SmartGhost* gs=dynamic_cast<SmartGhost*>(g_);
+				SmartGhost* gs=dynamic_cast<SmartGhost*>(g_); // si es un fantasma inteligente
 				if (gs != nullptr) {
-					if (gs->getAge() == Age::ADULT) {
+					if (gs->getAge() == Age::ADULT) {// si es un fantasma inteligente y adulto
 						Vector2D ps = SDLPointToMapCoords(Point2D(dest.x, dest.y));
 						createSmartGhost(ps);
 						return true;
@@ -237,39 +238,41 @@ bool Game::CollisionBetweenGhosts(Ghost* g)
 	return false;
 }
 
+// Bucle principal del juego
 void Game::run()
 {
 	while (!exit_)
 	{
 		handleEvents();
-		update();
+		update();		// Update antes del render para evitar lios
 		render();
 		
-		if((food_left<=0 || infoBar_->getPuntos()>= (level_ +1)*POINTS_PER_LEVEL)){
-			if(level_>=NUM_LEVELS){
+		if((infoBar_->getPuntos() >= (level_ + 1) * POINTS_PER_LEVEL)){
+			if(level_>=NUM_LEVELS){ //si se ha superado todos los niveles disponiles cerramos el juego
 				exit_ = true;
 			}	
 			else 
 			{
-				nextLevel();
+				nextLevel(); //si no cargamos el siguiente nivel
 			}
 		}
-		SDL_Delay(300);
+		SDL_Delay(DELAY);
 	}
 }
 
 void Game::loadFromFile(int seed)
 {
-	clear();
-	std::ifstream file;
-	file.open(std::to_string(seed) + ".pac");
+	clear(); //borramos todo
 
+	std::ifstream file;
+	file.open((std::to_string(seed) + ".pac").c_str());
+
+	//cargar partida si el archivo está abierto
 	if (file.is_open()) {
-	//cargar partida
-		int p, v;
+		int p, v;	//puntos y vida auxiliares
 		file >> p >> v >> level_;
 		
-		//mapa
+		//carga del mapa
 		file >> dim_map_x >> dim_map_y;
 		map_ = new GameMap(Vector2D(0, 0), TAM_TILE, TAM_TILE, 40, 40, textures[TextureOrder::MAP_SPRITESHEET], this);
 		for (int i = 0; i <= dim_map_x; i++) {
@@ -282,12 +285,13 @@ void Game::loadFromFile(int seed)
 		std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), map_);
 		map_->setItList(it);
 
+		//carga de la infoBar
 		infoBar_ = new InfoBar(Vector2D(WIN_WIDTH - OFFSET, 0), 0, 0, textures[TextureOrder::CHAR_SPRITESHEET], textures[TextureOrder::DIGITS], this);
 		it = gObjects_.insert(gObjects_.end(), infoBar_);
 		infoBar_->setItList(it);
 		infoBar_->setPuntos(p);
 
-		//pacman
+		//carga del pacman
 		int x, y, x0, y0, w, h;
 		file >> x >> y >> x0 >> y0 >> w >> h;
 		pacman_ = new Pacman(Vector2D(x0,y0), TAM_TILE / 2, w, h, textures[TextureOrder::CHAR_SPRITESHEET], this, v);
@@ -304,7 +308,7 @@ void Game::loadFromFile(int seed)
 			//sin cargar la linea entera(ya que tiene el color que es la unica diferencia a nivel de archivo de guardado)
 			int x, y, x0, y0, w, h, c;
 			file >> x >> y >> x0 >> y0 >> w >> h >> c;
-			if (c== 5) {
+			if (c== 5) { //si su color es 5 entonces es un SmartGhost
 				SmartGhost* g = new SmartGhost(Vector2D(x0, y0), TAM_TILE / 2, w, h, textures[TextureOrder::CHAR_SPRITESHEET], this, c);
 				g->setPos(x, y);
 				it = gObjects_.insert(gObjects_.end(), g);
@@ -314,6 +318,7 @@ void Game::loadFromFile(int seed)
 				g->setGhostIt(git);
 			}
 			else {
+				//creamos un fantasma normal si su color no es 5
 				Ghost* g= new Ghost(Vector2D(x0, y0), TAM_TILE / 2, w, h, textures[TextureOrder::CHAR_SPRITESHEET], this, c);
 				g->setPos(x, y);
 				it = gObjects_.insert(gObjects_.end(), g);
@@ -321,26 +326,28 @@ void Game::loadFromFile(int seed)
 				std::list <Ghost*>::iterator git = ghosts_.insert(ghosts_.end(), g);
 				g->setGhostIt(git);
 			}
-
-
 		}
 	}
 	else {
-		//throw a rock or a sandwich...I'm hungry help
-		init();
+		level_ = 0;
+		init(); //si no encontramos un archivo valido creamos una partida nueva
 	}
 
 }
 
 void Game::saveToFile() {
 
+	//pillamos el nombre del fichero
 	int seed = -1;
 	do {
 		std::cin >> seed;
 	} while (seed < 0);
+
+	//creamos el fichero seed.pac
 	std::ofstream file;
 	file.open(std::to_string(seed) + ".pac");
 
+	//si se abre escribiremos los datos de los objetos
 	if (file.is_open()) {
 		int p = infoBar_->getPuntos();
 		int v = pacman_->getVidas();
@@ -350,6 +357,7 @@ void Game::saveToFile() {
 		file << std::endl;
 		file << dim_map_x << " " << dim_map_y << std::endl; //dimensiones del mapa en num de tiles
 
+		//informacion del mapa
 		for (int i = 0; i <= dim_map_x; i++) {
 			for (int j = 0; j <= dim_map_y; j++) {
 				int d = (int)(map_->getCell(i, j));
@@ -357,26 +365,31 @@ void Game::saveToFile() {
 			}
 			file << std::endl;
 		}
-
+		//pacman
 		pacman_->saveToFile(file);
 		file << std::endl;
+		
+		//numero de fantasmas
 		file << num_ghosts;
 		file << std::endl;
+		//guardado de fantasmas
 		for (auto it = ghosts_.begin(); it != ghosts_.end(); ++it) {
 			auto g = *it;
 			g->saveToFile(file);
 			file << std::endl;
 		}
+		file.close();
 		std::cout << "Guardado " << seed << ".pac";
 
 	}
 	else {
-		//throw a rock or whatever
+		throw "No se ha podido guardar el fichero";
 	}
 }
 
 void Game::clear()
 {
+	//borrado de objetos
 	for (auto g = gObjects_.begin(); g != gObjects_.end();) {
 		auto aux = g;
 		g++;
@@ -391,7 +404,7 @@ void Game::render()
 	SDL_RenderClear(renderer_);	// Limpieza del frame
 	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);	// Color del fondo
 
-	for (GameObject* g : gObjects_)
+	for (GameObject* g : gObjects_) //renderizado
 		g->render();
 
 	SDL_RenderPresent(renderer_);
@@ -399,12 +412,13 @@ void Game::render()
 
 void Game::update()
 {
-	for (auto it= gObjects_.begin();it!=gObjects_.end();++it)
-		(*it)->update();
+	for (auto it = gObjects_.begin(); it != gObjects_.end();) //update		
+		(*(it++))->update();
 }
 
 void Game::handleEvents()
 {
+	//manejo eventos
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT) {

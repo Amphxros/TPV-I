@@ -17,7 +17,7 @@ void GameCharacter::update()
 	if (pos_.getX() <= 0)
 		pos_ = { (int)TAM_TILE * ((int)game_->getSwapX() - 1), (int)pos_.getY() };
 
-	else if (pos_.getX() >= (TAM_TILE *game_->getSwapX()-1))
+	else if (pos_.getX() >= (TAM_TILE *(game_->getSwapX()-1) -width_))
 		pos_ = { 1, (int)pos_.getY() };
 
 	if (pos_.getY() <= 0)
@@ -48,7 +48,9 @@ void GameCharacter::loadFromFile(std::ifstream& file)
 }
 
 GameCharacter::GameCharacter() :
-	GameObject(), speed_(0),pos_init(Vector2D()){}
+	GameObject(), speed_(0), pos_init(Vector2D()) {
+	throw "Personaje nulo";
+}
 
 GameCharacter::GameCharacter(Point2D pos, double speed, double width, double height, Texture* texture, Game* game):
 	GameObject(pos, width, height, texture, game),speed_(speed), pos_init(pos_)

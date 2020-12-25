@@ -42,7 +42,7 @@ void GameMap::render()
 				texture_->renderFrame(dest, 2, 9);
 			}
 
-			else if (map[i][j] == MapCell::Vitamins) {
+			else if (map[i][j] == MapCell::Vitamins) { //vitaminas
 				dest.w += 5;
 				dest.h += 5;
 				texture_->renderFrame(dest, 2, 8);

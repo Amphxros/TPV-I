@@ -9,6 +9,7 @@ void InfoBar::setPuntos(int p)
 	points_ = p;
 	punt_.clear();
 	int aux = points_;
+	//los troceamos en el vector para el renderizado
 	while (aux > 0) {
 		int r = aux % 10;
 		aux /= 10;
@@ -17,6 +18,7 @@ void InfoBar::setPuntos(int p)
 }
 void InfoBar::render()
 {
+	//renderizado de los puntos
 	for (int i = 0; i < punt_.size(); i++) {
 		SDL_Rect dest;
 		dest.x = pos_.getX() - TAM_TILE * i + 5;
@@ -27,6 +29,7 @@ void InfoBar::render()
 		num_texture->renderFrame(dest, punt_[i]/4, punt_[i]%4);
 	}
 
+	//renderizado de las vidas
 	for(int i=0;i<game_->getVidas();i++){
 		SDL_Rect dest;
 		dest.x=(pos_.getX()) - TAM_TILE* i + 5;

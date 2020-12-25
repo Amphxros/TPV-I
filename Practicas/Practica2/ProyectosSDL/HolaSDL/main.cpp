@@ -16,11 +16,13 @@ void firstTest() {
 		string carga_;
 		std::cout << "jugar(p) o cargar partida(c)?"<<std::endl;
 		std::cin >> carga_;
-		while (carga_ != "p" && carga_ != "c") {
+		do{
 			std::cout << "Introducir (p) o (c)"<<std::endl;
 			std::cin >> carga_;
-		}
+		} while (carga_ != "p" && carga_ != "c");
+
 		Game g = Game();
+		
 		if (carga_ == "c") {
 			int seed;
 			std::cout << "Introduce codigo: ";
