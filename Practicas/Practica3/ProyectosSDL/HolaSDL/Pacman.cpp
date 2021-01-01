@@ -1,8 +1,8 @@
 #include "Pacman.h"
 #include "Game.h"
 
-Pacman::Pacman(Point2D pos, double speed, double width, double height, Texture* texture, Game* game, int numVidas):
-	GameCharacter(pos,speed,width,height,texture,game), vidas(numVidas)
+Pacman::Pacman(Point2D pos, double speed, double width, double height, Texture* texture, GameState* game, int numVidas):
+	GameCharacter(pos,speed,width,height,texture,game),EventHandler(), vidas(numVidas)
 {
 	dir_ = dirs_[directions::LEFT];
 }
@@ -19,6 +19,8 @@ void Pacman::render()
 
 void Pacman::update()
 {
+	//more static cast
+	/*
 	if (!game_->CollisionWithGhosts(this)) {
 		GameCharacter::update(); 
 	}
@@ -26,7 +28,7 @@ void Pacman::update()
 		nyom = true;
 		cool_nyom = COOLNYOM;
 	}
-
+	*/
 	
 	//if nyom && ha pasao tiempo de cooldown bool nyom= false
 	if(nyom){

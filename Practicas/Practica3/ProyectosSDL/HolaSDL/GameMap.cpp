@@ -3,7 +3,7 @@
 #include "Game.h"
 #include <iostream>
 
-GameMap::GameMap(Point2D pos, double width, double height, int rows, int cols, Texture* texture, Game* game):
+GameMap::GameMap(Point2D pos, double width, double height, int rows, int cols, Texture* texture, GameState* game):
 	GameObject(pos,width,height,texture,game), rows_(rows), cols_(cols)
 {
 	map = new MapCell * [cols_];
@@ -54,26 +54,27 @@ void GameMap::render()
 
 bool GameMap::IntersectWall(SDL_Rect dest)
 {
-	Point2D topLeft = game_->SDLPointToMapCoords(Point2D(dest.x, dest.y)); //pos x + i * width, pos y + j * height
-	Point2D botRight = game_->SDLPointToMapCoords(Point2D(dest.x + (dest.w/2), dest.y + (dest.h/2))); //el margen es porque de lo contrario no se mueve 
-	bool b = false;
-	for (int y = topLeft.getY(); y <= botRight.getY(); y++) {
-		for (int x = topLeft.getX(); x <= botRight.getX(); x++) {
-			
-			if (map[x][y] == MapCell::Wall) {
-				b=true; 
-			}
-		}
-	}
-	return b;
+	//Point2D topLeft = game_->SDLPointToMapCoords(Point2D(dest.x, dest.y)); //pos x + i * width, pos y + j * height
+	//Point2D botRight = game_->SDLPointToMapCoords(Point2D(dest.x + (dest.w/2), dest.y + (dest.h/2))); //el margen es porque de lo contrario no se mueve 
+	//bool b = false;
+	//for (int y = topLeft.getY(); y <= botRight.getY(); y++) {
+	//	for (int x = topLeft.getX(); x <= botRight.getX(); x++) {
+	//		
+	//		if (map[x][y] == MapCell::Wall) {
+	//			b=true; 
+	//		}
+	//	}
+	//}
+	//return b;
+	return false;
 }
 
 bool GameMap::IntersectFood(SDL_Rect dest){
-	Point2D topLeft = game_->SDLPointToMapCoords(Point2D(dest.x, dest.y)); //pos x + i * width, pos y + j * height
-	Point2D botRight = game_->SDLPointToMapCoords(Point2D(dest.x + dest.w, dest.y + dest.h));
+	//Point2D topLeft = game_->SDLPointToMapCoords(Point2D(dest.x, dest.y)); //pos x + i * width, pos y + j * height
+	//Point2D botRight = game_->SDLPointToMapCoords(Point2D(dest.x + dest.w, dest.y + dest.h));
 
 	bool b = false;
-	for (int y = topLeft.getY(); y < botRight.getY(); y++) {
+	/*for (int y = topLeft.getY(); y < botRight.getY(); y++) {
 		for (int x = topLeft.getX(); x < botRight.getX(); x++) {
 			if (map[x][y] != MapCell::Wall && map[x][y] != MapCell::Empty) {
 			
@@ -87,6 +88,6 @@ bool GameMap::IntersectFood(SDL_Rect dest){
 				write(x, y, MapCell::Empty);
 			}
 		}
-	}
+	}*/
 	return b;
 }

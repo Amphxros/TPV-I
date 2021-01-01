@@ -9,7 +9,8 @@ const Vector2D dirs_[4] = {			//posibles direcciones
 	Vector2D(1,0),		//derecha
 	Vector2D(0,1)		//abajo
 };
-class Game;
+
+class GameState;
 class GameCharacter :
     public GameObject
 {
@@ -28,7 +29,7 @@ public:
   
 protected:
 	GameCharacter();
-    GameCharacter(Point2D pos, double speed, double width, double height, Texture* texture, Game* game);
+    GameCharacter(Point2D pos, double speed, double width, double height, Texture* texture, GameState* game);
    
     Point2D pos_init;	//posicion inicial
     Vector2D dir_;		//direccion actual

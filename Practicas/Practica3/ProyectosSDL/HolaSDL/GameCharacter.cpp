@@ -1,5 +1,6 @@
 #include "GameCharacter.h"
 #include "Game.h"
+#include "GameState.h"
 
 GameCharacter::~GameCharacter(){}
 
@@ -10,7 +11,9 @@ void GameCharacter::render()
 
 void GameCharacter::update()
 {
-	if (game_->tryMove(getdest(), dir_, pos_ + (dir_ * speed_))) {
+	//HAY QUE HACER MUCHOS STATIC CAST :)
+
+	/*if (game_->tryMove(getdest(), dir_, pos_ + (dir_ * speed_))) {
 		pos_ = pos_ + (dir_ * speed_);
 	}
 	//comprobamos los puntos en los que se puede salir por otro lado del mapa
@@ -24,7 +27,7 @@ void GameCharacter::update()
 		pos_ = { (int)pos_.getX(), (int)TAM_TILE *(int)game_->getSwapY() };
 
 	else if (pos_.getY() > TAM_TILE* game_->getSwapY())
-		pos_ = { (int)pos_.getX(), 0 };
+		pos_ = { (int)pos_.getX(), 0 };*/
 	
 }
 
@@ -52,7 +55,7 @@ GameCharacter::GameCharacter() :
 	throw "Personaje nulo";
 }
 
-GameCharacter::GameCharacter(Point2D pos, double speed, double width, double height, Texture* texture, Game* game):
+GameCharacter::GameCharacter(Point2D pos, double speed, double width, double height, Texture* texture, GameState* game):
 	GameObject(pos, width, height, texture, game),speed_(speed), pos_init(pos_)
 {
 	dir_ = dirs_[directions::UP];

@@ -22,7 +22,6 @@ const TextureData textures_data_[NUM_TEXTURES] = {		//array de datos de textura
 	{"../images/BlueWallsEtc.png",3,10},
 	{"../images/characters1.png",4,14},
 	{"../images/digits2.jpeg",3,4},
-
 	{"../images/play.png",1,3},
 	{"../images/exit.png",1,3},
 	{"../images/play.png",1,3},
@@ -34,6 +33,7 @@ class App
 {
 public:
 	App();
+	~App();
 	void run(); 
 
 	void quit() { exit_ = true; };
@@ -45,6 +45,8 @@ public:
 	static void toMainMenu(App* app);
 
 	GameStateMachine* states_;
+
+	Texture* getTexture(TextureOrder order) { return textures[(int)order]; }
 
 private:
 	SDL_Window* window_ = nullptr; //puntero a ventana

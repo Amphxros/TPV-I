@@ -16,6 +16,14 @@ App::App()
 		init();
 	}
 }
+App::~App()
+{
+	
+	//destruccion de cosas de sdl
+	SDL_DestroyRenderer(renderer_);
+	SDL_DestroyWindow(window_);
+	SDL_Quit();
+}
 void App::init()
 {
 }
@@ -23,7 +31,10 @@ void App::init()
 
 void App::render()
 {
+	SDL_RenderClear(renderer_);
 	states_->getCurrentState()->render();
+	SDL_RenderPresent(renderer_);
+
 }
 
 void App::update()

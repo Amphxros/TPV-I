@@ -16,7 +16,7 @@ const uint WIN_HEIGHT=800;	//alto de ventana
 const uint DELAY = 300;
 
 const uint NUM_LEVELS=5;	//numero total de niveles
-const uint NUM_TEXTURES=4;	//numero de texturas
+const uint NUM_TEXTURES=10;	//numero de texturas
 const uint NUM_GHOSTS=4;		//numero de fantasmas
 const uint TAM_TILE = WIN_HEIGHT/35;	//tama�o de tile
 const uint NUM_DIRS = 4;		//numero de direcciones
