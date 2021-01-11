@@ -1,6 +1,7 @@
 #include "Ghost.h"
 #include "Game.h"
 #include <vector>
+#include "PlayState.h"
 
 Ghost::Ghost(Point2D pos, double speed, double width, double height, Texture* texture, GameState* game, int color) :
 	GameCharacter(pos, speed, width, height, texture, game), color_(color), time_per_election(TIME_PER_ELECTION)
@@ -14,10 +15,10 @@ void Ghost::render()
 {
 	SDL_Rect dest=getdest();
 	
-	//if (game_->isPacmanNyom()) 
+	if (static_cast<PlayState*>( game_)->isPacmanNyom()) 
 		texture_->renderFrame(dest, 0, 13);
-	//else
-		//texture_->renderFrame(dest, 0, 2 * color_);
+	else
+		texture_->renderFrame(dest, 0, 2 * color_);
 }
 
 void Ghost::update()
@@ -31,10 +32,10 @@ void Ghost::update()
 	}
 	else{ //si no puede cambiar de direccion
 		time_per_election--;
-		//if(!game_->tryMove(getdest(),(Vector2D)(dir_),Point2D(pos_ + ((Vector2D)dir_*speed_)))){ //si hay colision tambien cambia de direccion
-		//	chooseDirection();
-		//}
-		//GameCharacter::update();
+		if(!static_cast<PlayState*>(game_)->tryMove(getdest(),(Vector2D)(dir_),Point2D(pos_ + ((Vector2D)dir_*speed_)))){ //si hay colision tambien cambia de direccion
+			chooseDirection();
+		}
+		GameCharacter::update();
 	}
 }
 
@@ -48,10 +49,10 @@ bool Ghost::chooseDirection()
 	//
 	for (int i = 0 ; i < NUM_DIRS; i++) {
 		aux = pos_ + ((Vector2D)dirs_[i]*speed_);	// Direcciones del enum de la clase padre
-		//if(game_->tryMove(getdest(),(Vector2D)(dirs_[i]),Point2D(aux))){ //si es posible el movimiento en esa direccion lo añade como posibilidad
-		//	
-		//	choises.push_back(dirs_[i]);	
-		//}	
+		if(static_cast<PlayState*>(game_)->tryMove(getdest(),(Vector2D)(dirs_[i]),Point2D(aux))){ //si es posible el movimiento en esa direccion lo añade como posibilidad
+			
+			choises.push_back(dirs_[i]);	
+		}	
 	}
 
 	if(choises.size()==0){	// Esto es  porque estaria encerrado entre muros

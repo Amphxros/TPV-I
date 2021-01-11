@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "GameStateMachine.h"
 
 
@@ -9,6 +9,7 @@ const uint WIN_HEIGHT = 800;	//alto de ventana
 const uint DELAY = 300;
 
 const uint NUM_TEXTURES = 10;	//numero de texturas
+
 
 
 enum TextureOrder { INIT, MAP_SPRITESHEET, CHAR_SPRITESHEET, DIGITS, BUTTONS_PLAY, BUTTONS_QUIT,BUTTON_SAVE,BUTTON_LOAD };		//orden de las texturas

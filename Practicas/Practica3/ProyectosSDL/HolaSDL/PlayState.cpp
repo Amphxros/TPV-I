@@ -9,10 +9,6 @@ PlayState::PlayState(App* app) :
 
 PlayState::~PlayState()
 {
-	// Borrado de texturas
-	for (int i = 0; i < NUM_TEXTURES; i++) {
-		delete textures[i];	textures[i] = nullptr;
-	}
 	//borrado de objetos
 	clear();
 }
@@ -25,7 +21,7 @@ void PlayState::init()
 	map_->setItList(it);
 
 	// Cargado de la barra de puntuaciones
-	infoBar_ = new InfoBar(Vector2D(WIN_WIDTH - OFFSET, 0), 0, 0, textures[TextureOrder::CHAR_SPRITESHEET], app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this);
+	infoBar_ = new InfoBar(Vector2D(WIN_WIDTH - OFFSET, 0), 0, 0, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this);
 	it = gObjects_.insert(gObjects_.end(), infoBar_);
 	infoBar_->setItList(it);
 

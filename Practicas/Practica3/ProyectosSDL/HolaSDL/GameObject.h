@@ -6,7 +6,7 @@
 #include "Texture.h"
 
 #include "checkML.h"
-class Game;
+class GameState;
 class GameObject
 {
 public:

@@ -1,6 +1,7 @@
 #include "GameCharacter.h"
 #include "Game.h"
 #include "GameState.h"
+#include "PlayState.h"
 
 GameCharacter::~GameCharacter(){}
 
@@ -11,23 +12,23 @@ void GameCharacter::render()
 
 void GameCharacter::update()
 {
-	//HAY QUE HACER MUCHOS STATIC CAST :)
+	//Puesto que en el unico sitio donde tenemos GameCharacters es en PlayState es seguro hacer static_cast
 
-	/*if (game_->tryMove(getdest(), dir_, pos_ + (dir_ * speed_))) {
+	if (static_cast<PlayState*>( game_)->tryMove(getdest(), dir_, pos_ + (dir_ * speed_))) {
 		pos_ = pos_ + (dir_ * speed_);
 	}
 	//comprobamos los puntos en los que se puede salir por otro lado del mapa
 	if (pos_.getX() <= 0)
-		pos_ = { (int)TAM_TILE * ((int)game_->getSwapX() - 1), (int)pos_.getY() };
+		pos_ = { (int)TAM_TILE * ((int)static_cast<PlayState*>(game_)->getSwapX() - 1), (int)pos_.getY() };
 
-	else if (pos_.getX() >= (TAM_TILE *(game_->getSwapX()-1) -width_))
+	else if (pos_.getX() >= (TAM_TILE *(static_cast<PlayState*>(game_)->getSwapX()-1) -width_))
 		pos_ = { 1, (int)pos_.getY() };
 
 	if (pos_.getY() <= 0)
-		pos_ = { (int)pos_.getX(), (int)TAM_TILE *(int)game_->getSwapY() };
+		pos_ = { (int)pos_.getX(), (int)TAM_TILE *(int)static_cast<PlayState*>(game_)->getSwapY() };
 
-	else if (pos_.getY() > TAM_TILE* game_->getSwapY())
-		pos_ = { (int)pos_.getX(), 0 };*/
+	else if (pos_.getY() > TAM_TILE* static_cast<PlayState*>(game_)->getSwapY())
+		pos_ = { (int)pos_.getX(), 0 };
 	
 }
 

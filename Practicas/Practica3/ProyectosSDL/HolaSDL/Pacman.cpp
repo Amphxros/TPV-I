@@ -1,5 +1,6 @@
 #include "Pacman.h"
 #include "Game.h"
+#include "PlayState.h"
 
 Pacman::Pacman(Point2D pos, double speed, double width, double height, Texture* texture, GameState* game, int numVidas):
 	GameCharacter(pos,speed,width,height,texture,game),EventHandler(), vidas(numVidas)
@@ -19,16 +20,14 @@ void Pacman::render()
 
 void Pacman::update()
 {
-	//more static cast
-	/*
-	if (!game_->CollisionWithGhosts(this)) {
+	
+	if (static_cast<PlayState*>(game_)->CollisionWithGhosts(this)) {
 		GameCharacter::update(); 
 	}
-	if (game_->eatFood(getdest(), pos_)){
+	if (static_cast<PlayState*>(game_)->eatFood(getdest(), pos_)){
 		nyom = true;
 		cool_nyom = COOLNYOM;
 	}
-	*/
 	
 	//if nyom && ha pasao tiempo de cooldown bool nyom= false
 	if(nyom){

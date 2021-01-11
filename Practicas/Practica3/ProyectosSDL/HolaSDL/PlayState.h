@@ -12,14 +12,9 @@
 
 using uint = unsigned int;
 
-const uint WIN_WIDTH = 800;	//ancho de ventana
-const uint WIN_HEIGHT = 800;	//alto de ventana
-const uint DELAY = 300;
 
 const uint NUM_LEVELS = 5;	//numero total de niveles
-const uint NUM_TEXTURES = 4;	//numero de texturas
 const uint NUM_GHOSTS = 4;		//numero de fantasmas
-const uint TAM_TILE = WIN_HEIGHT / 35;	//tama�o de tile
 const uint NUM_DIRS = 4;		//numero de direcciones
 
 const uint COOLNYOM = 100;	// Variable global de tiempo de duracion del powerup
@@ -29,7 +24,8 @@ const uint TIME_PER_ELECTION = 5;	//numero de movimientos antes de elegir una di
 const uint TIME_PER_PHASE = 50;		//numero de movimientos antes de cambiar de fase
 const uint TIME_PER_REPRODUCTION = 15; //numero de movimientos antes de reproducirse(de lo contrario es incontrolable)
 
-const uint OFFSET = WIN_HEIGHT / 15;	// Para el hueco de las vidas y puntuacion
+const uint TAM_TILE = 22;	//tama�o de tile
+const uint OFFSET = 15;	// Para el hueco de las vidas y puntuacion
 
 const uint POINTS_PER_FOOD = 50;		//puntuacion por comida
 const uint POINTS_PER_VITAMIN = 500;	//puntuacion por vitamina
@@ -52,6 +48,7 @@ class PlayState :
 public:
 
 	PlayState(App* app);
+	virtual ~PlayState();
 
 	void render();  //renderiza los elementos del juego
 	void update();  //actualiza los elementos de juego(posiciones, control de colisiones ...)
@@ -71,10 +68,8 @@ public:
 	//crea un smart ghost
 	void createSmartGhost(Vector2D pos);
 
-
 	void deleteGhost(std::list<GameObject*>::iterator it, std::list<Ghost*>::iterator git);
-	void deleteGhost(std::list<GameObject*>::iterator it, std::list<Ghost*>::iterator git);
-
+	
 	//GetWidth/height son los pixeles del tile
 	Point2D SDLPointToMapCoords(Point2D mapCoor) const { return Point2D((int)(mapCoor.getX() / map_->getWidth()), (int)(mapCoor.getY() / map_->getHeight())); }
 
@@ -96,7 +91,6 @@ private:
 
 	GameMap* map_ = nullptr; //mapa
 	Pacman* pacman_ = nullptr;// pacman
-	Texture* textures[NUM_TEXTURES]; //array de texturas
 	InfoBar* infoBar_ = nullptr;
 
 	std::list<Ghost*>ghosts_;	//lista de fantasmas

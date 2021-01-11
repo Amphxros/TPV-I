@@ -1,5 +1,5 @@
 #include "App.h"
-
+#include "PlayState.h"
 App::App()
 {
 	srand(NULL);
@@ -24,8 +24,20 @@ App::~App()
 	SDL_DestroyWindow(window_);
 	SDL_Quit();
 }
+void App::run()
+{
+	while (!exit_)
+	{
+		render();
+		update();
+		handleEvents();
+		SDL_Delay(DELAY);
+	}
+}
 void App::init()
 {
+	states_ = new GameStateMachine();
+	states_->pushState(new PlayState(this));
 }
 
 
