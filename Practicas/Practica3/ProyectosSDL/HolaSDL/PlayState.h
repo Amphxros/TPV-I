@@ -50,9 +50,9 @@ public:
 	PlayState(App* app);
 	virtual ~PlayState();
 
-	void render();  //renderiza los elementos del juego
-	void update();  //actualiza los elementos de juego(posiciones, control de colisiones ...)
-	void handleEvents(SDL_Event& event);	// Controla la salida del juego y los eventos de Pacman
+	virtual void render();  //renderiza los elementos del juego
+	virtual void update();  //actualiza los elementos de juego(posiciones, control de colisiones ...)
+	virtual void handleEvents(SDL_Event& event);	// Controla la salida del juego y los eventos de Pacman
 
 	void saveToFile();
 	//carga el fichero seed.pac

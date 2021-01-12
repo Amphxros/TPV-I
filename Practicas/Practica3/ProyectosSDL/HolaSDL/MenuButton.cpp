@@ -1,4 +1,5 @@
 #include "MenuButton.h"
+#include "App.h"
 
 MenuButton::MenuButton(): 
 	GameObject(), EventHandler(), state(ButtonState::NORMAL){}
@@ -20,10 +21,11 @@ void MenuButton::update() { }
 
 void MenuButton::handleEvents(SDL_Event& event)
 {
+
+	SDL_Point cursor_pos = { event.button.x, event.button.y };
 	switch (event.type)
 	{
 	case SDL_MOUSEBUTTONDOWN:
-		SDL_Point cursor_pos = { event.button.x, event.button.y };
 		if (SDL_PointInRect(&(cursor_pos), &getdest())) { //clickando el boton y estando en el boton
 			state = ButtonState::PRESSED;
 			if(callback_!=nullptr)
@@ -32,7 +34,7 @@ void MenuButton::handleEvents(SDL_Event& event)
 		break;
 
 	case SDL_MOUSEMOTION:
-        SDL_Point cursor_pos = { event.button.x, event.button.y };
+
         if(SDL_PointInRect(&(cursor_pos), &getdest())) { //dentro del boton pero sin clickar
 			state = ButtonState::HIGHLIGHT;
         }

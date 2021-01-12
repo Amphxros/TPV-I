@@ -2,13 +2,15 @@
 #include <list>
 #include "GameObject.h"
 #include "EventHandler.h"
+
 class App;
 class GameState
 {
 public:
+	GameState();
 	GameState(App* app):
 		app_(app) {};
-	virtual ~GameState();
+	~GameState();
 	
 	virtual void render();
 	virtual void update();

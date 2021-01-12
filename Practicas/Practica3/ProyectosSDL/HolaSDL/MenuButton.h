@@ -1,10 +1,10 @@
 #pragma once
 #include "GameObject.h"
 #include "EventHandler.h"
-#include "App.h"
 
 #include "checkML.h"
 
+class App;
 using CallBack = void(App * app);
 
 enum ButtonState { NORMAL, HIGHLIGHT, PRESSED};
@@ -14,12 +14,12 @@ class MenuButton :
 {
 public:
 	MenuButton();
-	MenuButton(Point2D pos, double width, double height, Texture* texture, GameState* game_,CallBack* callback);
+	MenuButton(Point2D pos, double width, double height, Texture* texture, GameState* game_, CallBack* callback);
 	virtual ~MenuButton();
 
-	void render();
-	void update();
-	void handleEvents(SDL_Event& event);
+	virtual void render();
+	virtual void update();
+	virtual void handleEvents(SDL_Event& event);
 
 private:
 	CallBack* callback_;

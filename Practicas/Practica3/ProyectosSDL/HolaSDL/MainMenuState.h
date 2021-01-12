@@ -12,12 +12,11 @@ public:
 	MainMenuState(App* app);
 	virtual ~MainMenuState();
 
-	void render();
-	void update();
-	void handleEvents(SDL_Event& events);
+	virtual void render();
+	virtual void update();
+	virtual void handleEvents(SDL_Event& events);
 
 private:
-	void init();
 	//std::list<MenuButton*> buttons_;
 
 };
