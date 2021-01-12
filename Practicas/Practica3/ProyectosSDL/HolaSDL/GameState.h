@@ -6,13 +6,15 @@ class App;
 class GameState
 {
 public:
-	GameState(App* app):app_(app) {};
+	GameState(App* app):
+		app_(app) {};
 	virtual ~GameState();
 	
 	virtual void render();
 	virtual void update();
 	virtual void handleEvents(SDL_Event& event);
 
+	inline App* getApp() { return app_; }
 
 	void addGameObject(GameObject* go);
 	void addEventHandler(EventHandler* ev);

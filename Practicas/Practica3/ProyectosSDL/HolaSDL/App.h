@@ -12,7 +12,21 @@ const uint NUM_TEXTURES = 10;	//numero de texturas
 
 
 
-enum TextureOrder { INIT, MAP_SPRITESHEET, CHAR_SPRITESHEET, DIGITS, BUTTONS_PLAY, BUTTONS_QUIT,BUTTON_SAVE,BUTTON_LOAD };		//orden de las texturas
+enum TextureOrder {
+	INIT,
+	MAP_SPRITESHEET,	//celdas del mapa
+	CHAR_SPRITESHEET,	//personajes
+	DIGITS,				//numeritos
+	
+	//Botones de los menus
+	BUTTONS_PLAY,
+	BUTTONS_QUIT,
+	BUTTON_SAVE,
+	BUTTON_LOAD,
+	BUTTON_MAIN,
+	LAST
+
+};		//orden de las texturas
 struct TextureData		//struct que contiene datos importantes de las texturas: nombre, filas y columnas
 {
 	std::string filename;
@@ -26,8 +40,9 @@ const TextureData textures_data_[NUM_TEXTURES] = {		//array de datos de textura
 	{"../images/play.png",1,3},
 	{"../images/exit.png",1,3},
 	{"../images/play.png",1,3},
-	{"../images/restart.png",1,3},
-	{"../images/main.png",1,3} 
+	{"../images/restart.png",1,3}, 
+	{"../images/main.png",1,3}, 
+	{"../images/burguer1.png",1,3}, 
 };
 
 class App
@@ -39,6 +54,7 @@ public:
 
 	void quit() { exit_ = true; };
 
+	//CALLBACKS
 	static void quitApp(App* app);
 	static void playGame(App* app);
 	static void resume(App* app);

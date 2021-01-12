@@ -2,6 +2,13 @@
 
 GameStateMachine::GameStateMachine(){}
 
+GameStateMachine::~GameStateMachine()
+{
+	while (!states_.empty()) {
+		states_.pop();
+	}
+}
+
 void GameStateMachine::popState()
 {
 	if (!states_.empty()){

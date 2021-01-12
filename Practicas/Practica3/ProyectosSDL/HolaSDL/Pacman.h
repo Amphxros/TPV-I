@@ -1,6 +1,7 @@
 #pragma once
-#include "GameCharacter.h"
 #include "checkML.h"
+
+#include "GameCharacter.h"
 #include "EventHandler.h"
 class Game;
 class Pacman: 

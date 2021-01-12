@@ -5,6 +5,7 @@ class GameStateMachine
 {
 public:
 	GameStateMachine();
+	~GameStateMachine();
 	
 	GameState* getCurrentState() { return states_.top(); }
 	void pushState(GameState* gs) { states_.push(gs); };
