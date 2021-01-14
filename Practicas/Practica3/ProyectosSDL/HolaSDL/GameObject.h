@@ -6,7 +6,7 @@
 #include "Texture.h"
 
 #include "checkML.h"
-class GameState;
+class Game;
 class GameObject
 {
 public:
@@ -25,12 +25,12 @@ public:
 
 protected:
 	GameObject() :pos_(Point2D(-1, -1)), width_(0), height_(0) { throw "objeto nulo"; };
-	GameObject(Point2D pos, double width, double height, Texture* texture, GameState* game):
+	GameObject(Point2D pos, double width, double height, Texture* texture, Game* game):
 		pos_(pos), width_(width),height_(height), texture_(texture),game_(game) {}
 
 	Point2D pos_;				//posicion
 	double width_, height_;		//width y height seran igual a la constante de tile generalmente
-	GameState* game_ = nullptr;		//puntero a game
+	Game* game_ = nullptr;		//puntero a game
 	Texture* texture_= nullptr;	//textura
 	
 	std::list<GameObject*>::iterator it_;	//iterador

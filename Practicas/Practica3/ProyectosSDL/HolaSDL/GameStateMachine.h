@@ -6,13 +6,13 @@ class GameStateMachine
 public:
 	GameStateMachine();
 	~GameStateMachine();
-	
-	GameState* getCurrentState() { return states_.top(); }
-	void pushState(GameState* gs) { states_.push(gs); };
+
+	GameState* getCurrentState();
+	void pushState(GameState* gs);
 	void popState();
 	void changeState(GameState* gs);
 
 private:
-	std::stack<GameState*> states_;
+	std::stack <GameState*> states_;
 };
 

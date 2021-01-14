@@ -1,15 +1,13 @@
 #pragma once
-#include "checkML.h"
-
 #include "GameCharacter.h"
-#include "EventHandler.h"
+#include "checkML.h"
 class Game;
 class Pacman: 
-	public GameCharacter, public EventHandler
+	public GameCharacter
 {
 public:
-	Pacman() : GameCharacter(), EventHandler() { throw "Pacman nulo"; }
-	Pacman(Point2D pos, double speed,double width, double height, Texture* texture, GameState* game_, int numVidas);
+	Pacman() : GameCharacter() { throw "Pacman nulo"; }
+	Pacman(Point2D pos, double speed,double width, double height, Texture* texture, Game* game_, int numVidas);
 	virtual ~Pacman();
 
 	void render();

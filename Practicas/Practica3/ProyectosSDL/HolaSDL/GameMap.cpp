@@ -2,9 +2,8 @@
 
 #include "Game.h"
 #include <iostream>
-#include "PlayState.h"
 
-GameMap::GameMap(Point2D pos, double width, double height, int rows, int cols, Texture* texture, GameState* game):
+GameMap::GameMap(Point2D pos, double width, double height, int rows, int cols, Texture* texture, Game* game):
 	GameObject(pos,width,height,texture,game), rows_(rows), cols_(cols)
 {
 	map = new MapCell * [cols_];
@@ -55,8 +54,8 @@ void GameMap::render()
 
 bool GameMap::IntersectWall(SDL_Rect dest)
 {
-	Point2D topLeft = static_cast<PlayState*>( game_)->SDLPointToMapCoords(Point2D(dest.x, dest.y)); //pos x + i * width, pos y + j * height
-	Point2D botRight =static_cast<PlayState*>( game_)->SDLPointToMapCoords(Point2D(dest.x + (dest.w/2), dest.y + (dest.h/2))); //el margen es porque de lo contrario no se mueve 
+	Point2D topLeft = game_->SDLPointToMapCoords(Point2D(dest.x, dest.y)); //pos x + i * width, pos y + j * height
+	Point2D botRight = game_->SDLPointToMapCoords(Point2D(dest.x + (dest.w/2), dest.y + (dest.h/2))); //el margen es porque de lo contrario no se mueve 
 	bool b = false;
 	for (int y = topLeft.getY(); y <= botRight.getY(); y++) {
 		for (int x = topLeft.getX(); x <= botRight.getX(); x++) {
@@ -67,12 +66,11 @@ bool GameMap::IntersectWall(SDL_Rect dest)
 		}
 	}
 	return b;
-	
 }
 
 bool GameMap::IntersectFood(SDL_Rect dest){
-	Point2D topLeft = static_cast<PlayState*>(game_)->SDLPointToMapCoords(Point2D(dest.x, dest.y)); //pos x + i * width, pos y + j * height
-	Point2D botRight = static_cast<PlayState*>(game_)->SDLPointToMapCoords(Point2D(dest.x + dest.w, dest.y + dest.h));
+	Point2D topLeft = game_->SDLPointToMapCoords(Point2D(dest.x, dest.y)); //pos x + i * width, pos y + j * height
+	Point2D botRight = game_->SDLPointToMapCoords(Point2D(dest.x + dest.w, dest.y + dest.h));
 
 	bool b = false;
 	for (int y = topLeft.getY(); y < botRight.getY(); y++) {
@@ -80,11 +78,11 @@ bool GameMap::IntersectFood(SDL_Rect dest){
 			if (map[x][y] != MapCell::Wall && map[x][y] != MapCell::Empty) {
 			
 				if (map[x][y] == MapCell::Vitamins) {
-					static_cast<PlayState*>(game_)->addPoints(POINTS_PER_VITAMIN);
+					game_->addPoints(POINTS_PER_VITAMIN);
 					b = true;
 				}
 				else {
-					static_cast<PlayState*>(game_)->addPoints(POINTS_PER_FOOD);
+					game_->addPoints(POINTS_PER_FOOD);
 				}
 				write(x, y, MapCell::Empty);
 			}

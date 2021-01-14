@@ -10,7 +10,7 @@ class SmartGhost :
 {
 public:
     SmartGhost() : Ghost() {	throw "SmartFantasma nulo (Not so smart now)"; }
-	SmartGhost(Point2D pos, double speed, double width, double height, Texture* texture, GameState* game, int color);
+	SmartGhost(Point2D pos, double speed, double width, double height, Texture* texture, Game* game, int color);
 	virtual ~SmartGhost() {};
 	
 	void render();

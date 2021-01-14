@@ -14,7 +14,7 @@ class GameMap:
 public:
 	GameMap() : GameObject() { throw "Mapa nulo"; }
 	//constructora
-	GameMap(Point2D pos, double width, double height, int rows, int cols, Texture* texture, GameState* game);
+	GameMap(Point2D pos, double width, double height, int rows, int cols, Texture* texture,Game* game);
 	//destructora
 	virtual ~GameMap();
 
