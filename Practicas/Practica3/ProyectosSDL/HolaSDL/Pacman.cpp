@@ -40,27 +40,36 @@ void Pacman::update()
 }
 
 // Actualiza la direccion actual de PacMan al presionar una tecla
-void Pacman::handleEvents(SDL_Event& event)
+bool Pacman::handleEvents(SDL_Event& event)
 {
+	bool ev = false;
 	switch (event.type)
 	{
 	case SDL_KEYDOWN:
-		if (event.key.keysym.sym == SDLK_UP)
+		if (event.key.keysym.sym == SDLK_UP) {
 			dir_ = dirs_[directions::UP];
+			ev = true;
+		}
 
-		else if (event.key.keysym.sym == SDLK_DOWN)
+		else if (event.key.keysym.sym == SDLK_DOWN) {
 			dir_ = dirs_[directions::DOWN];
+			ev = true;
+		}
 
-		else if (event.key.keysym.sym == SDLK_LEFT) 
+		else if (event.key.keysym.sym == SDLK_LEFT) {
 			dir_ = dirs_[directions::LEFT];
+			ev = true;
+		}
 
-		else if (event.key.keysym.sym == SDLK_RIGHT)
+		else if (event.key.keysym.sym == SDLK_RIGHT) {
 			dir_ = dirs_[directions::RIGHT];
-
+			ev = true;
+		}
 		break;
 	
 	default:
 		break;
 	}
+	return ev;
 }
 

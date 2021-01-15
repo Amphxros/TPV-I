@@ -1,9 +1,11 @@
 #pragma once
 #include "GameCharacter.h"
+#include "EventHandler.h"
+
 #include "checkML.h"
 class Game;
 class Pacman: 
-	public GameCharacter
+	public GameCharacter, public EventHandler
 {
 public:
 	Pacman() : GameCharacter() { throw "Pacman nulo"; }
@@ -12,7 +14,7 @@ public:
 
 	void render();
 	void update();
-	void handleEvents(SDL_Event& event);
+	bool handleEvents(SDL_Event& event);
 
 	bool getNyom() { return nyom; };
 	

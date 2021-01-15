@@ -7,6 +7,7 @@ class App;
 class GameState
 {
 public:
+	GameState();
 	GameState(App* app);
 	virtual ~GameState();
 	virtual void render();
@@ -14,11 +15,10 @@ public:
 	virtual void handleEvents(SDL_Event& event);
 
 protected:
-	std::list<GameObject*> gObjects;
-	std::list<std::list<GameObject*>::iterator> gObjectsToErase;
-	std::list<EventHandler*> evHandlers;
+	std::list<GameObject*> gObjects_;
+	std::list<std::list<GameObject*>::iterator> gObjectsToErase_;
+	std::list<EventHandler*> evHandlers_;
 
-
-
+	App* app_;
 };
 
