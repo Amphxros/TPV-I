@@ -31,7 +31,7 @@ const TextureData textures_data_[NUM_TEXTURES] = {		//array de datos de textura
 	{"../images/play.png",1,3},
 	{"../images/restart.png",1,3},
 	{"../images/resume.png",1,3},
-	{"../images/exit.png",1,3},
+	{"../images/exit.png",1,3}
 
 };
 

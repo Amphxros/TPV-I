@@ -98,7 +98,7 @@ void Game::nextLevel()
 void Game::createPacman(Vector2D pos)
 {
 	// Creamos Pacman, lo añadimos a la lista y movemos el iterador
-	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_TILE), (pos.getY()*TAM_TILE)),TAM_TILE/2,TAM_TILE +5,TAM_TILE +5, nullptr, this,NUM_VIDAS);
+	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_TILE), (pos.getY()*TAM_TILE)),TAM_TILE/2,TAM_TILE +5,TAM_TILE +5, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this,NUM_VIDAS);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), pacman_);
 	pacman_->setItList(it);
 }
@@ -106,7 +106,7 @@ void Game::createPacman(Vector2D pos)
 void Game::createGhost(Vector2D pos, int color)
 {
 	// Creamos el Fantasma, lo añadimos a la lista y movemos el iterador
-	Ghost* g = new Ghost(Vector2D((pos.getX() * TAM_TILE), (pos.getY() * TAM_TILE)),TAM_TILE/2,TAM_TILE,TAM_TILE, nullptr, this, color);
+	Ghost* g = new Ghost(Vector2D((pos.getX() * TAM_TILE), (pos.getY() * TAM_TILE)),TAM_TILE/2,TAM_TILE,TAM_TILE, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, color);
 
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
 	g->setItList(it);
@@ -120,7 +120,7 @@ void Game::createGhost(Vector2D pos, int color)
 // Funciona igual que la creacion de fantasma normal
 void Game::createSmartGhost(Vector2D pos)
 {
-	SmartGhost* g = new SmartGhost(Vector2D(( pos.getX() * TAM_TILE), ( pos.getY() * TAM_TILE)),TAM_TILE/2, TAM_TILE, TAM_TILE, nullptr, this, 4);
+	SmartGhost* g = new SmartGhost(Vector2D(( pos.getX() * TAM_TILE), ( pos.getY() * TAM_TILE)),TAM_TILE/2, TAM_TILE, TAM_TILE, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, 4);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
 	g->setItList(it);
 
@@ -237,7 +237,7 @@ void Game::loadFromFile(int seed)
 		
 		//carga del mapa
 		file >> dim_map_x >> dim_map_y;
-		map_ = new GameMap(Vector2D(0, 0), TAM_TILE, TAM_TILE, 40, 40, nullptr, this);
+		map_ = new GameMap(Vector2D(0, 0), TAM_TILE, TAM_TILE, 40, 40, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this);
 		for (int i = 0; i <= dim_map_x; i++) {
 			for (int j = 0; j <= dim_map_y; j++) {
 				int d;
@@ -249,7 +249,7 @@ void Game::loadFromFile(int seed)
 		map_->setItList(it);
 
 		//carga de la infoBar
-		infoBar_ = new InfoBar(Vector2D(WIN_WIDTH - OFFSET, 0), 0, 0, nullptr, nullptr, this);
+		infoBar_ = new InfoBar(Vector2D(WIN_WIDTH - OFFSET, 0), 0, 0, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), app_->getTexture(TextureOrder::DIGITS), this);
 		it = gObjects_.insert(gObjects_.end(), infoBar_);
 		infoBar_->setItList(it);
 		infoBar_->setPuntos(p);
@@ -272,7 +272,7 @@ void Game::loadFromFile(int seed)
 			int x, y, x0, y0, w, h, c;
 			file >> x >> y >> x0 >> y0 >> w >> h >> c;
 			if (c== 5) { //si su color es 5 entonces es un SmartGhost
-				SmartGhost* g = new SmartGhost(Vector2D(x0, y0), TAM_TILE / 2, w, h, nullptr, this, c);
+				SmartGhost* g = new SmartGhost(Vector2D(x0, y0), TAM_TILE / 2, w, h, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, c);
 				g->setPos(x, y);
 				it = gObjects_.insert(gObjects_.end(), g);
 				g->setItList(it);
@@ -282,7 +282,7 @@ void Game::loadFromFile(int seed)
 			}
 			else {
 				//creamos un fantasma normal si su color no es 5
-				Ghost* g= new Ghost(Vector2D(x0, y0), TAM_TILE / 2, w, h, nullptr, this, c);
+				Ghost* g= new Ghost(Vector2D(x0, y0), TAM_TILE / 2, w, h, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, c);
 				g->setPos(x, y);
 				it = gObjects_.insert(gObjects_.end(), g);
 				g->setItList(it);
