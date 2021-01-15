@@ -8,54 +8,16 @@
 #include "InfoBar.h"
 #include "GameMap.h"
 #include "checkML.h"
+#include "consts.h"
+	
 
-using uint = unsigned int;
-
-const uint WIN_WIDTH=800;	//ancho de ventana
-const uint WIN_HEIGHT=800;	//alto de ventana
-const uint DELAY = 300;
-
-const uint NUM_LEVELS=5;	//numero total de niveles
-const uint NUM_TEXTURES=4;	//numero de texturas
-const uint NUM_GHOSTS=4;		//numero de fantasmas
-const uint TAM_TILE = WIN_HEIGHT/35;	//tama�o de tile
-const uint NUM_DIRS = 4;		//numero de direcciones
-
-const uint COOLNYOM = 100;	// Variable global de tiempo de duracion del powerup
-const uint NUM_VIDAS=3;		// numero de vidas
-
-const uint TIME_PER_ELECTION = 5;	//numero de movimientos antes de elegir una direccion nueva
-const uint TIME_PER_PHASE = 50;		//numero de movimientos antes de cambiar de fase
-const uint TIME_PER_REPRODUCTION = 15; //numero de movimientos antes de reproducirse(de lo contrario es incontrolable)
-
-const uint OFFSET = WIN_HEIGHT / 15;	// Para el hueco de las vidas y puntuacion
-
-const uint POINTS_PER_FOOD=50;		//puntuacion por comida
-const uint POINTS_PER_VITAMIN=500;	//puntuacion por vitamina
-const uint POINTS_PER_GHOST=500;	//puntuacion por fantasma comido
-
-const uint POINTS_PER_LEVEL = 3000; //puntos por nivel
-
-	enum TextureOrder {INIT,MAP_SPRITESHEET, CHAR_SPRITESHEET,DIGITS };		//orden de las texturas
-	struct TextureData		//struct que contiene datos importantes de las texturas: nombre, filas y columnas
-	{
-	std::string filename;
-	int rows, cols;
-	};
-	const TextureData textures_data_[NUM_TEXTURES] = {		//array de datos de textura
-		{"../images/digits2.jpeg",3,4},
-		{"../images/BlueWallsEtc.png",3,10},
-		{"../images/characters1.png",4,14},
-		{"../images/digits2.jpeg",3,4}
-	};
-
-	const std::string map_name[NUM_LEVELS] = {		//array de datos de los ficheros del mapa
-		{"../Mapas/level01.dat"},
-		{"../Mapas/level02.dat"},
-		{"../Mapas/level03.dat"},
-		{"../Mapas/level04.dat"},
-		{"../Mapas/level05.dat"}
-	};
+const std::string map_name[NUM_LEVELS] = {		//array de datos de los ficheros del mapa
+	{"../Mapas/level01.dat"},
+	{"../Mapas/level02.dat"},
+	{"../Mapas/level03.dat"},
+	{"../Mapas/level04.dat"},
+	{"../Mapas/level05.dat"}
+};
 
 ///clase Game
 class Game
