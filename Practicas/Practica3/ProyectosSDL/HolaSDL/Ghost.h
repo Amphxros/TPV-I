@@ -9,7 +9,7 @@ class Ghost:
 public:
 	Ghost() : GameCharacter() { throw "Fantasma nulo"; }
 	//constructor
-	Ghost(Point2D pos, double speed,double width, double height, Texture* texture, Game* game,int color);
+	Ghost(Point2D pos, double speed,double width, double height, Texture* texture, GameState* game,int color);
 	//destructor
 	virtual ~Ghost();
 	//render

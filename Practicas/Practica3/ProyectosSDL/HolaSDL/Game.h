@@ -9,6 +9,7 @@
 #include "GameMap.h"
 #include "checkML.h"
 #include "consts.h"
+#include "GameState.h"
 	
 
 const std::string map_name[NUM_LEVELS] = {		//array de datos de los ficheros del mapa
@@ -20,11 +21,11 @@ const std::string map_name[NUM_LEVELS] = {		//array de datos de los ficheros del
 };
 
 ///clase Game
-class Game
+class Game: public GameState
 {
 public:
 	//constructora
-	Game();
+	Game(App* app);
 	//destructora
 	~Game();
 
@@ -69,12 +70,10 @@ private:
 
 	GameMap* map_=nullptr; //mapa
 	Pacman* pacman_=nullptr;// pacman
-	Texture* textures[NUM_TEXTURES]; //array de texturas
 	InfoBar* infoBar_=nullptr;
 
 	std::list<Ghost*>ghosts_;	//lista de fantasmas
-	std::list<GameObject*> gObjects_; //lista de GO (mapa, barra de vida, fantasmas, pacman ...)
-
+	
 	void render();  //renderiza los elementos del juego
 	void update();  //actualiza los elementos de juego(posiciones, control de colisiones ...)
 	void handleEvents();	// Controla la salida del juego y los eventos de Pacman

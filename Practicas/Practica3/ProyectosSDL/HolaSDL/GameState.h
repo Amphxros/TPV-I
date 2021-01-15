@@ -10,9 +10,12 @@ public:
 	GameState();
 	GameState(App* app);
 	virtual ~GameState();
+
 	virtual void render();
 	virtual void update();
 	virtual void handleEvents(SDL_Event& event);
+
+	App* getApp() { return app_; }
 
 protected:
 	std::list<GameObject*> gObjects_;

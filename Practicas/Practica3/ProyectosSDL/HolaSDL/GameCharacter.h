@@ -28,11 +28,12 @@ public:
   
 protected:
 	GameCharacter();
-    GameCharacter(Point2D pos, double speed, double width, double height, Texture* texture, Game* game);
+    GameCharacter(Point2D pos, double speed, double width, double height, Texture* texture, GameState* game);
    
     Point2D pos_init;	//posicion inicial
     Vector2D dir_;		//direccion actual
 	float speed_;		//velocidad
+	Game* game_state;
    
 };
 

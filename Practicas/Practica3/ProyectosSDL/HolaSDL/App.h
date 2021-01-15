@@ -54,6 +54,7 @@ public:
 	static void pauseGame(App* app);
 	static void toMainMenu(App* app);
 
+	Texture* getTexture(TextureOrder t) { return textures[(int)t]; }
 
 private:
 	void render();

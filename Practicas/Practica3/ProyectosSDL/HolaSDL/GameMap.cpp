@@ -3,8 +3,8 @@
 #include "Game.h"
 #include <iostream>
 
-GameMap::GameMap(Point2D pos, double width, double height, int rows, int cols, Texture* texture, Game* game):
-	GameObject(pos,width,height,texture,game), rows_(rows), cols_(cols)
+GameMap::GameMap(Point2D pos, double width, double height, int rows, int cols, Texture* texture, GameState* game):
+	GameObject(pos,width,height,texture,game), rows_(rows), cols_(cols), game_state(static_cast<Game*>(game))
 {
 	map = new MapCell * [cols_];
 
@@ -54,8 +54,8 @@ void GameMap::render()
 
 bool GameMap::IntersectWall(SDL_Rect dest)
 {
-	Point2D topLeft = game_->SDLPointToMapCoords(Point2D(dest.x, dest.y)); //pos x + i * width, pos y + j * height
-	Point2D botRight = game_->SDLPointToMapCoords(Point2D(dest.x + (dest.w/2), dest.y + (dest.h/2))); //el margen es porque de lo contrario no se mueve 
+	Point2D topLeft = game_state->SDLPointToMapCoords(Point2D(dest.x, dest.y)); //pos x + i * width, pos y + j * height
+	Point2D botRight = game_state->SDLPointToMapCoords(Point2D(dest.x + (dest.w/2), dest.y + (dest.h/2))); //el margen es porque de lo contrario no se mueve 
 	bool b = false;
 	for (int y = topLeft.getY(); y <= botRight.getY(); y++) {
 		for (int x = topLeft.getX(); x <= botRight.getX(); x++) {
@@ -69,8 +69,8 @@ bool GameMap::IntersectWall(SDL_Rect dest)
 }
 
 bool GameMap::IntersectFood(SDL_Rect dest){
-	Point2D topLeft = game_->SDLPointToMapCoords(Point2D(dest.x, dest.y)); //pos x + i * width, pos y + j * height
-	Point2D botRight = game_->SDLPointToMapCoords(Point2D(dest.x + dest.w, dest.y + dest.h));
+	Point2D topLeft = game_state->SDLPointToMapCoords(Point2D(dest.x, dest.y)); //pos x + i * width, pos y + j * height
+	Point2D botRight = game_state->SDLPointToMapCoords(Point2D(dest.x + dest.w, dest.y + dest.h));
 
 	bool b = false;
 	for (int y = topLeft.getY(); y < botRight.getY(); y++) {
@@ -78,11 +78,11 @@ bool GameMap::IntersectFood(SDL_Rect dest){
 			if (map[x][y] != MapCell::Wall && map[x][y] != MapCell::Empty) {
 			
 				if (map[x][y] == MapCell::Vitamins) {
-					game_->addPoints(POINTS_PER_VITAMIN);
+					game_state->addPoints(POINTS_PER_VITAMIN);
 					b = true;
 				}
 				else {
-					game_->addPoints(POINTS_PER_FOOD);
+					game_state->addPoints(POINTS_PER_FOOD);
 				}
 				write(x, y, MapCell::Empty);
 			}

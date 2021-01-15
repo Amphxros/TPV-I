@@ -5,29 +5,14 @@
 #include <cstdlib>	// Para el random
 #include "SmartGhost.h"
 
-Game::Game()
+Game::Game(App* app): GameState(app)
 {
-	srand(NULL);
-	SDL_Init(SDL_INIT_EVERYTHING);
-	window_ = SDL_CreateWindow("ManPac", SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED, WIN_WIDTH, WIN_HEIGHT, SDL_WINDOW_SHOWN);
-	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
-	if (window_ == nullptr || renderer_ == nullptr)
-		throw "Error cargando SDL";
-	else {
-	for (int i = 0; i < NUM_TEXTURES; i++) {
-		textures[i] = new Texture(renderer_, "", 1, 1);
-	}	
+	
 	init();
-	}
 }
 
 Game::~Game()
 {	
-	// Borrado de texturas
-	for (int i = 0; i < NUM_TEXTURES; i++) {
-		delete textures[i];	textures[i] = nullptr;
-	}
 	//borrado de objetos
 	clear();
 	//destruccion de cosas de sdl

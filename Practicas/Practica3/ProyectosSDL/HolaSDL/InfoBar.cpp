@@ -1,8 +1,8 @@
 #include "InfoBar.h"
 #include "Game.h"
 
-InfoBar::InfoBar(Vector2D pos, double width, double height, Texture* texture, Texture* nums, Game* game):
- GameObject(pos, width,height,texture, game),num_texture(nums), points_(0){		
+InfoBar::InfoBar(Vector2D pos, double width, double height, Texture* texture, Texture* nums, GameState* game):
+ GameObject(pos, width,height,texture, game),num_texture(nums), points_(0), game_state(static_cast<Game*>(game)){		
 }
 void InfoBar::setPuntos(int p)
 {
@@ -30,7 +30,7 @@ void InfoBar::render()
 	}
 
 	//renderizado de las vidas
-	for(int i=0;i<game_->getVidas();i++){
+	for(int i=0;i<game_state->getVidas();i++){
 		SDL_Rect dest;
 		dest.x=(pos_.getX()) - TAM_TILE* i + 5;
 		dest.y=pos_.getY() + OFFSET/2;

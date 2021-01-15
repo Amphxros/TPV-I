@@ -9,7 +9,7 @@ class Pacman:
 {
 public:
 	Pacman() : GameCharacter() { throw "Pacman nulo"; }
-	Pacman(Point2D pos, double speed,double width, double height, Texture* texture, Game* game_, int numVidas);
+	Pacman(Point2D pos, double speed,double width, double height, Texture* texture, GameState* game_, int numVidas);
 	virtual ~Pacman();
 
 	void render();
