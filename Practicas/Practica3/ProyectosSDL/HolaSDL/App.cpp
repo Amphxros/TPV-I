@@ -1,5 +1,5 @@
 #include "App.h"
-
+#include "Game.h"
 App::App()
 {
 	srand(NULL);
@@ -14,11 +14,13 @@ App::App()
 			textures[i] = new Texture(renderer_, textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
 		}
 		states_ = new GameStateMachine();
+		states_->pushState(new Game(this));
 	}
 }
 
 App::~App()
 {
+
 	//destruccion de cosas de sdl
 	SDL_DestroyRenderer(renderer_);
 	SDL_DestroyWindow(window_);
@@ -84,12 +86,20 @@ void App::toMainMenu(App* app)
 
 void App::render()
 {
+	SDL_RenderClear(renderer_);
+	states_->getCurrentState()->render();
+	SDL_RenderPresent(renderer_);
 }
 
 void App::update()
 {
+	states_->getCurrentState()->update();
+
 }
 
 void App::handleEvents()
 {
+	SDL_Event event_;
+	states_->getCurrentState()->handleEvents(event_);
+
 }

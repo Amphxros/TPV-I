@@ -27,10 +27,12 @@ public:
 	//constructora
 	Game(App* app);
 	//destructora
-	~Game();
+	virtual ~Game();
 
-	//bucle principal
-	void run();
+	virtual void render();  //renderiza los elementos del juego
+	virtual void update();  //actualiza los elementos de juego(posiciones, control de colisiones ...)
+	virtual void handleEvents(SDL_Event& event);	// Controla la salida del juego y los eventos de Pacman
+
 	//carga el fichero seed.pac
 	void loadFromFile(int seed);
 
@@ -65,8 +67,6 @@ public:
 	void addPoints(int points) { infoBar_->setPuntos(infoBar_->getPuntos() + points); }
 
 private:
-	SDL_Window* window_=nullptr; //puntero a ventana
-	SDL_Renderer* renderer_=nullptr; // puntero al renderer
 
 	GameMap* map_=nullptr; //mapa
 	Pacman* pacman_=nullptr;// pacman
@@ -74,9 +74,6 @@ private:
 
 	std::list<Ghost*>ghosts_;	//lista de fantasmas
 	
-	void render();  //renderiza los elementos del juego
-	void update();  //actualiza los elementos de juego(posiciones, control de colisiones ...)
-	void handleEvents();	// Controla la salida del juego y los eventos de Pacman
 	
 	void saveToFile();
 
@@ -87,8 +84,7 @@ private:
 	// pasa de nivel
 	void nextLevel();
 
-	bool exit_ = false;
-
+	
 	int dim_map_x = 0;
 	int dim_map_y = 0;
 	int level_ = 0;

@@ -4,8 +4,9 @@
 #include <fstream>
 #include <cstdlib>	// Para el random
 #include "SmartGhost.h"
+#include "App.h"
 
-Game::Game(App* app): GameState(app)
+Game::Game(App* app): GameState(app), level_(0)
 {
 	
 	init();
@@ -16,20 +17,18 @@ Game::~Game()
 	//borrado de objetos
 	clear();
 	//destruccion de cosas de sdl
-	SDL_DestroyRenderer(renderer_);
-	SDL_DestroyWindow(window_);
-	SDL_Quit();
+	
 }
 
 void Game::init()
 {	
 	// Cargado del Mapa
-	map_ = new GameMap(Vector2D(0,0),TAM_TILE,TAM_TILE,30, 30, nullptr, this);
+	map_ = new GameMap(Vector2D(0,0),TAM_TILE,TAM_TILE,30, 30,app_->getTexture(TextureOrder::MAP_SPRITESHEET) , this);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), map_);
 	map_->setItList(it);
 
 	// Cargado de la barra de puntuaciones
-	infoBar_= new InfoBar(Vector2D(WIN_WIDTH - OFFSET,0), 0, 0, nullptr, nullptr,this);
+	infoBar_= new InfoBar(Vector2D(WIN_WIDTH - OFFSET,0), 0, 0,app_->getTexture(TextureOrder::CHAR_SPRITESHEET), app_->getTexture(TextureOrder::DIGITS),this);
 	it = gObjects_.insert(gObjects_.end(), infoBar_);
 	infoBar_->setItList(it);
 
@@ -180,8 +179,9 @@ bool Game::CollisionWithGhosts(Pacman* g)
 			else {
 				pacman_->resetPos();
 				pacman_->setVidas(pacman_->getVidas()-1);
-				if (pacman_->getVidas()< 0) 
-					exit_ = true;
+				if (pacman_->getVidas() < 0) {
+					app_->quit();
+				}
 			}
 			return true;
 		}
@@ -221,28 +221,6 @@ bool Game::CollisionBetweenGhosts(Ghost* g)
 		}
 	}
 	return false;
-}
-
-// Bucle principal del juego
-void Game::run()
-{
-	while (!exit_)
-	{
-		handleEvents();
-		update();		// Update antes del render para evitar lios
-		render();
-		
-		if((infoBar_->getPuntos() >= (level_ + 1) * POINTS_PER_LEVEL)){
-			if(level_>=NUM_LEVELS){ //si se ha superado todos los niveles disponiles cerramos el juego
-				exit_ = true;
-			}	
-			else 
-			{
-				nextLevel(); //si no cargamos el siguiente nivel
-			}
-		}
-		SDL_Delay(DELAY);
-	}
 }
 
 void Game::loadFromFile(int seed)
@@ -386,13 +364,7 @@ void Game::clear()
 
 void Game::render()
 {
-	SDL_RenderClear(renderer_);	// Limpieza del frame
-	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);	// Color del fondo
-
-	for (GameObject* g : gObjects_) //renderizado
-		g->render();
-
-	SDL_RenderPresent(renderer_);
+	GameState::render();
 }
 
 void Game::update()
@@ -401,22 +373,10 @@ void Game::update()
 		(*(it++))->update();
 }
 
-void Game::handleEvents()
+void Game::handleEvents(SDL_Event& event)
 {
-	//manejo eventos
-	SDL_Event event;
-	while (SDL_PollEvent(&event)) {
-		if (event.type == SDL_QUIT) {
-			exit_ = true;
-		}
-		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_g) {
-			saveToFile();
-		}
-		else
-		{
-			pacman_->handleEvents(event);	
-		}
-	}
+	
+	GameState::handleEvents(event);
 }
 
 
