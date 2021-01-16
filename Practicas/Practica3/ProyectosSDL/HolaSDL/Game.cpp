@@ -98,7 +98,7 @@ void Game::nextLevel()
 void Game::createPacman(Vector2D pos)
 {
 	// Creamos Pacman, lo añadimos a la lista y movemos el iterador
-	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_TILE), (pos.getY()*TAM_TILE)),TAM_TILE/2,TAM_TILE +5,TAM_TILE +5, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this,NUM_VIDAS);
+	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_TILE), (pos.getY()*TAM_TILE)),TAM_TILE/4,TAM_TILE +5,TAM_TILE +5, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this,NUM_VIDAS);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), pacman_);
 	pacman_->setItList(it);
 
@@ -110,7 +110,7 @@ void Game::createPacman(Vector2D pos)
 void Game::createGhost(Vector2D pos, int color)
 {
 	// Creamos el Fantasma, lo añadimos a la lista y movemos el iterador
-	Ghost* g = new Ghost(Vector2D((pos.getX() * TAM_TILE), (pos.getY() * TAM_TILE)),TAM_TILE/2,TAM_TILE,TAM_TILE, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, color);
+	Ghost* g = new Ghost(Vector2D((pos.getX() * TAM_TILE), (pos.getY() * TAM_TILE)),TAM_TILE/4,TAM_TILE,TAM_TILE, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, color);
 
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
 	g->setItList(it);
@@ -124,7 +124,7 @@ void Game::createGhost(Vector2D pos, int color)
 // Funciona igual que la creacion de fantasma normal
 void Game::createSmartGhost(Vector2D pos)
 {
-	SmartGhost* g = new SmartGhost(Vector2D(( pos.getX() * TAM_TILE), ( pos.getY() * TAM_TILE)),TAM_TILE/2, TAM_TILE, TAM_TILE, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, 4);
+	SmartGhost* g = new SmartGhost(Vector2D(( pos.getX() * TAM_TILE), ( pos.getY() * TAM_TILE)),TAM_TILE/4, TAM_TILE, TAM_TILE, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, 4);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
 	g->setItList(it);
 
@@ -376,7 +376,9 @@ void Game::update()
 	for (auto it = gObjects_.begin(); it != gObjects_.end();) //update		
 		(*(it++))->update();
 
-	SDL_Delay(2*DELAY);
+	if (infoBar_->getPuntos() > POINTS_PER_LEVEL* (level_+1)) {
+		nextLevel();
+	}
 }
 
 void Game::handleEvents(SDL_Event& event)
