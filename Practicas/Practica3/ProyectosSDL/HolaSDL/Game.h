@@ -33,6 +33,7 @@ public:
 	virtual void update();  //actualiza los elementos de juego(posiciones, control de colisiones ...)
 	virtual void handleEvents(SDL_Event& event);	// Controla la salida del juego y los eventos de Pacman
 
+	void saveToFile();
 	//carga el fichero seed.pac
 	void loadFromFile(int seed);
 
@@ -75,7 +76,7 @@ private:
 	std::list<Ghost*>ghosts_;	//lista de fantasmas
 	
 	
-	void saveToFile();
+	
 
 	//creacion de texturas y objetos
 	void init();

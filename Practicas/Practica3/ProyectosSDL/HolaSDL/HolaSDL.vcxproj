@@ -80,6 +80,7 @@
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="Pacman.cpp" />
+    <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="SmartGhost.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
@@ -98,6 +99,7 @@
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MenuButton.h" />
     <ClInclude Include="Pacman.h" />
+    <ClInclude Include="PauseState.h" />
     <ClInclude Include="SmartGhost.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2D.h" />

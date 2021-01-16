@@ -8,7 +8,7 @@ MainMenuState::MainMenuState(App* app):
 	std::list<GameObject*>::iterator it_ = gObjects_.insert(gObjects_.end(), button);
 	std::list<EventHandler*>::iterator ev_ = evHandlers_.insert(evHandlers_.end(), button);
 
-	button = new MenuButton(Vector2D(2* WIN_WIDTH/5,WIN_HEIGHT/2), 150, 100, app_->getTexture(TextureOrder::BUTTON_MAIN), this, App::pauseGame);
+	button = new MenuButton(Vector2D(2* WIN_WIDTH/5,WIN_HEIGHT/2), 150, 100, app_->getTexture(TextureOrder::BUTTON_RESTART), this, App::loadGame);
 	it_ = gObjects_.insert(gObjects_.end(), button);
 	ev_ = evHandlers_.insert(evHandlers_.end(), button);
 

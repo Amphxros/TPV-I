@@ -46,6 +46,8 @@ public:
 	void play();
 	void pause();
 	void resume();
+	void saveGame();
+	void loadGame();
 	void toMainMenu();
 
 	static void quitApp(App* app);
@@ -53,6 +55,8 @@ public:
 	static void resume(App* app);
 	static void pauseGame(App* app);
 	static void toMainMenu(App* app);
+	static void saveGame(App* app);
+	static void loadGame(App* app);
 
 	Texture* getTexture(TextureOrder t) { return textures[(int)t]; }
 

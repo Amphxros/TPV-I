@@ -1,6 +1,8 @@
 #include "App.h"
 #include "Game.h"
 #include "MainMenuState.h"
+#include "PauseState.h"
+#include <iostream>
 App::App()
 {
 	srand(NULL);
@@ -46,7 +48,7 @@ void App::play()
 void App::pause()
 {
 
-	states_->pushState(nullptr);
+	states_->pushState(new PauseState(this));
 }
 
 void App::resume()
@@ -54,10 +56,27 @@ void App::resume()
 	states_->popState();
 }
 
+void App::saveGame()
+{
+	states_->popState();
+	if (dynamic_cast<Game*>(states_->getCurrentState() )!= nullptr) {
+		static_cast<Game*>(states_->getCurrentState())->saveToFile();
+	}
+}
+
+void App::loadGame()
+{
+	///pillar el nº de archivo
+	int seed;
+	std::cin >> seed;
+	
+	states_->pushState(new Game(this));
+	static_cast<Game*>(states_->getCurrentState())->loadFromFile(seed);
+}
+
 void App::toMainMenu()
 {
 
-	states_->popState();
 }
 
 void App::quitApp(App* app)
@@ -85,6 +104,16 @@ void App::toMainMenu(App* app)
 	app->toMainMenu();
 }
 
+void App::saveGame(App* app)
+{
+	app->saveGame();
+}
+
+void App::loadGame(App* app)
+{
+	app->loadGame();
+}
+
 void App::render()
 {
 	SDL_RenderClear(renderer_);
@@ -101,6 +130,7 @@ void App::update()
 void App::handleEvents()
 {
 	SDL_Event event_;
+	while(SDL_PollEvent(&event_))
 	states_->getCurrentState()->handleEvents(event_);
 
 }

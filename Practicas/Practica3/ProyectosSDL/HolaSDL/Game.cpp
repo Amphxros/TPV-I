@@ -381,5 +381,11 @@ void Game::update()
 
 void Game::handleEvents(SDL_Event& event)
 {
-	GameState::handleEvents(event);
+
+	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) {
+		app_->pause();
+	}
+	else {
+		GameState::handleEvents(event);
+	}
 }

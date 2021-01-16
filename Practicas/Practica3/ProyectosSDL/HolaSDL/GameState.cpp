@@ -35,13 +35,13 @@ void GameState::update()
 void GameState::handleEvents(SDL_Event& event)
 {
 	bool handled = false;
-	while (SDL_PollEvent(&event)) {
-		for (list<EventHandler*>::iterator ev = evHandlers_.begin(); ev != evHandlers_.end() && !handled; ev++)
-		{
-			if ((*(ev))->handleEvents(event)) {
-				return;
-			}
-
+	
+	for (list<EventHandler*>::iterator ev = evHandlers_.begin(); ev != evHandlers_.end() && !handled; ev++)
+	{
+		if ((*(ev))->handleEvents(event)) {
+			return;
 		}
+
 	}
+	
 }
