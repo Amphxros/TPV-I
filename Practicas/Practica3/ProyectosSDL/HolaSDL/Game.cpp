@@ -101,6 +101,10 @@ void Game::createPacman(Vector2D pos)
 	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_TILE), (pos.getY()*TAM_TILE)),TAM_TILE/2,TAM_TILE +5,TAM_TILE +5, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this,NUM_VIDAS);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), pacman_);
 	pacman_->setItList(it);
+
+	std::list < EventHandler*>::iterator ev = evHandlers_.insert(evHandlers_.begin(), pacman_);
+	pacman_->setItHandler(ev);
+
 }
 
 void Game::createGhost(Vector2D pos, int color)
@@ -371,15 +375,11 @@ void Game::update()
 {
 	for (auto it = gObjects_.begin(); it != gObjects_.end();) //update		
 		(*(it++))->update();
+
+	SDL_Delay(2*DELAY);
 }
 
 void Game::handleEvents(SDL_Event& event)
 {
-	
 	GameState::handleEvents(event);
 }
-
-
-
-
-

@@ -18,7 +18,7 @@ MenuButton::~MenuButton()
 void MenuButton::render()
 {
 	SDL_Rect dest = getdest();
-	texture_->renderFrame(dest, 1, (int)click);
+	texture_->renderFrame(dest, 0, click);
 }
 
 void MenuButton::update()
@@ -35,16 +35,21 @@ bool MenuButton::handleEvents(SDL_Event& event)
 			click = State::CLICKED;
 			if (call_back_ != nullptr)
 				call_back_(game_->getApp());
+		
+			return true;
 		}
+
 		break;
 
 	case SDL_MOUSEMOTION:
 
 		if (SDL_PointInRect(&(cursor_pos), &getdest())) { //dentro del boton pero sin clickar
 			click = State::HIGHLIGHTED;
+			return true;
 		}
 		else {  // Cualquier posicion que no sea en el boton
 			click = State::NORMAL;
+			return true;
 		}
 		break;
 
@@ -52,5 +57,4 @@ bool MenuButton::handleEvents(SDL_Event& event)
 		break;
 	}
 
-	return false;
 }

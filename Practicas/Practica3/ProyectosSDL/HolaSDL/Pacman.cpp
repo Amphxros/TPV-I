@@ -2,7 +2,7 @@
 #include "Game.h"
 
 Pacman::Pacman(Point2D pos, double speed, double width, double height, Texture* texture, GameState* game, int numVidas):
-	GameCharacter(pos,speed,width,height,texture,game), vidas(numVidas)
+	GameCharacter(pos,speed,width,height,texture,game), vidas(numVidas),EventHandler()
 {
 	dir_ = dirs_[directions::LEFT];
 }
@@ -70,6 +70,7 @@ bool Pacman::handleEvents(SDL_Event& event)
 	default:
 		break;
 	}
+
 	return ev;
 }
 

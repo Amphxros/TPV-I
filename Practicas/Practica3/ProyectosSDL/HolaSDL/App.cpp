@@ -1,5 +1,6 @@
 #include "App.h"
 #include "Game.h"
+#include "MainMenuState.h"
 App::App()
 {
 	srand(NULL);
@@ -14,7 +15,7 @@ App::App()
 			textures[i] = new Texture(renderer_, textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
 		}
 		states_ = new GameStateMachine();
-		states_->pushState(new Game(this));
+		states_->pushState(new MainMenuState(this));
 	}
 }
 
@@ -39,7 +40,7 @@ void App::run()
 
 void App::play()
 {
-	states_->pushState(nullptr);
+	states_->pushState(new Game(this));
 }
 
 void App::pause()
