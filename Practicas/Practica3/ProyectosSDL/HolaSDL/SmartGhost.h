@@ -1,6 +1,7 @@
 #pragma once
 #include "Ghost.h"
 
+#include "checkML.h"
 class PlayState;
 // La edad determinará si se puede reproducir, tiene que esperar o tiene que morir
 enum Age{CHILD, ADULT, QUARANTINE}; //edad

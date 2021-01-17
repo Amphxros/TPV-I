@@ -69,7 +69,7 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="EndState.cpp" />
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="GameCharacter.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameObject.cpp" />

@@ -8,18 +8,25 @@ PauseState::PauseState(App* app):
 	std::list<GameObject*>::iterator it_ = gObjects_.insert(gObjects_.end(), button);
 	std::list<EventHandler*>::iterator ev_ = evHandlers_.insert(evHandlers_.end(), button);
 
-	button = new MenuButton(Vector2D(2 * WIN_WIDTH / 5, WIN_HEIGHT / 2), 150, 100, app_->getTexture(TextureOrder::BUTTON_PLAY), this, App::saveGame);
-	it_ = gObjects_.insert(gObjects_.end(), button);
-	ev_ = evHandlers_.insert(evHandlers_.end(), button);
+	MenuButton* button1 = new MenuButton(Vector2D(2 * WIN_WIDTH / 5, WIN_HEIGHT / 2), 150, 100, app_->getTexture(TextureOrder::BUTTON_PLAY), this, App::saveGame);
+	std::list<GameObject*>::iterator it1 = gObjects_.insert(gObjects_.end(), button1);
+	std::list<EventHandler*>::iterator ev1 = evHandlers_.insert(evHandlers_.end(), button1);
 
-	button = new MenuButton(Vector2D(3 * WIN_WIDTH / 5, WIN_HEIGHT / 2), 150, 100, app_->getTexture(TextureOrder::BUTTON_MAIN), this, App::toMainMenu);
-	it_ = gObjects_.insert(gObjects_.end(), button);
-	ev_ = evHandlers_.insert(evHandlers_.end(), button);
+	MenuButton* button2 = new MenuButton(Vector2D(3 * WIN_WIDTH / 5, WIN_HEIGHT / 2), 150, 100, app_->getTexture(TextureOrder::BUTTON_MAIN), this, App::toMainMenu);
+	std::list<GameObject*>::iterator it2 = gObjects_.insert(gObjects_.end(), button2);
+	std::list<EventHandler*>::iterator ev2 = evHandlers_.insert(evHandlers_.end(), button2);
 }
 
 void PauseState::render()
 {
 	GameState::render();
+}
+
+void PauseState::update()
+{
+	//Los updates de los botones estan vacios 
+	//como en este estado solo hay botones 
+	//no necesita llamarse al GameState::update
 }
 
 void PauseState::handleEvents(SDL_Event& event)

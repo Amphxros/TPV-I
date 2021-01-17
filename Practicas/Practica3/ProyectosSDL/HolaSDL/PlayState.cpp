@@ -76,8 +76,10 @@ void PlayState::load(std::string filename)
 			}
 		}
 	}
-	else
+	else {
 		throw "Archivo no encontrado";
+	
+	}
 }
 
 void PlayState::nextLevel()
@@ -307,6 +309,7 @@ void PlayState::saveToFile() {
 	//pillamos el nombre del fichero
 	int seed = -1;
 	do {
+		std::cout << "Introduce num del archivo" << std::endl;
 		std::cin >> seed;
 	} while (seed < 0);
 

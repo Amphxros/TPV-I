@@ -3,6 +3,8 @@
 #include <string>
 #include "GameStateMachine.h"
 
+#include "checkML.h"
+
 enum TextureOrder { 
 	INIT,
 	MAP_SPRITESHEET,

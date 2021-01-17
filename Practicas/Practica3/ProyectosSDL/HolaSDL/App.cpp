@@ -64,7 +64,9 @@ void App::resume()
 void App::saveGame()
 {
 	states_->popState();
+	
 	if (dynamic_cast<PlayState*>(states_->getCurrentState() )!= nullptr) {
+	
 		static_cast<PlayState*>(states_->getCurrentState())->saveToFile();
 	}
 }
@@ -72,8 +74,9 @@ void App::saveGame()
 void App::loadGame()
 {
 	///pillar el nº de archivo
-	int seed;
-	std::cin >> seed;
+	Uint32 flag=0;
+	int seed = SDL_ShowSimpleMessageBox(flag, "", "Introduce nombre de archivo", window_);
+	
 	
 	states_->pushState(new PlayState(this));
 	static_cast<PlayState*>(states_->getCurrentState())->loadFromFile(seed);
