@@ -88,7 +88,7 @@ private:
 	
 	int dim_map_x = 0;
 	int dim_map_y = 0;
-	int level_ = 0;
+	int level_;
 
 	int num_ghosts = 0;
 };

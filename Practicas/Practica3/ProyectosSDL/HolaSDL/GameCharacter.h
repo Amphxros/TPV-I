@@ -33,7 +33,6 @@ protected:
     Point2D pos_init;	//posicion inicial
     Vector2D dir_;		//direccion actual
 	float speed_;		//velocidad
-	PlayState* game_state;
-   
+	PlayState* game_state; //esto es static_cast<PlayState*>(game)
 };
 

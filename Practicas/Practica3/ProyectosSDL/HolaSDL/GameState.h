@@ -21,7 +21,6 @@ public:
 
 protected:
 	std::list<GameObject*> gObjects_;
-	std::list<std::list<GameObject*>::iterator> gObjectsToErase_;
 	std::list<EventHandler*> evHandlers_;
 
 	App* app_;

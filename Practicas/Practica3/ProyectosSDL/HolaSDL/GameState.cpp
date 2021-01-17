@@ -30,14 +30,6 @@ void GameState::update()
 {
 	for (auto it = gObjects_.begin(); it != gObjects_.end();) //update		
 		(*(it++))->update();
-
-	for (auto it = gObjectsToErase_.begin(); it != gObjectsToErase_.end();) {
-		auto aux = it;
-		gObjects_.erase(*aux);
-		it++;
-	}
-
-	gObjectsToErase_.clear();
 }
 
 void GameState::handleEvents(SDL_Event& event)

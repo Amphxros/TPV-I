@@ -54,8 +54,8 @@ bool Ghost::chooseDirection()
 		}	
 	}
 
-	if(choises.size()==0){	// Esto es  porque estaria encerrado entre muros
-		throw "no puede moverse";
+	if(choises.size()==0){	
+		//los fantasmas no podrian moverse
 		return false;
 	}
 
