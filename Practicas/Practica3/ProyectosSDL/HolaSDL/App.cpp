@@ -23,6 +23,10 @@ App::App()
 
 App::~App()
 {
+	delete states_;
+	for (int i = 0; i < NUM_TEXTURES; i++) {
+		delete textures[i];
+	}
 
 	//destruccion de cosas de sdl
 	SDL_DestroyRenderer(renderer_);
@@ -76,7 +80,9 @@ void App::loadGame()
 
 void App::toMainMenu()
 {
-
+	while (dynamic_cast<MainMenuState*>(states_->getCurrentState()) == nullptr) {
+		states_->popState();
+	}
 }
 
 void App::quitApp(App* app)

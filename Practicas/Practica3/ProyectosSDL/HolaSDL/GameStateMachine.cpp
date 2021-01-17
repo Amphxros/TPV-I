@@ -4,6 +4,9 @@ GameStateMachine::GameStateMachine() {}
 
 GameStateMachine::~GameStateMachine()
 {
+	while (!states_.empty()) {
+		states_.pop();
+	}
 }
 
 GameState* GameStateMachine::getCurrentState()

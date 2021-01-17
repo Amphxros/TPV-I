@@ -98,7 +98,7 @@ void Game::nextLevel()
 void Game::createPacman(Vector2D pos)
 {
 	// Creamos Pacman, lo añadimos a la lista y movemos el iterador
-	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_TILE), (pos.getY()*TAM_TILE)),TAM_TILE/4,TAM_TILE +5,TAM_TILE +5, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this,NUM_VIDAS);
+	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_TILE), (pos.getY()*TAM_TILE)),TAM_TILE/2,TAM_TILE +5,TAM_TILE +5, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this,NUM_VIDAS);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), pacman_);
 	pacman_->setItList(it);
 
@@ -363,6 +363,7 @@ void Game::clear()
 		delete* aux;
 	}
 	gObjects_.clear();
+	evHandlers_.clear();
 	ghosts_.clear();
 }
 
