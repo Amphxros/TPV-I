@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "MainMenuState.h"
 #include "PauseState.h"
+#include "EndState.h"
 #include <iostream>
 App::App()
 {
@@ -83,6 +84,11 @@ void App::toMainMenu()
 	while (dynamic_cast<MainMenuState*>(states_->getCurrentState()) == nullptr) {
 		states_->popState();
 	}
+}
+
+void App::endGame()
+{
+	states_->pushState(new EndState(this));
 }
 
 void App::quitApp(App* app)

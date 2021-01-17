@@ -184,7 +184,7 @@ bool Game::CollisionWithGhosts(Pacman* g)
 				pacman_->resetPos();
 				pacman_->setVidas(pacman_->getVidas()-1);
 				if (pacman_->getVidas() < 0) {
-					app_->quit();
+					app_->endGame();
 				}
 			}
 			return true;

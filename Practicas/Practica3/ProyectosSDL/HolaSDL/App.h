@@ -49,6 +49,7 @@ public:
 	void saveGame();
 	void loadGame();
 	void toMainMenu();
+	void endGame();
 
 	static void quitApp(App* app);
 	static void playGame(App* app);
