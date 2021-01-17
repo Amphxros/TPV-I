@@ -90,7 +90,7 @@
     <ClInclude Include="consts.h" />
     <ClInclude Include="EndState.h" />
     <ClInclude Include="EventHandler.h" />
-    <ClInclude Include="Game.h" />
+    <ClInclude Include="PlayState.h" />
     <ClInclude Include="GameCharacter.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameObject.h" />

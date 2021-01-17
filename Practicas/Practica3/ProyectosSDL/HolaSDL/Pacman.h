@@ -3,7 +3,7 @@
 #include "EventHandler.h"
 
 #include "checkML.h"
-class Game;
+class PlayState;
 class Pacman: 
 	public GameCharacter, public EventHandler
 {

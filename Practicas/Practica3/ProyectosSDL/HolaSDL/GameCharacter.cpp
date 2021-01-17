@@ -1,5 +1,5 @@
 #include "GameCharacter.h"
-#include "Game.h"
+#include "PlayState.h"
 
 GameCharacter::~GameCharacter(){}
 
@@ -54,7 +54,7 @@ GameCharacter::GameCharacter() :
 }
 
 GameCharacter::GameCharacter(Point2D pos, double speed, double width, double height, Texture* texture, GameState* game):
-	GameObject(pos, width, height, texture, game),speed_(speed), pos_init(pos_),game_state(static_cast<Game*>(game))
+	GameObject(pos, width, height, texture, game),speed_(speed), pos_init(pos_),game_state(static_cast<PlayState*>(game))
 {
 	dir_ = dirs_[directions::UP];
 }

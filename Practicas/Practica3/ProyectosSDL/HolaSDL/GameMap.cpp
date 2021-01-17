@@ -1,10 +1,10 @@
 #include "GameMap.h"
 
-#include "Game.h"
+#include "PlayState.h"
 #include <iostream>
 
 GameMap::GameMap(Point2D pos, double width, double height, int rows, int cols, Texture* texture, GameState* game):
-	GameObject(pos,width,height,texture,game), rows_(rows), cols_(cols), game_state(static_cast<Game*>(game))
+	GameObject(pos,width,height,texture,game), rows_(rows), cols_(cols), game_state(static_cast<PlayState*>(game))
 {
 	map = new MapCell * [cols_];
 

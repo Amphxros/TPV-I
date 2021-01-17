@@ -5,7 +5,7 @@
 #include "GameObject.h"
 #include "consts.h"
 
-class Game;
+class PlayState;
 class InfoBar:
 	public GameObject
 {
@@ -23,6 +23,6 @@ private:
 	int points_=0;
 	std::vector<int> punt_;
 
-	Game* game_state;
+	PlayState* game_state;
 };
 

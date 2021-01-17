@@ -1,5 +1,5 @@
 #include "SmartGhost.h"
-#include "Game.h"
+#include "PlayState.h"
 #include <iostream>
 
 SmartGhost::SmartGhost(Point2D pos, double speed, double width, double height, Texture* texture, GameState* game, int color):

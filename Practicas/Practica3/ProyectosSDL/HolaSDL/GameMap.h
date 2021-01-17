@@ -7,7 +7,7 @@ using namespace std;
 
 enum class MapCell {Empty, Wall, Food, Vitamins};	//Solo contiene info de elementos estáticos
 
-class Game;
+class PlayState;
 class GameMap:
 	public GameObject
 {
@@ -39,6 +39,6 @@ public:
 private:
 	MapCell** map; //Array de celdas de tipo MapCell; Contienen info de lo que hay en las casillas
 	int rows_, cols_; //numero de filas y columnas
-	Game* game_state;
+	PlayState* game_state;
 };
 

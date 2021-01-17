@@ -1,8 +1,8 @@
 #include "InfoBar.h"
-#include "Game.h"
+#include "PlayState.h"
 
 InfoBar::InfoBar(Vector2D pos, double width, double height, Texture* texture, Texture* nums, GameState* game):
- GameObject(pos, width,height,texture, game),num_texture(nums), points_(0), game_state(static_cast<Game*>(game)){		
+ GameObject(pos, width,height,texture, game),num_texture(nums), points_(0), game_state(static_cast<PlayState*>(game)){		
 }
 void InfoBar::setPuntos(int p)
 {

@@ -1,5 +1,5 @@
 #include "App.h"
-#include "Game.h"
+#include "PlayState.h"
 #include "MainMenuState.h"
 #include "PauseState.h"
 #include "EndState.h"
@@ -47,7 +47,7 @@ void App::run()
 
 void App::play()
 {
-	states_->pushState(new Game(this));
+	states_->pushState(new PlayState(this));
 }
 
 void App::pause()
@@ -64,8 +64,8 @@ void App::resume()
 void App::saveGame()
 {
 	states_->popState();
-	if (dynamic_cast<Game*>(states_->getCurrentState() )!= nullptr) {
-		static_cast<Game*>(states_->getCurrentState())->saveToFile();
+	if (dynamic_cast<PlayState*>(states_->getCurrentState() )!= nullptr) {
+		static_cast<PlayState*>(states_->getCurrentState())->saveToFile();
 	}
 }
 
@@ -75,8 +75,8 @@ void App::loadGame()
 	int seed;
 	std::cin >> seed;
 	
-	states_->pushState(new Game(this));
-	static_cast<Game*>(states_->getCurrentState())->loadFromFile(seed);
+	states_->pushState(new PlayState(this));
+	static_cast<PlayState*>(states_->getCurrentState())->loadFromFile(seed);
 }
 
 void App::toMainMenu()

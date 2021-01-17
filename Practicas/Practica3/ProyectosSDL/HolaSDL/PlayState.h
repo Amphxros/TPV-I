@@ -21,13 +21,13 @@ const std::string map_name[NUM_LEVELS] = {		//array de datos de los ficheros del
 };
 
 ///clase Game
-class Game: public GameState
+class PlayState: public GameState
 {
 public:
 	//constructora
-	Game(App* app);
+	PlayState(App* app);
 	//destructora
-	virtual ~Game();
+	virtual ~PlayState();
 
 	virtual void render();  //renderiza los elementos del juego
 	virtual void update();  //actualiza los elementos de juego(posiciones, control de colisiones ...)

@@ -3,7 +3,7 @@
 #include "SDL_image.h"
 #include "checkML.h"
 #include <iostream>
-#include "Game.h"
+#include "PlayState.h"
 #include "App.h"
 
 using namespace std;
@@ -16,14 +16,7 @@ void firstTest() {
 		
 		App g = App();
 		g.run();
-		
-		/*if (carga_ == "c") {
-			int seed;
-			std::cout << "Introduce codigo: ";
-			std::cin >> seed;
-			g.loadFromFile(seed);
-		}*/
-
+	
 	}
 	catch(std::string s){
 		std::cout << s;

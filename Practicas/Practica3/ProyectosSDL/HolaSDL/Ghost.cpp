@@ -1,5 +1,5 @@
 #include "Ghost.h"
-#include "Game.h"
+#include "PlayState.h"
 #include <vector>
 
 Ghost::Ghost(Point2D pos, double speed, double width, double height, Texture* texture, GameState* game, int color) :

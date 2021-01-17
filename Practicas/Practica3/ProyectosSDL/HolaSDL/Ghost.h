@@ -2,7 +2,7 @@
 
 #include "checkML.h"
 #include "GameCharacter.h"
-class Game;
+class PlayState;
 class Ghost:
 	public GameCharacter
 {

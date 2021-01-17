@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "PlayState.h"
 
 #include <iostream>
 #include <fstream>
@@ -6,13 +6,13 @@
 #include "SmartGhost.h"
 #include "App.h"
 
-Game::Game(App* app): GameState(app), level_(0)
+PlayState::PlayState(App* app): GameState(app), level_(0)
 {
 	
 	init();
 }
 
-Game::~Game()
+PlayState::~PlayState()
 {	
 	//borrado de objetos
 	clear();
@@ -20,7 +20,7 @@ Game::~Game()
 	
 }
 
-void Game::init()
+void PlayState::init()
 {	
 	// Cargado del Mapa
 	map_ = new GameMap(Vector2D(0,0),TAM_TILE,TAM_TILE,30, 30,app_->getTexture(TextureOrder::MAP_SPRITESHEET) , this);
@@ -36,7 +36,7 @@ void Game::init()
 }
 
 
-void Game::load(std::string filename)
+void PlayState::load(std::string filename)
 {
 	std::ifstream file;
 	file.open(filename);
@@ -80,7 +80,7 @@ void Game::load(std::string filename)
 		throw "Archivo no encontrado";
 }
 
-void Game::nextLevel()
+void PlayState::nextLevel()
 {
 	// Datos para el siguiente nivel (Mismos puntos y vidas)
 	int v = pacman_->getVidas();
@@ -95,7 +95,7 @@ void Game::nextLevel()
 	pacman_->setVidas(v);
 }
 
-void Game::createPacman(Vector2D pos)
+void PlayState::createPacman(Vector2D pos)
 {
 	// Creamos Pacman, lo añadimos a la lista y movemos el iterador
 	pacman_ = new Pacman(Vector2D((pos.getX()*TAM_TILE), (pos.getY()*TAM_TILE)),TAM_TILE/2,TAM_TILE +5,TAM_TILE +5, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this,NUM_VIDAS);
@@ -107,7 +107,7 @@ void Game::createPacman(Vector2D pos)
 
 }
 
-void Game::createGhost(Vector2D pos, int color)
+void PlayState::createGhost(Vector2D pos, int color)
 {
 	// Creamos el Fantasma, lo añadimos a la lista y movemos el iterador
 	Ghost* g = new Ghost(Vector2D((pos.getX() * TAM_TILE), (pos.getY() * TAM_TILE)),TAM_TILE/4,TAM_TILE,TAM_TILE, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, color);
@@ -122,7 +122,7 @@ void Game::createGhost(Vector2D pos, int color)
 }
 
 // Funciona igual que la creacion de fantasma normal
-void Game::createSmartGhost(Vector2D pos)
+void PlayState::createSmartGhost(Vector2D pos)
 {
 	SmartGhost* g = new SmartGhost(Vector2D(( pos.getX() * TAM_TILE), ( pos.getY() * TAM_TILE)),TAM_TILE/4, TAM_TILE, TAM_TILE, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, 4);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
@@ -133,7 +133,7 @@ void Game::createSmartGhost(Vector2D pos)
 	num_ghosts++;
 }
 
-void Game::deleteGhost(std::list<GameObject*>::iterator it, std::list<Ghost*>::iterator git)
+void PlayState::deleteGhost(std::list<GameObject*>::iterator it, std::list<Ghost*>::iterator git)
 {
 	// Lo borramos de la lista de objetos y de la de fantasmas
 	gObjects_.erase(it);
@@ -142,7 +142,7 @@ void Game::deleteGhost(std::list<GameObject*>::iterator it, std::list<Ghost*>::i
 }
 
 // Detecta la colision con las paredes
-bool Game::tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos)
+bool PlayState::tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos)
 {
 	SDL_Rect dest; //rectangulo correspondiente a la posicion siguiente
 	dest.x = newPos.getX();
@@ -154,7 +154,7 @@ bool Game::tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos)
 }
 
 // Detecta la interseccion con la comida
-bool Game::eatFood(SDL_Rect rect, Point2D& newPos)
+bool PlayState::eatFood(SDL_Rect rect, Point2D& newPos)
 {
 	SDL_Rect dest; //rectangulo correspondiente a la posicion siguiente
 	dest.x = newPos.getX();
@@ -166,7 +166,7 @@ bool Game::eatFood(SDL_Rect rect, Point2D& newPos)
 }
 
 // Comprueba la colision del pacman con los fantasmas, resetea la posicion suya o de ellos y los elimina si es un fantasma inteligente
-bool Game::CollisionWithGhosts(Pacman* g)
+bool PlayState::CollisionWithGhosts(Pacman* g)
 {
 	for (auto g_ : ghosts_) {
 		if (SDL_HasIntersection(&(g->getdest()), &(g_->getdest()))) {
@@ -194,7 +194,7 @@ bool Game::CollisionWithGhosts(Pacman* g)
 }
 
 //compueba la colision de un fantasma inteligente entre los fantasmas y si es un fantasma normal o uno inteligente y adulto crea un fantasma inteligente
-bool Game::CollisionBetweenGhosts(Ghost* g)
+bool PlayState::CollisionBetweenGhosts(Ghost* g)
 {
 	for (auto g_ : ghosts_) {
 	
@@ -227,7 +227,7 @@ bool Game::CollisionBetweenGhosts(Ghost* g)
 	return false;
 }
 
-void Game::loadFromFile(int seed)
+void PlayState::loadFromFile(int seed)
 {
 	clear(); //borramos todo
 
@@ -302,7 +302,7 @@ void Game::loadFromFile(int seed)
 
 }
 
-void Game::saveToFile() {
+void PlayState::saveToFile() {
 
 	//pillamos el nombre del fichero
 	int seed = -1;
@@ -354,7 +354,7 @@ void Game::saveToFile() {
 	}
 }
 
-void Game::clear()
+void PlayState::clear()
 {
 	//borrado de objetos
 	for (auto g = gObjects_.begin(); g != gObjects_.end();) {
@@ -367,12 +367,12 @@ void Game::clear()
 	ghosts_.clear();
 }
 
-void Game::render()
+void PlayState::render()
 {
 	GameState::render();
 }
 
-void Game::update()
+void PlayState::update()
 {
 	for (auto it = gObjects_.begin(); it != gObjects_.end();) //update		
 		(*(it++))->update();
@@ -382,7 +382,7 @@ void Game::update()
 	}
 }
 
-void Game::handleEvents(SDL_Event& event)
+void PlayState::handleEvents(SDL_Event& event)
 {
 
 	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) {
