@@ -3,10 +3,7 @@
 #include "MainMenuState.h"
 #include "PauseState.h"
 #include "EndState.h"
-
-#include <SDL_ttf.h>
 #include <iostream>
-
 App::App()
 {
 	srand(NULL);

@@ -30,7 +30,7 @@ protected:
 
 	Point2D pos_;				//posicion
 	double width_, height_;		//width y height seran igual a la constante de tile generalmente
-	GameState* game_ = nullptr;		//puntero a gamestate
+	GameState* game_ = nullptr;		//puntero a game
 	Texture* texture_= nullptr;	//textura
 	
 	std::list<GameObject*>::iterator it_;	//iterador
