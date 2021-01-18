@@ -3,6 +3,7 @@
 GameState::GameState(): 
 	app_(nullptr)
 {
+	throw PacmanError("GameState not valid");
 }
 
 GameState::GameState(App* app): 

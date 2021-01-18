@@ -2,12 +2,13 @@
 
 #include "checkML.h"
 #include "GameCharacter.h"
+#include "PacmanError.h"
 class PlayState;
 class Ghost:
 	public GameCharacter
 {
 public:
-	Ghost() : GameCharacter() { throw "Fantasma nulo"; }
+	Ghost() : GameCharacter() { throw PacmanError( "Fantasma nulo"); }
 	//constructor
 	Ghost(Point2D pos, double speed,double width, double height, Texture* texture, GameState* game,int color);
 	//destructor

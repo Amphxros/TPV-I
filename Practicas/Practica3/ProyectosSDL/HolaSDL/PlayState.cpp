@@ -6,6 +6,7 @@
 #include "App.h"
 #include <time.h>
 #include <iomanip>
+#include "PacmanError.h"
 
 PlayState::PlayState(App* app): GameState(app), level_(0)
 {
@@ -17,7 +18,6 @@ PlayState::~PlayState()
 {	
 	//borrado de objetos
 	clear();
-	//destruccion de cosas de sdl
 	
 }
 
@@ -71,14 +71,13 @@ void PlayState::load(std::string filename)
 					break;
 
 				default:
-					map_->write(j, i, (MapCell)0);
-					break;
+					throw FileFormatError("file of a level corrupted: ", filename);
 				}
 			}
 		}
 	}
 	else {
-		throw "Archivo no encontrado";
+		throw FileNotFoundError("file of a level not found");
 	
 	}
 }
@@ -274,7 +273,6 @@ void PlayState::loadFromFile(int seed)
 		pacman_->setItHandler(ev);
 
 		//fantasmas
-		int n;
 		file >> num_ghosts;
 	
 		for (int i = 0; i < num_ghosts; i++) {
@@ -303,6 +301,8 @@ void PlayState::loadFromFile(int seed)
 		}
 	}
 	else {
+
+		throw FileNotFoundError("couldnt load the file "+ (std::to_string(seed) + ".pac"));
 		level_ = 0;
 		init(); //si no encontramos un archivo valido creamos una partida nueva
 	}
@@ -314,10 +314,10 @@ void PlayState::saveToFile() {
 	//pillamos el nombre del fichero
 	int seed = -1;
 	do {
-		std::cout << "Introduce num del archivo" << std::endl;
+		std::cout <<"Introduce nombre de archivo: ";
 		std::cin >> seed;
-	} while (seed < 0);
-
+	} while (seed < 0 || seed > 9999);
+	
 	//creamos el fichero seed.pac
 	std::ofstream file;
 	file.open(std::to_string(seed) + ".pac");

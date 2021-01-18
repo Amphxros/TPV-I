@@ -4,19 +4,25 @@
 #include "PauseState.h"
 #include "EndState.h"
 #include <iostream>
+#include "PacmanError.h"
 App::App()
 {
 	srand(NULL);
 	SDL_Init(SDL_INIT_EVERYTHING);
+	//if (TTF_Init()>=0){throw };
+
 	window_ = SDL_CreateWindow("ManPac", SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, WIN_WIDTH, WIN_HEIGHT, SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
-	if (window_ == nullptr || renderer_ == nullptr)
-		throw "Error cargando SDL";
+	if (window_ == nullptr || renderer_ == nullptr) {
+		throw SDLError("couldnt load the window or the renderer ");
+	}
 	else {
 		for (int i = 0; i < NUM_TEXTURES; i++) {
 			textures[i] = new Texture(renderer_, textures_data_[i].filename, textures_data_[i].rows, textures_data_[i].cols);
 		}
+		//string filename = "../fuentes/Completely legal font.ttf";
+		//font = TTF_OpenFont(filename.c_str(), 12); // Fichero .ttf y tamaño en ptos
 		states_ = new GameStateMachine();
 		states_->pushState(new MainMenuState(this));
 	}

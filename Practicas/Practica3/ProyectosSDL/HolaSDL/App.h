@@ -1,8 +1,8 @@
 #pragma once
 #include "consts.h"
 #include <string>
+//#include <SDL_ttf.h>
 #include "GameStateMachine.h"
-
 #include "checkML.h"
 
 enum class TextureOrder { 
@@ -74,6 +74,7 @@ private:
 	bool exit_=false;
 	GameStateMachine* states_=nullptr;
 	Texture* textures[NUM_TEXTURES];
-
+	
+	//TTF_Font* font;
 };
 

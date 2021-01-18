@@ -1,6 +1,6 @@
 #pragma once
 #include "Ghost.h"
-
+#include "PacmanError.h"
 #include "checkML.h"
 class PlayState;
 // La edad determinará si se puede reproducir, tiene que esperar o tiene que morir
@@ -10,7 +10,7 @@ class SmartGhost :
 	public Ghost
 {
 public:
-    SmartGhost() : Ghost() {	throw "SmartFantasma nulo (Not so smart now)"; }
+    SmartGhost() : Ghost() {	throw PacmanError("SmartFantasma nulo (Not so smart now)"); }
 	SmartGhost(Point2D pos, double speed, double width, double height, Texture* texture, GameState* game, int color);
 	virtual ~SmartGhost() {};
 	

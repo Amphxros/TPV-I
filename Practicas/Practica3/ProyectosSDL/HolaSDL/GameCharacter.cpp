@@ -1,7 +1,8 @@
 #include "GameCharacter.h"
 #include "PlayState.h"
 
-GameCharacter::~GameCharacter(){}
+GameCharacter::~GameCharacter(){
+}
 
 void GameCharacter::render()
 {
@@ -50,7 +51,8 @@ void GameCharacter::loadFromFile(std::ifstream& file)
 
 GameCharacter::GameCharacter() :
 	GameObject(), speed_(0), pos_init(Vector2D()) {
-	throw "Personaje nulo";
+
+	throw PacmanError("character null");
 }
 
 GameCharacter::GameCharacter(Point2D pos, double speed, double width, double height, Texture* texture, GameState* game):

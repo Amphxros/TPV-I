@@ -24,6 +24,7 @@ const std::string map_name[NUM_LEVELS] = {		//array de datos de los ficheros del
 class PlayState: public GameState
 {
 public:
+	PlayState():GameState(){}
 	//constructora
 	PlayState(App* app);
 	//destructora

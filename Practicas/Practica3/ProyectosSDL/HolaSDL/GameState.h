@@ -3,7 +3,7 @@
 #include <list>
 #include "GameObject.h"
 #include "EventHandler.h"
-
+#include "PacmanError.h"
 #include "checkML.h"
 class App;
 class GameState

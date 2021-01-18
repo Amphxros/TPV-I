@@ -12,11 +12,14 @@ void Texture::clear() {
 void Texture::load(string filename, uint nRows, uint nCols) {
 	SDL_Surface* tempSurface = IMG_Load(filename.c_str());
 	if (tempSurface == nullptr) {
-		throw "Error loading surface from " + filename;
+		throw SDLError("couldnt load the surface of a texture");
 	}
 	clear();
 	texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
-	if (texture == nullptr) throw "Error loading texture from " + filename;
+	if (texture == nullptr) { 
+		throw FileNotFoundError("couldn't find the image");
+	}
+
 	numRows = nRows;
 	numCols = nCols;
 	w = tempSurface->w;
