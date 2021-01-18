@@ -5,6 +5,7 @@
 #include <list>
 #include "Texture.h"
 
+#include "PacmanError.h"
 #include "checkML.h"
 class GameState;
 class GameObject

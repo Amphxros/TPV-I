@@ -6,7 +6,9 @@
 #include "Pacman.h"
 #include "Ghost.h"
 #include "InfoBar.h"
+#include "Pacman.h"
 #include "GameMap.h"
+
 #include "checkML.h"
 #include "consts.h"
 #include "GameState.h"
@@ -24,7 +26,8 @@ const std::string map_name[NUM_LEVELS] = {		//array de datos de los ficheros del
 class PlayState: public GameState
 {
 public:
-	PlayState():GameState(){}
+	
+	PlayState():GameState(), level_(-1){}
 	//constructora
 	PlayState(App* app);
 	//destructora

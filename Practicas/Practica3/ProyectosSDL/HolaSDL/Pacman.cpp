@@ -1,10 +1,10 @@
-#include "Pacman.h"
+
 #include "PlayState.h"
 
 Pacman::Pacman(Point2D pos, double speed, double width, double height, Texture* texture, GameState* game, int numVidas):
 	GameCharacter(pos,speed,width,height,texture,game), vidas(numVidas),EventHandler()
 {
-	dir_ = dirs_[directions::LEFT];
+	dir_ = Vector2D(0,0);
 }
 
 Pacman::~Pacman()

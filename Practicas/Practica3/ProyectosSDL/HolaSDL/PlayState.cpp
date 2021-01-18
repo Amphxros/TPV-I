@@ -6,7 +6,6 @@
 #include "App.h"
 #include <time.h>
 #include <iomanip>
-#include "PacmanError.h"
 
 PlayState::PlayState(App* app): GameState(app), level_(0)
 {
@@ -112,7 +111,7 @@ void PlayState::createPacman(Vector2D pos)
 void PlayState::createGhost(Vector2D pos, int color)
 {
 	// Creamos el Fantasma, lo añadimos a la lista y movemos el iterador
-	Ghost* g = new Ghost(Vector2D((pos.getX() * TAM_TILE), (pos.getY() * TAM_TILE)),TAM_TILE/4,TAM_TILE,TAM_TILE, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, color);
+	Ghost* g = new Ghost(Vector2D((pos.getX() * TAM_TILE), (pos.getY() * TAM_TILE)),TAM_TILE/2,TAM_TILE,TAM_TILE, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, color);
 
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
 	g->setItList(it);
