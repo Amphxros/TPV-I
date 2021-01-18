@@ -189,8 +189,6 @@ bool PlayState::CollisionWithGhosts(Pacman* g)
 				if (pacman_->getVidas() < 0) {
 					app_->endGame();
 					std::cout << infoBar_->getPuntos() << std::endl;
-
-					
 				}
 			}
 			return true;
@@ -331,8 +329,7 @@ void PlayState::saveToFile() {
 
 		file << p << " " << v << " " << level_ << std::endl; //puntos, vidas y nivel
 
-		file << std::endl;
-		file << dim_map_x << " " << dim_map_y << std::endl; //dimensiones del mapa en num de tiles
+		file << std::endl<< dim_map_x << " " << dim_map_y << std::endl; //dimensiones del mapa en num de tiles
 
 		//informacion del mapa
 		for (int i = 0; i <= dim_map_x; i++) {
@@ -347,8 +344,7 @@ void PlayState::saveToFile() {
 		file << std::endl;
 		
 		//numero de fantasmas
-		file << num_ghosts;
-		file << std::endl;
+		file << num_ghosts << std::endl;
 		//guardado de fantasmas
 		for (auto it = ghosts_.begin(); it != ghosts_.end(); ++it) {
 			auto g = *it;
