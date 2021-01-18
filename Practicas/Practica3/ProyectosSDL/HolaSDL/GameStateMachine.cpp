@@ -21,7 +21,9 @@ void GameStateMachine::pushState(GameState* gs)
 
 void GameStateMachine::popState()
 {
-	states_.pop();
+	if (!states_.empty()) {
+		states_.pop();
+	}
 }
 
 void GameStateMachine::changeState(GameState* gs)

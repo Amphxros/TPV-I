@@ -9,8 +9,10 @@ class App;
 class GameState
 {
 public:
+	//constructora
 	GameState();
 	GameState(App* app);
+	//destructora
 	virtual ~GameState();
 
 	virtual void render();
@@ -20,9 +22,9 @@ public:
 	App* getApp() { return app_; }
 
 protected:
-	std::list<GameObject*> gObjects_;
-	std::list<EventHandler*> evHandlers_;
+	std::list<GameObject*> gObjects_; //lista de GameObjects para renderizar y actualizar 
+	std::list<EventHandler*> evHandlers_; //lista de manejo de eventos
 
-	App* app_;
+	App* app_; //puntero a app
 };
 

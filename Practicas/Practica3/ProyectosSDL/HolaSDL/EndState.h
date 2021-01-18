@@ -15,11 +15,5 @@ public:
 	virtual void render();
 	virtual void update();
 	virtual void handleEvents(SDL_Event & event);
-
-	void saveScores();
-	void loadScores();
-
-private:
-
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "checkML.h"
+
 enum directions { LEFT, UP, RIGHT, DOWN };		//enum para las posibles direcciones
 const Vector2D dirs_[4] = {			//posibles direcciones
 	Vector2D(-1,0),		//izquierda

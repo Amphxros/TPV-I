@@ -8,7 +8,8 @@ class Pacman:
 	public GameCharacter, public EventHandler
 {
 public:
-	Pacman() : GameCharacter(),EventHandler() { throw "Pacman nulo"; }
+	Pacman() : GameCharacter(),EventHandler() { throw PacmanError("player null"); }
+	//constructora
 	Pacman(Point2D pos, double speed,double width, double height, Texture* texture, GameState* game_, int numVidas);
 	virtual ~Pacman();
 

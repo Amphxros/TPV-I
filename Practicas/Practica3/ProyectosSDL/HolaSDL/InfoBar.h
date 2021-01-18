@@ -10,6 +10,7 @@ class InfoBar:
 	public GameObject
 {
 public:
+	InfoBar() : GameObject() { throw PacmanError("Info bar null"); }
 	InfoBar(Vector2D pos, double width, double height, Texture* texture, Texture* nums, GameState* game);
 	virtual ~InfoBar() { punt_.clear(); num_texture = nullptr; }
 	

@@ -1,7 +1,8 @@
 ﻿#pragma once
-
 #include "checkML.h"
 using uint = unsigned int;
+
+///CONSTANTES
 
 const uint WIN_WIDTH = 800;	//ancho de ventana
 const uint WIN_HEIGHT = 800;	//alto de ventana

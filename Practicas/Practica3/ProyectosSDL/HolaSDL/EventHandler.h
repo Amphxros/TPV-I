@@ -6,12 +6,12 @@
 class EventHandler
 {
 public:
-	EventHandler() {}
-	virtual ~EventHandler(){}
-	virtual bool handleEvents(SDL_Event& event) = 0;
+	virtual ~EventHandler(){} //destructora
+	virtual bool handleEvents(SDL_Event& event) = 0; //metodo que maneja los eventos
 	void setItHandler(const std::list<EventHandler*>::iterator& it) { it_ = it; }
 
 protected:
-	std::list<EventHandler*>::iterator it_;
+	EventHandler() {}
+	std::list<EventHandler*>::iterator it_; //iterador (necesario para la lista)
 };
 
