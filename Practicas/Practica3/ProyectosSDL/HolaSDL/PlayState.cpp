@@ -2,9 +2,10 @@
 
 #include <iostream>
 #include <fstream>
-#include <cstdlib>	// Para el random
 #include "SmartGhost.h"
 #include "App.h"
+#include <time.h>
+#include <iomanip>
 
 PlayState::PlayState(App* app): GameState(app), level_(0)
 {
@@ -187,6 +188,9 @@ bool PlayState::CollisionWithGhosts(Pacman* g)
 				pacman_->setVidas(pacman_->getVidas()-1);
 				if (pacman_->getVidas() < 0) {
 					app_->endGame();
+					std::cout << infoBar_->getPuntos() << std::endl;
+
+					
 				}
 			}
 			return true;
@@ -243,7 +247,7 @@ void PlayState::loadFromFile(int seed)
 		
 		//carga del mapa
 		file >> dim_map_x >> dim_map_y;
-		map_ = new GameMap(Vector2D(0, 0), TAM_TILE, TAM_TILE, 40, 40, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this);
+		map_ = new GameMap(Vector2D(0, 0), TAM_TILE, TAM_TILE, 40, 40, app_->getTexture(TextureOrder::MAP_SPRITESHEET), this);
 		for (int i = 0; i <= dim_map_x; i++) {
 			for (int j = 0; j <= dim_map_y; j++) {
 				int d;
@@ -263,21 +267,24 @@ void PlayState::loadFromFile(int seed)
 		//carga del pacman
 		int x, y, x0, y0, w, h;
 		file >> x >> y >> x0 >> y0 >> w >> h;
-		pacman_ = new Pacman(Vector2D(x0,y0), TAM_TILE / 2, w, h, nullptr, this, v);
+		pacman_ = new Pacman(Vector2D(x0,y0), TAM_TILE / 2, w, h, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, v);
 		pacman_->setPos(x, y);
 		it = gObjects_.insert(gObjects_.end(), pacman_);
 		pacman_->setItList(it);
 	
+		std::list<EventHandler*>::iterator ev = evHandlers_.insert(evHandlers_.end(), pacman_);
+		pacman_->setItHandler(ev);
+
 		//fantasmas
 		int n;
 		file >> num_ghosts;
-		std::cout << num_ghosts;
+	
 		for (int i = 0; i < num_ghosts; i++) {
 			//habría usado el loadfromfile de Ghost pero no habia una forma clara de distinguir los fantasmas normales 
 			//sin cargar la linea entera(ya que tiene el color que es la unica diferencia a nivel de archivo de guardado)
 			int x, y, x0, y0, w, h, c;
 			file >> x >> y >> x0 >> y0 >> w >> h >> c;
-			if (c== 5) { //si su color es 5 entonces es un SmartGhost
+			if (c== 4) { //si su color es 4 entonces es un SmartGhost
 				SmartGhost* g = new SmartGhost(Vector2D(x0, y0), TAM_TILE / 2, w, h, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, c);
 				g->setPos(x, y);
 				it = gObjects_.insert(gObjects_.end(), g);
@@ -287,7 +294,7 @@ void PlayState::loadFromFile(int seed)
 				g->setGhostIt(git);
 			}
 			else {
-				//creamos un fantasma normal si su color no es 5
+				//creamos un fantasma normal si su color no es 4
 				Ghost* g= new Ghost(Vector2D(x0, y0), TAM_TILE / 2, w, h, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, c);
 				g->setPos(x, y);
 				it = gObjects_.insert(gObjects_.end(), g);

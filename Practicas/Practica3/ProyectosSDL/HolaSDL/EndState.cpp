@@ -1,5 +1,6 @@
 #include "EndState.h"
 #include "MenuButton.h"
+#include <iostream>
 
 EndState::EndState():
 	GameState()
@@ -29,4 +30,29 @@ void EndState::update()
 void EndState::handleEvents(SDL_Event& event)
 {
 	GameState::handleEvents(event);
+}
+
+void EndState::saveScores()
+{
+}
+
+void EndState::loadScores()
+{
+	std::ifstream file;
+	file.open("scores.log");
+
+	if (file.is_open()) {
+		for (int i = 0; i < MAX_SCORES; i++) {		
+			int m, d, a, p;
+			string s;
+			file >> s >> p >> d >> m >> a;
+			//User u = User(s, p, d, m, a);
+			//scores_.emplace(u, i);
+			//std::cout << u.name << " " << std::to_string(u.score) << " " <<std::to_string( u.date.d) << "/" << std::to_string(u.date.m) << std::to_string(u.date.a) << std::endl;
+		}
+	}
+	else {
+		
+	}
+
 }

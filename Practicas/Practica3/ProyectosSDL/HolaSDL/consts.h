@@ -29,3 +29,5 @@ const uint POINTS_PER_GHOST = 500;	//puntuacion por fantasma comido
 
 const uint POINTS_PER_LEVEL = 3000; //puntos por nivel
 
+const uint MAX_SCORES = 10;
+

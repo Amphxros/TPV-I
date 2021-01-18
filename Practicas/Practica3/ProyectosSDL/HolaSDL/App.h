@@ -5,7 +5,7 @@
 
 #include "checkML.h"
 
-enum TextureOrder { 
+enum class TextureOrder { 
 	INIT,
 	MAP_SPRITESHEET,
 	CHAR_SPRITESHEET,

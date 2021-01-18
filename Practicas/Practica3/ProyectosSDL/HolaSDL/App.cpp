@@ -75,9 +75,13 @@ void App::loadGame()
 {
 	///pillar el nº de archivo
 	Uint32 flag=0;
-	int seed = SDL_ShowSimpleMessageBox(flag, "", "Introduce nombre de archivo", window_);
+	int seed = -1;
+	do {
+		std::cout <<"Introduce nombre de archivo: ";
+		std::cin >> seed;
+	} while (seed < 0 || seed > 9999);
 	
-	
+	//SDL_ShowSimpleMessageBox(flag, "", "cargando fichero" , window_);
 	states_->pushState(new PlayState(this));
 	static_cast<PlayState*>(states_->getCurrentState())->loadFromFile(seed);
 }
