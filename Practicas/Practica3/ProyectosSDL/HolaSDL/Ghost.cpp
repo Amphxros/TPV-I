@@ -75,16 +75,17 @@ bool Ghost::chooseDirection()
 	}
 }
 void Ghost::saveToFile(std::ofstream& file) {
+	file << (to_string)(color_) << " ";
 	GameCharacter::saveToFile(file);
-	file <<" "<< (to_string)(color_);
 }
-void Ghost::LoadFromFile(std::ifstream& file) {
+void Ghost::loadFromFile(std::ifstream& file) {
 
-	int x, y, x0, y0, w, h,c;
-	file >> x >> y >> x0 >> y0 >> w >> h>>c;
+	int c, x, y, x0, y0, w, h;
+	file >> c >> x >> y >> x0 >> y0 >> w >> h;
+
+	color_ = c;
 	pos_ = { (int)x,(int)y };
 	pos_init = { (int)x0,(int)y0 };
 	width_ = w;
 	height_ = h;
-	color_ = c;
 }

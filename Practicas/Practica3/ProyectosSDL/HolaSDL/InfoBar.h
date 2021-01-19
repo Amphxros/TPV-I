@@ -12,7 +12,7 @@ class InfoBar:
 public:
 	InfoBar() : GameObject() { throw PacmanError("Info bar null"); }
 	InfoBar(Vector2D pos, double width, double height, Texture* texture, Texture* nums, GameState* game);
-	virtual ~InfoBar() { punt_.clear(); num_texture = nullptr; }
+	virtual ~InfoBar() { punt_.clear(); num_texture = nullptr; delete num_texture; }
 	
 	void setPuntos(int p); //cambia los puntos
 	int getPuntos() { return points_; }

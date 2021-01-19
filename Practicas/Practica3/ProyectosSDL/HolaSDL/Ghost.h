@@ -19,7 +19,7 @@ public:
 	void update();
 
 	void saveToFile(std::ofstream& file);
-	void LoadFromFile(std::ifstream& file);
+	void loadFromFile(std::ifstream& file);
 
 	bool chooseDirection(); //cambia la direccion del fantasma
 

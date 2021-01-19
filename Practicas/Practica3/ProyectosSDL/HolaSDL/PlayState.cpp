@@ -125,7 +125,7 @@ void PlayState::createGhost(Vector2D pos, int color)
 // Funciona igual que la creacion de fantasma normal
 void PlayState::createSmartGhost(Vector2D pos)
 {
-	SmartGhost* g = new SmartGhost(Vector2D(( pos.getX() * TAM_TILE), ( pos.getY() * TAM_TILE)),TAM_TILE/4, TAM_TILE, TAM_TILE, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, 4);
+	SmartGhost* g = new SmartGhost(Vector2D(( pos.getX() * TAM_TILE), ( pos.getY() * TAM_TILE)),TAM_TILE/2, TAM_TILE, TAM_TILE, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, 4);
 	std::list<GameObject*>::iterator it = gObjects_.insert(gObjects_.end(), g);
 	g->setItList(it);
 
@@ -277,21 +277,20 @@ void PlayState::loadFromFile(int seed)
 		for (int i = 0; i < num_ghosts; i++) {
 			//habría usado el loadfromfile de Ghost pero no habia una forma clara de distinguir los fantasmas normales 
 			//sin cargar la linea entera(ya que tiene el color que es la unica diferencia a nivel de archivo de guardado)
-			int x, y, x0, y0, w, h, c;
-			file >> x >> y >> x0 >> y0 >> w >> h >> c;
-			if (c== 4) { //si su color es 4 entonces es un SmartGhost
-				SmartGhost* g = new SmartGhost(Vector2D(x0, y0), TAM_TILE / 2, w, h, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, c);
-				g->setPos(x, y);
+			int c, x, y, x0, y0, w, h;
+			file >> c;
+			if (c == 4) { //si su color es 4 entonces es un SmartGhost
+				SmartGhost* g = new SmartGhost(Vector2D(), TAM_TILE / 2, 0, 0, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, c);
+				g->loadFromFile(file);
 				it = gObjects_.insert(gObjects_.end(), g);
 				g->setItList(it);
-
 				std::list <Ghost*>::iterator git = ghosts_.insert(ghosts_.end(), g);
 				g->setGhostIt(git);
 			}
 			else {
 				//creamos un fantasma normal si su color no es 4
-				Ghost* g= new Ghost(Vector2D(x0, y0), TAM_TILE / 2, w, h, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, c);
-				g->setPos(x, y);
+				Ghost* g= new Ghost(Vector2D(), TAM_TILE / 2, 0, 0, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, c);
+				g->loadFromFile(file);
 				it = gObjects_.insert(gObjects_.end(), g);
 				g->setItList(it);
 				std::list <Ghost*>::iterator git = ghosts_.insert(ghosts_.end(), g);

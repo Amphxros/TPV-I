@@ -63,3 +63,24 @@ void SmartGhost::handleState()
 		}
 	}
 }
+
+void SmartGhost::saveToFile(std::ofstream& file)
+{
+	file << (to_string)(color_) << " " << (to_string)((int)age_) << " " << (to_string)(time_) << " " << (to_string)((int)(reproduction_time)) << " ";
+	GameCharacter::saveToFile(file);
+}
+
+void SmartGhost::loadFromFile(std::ifstream& file)
+{
+	int c, x, y, x0, y0, w, h, a, t, rt;
+	file >> c >> a >> t >> rt >> x >> y >> x0 >> y0 >> w >> h;
+
+	color_ = c;
+	pos_ = { (int)x,(int)y };
+	pos_init = { (int)x0,(int)y0 };
+	width_ = w;
+	height_ = h;
+	age_ = (Age)a;
+	time_ = t;
+	reproduction_time = rt;
+}

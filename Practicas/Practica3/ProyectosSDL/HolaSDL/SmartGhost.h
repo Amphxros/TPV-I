@@ -18,6 +18,9 @@ public:
 	void handleState(); //cambia la fase del fantasma si es necesario
 	inline Age getAge() { return age_; } //deuelve la edad
 
+	void saveToFile(std::ofstream& file);
+	void loadFromFile(std::ifstream& file);
+
 private:
 	Age age_; //edad del fantasma
 	int time_; //tiempo de fase
