@@ -273,8 +273,6 @@ void PlayState::loadFromFile(int seed)
 		file >> num_ghosts;
 	
 		for (int i = 0; i < num_ghosts; i++) {
-			//habría usado el loadfromfile de Ghost pero no habia una forma clara de distinguir los fantasmas normales 
-			//sin cargar la linea entera(ya que tiene el color que es la unica diferencia a nivel de archivo de guardado)
 			int c;
 			file >> c;
 			
