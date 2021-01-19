@@ -6,3 +6,5 @@ Jorge Zurdo Izquierdo
 -Todo funciona correctamente
 
 -Los SmartGhost tienen un cooldown antes de poder reproducirse porque de lo contrario generaban demasiados fantasmas
+
+-No hemos podido incluir la libreria TTF debido a un error en la cabecera de uno de los dll
