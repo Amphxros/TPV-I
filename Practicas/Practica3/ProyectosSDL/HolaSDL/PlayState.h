@@ -80,7 +80,6 @@ private:
 	std::list<Ghost*>ghosts_;	//lista de fantasmas
 	
 	
-	
 
 	//creacion de texturas y objetos
 	void init();

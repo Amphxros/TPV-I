@@ -80,12 +80,11 @@ void Ghost::saveToFile(std::ofstream& file) {
 }
 void Ghost::loadFromFile(std::ifstream& file) {
 
-	int c, x, y, x0, y0, w, h;
-	file >> c >> x >> y >> x0 >> y0 >> w >> h;
+	int x, y, x0, y0, w, h;
+	file >> x >> y >> x0 >> y0;
 
-	color_ = c;
+
 	pos_ = { (int)x,(int)y };
 	pos_init = { (int)x0,(int)y0 };
-	width_ = w;
-	height_ = h;
+	
 }

@@ -72,14 +72,12 @@ void SmartGhost::saveToFile(std::ofstream& file)
 
 void SmartGhost::loadFromFile(std::ifstream& file)
 {
-	int c, x, y, x0, y0, w, h, a, t, rt;
-	file >> c >> a >> t >> rt >> x >> y >> x0 >> y0 >> w >> h;
+	int c, x, y, x0, y0, a, t, rt;
+	file >> a >> t >> rt >> x >> y >> x0 >> y0;
 
-	color_ = c;
+	//color_ = c;
 	pos_ = { (int)x,(int)y };
 	pos_init = { (int)x0,(int)y0 };
-	width_ = w;
-	height_ = h;
 	age_ = (Age)a;
 	time_ = t;
 	reproduction_time = rt;

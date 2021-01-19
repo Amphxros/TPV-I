@@ -261,10 +261,8 @@ void PlayState::loadFromFile(int seed)
 		infoBar_->setPuntos(p);
 
 		//carga del pacman
-		int x, y, x0, y0, w, h;
-		file >> x >> y >> x0 >> y0 >> w >> h;
-		pacman_ = new Pacman(Vector2D(x0,y0), TAM_TILE / 2, w, h, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, v);
-		pacman_->setPos(x, y);
+		pacman_ = new Pacman(Vector2D(), TAM_TILE / 2, TAM_TILE+5, TAM_TILE+5, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, v);
+		pacman_->loadFromFile(file);
 		it = gObjects_.insert(gObjects_.end(), pacman_);
 		pacman_->setItList(it);
 	
@@ -277,10 +275,11 @@ void PlayState::loadFromFile(int seed)
 		for (int i = 0; i < num_ghosts; i++) {
 			//habría usado el loadfromfile de Ghost pero no habia una forma clara de distinguir los fantasmas normales 
 			//sin cargar la linea entera(ya que tiene el color que es la unica diferencia a nivel de archivo de guardado)
-			int c, x, y, x0, y0, w, h;
+			int c;
 			file >> c;
+			
 			if (c == 4) { //si su color es 4 entonces es un SmartGhost
-				SmartGhost* g = new SmartGhost(Vector2D(), TAM_TILE / 2, 0, 0, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, c);
+				SmartGhost* g = new SmartGhost(Vector2D(), TAM_TILE / 2, TAM_TILE, TAM_TILE, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, c);
 				g->loadFromFile(file);
 				it = gObjects_.insert(gObjects_.end(), g);
 				g->setItList(it);
@@ -289,7 +288,7 @@ void PlayState::loadFromFile(int seed)
 			}
 			else {
 				//creamos un fantasma normal si su color no es 4
-				Ghost* g= new Ghost(Vector2D(), TAM_TILE / 2, 0, 0, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, c);
+				Ghost* g= new Ghost(Vector2D(), TAM_TILE / 2, TAM_TILE, TAM_TILE, app_->getTexture(TextureOrder::CHAR_SPRITESHEET), this, c);
 				g->loadFromFile(file);
 				it = gObjects_.insert(gObjects_.end(), g);
 				g->setItList(it);
