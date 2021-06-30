@@ -1,8 +1,7 @@
-
 #include "PlayState.h"
 
 Pacman::Pacman(Point2D pos, double speed, double width, double height, Texture* texture, GameState* game, int numVidas):
-	GameCharacter(pos,speed,width,height,texture,game), vidas(numVidas),EventHandler()
+	GameCharacter(pos,speed,width,height,texture,game), vidas(numVidas), EventHandler()
 {
 	dir_ = Vector2D(0,0);
 }
@@ -73,4 +72,3 @@ bool Pacman::handleEvents(SDL_Event& event)
 
 	return ev;
 }
-

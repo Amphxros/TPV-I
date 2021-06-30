@@ -11,25 +11,29 @@ void GameCharacter::render()
 
 void GameCharacter::update()
 {
-	if (game_state->tryMove(getdest(), dir_, pos_ + (dir_ * speed_))) {
-		pos_ = pos_ + (dir_ * speed_);
-	}
 
-	//comprobamos los puntos en los que se puede salir por otro lado del mapa
+	// Comprobamos los puntos en los que se puede salir por otro lado del mapa
+	int x = pos_.getX() + dir_.getX(); int y = pos_.getY() + dir_.getX();
 	if (pos_.getX() <= 0)
 		pos_ = { (int)TAM_TILE * ((int)game_state->getSwapX() - 1), (int)pos_.getY() };
 
-	else if (pos_.getX() >= (TAM_TILE *(game_state->getSwapX()) -width_))
+	else if (pos_.getX() >= (TAM_TILE * (game_state->getSwapX()) -width_))
 		pos_ = { 1, (int)pos_.getY() };
 
 	if (pos_.getY() <= 0)
-		pos_ = { (int)pos_.getX(), (int)TAM_TILE *(int)game_state->getSwapY() };
+		pos_ = { (int)pos_.getX(), (int)TAM_TILE * (int)game_state->getSwapY() };
 
-	else if (pos_.getY() > TAM_TILE* game_state->getSwapY())
+	else if (pos_.getY() > TAM_TILE * game_state->getSwapY())
 		pos_ = { (int)pos_.getX(), 0 };
-	
+
+	// Intenta cambiar la dirección
+	if (game_state->tryMove(getdest(), dir_, pos_ + (dir_ * speed_))) {
+		pos_ = pos_ + (dir_ * speed_);
+	}
+	// Si no lo consigue la direccion permanece como estaba
 }
 
+// El saveToFile es comun a Ghost y Pacman
 void GameCharacter::saveToFile(std::ofstream& file)
 {
 	std::string data = to_string((int)pos_.getX()) + " " + to_string((int)pos_.getY()) + " " +

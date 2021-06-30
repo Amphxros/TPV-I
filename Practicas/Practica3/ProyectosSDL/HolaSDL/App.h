@@ -15,7 +15,8 @@ enum class TextureOrder {
 	BUTTON_PLAY,
 	BUTTON_RESTART,
 	BUTTON_RESUME,
-	BUTTON_EXIT
+	BUTTON_EXIT,
+	BUTTON_SAVE
 
 };		
 
@@ -35,7 +36,8 @@ const TextureData textures_data_[NUM_TEXTURES] = {		//array de datos de textura
 	{"../images/play.png",1,3},
 	{"../images/restart.png",1,3},
 	{"../images/resume.png",1,3},
-	{"../images/exit.png",1,3}
+	{"../images/exit.png",1,3},
+	{"../images/save.png",1,3}
 
 };
 
@@ -91,8 +93,8 @@ private:
 	SDL_Renderer* renderer_=nullptr;
 
 
-	bool exit_=false;
-	GameStateMachine* states_=nullptr; //maquina de estados
+	bool exit_ = false;
+	GameStateMachine* states_ = nullptr; //maquina de estados
 	Texture* textures[NUM_TEXTURES]; //array de texturas
 	
 	//TTF_Font* font;

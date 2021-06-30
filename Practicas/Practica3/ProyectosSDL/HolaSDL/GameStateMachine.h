@@ -7,17 +7,17 @@ class GameStateMachine
 {
 public:
 	GameStateMachine();
-	~GameStateMachine();
+	virtual ~GameStateMachine();
 
-	//devuelve el estado actual (pila)
-	GameState* getCurrentState();
-	//pone un nuevo estado actual
-	void pushState(GameState* gs);
-	//quita el estado actual
-	void popState();
+
+	GameState* getCurrentState();	//devuelve el estado actual (tope de la pila)
+	void pushState(GameState* gs);//pone un nuevo estado actual al tope de la pila
+	void popState();	//quita el estado actual y hace delete
 	void changeState(GameState* gs);
 
 private:
+
 	std::stack <GameState*> states_; //pila de estados
+
 };
 

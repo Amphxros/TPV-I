@@ -145,11 +145,12 @@ void PlayState::deleteGhost(std::list<GameObject*>::iterator it, std::list<Ghost
 // Detecta la colision con las paredes
 bool PlayState::tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos)
 {
+
 	SDL_Rect dest; //rectangulo correspondiente a la posicion siguiente
-	dest.x = newPos.getX();
-	dest.y = newPos.getY();
-	dest.w = rect.w;
-	dest.h = rect.h;
+	dest.x = newPos.getX();		dest.y = newPos.getY();
+	dest.w = rect.w;		dest.h = rect.h;
+
+	//newPos = fitInMap(Vector2D(rect.x + dir.getX(), rect.y + dir.getY()));
 
 	return !(map_->IntersectWall(dest));
 }
@@ -358,11 +359,14 @@ void PlayState::saveToFile() {
 void PlayState::clear()
 {
 	//borrado de objetos
-	for (auto g = gObjects_.begin(); g != gObjects_.end();) {
-		auto aux = g;
-		g++;
-		delete* aux;
-	}
+	//for (auto g = gObjects_.begin(); g != gObjects_.end(); g++) {
+	//	auto aux = g;
+	//	//g++;
+	//	delete* aux;
+	//}
+
+	for (auto* g : gObjects_) delete g;
+
 	gObjects_.clear();
 	evHandlers_.clear();
 	ghosts_.clear();

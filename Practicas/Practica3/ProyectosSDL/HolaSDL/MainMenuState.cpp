@@ -1,22 +1,23 @@
 #include "MainMenuState.h"
-#include "MenuButton.h"
 
-MainMenuState::MainMenuState(App* app):
-	GameState(app)
+MainMenuState::MainMenuState(App* app)	:	GameState(app)
 {
-	MenuButton* button = new MenuButton(Vector2D(WIN_WIDTH / 2-75, WIN_HEIGHT / 4), 150, 100, app_->getTexture(TextureOrder::BUTTON_PLAY), this, App::playGame);
-	std::list<GameObject*>::iterator it_ = gObjects_.insert(gObjects_.end(), button);
-	std::list<EventHandler*>::iterator ev_ = evHandlers_.insert(evHandlers_.end(), button);
 
-	button = new MenuButton(Vector2D(WIN_WIDTH/2 -75,WIN_HEIGHT/2), 150, 100, app_->getTexture(TextureOrder::BUTTON_RESTART), this, App::loadGame);
-	it_ = gObjects_.insert(gObjects_.end(), button);
-	ev_ = evHandlers_.insert(evHandlers_.end(), button);
+	MenuButton* playbutton = new MenuButton(Vector2D(WIN_WIDTH / 2-75, WIN_HEIGHT / 4), 150, 100, app_->getTexture(TextureOrder::BUTTON_PLAY), this, App::playGame);
+	gObjects_.push_back(playbutton); 
+	evHandlers_.push_back(playbutton);
 
-	button = new MenuButton(Vector2D(WIN_WIDTH / 2-75, 3*WIN_HEIGHT / 4), 150, 100, app_->getTexture(TextureOrder::BUTTON_EXIT), this, App::quitApp);
-	it_ = gObjects_.insert(gObjects_.end(), button);
-	ev_ = evHandlers_.insert(evHandlers_.end(), button);
+	MenuButton* loadbutton = new MenuButton(Vector2D(WIN_WIDTH/2 -75,WIN_HEIGHT/2), 150, 100, app_->getTexture(TextureOrder::BUTTON_RESTART), this, App::loadGame);
+	gObjects_.push_back(loadbutton);
+	evHandlers_.push_back(loadbutton);
+
+	MenuButton* exitbutton = new MenuButton(Vector2D(WIN_WIDTH / 2-75, 3*WIN_HEIGHT / 4), 150, 100, app_->getTexture(TextureOrder::BUTTON_EXIT), this, App::quitApp);
+	gObjects_.push_back(exitbutton);
+	evHandlers_.push_back(exitbutton);
 
 }
+
+
 
 void MainMenuState::render()
 {

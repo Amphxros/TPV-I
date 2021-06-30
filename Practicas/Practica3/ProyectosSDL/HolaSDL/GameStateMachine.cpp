@@ -1,12 +1,12 @@
 #include "GameStateMachine.h"
 
-GameStateMachine::GameStateMachine() {}
+GameStateMachine::GameStateMachine() {
+	states_ = stack<GameState*>();
+}
 
 GameStateMachine::~GameStateMachine()
 {
-	while (!states_.empty()) {
-		states_.pop();
-	}
+	while (!states_.empty()) { states_.pop(); }
 }
 
 GameState* GameStateMachine::getCurrentState()
@@ -22,12 +22,13 @@ void GameStateMachine::pushState(GameState* gs)
 void GameStateMachine::popState()
 {
 	if (!states_.empty()) {
+		delete states_.top();
 		states_.pop();
 	}
 }
 
 void GameStateMachine::changeState(GameState* gs)
 {
-	states_.pop();
-	states_.push(gs);
+	popState();
+	pushState(gs);
 }

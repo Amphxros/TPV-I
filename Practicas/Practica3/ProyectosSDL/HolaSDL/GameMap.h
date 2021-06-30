@@ -1,21 +1,20 @@
 #pragma once
 #include <string>
+#include "checkML.h"
+
 #include "GameObject.h"
 
-#include "checkML.h"
 using namespace std;
 
 enum class MapCell {Empty, Wall, Food, Vitamins};	//Solo contiene info de elementos estáticos
 
 class PlayState;
-class GameMap:
-	public GameObject
+class GameMap	:	public GameObject
 {
 public:
+
 	GameMap() : GameObject() { throw "Mapa nulo"; }
-	//constructora
 	GameMap(Point2D pos, double width, double height, int rows, int cols, Texture* texture,GameState* game);
-	//destructora
 	virtual ~GameMap();
 
 	void render();	
@@ -35,10 +34,10 @@ public:
 	bool isCellFood(int i, int j) { return map[i][j] == MapCell::Food; };
 	bool isCellVitamin(int i, int j) { return map[i][j] == MapCell::Vitamins; };
 
-
 private:
+
 	MapCell** map; //Array de celdas de tipo MapCell; Contienen info de lo que hay en las casillas
 	int rows_, cols_; //numero de filas y columnas
 	PlayState* game_state;
-};
 
+};

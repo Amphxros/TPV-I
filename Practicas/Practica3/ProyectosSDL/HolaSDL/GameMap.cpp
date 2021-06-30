@@ -8,6 +8,7 @@ GameMap::GameMap(Point2D pos, double width, double height, int rows, int cols, T
 {
 	map = new MapCell * [cols_];
 
+	// Inicializacion por defecto a Empty
 	for (int i = 0; i < cols_; i++) {
 		map[i] = new MapCell[rows_];
 		for (int j = 0; j < rows_; j++)
@@ -18,7 +19,7 @@ GameMap::GameMap(Point2D pos, double width, double height, int rows, int cols, T
 GameMap::~GameMap()
 {
 	for (int i = 0; i < rows_; i++) {
-		delete []map[i];
+		delete map[i];
 	}
 	delete map; map = nullptr;
 }

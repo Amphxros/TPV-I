@@ -13,11 +13,15 @@ GameState::GameState(App* app):
 
 GameState::~GameState()
 {
-	for (auto it = gObjects_.begin(); it != gObjects_.end();) {
-		auto aux = it;
-		it++;
-		delete* aux;
-	};
+	//for (auto it = gObjects_.begin(); it != gObjects_.end();) {
+	//	auto aux = it;
+	//	it++;
+	//	delete* aux;
+	//};
+
+	for (auto g : gObjects_) delete g;
+
+	gObjects_.clear();
 	evHandlers_.clear(); //como los objetos que hereden de evHandler seran de herencia multiple no necesito otro bucle
 }
 

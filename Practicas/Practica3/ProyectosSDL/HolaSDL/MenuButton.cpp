@@ -1,13 +1,12 @@
 #include "MenuButton.h"
 #include "App.h"
 
-MenuButton::MenuButton():
-	GameObject(), EventHandler(), call_back_(nullptr)
+MenuButton::MenuButton()	:	GameObject(), EventHandler(), call_back_(nullptr)
 {
 }
 
 MenuButton::MenuButton(Point2D pos, double width, double height, Texture* texture, GameState* game, CallBack* cb):
-	GameObject(pos,width,height,texture,game), EventHandler(), call_back_(cb),click(NORMAL)
+	GameObject(pos,width,height,texture,game), EventHandler(), call_back_(cb), click(NORMAL)
 {
 }
 

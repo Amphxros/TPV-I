@@ -28,9 +28,7 @@ class PlayState: public GameState
 public:
 	
 	PlayState():GameState(), level_(-1){}
-	//constructora
 	PlayState(App* app);
-	//destructora
 	virtual ~PlayState();
 
 	virtual void render();  //renderiza los elementos del juego
@@ -38,23 +36,18 @@ public:
 	virtual void handleEvents(SDL_Event& event);	// Controla la salida del juego y los eventos de Pacman
 
 	void saveToFile();
-	//carga el fichero seed.pac
-	void loadFromFile(int seed);
+	void loadFromFile(int seed);	//carga el fichero seed.pac
 
-	//eleimina todos los objetos de gObjects_
-	void clear();
+	void clear();	//eleimina todos los objetos de gObjects_
 
-	//crea un pacman en una pos dada
-	void createPacman(Vector2D pos);
-	//crea un fantasma en una pos dada
-	void createGhost(Vector2D pos,int color);
-	//crea un smart ghost
-	void createSmartGhost(Vector2D pos);
+	void createPacman(Vector2D pos);			//crea un pacman en una pos dada
+	void createGhost(Vector2D pos,int color);	//crea un fantasma en una pos dada
+	void createSmartGhost(Vector2D pos);		//crea un smart ghost
 	
 
 	void deleteGhost(std::list<GameObject*>::iterator it, std::list<Ghost*>::iterator git);
 	
-	//GetWidth/height son los pixeles del tile
+	// GetWidth/height son los pixeles del tile
 	Point2D SDLPointToMapCoords(Point2D mapCoor) const { return Point2D((int)(mapCoor.getX() / map_->getWidth()), (int)(mapCoor.getY() / map_->getHeight())); }
 
 	bool tryMove(SDL_Rect rect, Vector2D dir, Point2D& newPos);
@@ -73,25 +66,18 @@ public:
 
 private:
 
-	GameMap* map_=nullptr; //mapa
-	Pacman* pacman_=nullptr;// pacman
+	GameMap* map_=nullptr;		//mapa
+	Pacman* pacman_=nullptr;	// pacman
 	InfoBar* infoBar_=nullptr;
 
 	std::list<Ghost*>ghosts_;	//lista de fantasmas
-	
-	
 
-	//creacion de texturas y objetos
-	void init();
-	// Carga del mapa desde el archivo.dat
-	void load(std::string filename);
-	// pasa de nivel
-	void nextLevel();
-
+	void init();			//creacion de texturas y objetos
+	void load(std::string filename);	// Carga del mapa desde el archivo.dat
+	void nextLevel();	// pasa de nivel
 	
 	int dim_map_x = 0;
 	int dim_map_y = 0;
 	int level_;
-
 	int num_ghosts = 0;
 };

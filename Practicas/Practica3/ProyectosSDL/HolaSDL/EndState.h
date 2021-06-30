@@ -4,8 +4,7 @@
 #include "checkML.h"
 
 
-class EndState :
-	public GameState
+class EndState :	public GameState
 {
 public:
 	EndState();

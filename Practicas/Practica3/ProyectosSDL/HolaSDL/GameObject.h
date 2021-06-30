@@ -3,10 +3,11 @@
 #include <fstream>
 #include <SDL.h>
 #include <list>
-#include "Texture.h"
-
-#include "PacmanError.h"
 #include "checkML.h"
+
+#include "Texture.h"
+#include "PacmanError.h"
+
 class GameState;
 class GameObject
 {
@@ -25,6 +26,7 @@ public:
 	inline Point2D getPos() { return pos_; }
 
 protected:
+
 	GameObject() :pos_(Point2D(-1, -1)), width_(0), height_(0) { throw "objeto nulo"; };
 	GameObject(Point2D pos, double width, double height, Texture* texture, GameState* game):
 		pos_(pos), width_(width),height_(height), texture_(texture),game_(game) {}

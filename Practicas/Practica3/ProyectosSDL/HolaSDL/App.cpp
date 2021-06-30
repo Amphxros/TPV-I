@@ -5,6 +5,7 @@
 #include "EndState.h"
 #include <iostream>
 #include "PacmanError.h"
+
 App::App()
 {
 	srand(NULL);
@@ -30,10 +31,10 @@ App::App()
 
 App::~App()
 {
+	// Borrado de texturas (Mem dinámica)
+	for (Texture* text : textures) delete text;
+	states_->popState();
 	delete states_;
-	for (int i = 0; i < NUM_TEXTURES; i++) {
-		delete textures[i];
-	}
 
 	//destruccion de cosas de sdl
 	SDL_DestroyRenderer(renderer_);
@@ -155,7 +156,10 @@ void App::update()
 void App::handleEvents()
 {
 	SDL_Event event_;
-	while(SDL_PollEvent(&event_))
-	states_->getCurrentState()->handleEvents(event_);
+	while (SDL_PollEvent(&event_) && !exit_) {
+
+		if (event_.type == SDL_QUIT) exit_ = true;
+		else states_->getCurrentState()->handleEvents(event_);
+	}
 
 }

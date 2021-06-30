@@ -4,11 +4,13 @@
 PauseState::PauseState(App* app): 
 	GameState(app)
 {
+	// Deshace la pausa
 	MenuButton* button = new MenuButton(Vector2D(WIN_WIDTH / 5, WIN_HEIGHT / 2), 150, 100, app_->getTexture(TextureOrder::BUTTON_RESUME), this, App::resume);
 	std::list<GameObject*>::iterator it_ = gObjects_.insert(gObjects_.end(), button);
 	std::list<EventHandler*>::iterator ev_ = evHandlers_.insert(evHandlers_.end(), button);
 
-	MenuButton* button1 = new MenuButton(Vector2D(2 * WIN_WIDTH / 5, WIN_HEIGHT / 2), 150, 100, app_->getTexture(TextureOrder::BUTTON_PLAY), this, App::saveGame);
+	// Guarda el juego
+	MenuButton* button1 = new MenuButton(Vector2D(2 * WIN_WIDTH / 5, WIN_HEIGHT / 2), 150, 100, app_->getTexture(TextureOrder::BUTTON_SAVE), this, App::saveGame);
 	std::list<GameObject*>::iterator it1 = gObjects_.insert(gObjects_.end(), button1);
 	std::list<EventHandler*>::iterator ev1 = evHandlers_.insert(evHandlers_.end(), button1);
 

@@ -1,15 +1,15 @@
 #pragma once
+#include "checkML.h"
+
 #include "GameCharacter.h"
 #include "EventHandler.h"
 
-#include "checkML.h"
 class PlayState;
-class Pacman: 
-	public GameCharacter, public EventHandler
+class Pacman	:	public GameCharacter, public EventHandler
 {
 public:
+
 	Pacman() : GameCharacter(),EventHandler() { throw PacmanError("player null"); }
-	//constructora
 	Pacman(Point2D pos, double speed,double width, double height, Texture* texture, GameState* game_, int numVidas);
 	virtual ~Pacman();
 
@@ -26,9 +26,9 @@ public:
 	Vector2D getCurrPos() { return pos_; };	// Devuelve la posicion a la que intenta moverse
 	
 private:
+
+	enum State { still, moving, up, down, left, right };
 	int vidas; //num de vidas actuales
-
 	bool nyom = false; //es true si se puede comer a los fantasmas
-	int cool_nyom = 0; //tiempo restante para comer los fantasmas
+	int cool_nyom = 0; //tiempo restante(cooldown) para comer los fantasmas
 };
-

@@ -8,7 +8,7 @@ const uint WIN_WIDTH = 800;	//ancho de ventana
 const uint WIN_HEIGHT = 800;	//alto de ventana
 const uint DELAY = 90;
 
-const uint NUM_TEXTURES = 9;	//numero de texturas
+const uint NUM_TEXTURES = 10;	//numero de texturas
 
 const uint NUM_LEVELS = 5;	//numero total de niveles
 const uint NUM_GHOSTS = 4;		//numero de fantasmas
